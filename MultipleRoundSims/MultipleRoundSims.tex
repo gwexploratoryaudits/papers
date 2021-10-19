@@ -185,23 +185,40 @@ For this paper, we consider two choices of round sizes.
 For both, we estimate and then use the minimum first round size 
 which achieves
 a $90\%$ probability of stopping.
-Then, for subsequent rounds, we either (i) multiply the previous
-round size by a factor of $1.5$ and samples this many new ballots 
-or (ii) multiply by a factor of $1$ and sample this many.
-We choose $1.5$ because it gives a very rough approximation of the
-round sizes which give a $90\%$ probability of stopping.
-We choose $1$ because it may reflect a practical way to continue an
+Then, for subsequent rounds, we either (i) 
+draw the same number of ballots in each round or (ii)
+multiply the previous round size by a factor of $1.5$ and 
+sample this many new ballots.
+We consider the case of drawing samples of the same size
+because it may reflect a practical way to continue an
 audit; if election officials have selected some first round size within
-reasonable logistical bounds, drawing the same sample in subsequent rounds
-could be practical.
+reasonable logistical bounds, drawing the same number of 
+ballots in subsequent rounds may be practical.
+We also consider round sizes with samples increasing by a multiple
+of $1.5$ because this multiple gives a very rough approximation of 
+round sizes with a $90\%$ probability of stopping.
 
-\subsubsection{Roundsizes with Multiple of $1.5$}
+\subsubsection{Round Sizes with Multiple of $1.0$}
 
-\includegraphics[scale=.7]{minerva_multiround_1p5x_10^6/total_risk.png}
-
-\subsubsection{Roundsizes with Multiple of $1.0$}
+As with the preceding simulations, we ran $10,000=10^4$ trials
+per state for both the underlying tie and underlying announced
+outcome.
 
 \includegraphics[scale=.7]{minerva_multiround_1x_10^4/total_risk.png}
+
+[Fig above] shows that all simulations had a risk of less than 
+$.1$, the risk limit. 
+Unlike EOR BRAVO, the risks here are much closer to the risk limit,
+showing that Minerva stops on average with sharper risk.
+
+\subsubsection{Round Sizes with Multiple of $1.5$}
+
+%For the Minerva simulations with a round size multiple of $1.5$,
+%we increased the number of simulations to $10^6$ per state for 
+%both an underlying tie and underlying announced outcome. 
+
+%\includegraphics[scale=.7]{minerva_multiround_1p5x_10^6/total_risk.png}
+
 
 
 
