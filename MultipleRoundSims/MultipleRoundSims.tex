@@ -2,6 +2,8 @@
 \usepackage[utf8]{inputenc}
 \usepackage{graphicx}
 \graphicspath{{./imgs/}}
+\usepackage{amsthm}
+\newtheorem{definition}{Definition}
 
 \title{Multiple Round Ballot Polling Risk-Limiting Audit Simulations}
 \author{ }
@@ -71,7 +73,46 @@ Minerva was designed for R2 audits and applies its stopping rule
 once for each round.
 Minerva, by design then, requires fewer ballots to be sampled when 
 an audit is performed in rounds.
- 
+
+Now we present relevant definitions.
+We consider a two candidate plurality contest.
+To begin we define an audit.
+\begin{definition}
+An audit $\mathcal{A}$ takes a sample $X$ as input and gives one of the 
+following decisions
+\begin{enumerate}
+\item
+$Correct$: the audit is complete
+\item
+$Uncertain$: continue the audit
+\end{enumerate}
+\end{definition}
+Audits in this paper are all formed as a binary hypothesis test.
+Under the alternate hypothesis, $H_a$, the announced outcome is correct. 
+That is, the true underlying ballot distribution is given by the announced ballot tallies.
+Under the null hypothesis, $H_0$, the true outcome is a tie 
+(or a the announced winner losing by one vote if there is an odd number of total ballots).
+Now we define key attributes of an audit that we will consider while analyzing our simulations.
+The risk of an audit is the probability that an audit stops when a tie has occurred.
+\begin{definition}[Risk]
+The risk $R$ of an audit $\mathcal{A}$ is
+$$R(\mathcal{A})=\Pr[\mathcal{A}(X)=Correct \mid H_0]$$
+\end{definition}
+This leads us to the following simple definition of an $\alpha$-RLA.
+\begin{definition}[Risk Limiting Audit ($\alpha$-RLA)]
+An audit $\mathcal{A}$ is a Risk Limiting Audit with 
+risk limit $\alpha$ iff 
+$$R(\mathcal{A}) \le \alpha.$$
+\end{definition}
+
+It is useful to discuss the probability of an audit stopping in
+some round, if the outcome is correctly announced.
+\begin{definition}[Stopping Probability]
+The stopping probability $S$ of an audit $\mathcal{A}$ in round $j$ is 
+$$S_j(\mathcal{A})=\Pr[\mathcal{A}(X_j)=Correct \mid H_a]$$
+\end{definition}
+The notion of stopping probability can be useful when selecting round sizes.
+
 \section{Simulations to Confirm Theoretical Results}
 
 The outcomes of RLAs depend on random chance; some random samples
