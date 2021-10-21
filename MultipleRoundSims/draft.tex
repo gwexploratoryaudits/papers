@@ -5,8 +5,10 @@
 \documentclass[runningheads]{llncs}
 %
 \usepackage{float}
+\usepackage{xspace}
 \usepackage{graphicx}
 \graphicspath{{./imgs/}}
+\usepackage{comment}
 % Used for displaying a sample figure. If possible, figure files should
 % be included in EPS format.
 %
@@ -19,7 +21,7 @@
 \newcommand{\Minerva}{\textsc{Minerva}\xspace}
 \newcommand{\B}{{{B2}}\xspace}
 \newcommand{\R}{{{R2}}\xspace}
-\newcommand{\Bravo}{\textsc{BRAVO}\xspace}
+\newcommand{\BRAVO}{\textsc{Bravo}\xspace}
 
 
 
@@ -32,6 +34,7 @@
 % If the paper title is too long for the running head, you can set
 % an abbreviated paper title here
 %
+\begin{comment}
 \author{First Author\inst{1}\orcidID{0000-1111-2222-3333} \and
 Second Author\inst{2,3}\orcidID{1111-2222-3333-4444} \and
 Third Author\inst{3}\orcidID{2222--3333-4444-5555}}
@@ -47,6 +50,7 @@ Springer Heidelberg, Tiergartenstr. 17, 69121 Heidelberg, Germany
 ABC Institute, Rupert-Karls-University Heidelberg, Heidelberg, Germany\\
 \email{\{abc,lncs\}@uni-heidelberg.de}}
 %
+\end{comment}
 \maketitle              % typeset the header of the contribution
 %
 \begin{abstract}
@@ -59,22 +63,22 @@ ABC Institute, Rupert-Karls-University Heidelberg, Heidelberg, Germany\\
     that can be used to support theoretical results of audits.
     We present such experimental results for multiple round 
     ballot-polling RLAs.
-    BRAVO [citation] has long been the standard ballot-polling RLA,
-    while Minerva was recently introduced with the claim
+    \BRAVO [citation] has long been the standard ballot-polling RLA,
+    while \Minerva was recently introduced with the claim
     that fewer ballots on average are necessary to conclude 
     an audit.
     [Minerva paper] presented experimental
     results for one round audits, and here
     we present results
-    from simulations of multiple round audits using Minerva 
-    as well as BRAVO 
+    from simulations of multiple round audits using \Minerva 
+    as well as \BRAVO 
     (both Selection-Ordered 
-    BRAVO and End-of-Round BRAVO).
+    \BRAVO and End-of-Round \BRAVO).
     The simulation results agree within reasonable error with
     the mathematical properties claimed in [Minerva paper].
-    On average, BRAVO audits are unnecessarily conservative 
-    while Minerva audits stop with fewer ballots. We also
-    present details on software implementing Minerva and
+    On average, \BRAVO audits are unnecessarily conservative 
+    while \Minerva audits stop with fewer ballots. We also
+    present details on software implementing \Minerva and
     the simulations themselves.
 
 \keywords{Risk-limiting audit  \and Ballot polling audit}
@@ -97,22 +101,20 @@ so-called round.
 In practice, election officials draw many ballots at once.
 For this reason, R2 audits are used or B2 audits are applied to 
 rounds.
-BRAVO is a B2 audit. 
-When an audit is performed in rounds, BRAVO can have its
-stopping condition applied once at the end of each round
-(End-of Round (EoR) BRAVO).
+\BRAVO is a B2 audit. 
+When an audit is performed in rounds, \BRAVO can have its
+stopping condition applied once at the end of each round: End-of Round (EoR) \BRAVO.
 This method ignores the possibility of stopping earlier in the 
 sample and thus requires more ballots on average to sample.
 Alternatively, the order of ballots in the sample can be tracked
-by election officials and the B2 BRAVO stopping condition can 
-be applied retroactively to all subsamples 
-(Selection-Ordered (SO) BRAVO).
-SO BRAVO requires fewer ballots on average than EoR BRAVO but
+by election officials and the B2 \BRAVO stopping condition can 
+be applied retroactively to all subsamples: Selection-Ordered (SO) \BRAVO.
+SO \BRAVO requires fewer ballots on average than EoR \BRAVO but
 requies the work of tracking the order of ballots rather than
 just their tally.
-Minerva was designed for R2 audits and applies its stopping rule
+\Minerva was designed for R2 audits and applies its stopping rule
 once for each round.
-Minerva, by design then, requires fewer ballots to be sampled when 
+By design then, \Minerva requires fewer ballots to be sampled when 
 an audit is performed in rounds.
 
 Now we present relevant definitions.
@@ -213,16 +215,16 @@ an audit only has a $a$ probablity of not stopping
 by the end of the fifth round, assuming the outcome was correctly
 announced.
 
-\subsection{End-of-Round BRAVO}
-For the EoR BRAVO simulations, our software estimated and used for each round
+\subsection{End-of-Round \BRAVO}
+For the EoR \BRAVO simulations, our software estimated and used for each round
 the minimum round size that would achieve a $90\%$ probability of stopping.
 For the simulations with the announced outcome as the underlying
 ballot distribution, for each round $j$ we computed the proportion of audits 
 that stopped in round $j$ among those that had not stopped before round $j$.
 
-\begin{figure}
+\begin{figure}[H]
 \includegraphics[width=\textwidth]{eor_bravo_90perc_10^4_corrected/sprob_first_three.png}\caption{
-For the first three rounds of the EoR BRAVO simulations, this plot shows the proportion of audits that stopped in the $j$th round
+For the first three rounds of the EoR \BRAVO simulations, this plot shows the proportion of audits that stopped in the $j$th round
 to all audits which had not yet stopped before the $j$th round.}
 \label{fig:eor_bravo_sprob}
 \end{figure}
@@ -232,7 +234,7 @@ since very few audits, $(.1)^{j-1}\cdot(10^4)$ on average,
 make it to the $jth$ round.
 As  a result, the proportions are based on an exponentially smaller dataset in each round.
 The proportions shown in Figure \ref{fig:eor_bravo_sprob} give an estimate
-of the true probability of an EOR BRAVO audit stopping in the $j$th round,
+of the true probability of an EOR \BRAVO audit stopping in the $j$th round,
 given that it has not already stopped in a previous round. 
 In \ref{fig:eor_bravo_sprob}, we see that, especially in earlier rounds for which 
 the values are more representative of true audit behavior, 
@@ -244,31 +246,31 @@ The risk of this audit, across all $5$ rounds, is an important metric since it d
 Therefore, we now consider the proportion of audits that stopped with an underlying tie.
 This proportion, for a risk-limiting audit, should approach a value less than the risk limit, $0.1$, as more audits are performed.
 
-\begin{figure}
+\begin{figure}[H]
 \includegraphics[width=\textwidth]{eor_bravo_90perc_10^4_corrected/total_risk.png}
 \caption{For each state margin, this plot shows
-the proportion of EOR BRAVO audits with an underlying
+the proportion of EOR \BRAVO audits with an underlying
 tie that stopped.}
 \label{fig:eor_bravo_risk}
 \end{figure}
 
-Figure~\ref{fig:eor_bravo_risk} makes it clear that the risk of EOR BRAVO is roughly
+Figure~\ref{fig:eor_bravo_risk} makes it clear that the risk of EOR \BRAVO is roughly
 an order of magnitude less than the risk limit. 
 That is, on average, roughly $10$ times more audits could have stopped 
 with the audit still meeting the risk limit.
-These simulations support the claim made in [Minerva paper]
-that EOR BRAVO is unnecessarily conservative and thus requires
+These simulations support the claim made in [\Minerva paper]
+that EOR \BRAVO is unnecessarily conservative and thus requires
 more ballots on average.
 
 % \subsection{Selection-Ordered BRAVO}
 % next_sample_size code is slow... tie simulations running still!
 
-\subsection{Minerva}
-For Minerva, it has not been shown that round sizes can be chosen
+\subsection{\Minerva Simulations}
+For \Minerva, it has not been shown that round sizes can be chosen
 during the audit. That is, an adversary with knowledge of the history
 of the audit may be able to choose round sizes which cause the 
 risk of the audit to exceed the risk limit.
-For this reason, we have to choose the round sizes of a Minerva 
+For this reason, we have to choose the round sizes of a \Minerva 
 audit a priori.
 For this paper, we consider two choices of round sizes.
 For both, we estimate and then use the minimum first round size 
@@ -293,7 +295,7 @@ As with the preceding simulations, we ran $10,000=10^4$ trials
 per state for both the underlying tie and underlying reported
 outcome.
 
-\begin{figure}
+\begin{figure}[H]
 \includegraphics[width=\textwidth]{minerva_multiround_1x_10^4/total_risk.png}
 \caption{This plot shows, for each state's margin, the proportion of audits that stopped of
 all $10^4$ audits with an underlying tie in the simulations with a round size multiple of $1.0$.}
@@ -301,15 +303,15 @@ all $10^4$ audits with an underlying tie in the simulations with a round size mu
 \end{figure}
 
 Notice in Figure \ref{fig:minerva1_risk} that all simulations for a tie had a proportion of audits that stopped less than $.1$, the risk limit, supporting
-the claim that Minerva is a risk limiting audit. 
-Unlike EOR BRAVO, the experimental risks here are much closer to the risk limit,
-showing that Minerva stops on average with a less conservative risk; Minerva is sharper.
+the claim that \Minerva is a risk limiting audit. 
+Unlike EOR \BRAVO, the experimental risks here are much closer to the risk limit,
+showing that \Minerva stops on average with a less conservative risk; \Minerva is sharper.
 
-\begin{figure}
+\begin{figure}[H]
 \includegraphics[width=\textwidth]{minerva_multiround_1x_10^4/sprobs_first_three.png}
 \caption{This plot shows, for each state's margin, the proportion of audits that stopped of
 all $10^4$ audits with the announced results as the underlying distribution
-in the Minerva simulations with a round size multiple of $1.0$.}
+in the \Minerva simulations with a round size multiple of $1.0$.}
 \label{fig:minerva1_sprob}
 \end{figure}
 
@@ -325,7 +327,7 @@ probability, but it was within  roughly $10\%$.
 
 %\includegraphics[width=\textwidth]{minerva_multiround_1p5x_10^6/total_risk.png}
 
-\begin{figure}
+\begin{figure}[H]
 \includegraphics[width=\textwidth]{minerva_multiround_1p5x_10^4/total_risk.png}
 \caption{This plot shows, for each state's margin, the proportion of audits that stopped of
 all $10^4$ audits with an underlying tie in the simulations with a round size multiple of $1.5$.}
@@ -335,11 +337,11 @@ all $10^4$ audits with an underlying tie in the simulations with a round size mu
 Figure~\ref{fig:minerva1p5_risk} shows, for each state's margin, the proportion of audits that stopped of
 all $10^4$ audits with an underlying tie in the simulations with a round size multiple of $1.5$.
 
-\begin{figure}
+\begin{figure}[H]
 \includegraphics[width=\textwidth]{minerva_multiround_1p5x_10^4/sprobs_first_three.png}
 \caption{This plot shows, for each state's margin, the proportion of audits that stopped in each round
 with the announced results as the underlying distribution
-in the Minerva simulations with a round size multiple of $1.5$.}
+in the \Minerva simulations with a round size multiple of $1.5$.}
 \label{fig:minerva1p5_sprob}
 \end{figure}
 
