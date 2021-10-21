@@ -22,8 +22,8 @@
     In this paper we present an audit simulation framework
     that can be used to confirm theoretical results of audits.
     We present such experimental results for multiple round 
-    ballot-polling RLAs.
-    BRAVO [citation] has long been the standard ballot-polling RLA,
+    ballot polling RLAs.
+    BRAVO [citation] has long been the standard ballot polling RLA,
     while Minerva was recently introduced with the claim
     that fewer ballots on average are necessary to conclude 
     an audit.
@@ -43,14 +43,14 @@
 \end{abstract}
 
 \section{Introduction: B2 and R2 Ballot Polling RLAs}
-In ballot-polling RLAs, samples of ballots are drawn and tallied
+In ballot polling RLAs, samples of ballots are drawn and tallied
 in rounds
 after each of which a statistical measure determines whether to
 continue. 
-Some ballot-polling audits (B2 audits) 
+Some ballot polling audits (B2 audits) 
 are designed to make a stopping decision
 after each individual ballot is sampled.
-Other ballot-polling audits (R2 audits) assume many ballots are drawn
+Other ballot polling audits (R2 audits) assume many ballots are drawn
 at once and make a stopping decision at the conclusion of each 
 so-called round.
 In practice, election officials draw many ballots at once.
@@ -247,10 +247,13 @@ outcome.
 
 \includegraphics[scale=.7]{minerva_multiround_1x_10^4/total_risk.png}
 
-[Fig above] shows that all simulations had a risk of less than 
-$.1$, the risk limit. 
-Unlike EOR BRAVO, the risks here are much closer to the risk limit,
-showing that Minerva stops on average with sharper risk.
+[Fig above] shows, for each state's margin, the proportion of audits that stopped of
+all $10^4$ audits with an underlying tie in the simulations with a round size multiple of $1.0$.
+
+Notice in [fig above] that all simulations had a proportion of audits that stopped less than $.1$, the risk limit, supporting
+the claim that Minerva is a risk limiting audit. 
+Unlike EOR BRAVO, the experimental risks here are much closer to the risk limit,
+showing that Minerva stops on average with a less conservative risk; Minerva is sharper.
 
 \subsubsection{Round Sizes with Multiple of $1.5$}
 
@@ -259,8 +262,12 @@ showing that Minerva stops on average with sharper risk.
 %both an underlying tie and underlying announced outcome. 
 
 %\includegraphics[scale=.7]{minerva_multiround_1p5x_10^6/total_risk.png}
+\includegraphics[scale=.7]{minerva_multiround_1p5x_10^4/total_risk.png}
 
+[Fig above] shows, for each state's margin, the proportion of audits that stopped of
+all $10^4$ audits with an underlying tie in the simulations with a round size multiple of $1.5$.
 
+\includegraphics[scale=.7]{minerva_multiround_1p5x_10^4/sprobs_first_three.png}
 
 
 \end{document}
