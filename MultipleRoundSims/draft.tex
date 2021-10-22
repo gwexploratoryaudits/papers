@@ -23,6 +23,10 @@
 \newcommand{\R}{{{R2}}\xspace}
 \newcommand{\BRAVO}{\textsc{Bravo}\xspace}
 
+\usepackage{color}
+\definecolor{green}{rgb}{0.31, 0.78, 0.47}
+\newcommand{\fpo}[1]{\textcolor{green}{#1}}
+
 
 
 \begin{document}
@@ -59,6 +63,8 @@ ABC Institute, Rupert-Karls-University Heidelberg, Heidelberg, Germany\\
     election is incorrectly announced, it will be detected, 
     and a full hand recount will be performed. 
     In Ballot-polling RLAs, samples of ballots are drawn and tallied.
+    \fpo{Then the sample tally is (statistically) compared with announced tally.}
+    
     In this paper we present an audit simulation framework
     that can be used to support theoretical results of audits.
     We present such experimental results for multiple round 
