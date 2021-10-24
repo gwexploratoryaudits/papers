@@ -1,0 +1,32 @@
+\begin{abstract}
+    Risk-Limiting Audits (RLAs) guarantee with known probability 
+    that if the outcome of an 
+    election is incorrectly announced, it will be detected, 
+    and a full hand recount will be performed. 
+    In Ballot-polling RLAs, samples of ballots are drawn and tallied.
+    \fpo{Then the sample tally is (statistically) compared with announced tally.}
+    
+    In this paper we present an audit simulation framework
+    that can be used to support theoretical results of audits.
+    We present such experimental results for multiple round 
+    ballot-polling RLAs.
+    \BRAVO [citation] has long been the standard ballot-polling RLA,
+    while \Minerva was recently introduced with the claim
+    that fewer ballots on average are necessary to conclude 
+    an audit.
+    [Minerva paper] presented experimental
+    results for one round audits, and here
+    we present results
+    from simulations of multiple round audits using \Minerva 
+    as well as \BRAVO 
+    (both Selection-Ordered 
+    \BRAVO and End-of-Round \BRAVO).
+    The simulation results agree within reasonable error with
+    the mathematical properties claimed in [Minerva paper].
+    On average, \BRAVO audits are unnecessarily conservative 
+    while \Minerva audits stop with fewer ballots. We also
+    present details on software implementing \Minerva and
+    the simulations themselves.
+
+\keywords{Risk-limiting audit  \and Ballot polling audit}
+\end{abstract}

@@ -31,61 +31,44 @@
 
 \begin{document}
 %
-\title{Multiple Round Ballot Polling Risk-Limiting Audit Simulations}
+\title{Simulations of Ballot Polling Risk-Limiting Audits}
 %add \thanks{} within the title brackets if want to refer to supporting organization ^^
 %
 %\titlerunning{Abbreviated paper title}
 % If the paper title is too long for the running head, you can set
 % an abbreviated paper title here
 %
-\begin{comment}
-\author{First Author\inst{1}\orcidID{0000-1111-2222-3333} \and
-Second Author\inst{2,3}\orcidID{1111-2222-3333-4444} \and
-Third Author\inst{3}\orcidID{2222--3333-4444-5555}}
+%\begin{comment}
+\author{Oliver Broadrick\inst{1} \and
+Sarah Morin\inst{1} \and
+Grant McClearn\inst{2} \and
+Filip Zagorski\inst{3} \and Neal McBurnett \and Poorvi L. Vora\inst{1}}
 %
-\authorrunning{F. Author et al.}
+\authorrunning{Broadrick, Morin et al.}
 % First names are abbreviated in the running head.
 % If there are more than two authors, 'et al.' is used.
 %
-\institute{Princeton University, Princeton NJ 08544, USA \and
-Springer Heidelberg, Tiergartenstr. 17, 69121 Heidelberg, Germany
-\email{lncs@springer.com}\\
-\url{http://www.springer.com/gp/computer-science/lncs} \and
-ABC Institute, Rupert-Karls-University Heidelberg, Heidelberg, Germany\\
-\email{\{abc,lncs\}@uni-heidelberg.de}}
+\institute{Department of Computer Science, The George Washington University 
+\email{obroadrick@gwmail.gwu.edu}\\
+\and
+Department of Computer Science, Stanford University 
+\email{obroadrick@gwmail.gwu.edu}\\
+\and Wroclaw University of Science and Technology\\
+\email{filip.zagorski@gmail.com}}
 %
-\end{comment}
+%\end{comment}
 \maketitle              % typeset the header of the contribution
 %
 \begin{abstract}
-    Risk-Limiting Audits (RLAs) guarantee with known probability 
-    that if the outcome of an 
-    election is incorrectly announced, it will be detected, 
-    and a full hand recount will be performed. 
-    In Ballot-polling RLAs, samples of ballots are drawn and tallied.
-    \fpo{Then the sample tally is (statistically) compared with announced tally.}
+    In this paper we present simulation results comparing the risk, stopping probability and number of ballots required over multiple rounds of ballot-polling RLAs \Minerva, Selection-Ordered \BRAVO and End-of-Round \BRAVO. We also
+    present details on the R2B2 open source software library and the related simulation software.    
     
-    In this paper we present an audit simulation framework
-    that can be used to support theoretical results of audits.
-    We present such experimental results for multiple round 
-    ballot-polling RLAs.
-    \BRAVO [citation] has long been the standard ballot-polling RLA,
-    while \Minerva was recently introduced with the claim
-    that fewer ballots on average are necessary to conclude 
-    an audit.
-    [Minerva paper] presented experimental
-    results for one round audits, and here
-    we present results
-    from simulations of multiple round audits using \Minerva 
-    as well as \BRAVO 
-    (both Selection-Ordered 
-    \BRAVO and End-of-Round \BRAVO).
-    The simulation results agree within reasonable error with
-    the mathematical properties claimed in [Minerva paper].
-    On average, \BRAVO audits are unnecessarily conservative 
-    while \Minerva audits stop with fewer ballots. We also
-    present details on software implementing \Minerva and
-    the simulations themselves.
+    \BRAVO is the most commonly used ballot-polling RLA. \Minerva was recently proposed, and requires fewer first-round ballots, on average, than both Selection-Ordered \BRAVO and End-of-Round \BRAVO when the first-round stopping probability is large. 
+    
+    An open question, however, is how \Minerva compares to Selection-Ordered \BRAVO and End-of-Round \BRAVO over multiple rounds.  In this paper, we present results from simulations of multiple round audits with first-round stopping probabilities of $0.9$, a common choice among election officials. Because the size of rounds in \Minerva needs to be predetermined (and independent of the audit draws), we use two pre-determined round sequences for \Minerva: (a) all rounds are of the same size (which might be a practical choice for election officials if they had planned to have resources for the first round size) and (b) each round is $1.5$ times the previous one (which is the preset value for \Minerva as integrated into election audit software Arlo). 
+    
+    We show that the simulation results are consistent with predictions of the R2B2 open-source library for ballot polling audits. We also observe that both \BRAVO audits are unnecessarily conservative 
+    while \Minerva audits stop with fewer ballots. 
 
 \keywords{Risk-limiting audit  \and Ballot polling audit}
 \end{abstract}
