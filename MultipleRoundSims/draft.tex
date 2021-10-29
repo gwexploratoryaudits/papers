@@ -38,11 +38,11 @@
 % If the paper title is too long for the running head, you can set
 % an abbreviated paper title here
 %
-%\begin{comment}
+\begin{comment}
 \author{Oliver Broadrick\inst{1} \and
 Sarah Morin\inst{1} \and
-Grant McClearn\inst{2} \and
-Filip Zagorski\inst{3} \and Neal McBurnett \and Poorvi L. Vora\inst{1}}
+Grant McClearn\inst{2} \and Neal McBurnett \and Poorvi L. Vora\inst{1} \and
+Filip Zagorski\inst{3} }
 %
 \authorrunning{Broadrick, Morin et al.}
 % First names are abbreviated in the running head.
@@ -52,18 +52,18 @@ Filip Zagorski\inst{3} \and Neal McBurnett \and Poorvi L. Vora\inst{1}}
 \email{obroadrick@gwmail.gwu.edu}\\
 \and
 Department of Computer Science, Stanford University 
-\email{obroadrick@gwmail.gwu.edu}\\
+\email{grantmcc@stanford.edu}\\
 \and Wroclaw University of Science and Technology\\
 \email{filip.zagorski@gmail.com}}
 %
-%\end{comment}
+\end{comment}
 \maketitle              % typeset the header of the contribution
 %
 \begin{abstract}
     In this paper we present simulation results comparing the risk, stopping probability and number of ballots required over multiple rounds of ballot-polling RLAs \Minerva, Selection-Ordered \BRAVO and End-of-Round \BRAVO. We also
     present details on the R2B2 open source software library and the related simulation software.    
     
-    \BRAVO is the most commonly used ballot-polling RLA. \Minerva was recently proposed, and requires fewer first-round ballots, on average, than both Selection-Ordered \BRAVO and End-of-Round \BRAVO when the first-round stopping probability is large. 
+    \BRAVO is the most commonly used ballot-polling risk limiting audit (RLA). \Minerva was recently proposed, and requires fewer first-round ballots, on average, than both Selection-Ordered \BRAVO and End-of-Round \BRAVO when the first-round stopping probability is large. 
     
     An open question, however, is how \Minerva compares to Selection-Ordered \BRAVO and End-of-Round \BRAVO over multiple rounds.  In this paper, we present results from simulations of multiple round audits with first-round stopping probabilities of $0.9$, a common choice among election officials. Because the size of rounds in \Minerva needs to be predetermined (and independent of the audit draws), we use two pre-determined round sequences for \Minerva: (a) all rounds are of the same size (which might be a practical choice for election officials if they had planned to have resources for the first round size) and (b) each round is $1.5$ times the previous one (which is the preset value for \Minerva as integrated into election audit software Arlo). 
     
@@ -76,36 +76,19 @@ Department of Computer Science, Stanford University
 %
 %
 
-\section{Introduction: B2 and R2 Ballot Polling RLAs}
-In ballot-polling RLAs, samples of ballots are drawn and tallied
-in rounds
-after each of which a statistical measure determines whether to
-continue. 
-Some ballot-polling audits (B2 audits) 
-are designed to make a stopping decision
-after each individual ballot is sampled.
-Other ballot-polling audits (R2 audits) assume many ballots are drawn
-at once and make a stopping decision at the conclusion of each 
-so-called round.
-In practice, election officials draw many ballots at once.
-For this reason, R2 audits are used or B2 audits are applied to 
-rounds.
-\BRAVO is a B2 audit. 
-When an audit is performed in rounds, \BRAVO can have its
-stopping condition applied once at the end of each round: End-of Round (EoR) \BRAVO.
-This method ignores the possibility of stopping earlier in the 
-sample and thus requires more ballots on average to sample.
-Alternatively, the order of ballots in the sample can be tracked
-by election officials and the B2 \BRAVO stopping condition can 
-be applied retroactively to all subsamples: Selection-Ordered (SO) \BRAVO.
-SO \BRAVO requires fewer ballots on average than EoR \BRAVO but
-requies the work of tracking the order of ballots rather than
-just their tally.
-\Minerva was designed for R2 audits and applies its stopping rule
-once for each round.
-By design then, \Minerva requires fewer ballots to be sampled when 
-an audit is performed in rounds.
+\section{Introduction}
+\subsection{Background}
+In the general ballot-polling risk limiting audit (RLA), a number of ballots are drawn and tallied in what is termed a {\em round} of ballots \cite{usenix_minerva}. A statistical measure is then computed to determine whether there is sufficient evidence to declare the election outcome correct within the pre-determined risk limit. Because the decision is made after drawing a round of ballots, the audit is termed a {\em round-by-round (R2)} audit. The special case when round size is one---that is, stopping decisions are made after each ballot draw---is a {\em ballot-by-ballot (B2)} audit. 
 
+The \BRAVO audit is designed for use as a B2 audit: it requires the smallest expected number of ballots when the true tally of the underlying election is as announced, and stopping decisions are made after each ballot draw. In practice, election officials draw many ballots at once, and the \BRAVO stopping rule needs to be modified for use in an R2 audit that is not B2. There are two obvious approaches. The B2 stopping condition can be applied once at the end of each round: End-of Round (EoR) \BRAVO.  Alternatively, the order of ballots in the sample can be tracked by election officials and the B2 \BRAVO stopping condition can be applied retroactively after each ballot drawn: Selection-Ordered (SO) \BRAVO. SO \BRAVO requires fewer ballots on average than EoR \BRAVO but requires the work of tracking the order of ballots rather than just their tally.
+
+\Minerva was designed for R2 audits and applies its stopping rule once for each round. Thus it does not require the tracking of ballots that SO \BRAVO does. It has been proven that \Minerva is a risk-limiting audit and requires fewer ballots to be sampled than EoR \BRAVO when an audit is performed in rounds. Computations of first-round size for a 0.9 stopping probability when the election is as announced have been computed for a wide range of margins and shown to be smaller than those for both EoR and SO \BRAVO. First round simulations of \Minerva \cite{arxiv_athena} demonstrate that its first-round properties---regarding the probabilities of stopping when the underlying election is tied and when it is as announced---are as predicted for first round sizes with stopping probability 0.9. There are no results, either theoretical or based on simulations, regarding the expected number of ballots drawn in a \Minerva audit. Further, there is no literature comparing simulations of \Minerva and EoR or SO \BRAVO, or studying the sizes of multiple-round \Minerva audits. 
+
+\subsection{Our Results}
+
+\subsection{Organization}
+
+\section{Definitions}
 Now we present relevant definitions.
 We consider a two candidate plurality contest.
 To begin we define an audit.
