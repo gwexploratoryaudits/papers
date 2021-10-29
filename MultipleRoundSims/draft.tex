@@ -8,6 +8,7 @@
 \usepackage{graphicx}
 \graphicspath{{./imgs/}}
 \usepackage{comment}
+\usepackage{listings,hyperref}
 
 % \usepackage{graphicx}  --> Used for displaying a sample figure. If possible, figure files should
 % be included in EPS format.
@@ -27,9 +28,10 @@
 \definecolor{green}{rgb}{0.31, 0.78, 0.47}
 \newcommand{\fpo}[1]{\textcolor{green}{#1}}
 
-
+\def\code#1{\texttt{#1}}
 
 \begin{document}
+\lstset{language=Python}
 %
 \title{Simulations of Ballot Polling Risk-Limiting Audits}
 %add \thanks{} within the title brackets if want to refer to supporting organization ^^
@@ -87,9 +89,9 @@ Department of Computer Science, Stanford University
 \label{sec:related}
 \input{sections/03-related}
 
-\section{Simulator}
-\label{sec:simulator}
-\input{sections/04-simulator}
+\section{Software}
+\label{sec:software}
+\input{sections/04-software}
 
 \section{Simulation Results}
 \label{sec:results}

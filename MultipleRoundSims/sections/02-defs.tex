@@ -1,7 +1,7 @@
 %Definitions
 Now we present relevant definitions.
 We consider a two candidate plurality contest.
-To begin we define an audit.
+To begin we define an audit. We assume that ballots are sampled with replacement. 
 \begin{definition}
 An audit $\mathcal{A}$ takes a sample $X$ as input and gives one of the 
 following decisions
@@ -16,11 +16,11 @@ All of the audits discussed in this paper are modeled as binary hypothesis tests
 Under the alternate hypothesis, $H_a$, the announced outcome is correct. 
 That is, the true underlying ballot distribution is given by the announced ballot tallies.
 Under the null hypothesis, $H_0$, the true outcome is a tie 
-(or a the announced winner losing by one vote if there is an odd number of total ballots).
+(or the announced winner lost by one vote, and the number of ballots is large enough that the probability of drawing a ballot for the winner is that of drawing one for the winner).
 Now we define key attributes of an audit that we will consider while analyzing our simulations.
-The risk of an audit is the probability that an audit stops when a tie has occurred.
+The maximum risk of an audit is the probability that an audit stops, given that the underlying election is a tie. 
 \begin{definition}[Risk]
-The risk $R$ of an audit $\mathcal{A}$ is
+The maximum risk $R$ of an audit $\mathcal{A}$ is
 $$R(\mathcal{A})=\Pr[\mathcal{A}(X)=Correct \mid H_0]$$
 \end{definition}
 This leads us to the following simple definition of an $\alpha$-RLA.
@@ -31,10 +31,10 @@ $$R(\mathcal{A}) \le \alpha.$$
 \end{definition}
 
 It is useful to discuss the probability of an audit stopping in
-some round, if the outcome is correctly announced.
+the $j^{th}$ round, given that the underlying election is as announced.
 \begin{definition}[Stopping Probability]
 The stopping probability $S$ of an audit $\mathcal{A}$ in round $j$ is 
-$$S_j(\mathcal{A})=\Pr[\mathcal{A}(X_j)=Correct \mid H_a]$$
+$$S_j(\mathcal{A})=\Pr[\mathcal{A}(X)=Correct ~in~round~j~\land \mathcal{A}(X) \neq Correct ~previously \mid H_a]$$
 \end{definition}
 The notion of stopping probability can be useful for selecting round sizes.
 
