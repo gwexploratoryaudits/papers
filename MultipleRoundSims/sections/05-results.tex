@@ -71,8 +71,54 @@ These simulations support the claim made in [\Minerva paper]
 that EOR \BRAVO is unnecessarily conservative and thus requires
 more ballots on average.
 
-% \subsection{Selection-Ordered BRAVO}
+\subsection{Selection-Ordered \BRAVO}
 % next_sample_size code is slow... tie simulations running still!
+For the SO \BRAVO simulations, our software estimated and used for each round
+the minimum round size that would achieve a $90\%$ probability of stopping.
+For the simulations with the announced outcome as the underlying
+ballot distribution, for each round $j$ we computed the proportion of audits 
+that stopped in round $j$ among those that had not stopped before round $j$.
+
+\begin{figure}[H]
+\includegraphics[width=\textwidth]{so_bravo_90perc_10^4/sprob_first_three.png}\caption{
+For the first three rounds of the SO \BRAVO simulations, this plot shows the proportion of audits that stopped in the $j$th round
+to all audits which had not yet stopped before the $j$th round.}
+\label{fig:so_bravo_sprob}
+\end{figure}
+
+In Figure \ref{fig:so_bravo_sprob}, we again display proportions for only the first three rounds.
+The proportions shown in Figure \ref{fig:so_bravo_sprob}, like those in \ref{fig:eor_bravo_sprob}, give an estimate
+of the true probability of an SO \BRAVO audit stopping in the $j$th round,
+given that it has not already stopped in a previous round. 
+In \ref{fig:so_bravo_sprob}, we see that our round size predictions are relatively accurate,
+all three rounds being near $90\%$.
+
+Again, we will next consider the proportion of audits that stopped with an underlying tie over all five rounds.
+This proportion, for a risk-limiting audit, should approach a value less than the risk limit, 
+$0.1$, as more audits are performed.
+
+\begin{figure}[H]
+\includegraphics[width=\textwidth]{so_bravo_90perc_10^4/total_risk.png}
+\caption{For each state margin, this plot shows
+the proportion of SO \BRAVO audits with an underlying
+tie that stopped in any of the five rounds.}
+\label{fig:so_bravo_risk}
+\end{figure}
+
+In Figure~\ref{fig:so_bravo_risk} we show only the results for the $13$
+states whose simulations with an underlying tie have finished running.
+To estimate the minimum next round size that achieves a desired stopping probability,
+the SO \BRAVO software generates the probability distribution ballot by ballot since
+the stopping condition needs to be evaluated for each individual ballot drawn.
+This means, when an underyling tie causes audits to quickly move on to larger rounds, 
+the simulations are computationally expensive. 
+Regardless, the claim that these simulations support, that SO \BRAVO is a Risk-Limiting Audit,
+is a proven and well known result.
+Notice in Figure~\ref{fig:so_bravo_risk},
+that the risk of SO \BRAVO is much
+nearer the risk limit than that of EoR \BRAVO. 
+
+%TODO SO and EoR macros
 
 \subsection{\Minerva Simulations}
 For \Minerva, it has not been shown that round sizes can be chosen
