@@ -1,0 +1,29 @@
+\begin{thebibliography}{1}
+\providecommand{\url}[1]{\texttt{#1}}
+\providecommand{\urlprefix}{URL }
+\providecommand{\doi}[1]{https://doi.org/#1}
+
+\bibitem{bravo}
+Lindeman, M., Stark, P.B., Yates, V.S.: {BRAVO}: Ballot-polling risk-limiting
+  audits to verify outcomes. In: EVT/WOTE (2012)
+
+\bibitem{r2b2}
+Morin, S., McClearn, G.: The {R2B2} ({R}ound-by-{R}ound, {B}allot-by-{B}allot)
+  library, https://github.com/gwexploratoryaudits/r2b2
+
+\bibitem{arlo}
+VotingWorks: Arlo, https://voting.works/risk-limiting-audits/
+
+\bibitem{arxiv_athena}
+Zag{\'{o}}rski, F., McClearn, G., Morin, S., McBurnett, N., Vora, P.L.: The
+  athena class of risk-limiting ballot polling audits. CoRR
+  \textbf{abs/2008.02315} (2020), \url{https://arxiv.org/abs/2008.02315}
+
+\bibitem{usenix_minerva}
+Zag{\'o}rski, F., McClearn, G., Morin, S., McBurnett, N., Vora, P.L.:
+  Minerva{\textendash} an efficient risk-limiting ballot polling audit. In:
+  30th {USENIX} Security Symposium ({USENIX} Security 21). pp. 3059--3076.
+  {USENIX} Association (Aug 2021),
+  \url{https://www.usenix.org/conference/usenixsecurity21/presentation/zagorski}
+
+\end{thebibliography}
