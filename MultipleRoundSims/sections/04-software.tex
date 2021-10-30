@@ -1,40 +1,33 @@
 %Software
-In this section we describe the software implementing ballot polling audits and the simulator, termed the R2B2 library. All the software is released as open source under the MIT License.
+In this section we describe the software implementing ballot polling audits, termed the R2B2 library, and the simulator software. All the software is released as open source under the MIT License.
 \subsection{R2B2 Library}
 
 The R2B2 Python library provides a framework for the exploration of round-by-round
-and ballot-by-ballot Risk-Limiting Audits (RLAs). The goal in designing R2B2 is two fold:
+and ballot-by-ballot RLAs. The goal in designing R2B2 is two fold:
 \begin{enumerate}
     \item Provide an elegant Python library which can be easily imported and used
     in any other code base.
     \item Provide an interactive set of tools which can be utilized `out-of-the-box'
     for experimenting with and learning about risk-limiting audits.
 \end{enumerate}
-The following describes the design, usage and possible next steps for the R2B2 library.
 
-\subsection{Design}
+\subsubsection{Design}
 
 The high-level design of R2B2 is an object-oriented view of election audits.
 The three main object classes, \code{Election}, \code{Contest}, and \code{Audit},
 -serve to group data into logically independent structures.
 
-\subsubsection{Election}
 The \code{Election} contains the information that comprises an entire election,
 most importantly, the total number of ballots cast in the election and the list
 of \code{Contest}s from the election. At the moment \code{Election} does not offer
-functionality beyond grouping \code{Contest}s; potential functionality discussed
-in 1.3 Future Work.
+functionality beyond grouping \code{Contest}s.
 
-\subsubsection{Contest}
 The \code{Contest} contains the information related to a single
 contest such as the ballots cast in that contest, the candidates, the type of contest,
 and the reported tally. Providing a structure to hold this information independent of
 any particular audit is especially useful for exploratory work.
 
-\subsubsection{Audit}
-
-
-The \code{Audit} contains information related to a single contests audit parameters
+The \code{Audit} contains information related to the audit parameters for a single contest, 
 such as the risk limit, sampling method, and \code{Contest} to audit. It is important
 to note the \code{Audit} is an Abstract Base Class upon which specific RLAs are built.
 It only contains the parameters and attributes common to all RLAs and provides a set
@@ -65,13 +58,11 @@ such as:
     \item A list of all stopping conditions from the minimum to the maximum round size.
 \end{itemize}
 
-\subsection{Usage}
+\subsubsection{Usage}
 
 R2B2 makes understanding and exploring election audits simple for the user with no
 Python knowledge while simultaneously providing a comprehensive set of tools for
 the experienced Python developer.
-
-\subsubsection{Python Library}
 
 Using R2B2 is as simple as using any other Python library: simply import the library
 and all of the functionality is at your finger tips. Not only does this allow users
@@ -84,10 +75,7 @@ the usage of R2B2:
     \item \href{https://github.com/gwexploratoryaudits/r2b2/blob/notebooks/notebook/Generating%20Graphs.ipynb}{Generating Graphs}
 \end{itemize}
 
-
-\subsubsection{Stand-Alone Tool}
-
-R2B2 provides a significant amount of functionality `out-of-the-box' for educational
+R2B2 also provides a significant amount of functionality `out-of-the-box' for educational
 or exploratory use. For those who wish learn about RLAs without having to write any
 code themselves, R2B2 provides a command line tool for both interactive auditing and
 generating audit results and statistics for larger data sets.
