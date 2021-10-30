@@ -1,18 +1,61 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{10}
 \providecommand{\url}[1]{\texttt{#1}}
 \providecommand{\urlprefix}{URL }
 \providecommand{\doi}[1]{https://doi.org/#1}
+
+\bibitem{blom_IRV}
+Blom, M.L., Stuckey, P.J., Teague, V.J.: Ballot-polling risk limiting audits
+  for {IRV} elections. In: Krimmer, R., Volkamer, M., Cortier, V., Gor{\'{e}},
+  R., Hapsara, M., Serd{\"{u}}lt, U., Duenas{-}Cid, D. (eds.) Electronic Voting
+  - Third International Joint Conference, E-Vote-ID 2018, Bregenz, Austria,
+  October 2-5, 2018, Proceedings. Lecture Notes in Computer Science, vol.
+  11143, pp. 17--34. Springer (2018). \doi{10.1007/978-3-030-00419-4\_2},
+  \url{https://doi.org/10.1007/978-3-030-00419-4\_2}
+
+\bibitem{DBLP:conf/evoteid/HuangRSTV20}
+Huang, Z., Rivest, R.L., Stark, P.B., Teague, V.J., Vukcevic, D.: A unified
+  evaluation of two-candidate ballot-polling election auditing methods. In:
+  Krimmer, R., Volkamer, M., Beckert, B., K{\"{u}}sters, R., Kulyk, O.,
+  Duenas{-}Cid, D., Solvak, M. (eds.) Electronic Voting - 5th International
+  Joint Conference, E-Vote-ID 2020, Bregenz, Austria, October 6-9, 2020,
+  Proceedings. Lecture Notes in Computer Science, vol. 12455, pp. 112--128.
+  Springer (2020). \doi{10.1007/978-3-030-60347-2\_8},
+  \url{https://doi.org/10.1007/978-3-030-60347-2\_8}
 
 \bibitem{bravo}
 Lindeman, M., Stark, P.B., Yates, V.S.: {BRAVO}: Ballot-polling risk-limiting
   audits to verify outcomes. In: EVT/WOTE (2012)
 
+\bibitem{simulations_house}
+McLaughlin, K., Stark, P.B.: Simulations of risk-limiting audit techniques and
+  the effects of reducing batch size on the 2008 california house of
+  representatives elections  (2010),
+  \url{https://www.stat.berkeley.edu/users/vigre/undergrad/reports/McLaughlin_Stark.pdf}
+
+\bibitem{mclaughlin_thesis}
+McLaughlin, K., Stark, P.B.: Workload estimates for risk-limiting audits of
+  large contests  (2011),
+  \url{https://www.stat.berkeley.edu/~stark/Preprints/workload11.pdf}
+
 \bibitem{r2b2}
 Morin, S., McClearn, G.: The {R2B2} ({R}ound-by-{R}ound, {B}allot-by-{B}allot)
   library, https://github.com/gwexploratoryaudits/r2b2
 
+\bibitem{bayesian-audits}
+Rivest, R.L., Shen, E.: A {B}ayesian method for auditing elections. In:
+  EVT/WOTE (2012)
+
+\bibitem{dice}
+Stark, P.B.: Simulating a ballot-polling audit with cards and dice. In:
+  Multidisciplinary Conference on Election Auditing, MIT (december 2018),
+  \url{http://electionlab.mit.edu/sites/default/files/2018-12/eas-ballotpollingsimulation.pdf}
+
 \bibitem{arlo}
 VotingWorks: Arlo, https://voting.works/risk-limiting-audits/
+
+\bibitem{wald}
+Wald, A.: Sequential tests of statistical hypotheses. The Annals of
+  Mathematical Statistics  \textbf{16}(2),  117--186 (1945)
 
 \bibitem{arxiv_athena}
 Zag{\'{o}}rski, F., McClearn, G., Morin, S., McBurnett, N., Vora, P.L.: The
