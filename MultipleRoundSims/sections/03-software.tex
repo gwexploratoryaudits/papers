@@ -2,7 +2,7 @@
 In this section we describe the software implementing ballot polling audits, termed the R2B2 library, and the simulator software used for this research. All the software is released as open source under the MIT License.
 \subsection{R2B2 Library}
 
-The R2B2 Python library \cite{r2b2} provides a framework for the exploration of round-by-round
+The R2B2 Python library \cite{r2b2_anon} provides a framework for the exploration of round-by-round
 and ballot-by-ballot RLAs. The goal in designing R2B2 is two fold:
 \begin{enumerate}
     \item Provide an elegant Python library which can be easily imported and used
@@ -81,7 +81,7 @@ code themselves, R2B2 provides a command line tool for both interactive auditing
 generating audit results and statistics for larger data sets.
 
 \subsection{Simulation Software}
-As described above, our open source audit software library R2B2 has implementations of several ballot polling risk-limiting audits as well as a simulator, 
+As described above R2B2 has implementations of several ballot polling risk-limiting audits as well as a simulator, 
 all written in Python.
 For each of these audits, the software can compute the stopping condition for a given sample and estimates
 of the next round size to achieve a desired stopping probability. 
@@ -89,8 +89,6 @@ For a given audit and random seed, the simulator draws random samples, with repl
 given the number of votes for each candidate, and the number of invalid votes, in the underlying election (these need not be chosen to be those announced). 
 
 When the number of candidates is more than two, the audit is carried out pairwise for each candidate pair, and votes for all other candidates are considered invalid votes. 
-It is often useful to consider two underlying elections: one corresponding to a tie between the pair, and the other corresponding to the results as announced. These are the probability distributions represented
-by the null and alternative hypotheses.
 
 After drawing a simulated sample of ballots, the simulator evaluates the given audit's stopping condition for this sample.
 If the audit stops, the simulation stops, and if the audit continues, the simulation draws another round. 
@@ -101,6 +99,6 @@ predetermined round sizes, and pseudorandomly-generated round sizes.
 
 \subsection{Testing}
 
-The R2B2 (python) software is used to compute stopping conditions and next round estimates, it is intended for use by us and other researchers, and designed for this purpose. We have also independently implemented all the functionality in matlab (the two codebases are written by different individuals) and have extensively checked the results of the two codebases. Additionally, for use in regular election audits by election officials, we have written an add-on to the {\em Arlo} risk-limiting audit software, which has also been extensively checked against these two codebases. 
+The R2B2 software is used to compute stopping conditions and next round estimates. It is intended for use by us and other researchers, and designed for this purpose. We have also independently implemented all the functionality in matlab \cite{brla_explore_anon} (the two codebases are written by different individuals) and have extensively checked the results of the two codebases. Additionally, for use in regular election audits by election officials, we have written an add-on \cite{athena_anon} to the {\em Arlo} risk-limiting audit software, the results of which have also been extensively checked against the other two codebases. 
 
 

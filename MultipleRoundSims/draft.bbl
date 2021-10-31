@@ -3,6 +3,17 @@
 \providecommand{\urlprefix}{URL }
 \providecommand{\doi}[1]{https://doi.org/#1}
 
+\bibitem{athena_anon}
+Anonymized: Athena - risk limiting audit (round-by-round),
+  https://github.com/xxxx
+
+\bibitem{brla_explore_anon}
+Anonymized: brla\_explore, https://github.com/xxxx
+
+\bibitem{r2b2_anon}
+Anonymized: The {R2B2} ({R}ound-by-{R}ound, {B}allot-by-{B}allot) library,
+  https://github.com/xxxx
+
 \bibitem{blom_IRV}
 Blom, M.L., Stuckey, P.J., Teague, V.J.: Ballot-polling risk limiting audits
   for {IRV} elections. In: Krimmer, R., Volkamer, M., Cortier, V., Gor{\'{e}},
@@ -37,10 +48,6 @@ McLaughlin, K., Stark, P.B.: Workload estimates for risk-limiting audits of
   large contests  (2011),
   \url{https://www.stat.berkeley.edu/~stark/Preprints/workload11.pdf}
 
-\bibitem{r2b2}
-Morin, S., McClearn, G.: The {R2B2} ({R}ound-by-{R}ound, {B}allot-by-{B}allot)
-  library, https://github.com/gwexploratoryaudits/r2b2
-
 \bibitem{bayesian-audits}
 Rivest, R.L., Shen, E.: A {B}ayesian method for auditing elections. In:
   EVT/WOTE (2012)
@@ -49,6 +56,11 @@ Rivest, R.L., Shen, E.: A {B}ayesian method for auditing elections. In:
 Stark, P.B.: Simulating a ballot-polling audit with cards and dice. In:
   Multidisciplinary Conference on Election Auditing, MIT (december 2018),
   \url{http://electionlab.mit.edu/sites/default/files/2018-12/eas-ballotpollingsimulation.pdf}
+
+\bibitem{Bayesian-RLA}
+Vora, P.L.: Risk-limiting {B}ayesian polling audits for two candidate
+  elections. CoRR  \textbf{abs/1902.00999} (2019),
+  \url{http://arxiv.org/abs/1902.00999}
 
 \bibitem{arlo}
 VotingWorks: Arlo, https://voting.works/risk-limiting-audits/
@@ -59,7 +71,7 @@ Wald, A.: Sequential tests of statistical hypotheses. The Annals of
 
 \bibitem{arxiv_athena}
 Zag{\'{o}}rski, F., McClearn, G., Morin, S., McBurnett, N., Vora, P.L.: The
-  athena class of risk-limiting ballot polling audits. CoRR
+  {Athena} class of risk-limiting ballot polling audits. CoRR
   \textbf{abs/2008.02315} (2020), \url{https://arxiv.org/abs/2008.02315}
 
 \bibitem{usenix_minerva}

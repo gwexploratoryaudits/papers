@@ -67,7 +67,7 @@ Department of Computer Science, Stanford University
     
     \BRAVO is the most commonly used ballot-polling RLA. \Minerva was recently proposed, and requires fewer first-round ballots, on average, than both Selection-Ordered \BRAVO and End-of-Round \BRAVO when the first-round stopping probability is large. 
     
-    An open question, however, is how \Minerva compares to Selection-Ordered \BRAVO and End-of-Round \BRAVO over multiple rounds.  In this paper, we present results from simulations of multiple round audits with first-round stopping probabilities of $0.9$, a common choice among election officials. Because the size of rounds in \Minerva needs to be predetermined (and independent of the audit draws), we use two pre-determined round sequences for \Minerva: (a) all rounds are of the same size (which might be a practical choice for election officials if they had planned to have resources for the first round size) and (b) each round is $1.5$ times the previous one (which is the preset value for \Minerva as integrated into election audit software Arlo). 
+    An open question, however, is how \Minerva compares to Selection-Ordered \BRAVO and End-of-Round \BRAVO over multiple rounds.  In this paper, we present results from simulations of multiple round audits with first-round stopping probabilities of $90\%$, a common choice among election officials. Because the size of rounds in \Minerva needs to be predetermined (and independent of the audit draws), we use two pre-determined round sequences for \Minerva: (a) all rounds are of the same size (which might be a practical choice for election officials if they had planned to have resources for the first round size) and (b) each round is $1.5$ times the previous one (which is the preset value for \Minerva as integrated into election audit software Arlo). 
     
     We show that the simulation results are consistent with predictions of the R2B2 open-source library for ballot polling audits. We also observe that both \BRAVO audits are more conservative  than needed,
     while \Minerva audits stop with fewer ballots. 
@@ -85,13 +85,13 @@ Department of Computer Science, Stanford University
 \label{sec:related}
 \input{sections/02-related}
 
-\section{Definitions}
-\label{sec:defs}
-\input{sections/03-defs}
-
 \section{Software}
 \label{sec:software}
-\input{sections/04-software}
+\input{sections/03-software}
+
+\section{Experiments}
+\label{sec:expts}
+\input{sections/04-expts}
 
 \section{Simulation Results}
 \label{sec:results}

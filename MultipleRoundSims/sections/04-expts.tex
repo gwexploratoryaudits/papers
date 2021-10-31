@@ -1,9 +1,10 @@
 %Definitions
-Now we present relevant definitions.
-We consider a two candidate plurality contest.
-To begin we define an audit. We assume that ballots are sampled with replacement. 
+In this section, we motivate and describe the experiments. We consider a two candidate plurality contest, and assume that ballots are sampled with replacement, as is common in the literature. 
+
+We first present relevant definitions.
+
 \begin{definition}
-An audit $\mathcal{A}$ takes a sample $X$ as input and gives one of the 
+An audit $\mathcal{A}$ takes a sample of ballots $X$ as input and gives one of the 
 following decisions
 \begin{enumerate}
 \item
@@ -12,18 +13,22 @@ $Correct$: the audit is complete
 $Uncertain$: continue the audit
 \end{enumerate}
 \end{definition}
+
 All of the audits discussed in this paper are modeled as binary hypothesis tests.
+
 Under the alternate hypothesis, $H_a$, the announced outcome is correct. 
 That is, the true underlying ballot distribution is given by the announced ballot tallies.
+
 Under the null hypothesis, $H_0$, the true outcome is a tie 
 (or the announced winner lost by one vote, and the number of ballots is large enough that the probability of drawing a ballot for the winner is that of drawing one for the winner).
-Now we define key attributes of an audit that we will consider while analyzing our simulations.
-The maximum risk of an audit is the probability that an audit stops, given that the underlying election is a tie. 
+
+The maximum risk of an audit is the probability that an audit stops, given that the underlying election is a tie. (Vora show that this is the maximum risk \cite{Bayesian-RLA}.) 
 \begin{definition}[Risk]
 The maximum risk $R$ of an audit $\mathcal{A}$ is
 $$R(\mathcal{A})=\Pr[\mathcal{A}(X)=Correct \mid H_0]$$
 \end{definition}
-This leads us to the following simple definition of an $\alpha$-RLA.
+
+This leads us to the following definition of an $\alpha$-RLA.
 \begin{definition}[Risk Limiting Audit ($\alpha$-RLA)]
 An audit $\mathcal{A}$ is a Risk Limiting Audit with 
 risk limit $\alpha$ iff 
@@ -38,3 +43,4 @@ $$S_j(\mathcal{A})=\Pr[\mathcal{A}(X)=Correct ~in~round~j~\land \mathcal{A}(X) \
 \end{definition}
 The notion of stopping probability can be useful for selecting round sizes.
 
+We performed simulations to study $S_j$ and obtain estimates of the expected number of ballots drawn for the various audits. We know that \BRAVO uses the smallest expected number of ballots when drawn ballot-by-ballot. However, this may not be the case when \BRAVO is used as an R2 audit for a large first round size. We also studied the risk values. While all the audits we studied have been proven to be RLAs, it is useful to observe how close to the risk limit each audit gets over a small, finite number of rounds as would be the case in a real election. 
