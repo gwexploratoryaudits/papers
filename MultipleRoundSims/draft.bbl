@@ -10,6 +10,12 @@ Anonymized: Athena - risk limiting audit (round-by-round),
 \bibitem{brla_explore_anon}
 Anonymized: brla\_explore, https://github.com/xxxx
 
+\bibitem{jupyterBasic}
+Anonymized: {R2B2} {B}asics, https://github.com/xxxx
+
+\bibitem{jupyterGraphs}
+Anonymized: {R2B2} {C}omparing {A}udits with {G}raphs, https://github.com/xxxx
+
 \bibitem{r2b2_anon}
 Anonymized: The {R2B2} ({R}ound-by-{R}ound, {B}allot-by-{B}allot) library,
   https://github.com/xxxx
