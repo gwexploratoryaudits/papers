@@ -85,7 +85,7 @@ As described above R2B2 has implementations of several ballot polling risk-limit
 all written in Python.
 For each of these audits, the software can compute the stopping condition for a given sample and estimates
 of the next round size to achieve a desired stopping probability. 
-For a given audit and random seed, the simulator draws random samples, with replacement, using a pseudorandom number generator, [need to check].
+For a given audit and random seed, the simulator draws random samples, with replacement, using a pseudorandom number generator.
 given the number of votes for each candidate, and the number of invalid votes, in the underlying election (these need not be chosen to be those announced). 
 
 When the number of candidates is more than two, the audit is carried out pairwise for each candidate pair, and votes for all other candidates are considered invalid votes. 
