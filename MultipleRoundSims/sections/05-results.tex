@@ -1,17 +1,4 @@
 %Results
-For this paper, we simulated audits for 
-the 2020 Presidential election
-in all US states where the pairwise margin for the two main candidates was at least $5\%$. 
-Round sizes increase roughly proportional to the inverse
-square of the margin, so 
-smaller margins are computationally much more expensive to simulate.
-For each of these states, we simulated 
-$10,000=10^4$ audits assuming the underlying election was as announced,  
-and an additional $10,000=10^4$ audits assuming the underlying election was a tie. 
-
-We ran simulations for a $90\%$ probability of stopping in the first round, enabling election officials to be done in the first round with very high probability if the election is as announced.
-We ran our simulations for up to five rounds. We assume that the audit results in a hand count if it does not stop in any of $5$ rounds. 
-
 \subsection{End-of-Round \BRAVO}
 For the EoR \BRAVO simulations, our software estimated and used for each round
 the round size that would achieve a $90\%$ probability of stopping if the true election outcome were as announced. In Figure \ref{fig:eor_bravo_sprob}, we display the proportion of EoR \BRAVO audits that stopped in the $j^{th}$ round

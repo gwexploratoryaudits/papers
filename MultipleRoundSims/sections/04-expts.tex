@@ -14,13 +14,7 @@ $Uncertain$: continue the audit
 \end{enumerate}
 \end{definition}
 
-All of the audits discussed in this paper are modeled as binary hypothesis tests.
-
-Under the alternate hypothesis, $H_a$, the announced outcome is correct. 
-That is, the true underlying ballot distribution is given by the announced ballot tallies.
-
-Under the null hypothesis, $H_0$, the true outcome is a tie 
-(or the announced winner lost by one vote, and the number of ballots is large enough that the probability of drawing a ballot for the winner is that of drawing one for the winner).
+All of the audits discussed in this paper are modeled as binary hypothesis tests. Under the alternate hypothesis, $H_a$, the announced outcome is correct. That is, the true underlying ballot distribution is given by the announced ballot tallies. Under the null hypothesis, $H_0$, the true outcome is a tie (or the announced winner lost by one vote, and the number of ballots is large enough that the probability of drawing a ballot for the winner is that of drawing one for the winner).
 
 The maximum risk of an audit is the probability that an audit stops, given that the underlying election is a tie. (Vora show that this is the maximum risk \cite{Bayesian-RLA}.) 
 \begin{definition}[Risk]
@@ -35,12 +29,32 @@ risk limit $\alpha$ iff
 $$R(\mathcal{A}) \le \alpha.$$
 \end{definition}
 
-It is useful to discuss the probability of an audit stopping in
-the $j^{th}$ round, given that the underlying election is as announced.
+We present measures of stopping probability in the $j^{th}$ round of the audit, given that the underlying election is as announced.
 \begin{definition}[Stopping Probability]
-The stopping probability $S$ of an audit $\mathcal{A}$ in round $j$ is 
+The stopping probability $S_j$ of an audit $\mathcal{A}$ in round $j$ is 
 $$S_j(\mathcal{A})=\Pr[\mathcal{A}(X)=Correct ~in~round~j~\land \mathcal{A}(X) \neq Correct ~previously \mid H_a]$$
 \end{definition}
-The notion of stopping probability can be useful for selecting round sizes.
+Experimentally, using our simulations, $S_j$ would be estimated by the fraction of audits that stop in round $j$. 
 
-We performed simulations to study $S_j$ and obtain estimates of the expected number of ballots drawn for the various audits. We know that \BRAVO uses the smallest expected number of ballots when drawn ballot-by-ballot. However, this may not be the case when \BRAVO is used as an R2 audit for a large first round size. We also studied the risk values. While all the audits we studied have been proven to be RLAs, it is useful to observe how close to the risk limit each audit gets over a small, finite number of rounds as would be the case in a real election. 
+Note that $\sum _j S_j(\mathcal{A})=1$. We can also consider the cumulative stopping probability: 
+\begin{definition}[Cumulative Stopping Probability]
+The cumulative stopping probability $C_j$ of an audit $\mathcal{A}$ in round $j$ is 
+$$C_j(\mathcal{A})= \sum_{i=1}^j S_j$$
+\end{definition}
+Experimentally, using our simulations, $C_j$ would be estimated by the fraction of audits that stop in or before round $j$. 
+
+Finally, we are also interested in the probability that an audit will stop in round $j$ given that it did not stop earlier: 
+\begin{definition}[Conditional Stopping Probability]
+The conditional stopping probability  of an audit $\mathcal{A}$ in round $j$ is 
+$$\chi_j (\mathcal{A})=\Pr[\mathcal{A}(X)=Correct ~in~round~j~\mid H_a \land \mathcal{A}(X) \neq Correct ~previously]$$
+\end{definition}
+Experimentally, using our simulations, $\chi_j$ would be estimated by the ratio of the audits that stop in round $j$ to those that ``entered'' round $j$, i.e. those that did not stop before round $j$. 
+
+We simulated audits using margins from the 2020 Presidential election, limiting ourselves to pairwise margins for the two main candidates of $0.05$ or larger. Round sizes increase roughly proportional to the inverse
+square of the margin, so 
+smaller margins are computationally much more expensive to simulate.
+For each of these states, we simulated 
+$10,000=10^4$ audits assuming the underlying election was as announced ($H_a$),  
+and an additional $10,000=10^4$ audits assuming the underlying election was a tie ($H_0$). 
+
+We ran simulations for: (a) $90\%$ probability of stopping in the first round, enabling election officials to be done in the first round with very high probability if the election is as announced and (b) $25\%$ probability of stopping in the first round which is more favorable to \BRAVO. We ran our simulations for up to five rounds. For \Minerva, we chose two round schedules: one where the additional number of ballots chosen in a round is the same as in the previous round (multiplying factor of $1.0$) and the second where the multiplying factor is $1.5$ (this version is integrated into {\em Arlo}, and the multiplying factor was chosen as it roughly ensures a $90\%$ conditional stopping probability in the second round for a first round stopping probability of $90\%$). For both versions of \BRAVO, we chose a single round schedule: each round size has the same conditional stopping probability as the first one. 
