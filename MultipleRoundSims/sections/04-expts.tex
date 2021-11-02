@@ -57,14 +57,14 @@ For each of these states, we simulated
 $10,000=10^4$ audits assuming the underlying election was as announced ($H_a$),  
 and an additional $10,000=10^4$ audits assuming the underlying election was a tie ($H_0$). 
 
-We ran simulations for: (a) $.9$ probability of stopping in the first round, enabling election officials to be done in the first round with very high probability if the election is as announced and (b) $.25$ probability of stopping in the first round which is more favorable to \BRAVO. We ran our simulations for up to five rounds. 
+We ran simulations for: (a) $0.9$ probability of stopping in the first round, enabling election officials to be done in the first round with very high probability if the election is as announced and (b) $.25$ probability of stopping in the first round which is more favorable to \BRAVO. We ran our simulations for up to five rounds. 
 
 For rounds after the first one, we chose the round schedule as follows. For both versions of \BRAVO, we chose a single round schedule: each round size has the same conditional stopping probability as the first one. As the proof of the risk-limiting property of \Minerva assumes that its round schedule is determined before any ballots are drawn, we could not use this approach for \Minerva round sizes. Instead, we chose to compare two fixed round schedules for \Minerva: one where the additional number of ballots drawn in a round is the same as in the previous round (multiplying factor of $1.0$) and the second where the multiplying factor is $1.5$. We consider the case of drawing samples of the same size because it may reflect a practical way to continue an
 audit; if election officials have selected some first round size within
 reasonable logistical bounds, drawing the same number of 
 ballots in subsequent rounds may be practical.
 We also consider round sizes with samples increasing by a multiple
-of $1.5$ because this version is integrated into {\em Arlo}, and the multiplying factor was chosen as it roughly ensures a $.9$ conditional stopping probability in the second round for a first round stopping probability of $.9$. 
+of $1.5$ because this version is integrated into {\em Arlo}, and the multiplying factor was chosen as it roughly ensures a $0.9$ conditional stopping probability in the second round for a first round stopping probability of $0.9$. 
 
 We used the R2B2 library \cite{r2b2_anon}, which provides a framework for the exploration of round-by-round
 and ballot-by-ballot RLAs. It has implementations of several ballot polling risk-limiting audits as well as a simulator, 
