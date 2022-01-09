@@ -1,5 +1,5 @@
 %Definitions
-In this section, we motivate and describe the experiments. We consider a two candidate plurality contest, and assume that ballots are sampled with replacement, as is common in the literature. 
+In this section, we motivate and describe the experiments. We consider a two candidate plurality contest, and assume that ballots are sampled with replacement, as is common in the literature. Note that \BRAVO and \Minerva can be extended for multiple-candidate, multiple-winner plurality contests by performing pairwise audits between the winners and the losers\cite{RLA, arxiv_athena}. Therefore, a two candidate plurality contest can be thought of as the most general case, and our simulations provide insight for multiple-candidate and multiple-winner contests too.
 
 We first present relevant definitions.
 
@@ -18,7 +18,8 @@ All of the audits discussed in this paper are modeled as binary hypothesis tests
 
 The maximum risk of an audit is the probability that an audit stops, given that the underlying election is a tie. (Vora show that this is the maximum risk \cite{Bayesian-RLA}.) 
 \begin{definition}[Risk]
-The maximum risk $R$ of an audit $\mathcal{A}$ is
+The maximum risk $R$ of audit $\mathcal{A}$ with sample $X\in \{0,1\}^*$ drawn from 
+the true underlying distribution of ballots is
 $$R(\mathcal{A})=\Pr[\mathcal{A}(X)=Correct \mid H_0]$$
 \end{definition}
 
@@ -50,7 +51,7 @@ $$\chi_j (\mathcal{A})=\Pr[\mathcal{A}(X)=Correct ~in~round~j~\mid H_a \land \ma
 \end{definition}
 Experimentally, using our simulations, $\chi_j$ would be estimated by the ratio of the audits that stop in round $j$ to those that ``entered'' round $j$, i.e. those that did not stop before round $j$. 
 
-We simulated audits for a risk limit of $0.1$ using margins from the 2020 Presidential election, limiting ourselves to pairwise margins for the two main candidates of $0.05$ or larger. Round sizes increase roughly proportional to the inverse
+We simulated audits for a risk limit of $0.1$ using margins from the 2020 US Presidential election, limiting ourselves to pairwise margins for the two main candidates of $0.05$ or larger. Round sizes increase roughly proportional to the inverse
 square of the margin, so 
 smaller margins are computationally much more expensive to simulate.
 For each of these states, we simulated 

@@ -7,6 +7,10 @@
 Anonymized: The {R2B2} ({R}ound-by-{R}ound, {B}allot-by-{B}allot) library,
   https://github.com/xxxx
 
+\bibitem{bernhard-diss}
+Bernhard, M.: Election Security Is Harder Than You Think. Ph.D. thesis,
+  University of Michigan (2020)
+
 \bibitem{blom_IRV}
 Blom, M.L., Stuckey, P.J., Teague, V.J.: Ballot-polling risk limiting audits
   for {IRV} elections. In: Krimmer, R., Volkamer, M., Cortier, V., Gor{\'{e}},
@@ -15,6 +19,11 @@ Blom, M.L., Stuckey, P.J., Teague, V.J.: Ballot-polling risk limiting audits
   October 2-5, 2018, Proceedings. Lecture Notes in Computer Science, vol.
   11143, pp. 17--34. Springer (2018). \doi{10.1007/978-3-030-00419-4\_2},
   \url{https://doi.org/10.1007/978-3-030-00419-4\_2}
+
+\bibitem{RI-report}
+Cause, C., VerifiedVoting, Center, B.: Pilot implementation study of
+  risk-limiting audit methods in the state of rhode island.
+  \url{https://www.brennancenter.org/sites/default/files/2019-09/Report-RI-Design-FINAL-WEB4.pdf}
 
 \bibitem{DBLP:conf/evoteid/HuangRSTV20}
 Huang, Z., Rivest, R.L., Stark, P.B., Teague, V.J., Vukcevic, D.: A unified
@@ -45,6 +54,12 @@ McLaughlin, K., Stark, P.B.: Workload estimates for risk-limiting audits of
   large contests  (2011),
   \url{https://www.stat.berkeley.edu/~stark/Preprints/workload11.pdf}
 
+\bibitem{bernoulli-ballot-polling}
+Ottoboni, K., Bernhard, M., Halderman, J.A., Rivest, R.L., Stark, P.B.:
+  Bernoulli ballot polling: A manifest improvement for risk-limiting audits.
+  International Conference on Financial Cryptography and Data Security pp.
+  226--241 (2019)
+
 \bibitem{bayesian-audits}
 Rivest, R.L., Shen, E.: A {B}ayesian method for auditing elections. In:
   EVT/WOTE (2012)
@@ -58,6 +73,11 @@ Stark, P.B.: Simulating a ballot-polling audit with cards and dice. In:
 Stark, P.B., Wagner, D.A.: Evidence-based elections. {IEEE} Secur. Priv.
   \textbf{10}(5),  33--41 (2012). \doi{10.1109/MSP.2012.62},
   \url{https://doi.org/10.1109/MSP.2012.62}
+
+\bibitem{virginia_rla}
+{Virginia Department of Elections}: Results of risk-limiting audit of nov. 3,
+  2020 general election in virginia.
+  \url{https://www.elections.virginia.gov/rla-results_nov-3-2020/}
 
 \bibitem{Bayesian-RLA}
 Vora, P.L.: Risk-limiting {B}ayesian polling audits for two candidate
