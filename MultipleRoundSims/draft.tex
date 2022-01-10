@@ -63,13 +63,19 @@ Department of Computer Science, Stanford University
 \maketitle              % typeset the header of the contribution
 %
 \begin{abstract}
-    In this paper we present simulation results comparing the risk, stopping probability and number of ballots required over multiple rounds of ballot polling risk limiting audits (RLAs) \Minerva, Selection-Ordered (SO) \BRAVO and End-of-Round (EoR) \BRAVO.    
-    
-    \BRAVO is the most commonly used ballot polling RLA and requires the smallest expected number of ballots when ballots are drawn one at a time and the (true) underlying election is as announced. In real audits, election officials draw multiple ballots at a time, and \BRAVO rules may be implemented as SO \BRAVO or EoR \BRAVO, with neither being optimal for large first round sizes. \Minerva was recently proposed for use when the first-round stopping probability is large. It requires fewer first-round ballots, on average, than both SO \BRAVO and EoR \BRAVO for first round stopping probabilities of $0.9$ when the (true) underlying election is as announced. 
-    
-    An open question, however, is how \Minerva compares to SO \BRAVO and EoR \BRAVO over multiple rounds, and for lower stopping probabilities.  In this paper, we present results from simulations of multiple round audits. We examine both: first-round stopping probabilities of $0.9$, a common choice among election officials, and $0.25$, which would be more favorable to \BRAVO. 
-        
-We show that the simulation results are consistent with predictions of the R2B2 open-source library for ballot polling audits. Because the \Minerva round schedule needs to be predetermined, we observe that the simulator is useful as a tool for understanding the behavior of \Minerva with the fixed round schedule. Most importantly, we observe that both \BRAVO audits are more conservative than needed, while \Minerva audits stop with fewer ballots, for both first round stopping probabilities. However, the advantage of using \Minerva decreases considerably for the smaller first round stopping probability, as one would expect. 
+    In this paper we present simulation results comparing the risk, stopping probability, and number of ballots required over multiple rounds of ballot polling risk-limiting audits (RLAs) \Minerva, Selection-Ordered (SO) \BRAVO, and End-of-Round (EoR) \BRAVO.    
+    \BRAVO is the most commonly used ballot polling RLA and requires the smallest expected number of ballots when ballots are drawn one at a time and the (true) underlying election is as announced. 
+    In real audits, multiple ballots are drawn at a time, and \BRAVO is implemented as SO \BRAVO or EoR \BRAVO. 
+    \Minerva is a recently proposed ballot polling RLA that requires fewer ballots than either implementation of \BRAVO in the first round but requires a predetermined round schedule.
+    %\BRAVO is the most commonly used ballot polling RLA and requires the smallest expected number of ballots when ballots are drawn one at a time and the (true) underlying election is as announced. In real audits, election officials draw multiple ballots at a time, and \BRAVO rules may be implemented as SO \BRAVO or EoR \BRAVO, with neither being optimal for large first round sizes. \Minerva was recently proposed for use when the first-round stopping probability is large. It requires fewer first-round ballots, on average, than both SO \BRAVO and EoR \BRAVO for first round stopping probabilities of $0.9$ when the (true) underlying election is as announced. 
+    It is an open question how these audits compare over multiple rounds and for lower stopping probabilities. 
+    Our simulations use stopping probabilities of $0.9$ and $0.25$.
+    %In this paper, we present results from simulations of multiple round audits with stopping probabilities of $0.9$ and $0.25$.
+    %We examine both: first-round stopping probabilities of $0.9$, a common choice among election officials, and $0.25$, which would be more favorable to \BRAVO. 
+    The results are consistent with predictions of the R2B2 open-source library for ballot polling audits. 
+    %Because the \Minerva round schedule needs to be predetermined, we observe that the simulator is useful as a tool for understanding the behavior of \Minerva with the fixed round schedule. 
+    We observe that both \BRAVO audits are more conservative than \Minerva, which stops with fewer ballots, for both first round stopping probabilities. 
+    However, the advantage of using \Minerva decreases considerably for the smaller first round stopping probability, as one would expect. 
 
 \keywords{risk-limiting audit (RLA)  \and ballot polling audit \and evidence-based elections \and statistical election audit}
 \end{abstract}
