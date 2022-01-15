@@ -67,26 +67,52 @@ This proportion should approach a value less than the risk limit, $10\%$, as mor
 %\label{fig:eor_bravo_risk}
 %\end{figure}
 
+\begin{comment}
+%\begin{minipage}{.5\textwidth}
 \begin{figure}
-\begin{centering}
-\includegraphics[width=0.6\textwidth]{bravo_risks_same_plot.png}
+%\begin{centering}
+\begin{minipage}{.5\textwidth}
+\includegraphics[width=\textwidth]{bravo_risks_same_plot.png}
 \caption{This plot shows the fraction of EoR \BRAVO audits (all states with margins at least $0.05$) and SO \BRAVO audits (the 13 states for which our simulations are complete so far) that stopped in any of the $5$ rounds when the underlying election was a tie.}
 \label{fig:bravo_risk}
-\end{centering}
+\end{minipage}
+%\end{centering}
+%\end{figure}
+%\end{minipage}
+%\begin{minipage}{.5\textwidth}
+%\begin{figure}
+%\begin{centering}
+\begin{minipage}{.5\textwidth}
+\includegraphics[width=\textwidth]{minerva_multiround_1p5x_10^4/total_risk.png}
+\caption{This plot shows, for each state margin,
+the fraction of \Minerva audits with a round size multiple of $1.5$ that stopped in any of the $5$ rounds when the underlying election was a tie.}
+\label{fig:risk}
+\end{minipage}
+%\end{centering}
 \end{figure}
+%\end{minipage}
+\end{comment}
+
+\begin{figure}
+\includegraphics[width=\textwidth]{both_risk_plots.png}
+\caption{The left hand plot shows the fraction of EoR \BRAVO audits (all states with margins at least $0.05$) and SO \BRAVO audits (the 13 states for which our simulations are complete so far) that stopped in any of the $5$ rounds when the underlying election was a tie. The right hand plot, for each state margin, shows the fraction of \Minerva audits with a round size multiple of $1.5$ that stopped in any of the $5$ rounds when the underlying election was a tie.}
+\label{fig:risk}
+%\end{centering}
+\end{figure}
+%
 
 We observe that the risk of EoR \BRAVO is roughly
 an order of magnitude less than the risk limit. 
 These results are as expected, because EoR \BRAVO is known to be too conservative \cite{usenix_minerva}.  
 
-In Figure~\ref{fig:bravo_risk} we show only the results for the $13$
+In Figure~\ref{fig:risk} we show only the results for the $13$
 states for which our simulations with an underlying tied election have completed.
 To estimate the next round size that achieves a desired stopping probability,
 the SO \BRAVO software generates the probability distribution on the number of ballots in the sample ballot by ballot (see \cite{usenix_minerva}) since
 the stopping condition needs to be evaluated for each individual ballot drawn.
 Because the underlying tied election causes audits to move on to larger rounds, 
 the simulations are computationally expensive. SO \BRAVO is proven to be a Risk-Limiting Audit,
-and we observe in Figure~\ref{fig:bravo_risk},
+and we observe in Figure~\ref{fig:risk},
 that the risk of SO \BRAVO is much
 nearer the risk limit than that of EoR \BRAVO, as expected. 
 
@@ -99,7 +125,7 @@ nearer the risk limit than that of EoR \BRAVO, as expected.
 
 %TODO SO and EoR macros
 
-Figure~\ref{fig:minerva1p5_risk} show that fewer than $0.1$ of the audits stopped when the underlying election was a tie, for round multiples $1.5$, as would be expected for an RLA with risk limit $10\%$. 
+Figure~\ref{fig:risk} shows that fewer than $0.1$ of the audits stopped when the underlying election was a tie, for round multiples $1.5$, as would be expected for an RLA with risk limit $10\%$. 
 Unlike EOR \BRAVO, the experimental risks here are much closer to the risk limit,
 showing that \Minerva stops on average with a less conservative risk; \Minerva is sharper. The plot for round multiple $1.0$ is very similar. 
 
@@ -119,15 +145,6 @@ showing that \Minerva stops on average with a less conservative risk; \Minerva i
 %\includegraphics[width=\textwidth]{minerva_multiround_1p5x_10^6/total_risk.png}
 
 % we could suggest that predicting accurate multiples is possible (same curve rather than line)
-
-\begin{figure}
-\begin{centering}
-\includegraphics[width=0.6\textwidth]{minerva_multiround_1p5x_10^4/total_risk.png}
-\caption{This plot shows, for each state margin,
-the fraction of \Minerva audits with a round size multiple of $1.5$ that stopped in any of the $5$ rounds when the underlying election was a tie.}
-\label{fig:minerva1p5_risk}
-\end{centering}
-\end{figure}
 
 
 

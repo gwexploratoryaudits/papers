@@ -2,31 +2,25 @@
 In this section, we motivate and describe the experiments. We consider a two candidate plurality contest, and assume that ballots are sampled with replacement, as is common in the literature. Note that sampling without replacement is more efficient for large sampling fractions, but \Minerva has not been extended for sampling without replacement. We first present relevant definitions.
 
 \begin{definition}
-An audit $\mathcal{A}$ takes a sample of ballots $X$ as input and gives one of the 
-following decisions
-\begin{enumerate}
-\item
-$Correct$: the audit is complete
-\item
-$Uncertain$: continue the audit
-\end{enumerate}
+An audit $\mathcal{A}$ takes a sample of ballots $X$ as input and gives as output either
+(1) $Correct$: the audit is complete, or (2) $Uncertain$: continue the audit.
 \end{definition}
 
-All of the audits discussed in this paper are modeled as binary hypothesis tests. Under the alternative hypothesis, $H_a$, the announced outcome is correct. That is, the true underlying ballot distribution is given by the announced ballot tallies. Under the null hypothesis, $H_0$, the true outcome is a tie (or the announced winner lost by one vote, and the number of ballots is large enough that the probability of drawing a ballot for the winner is that of drawing one for the loser).
-
-The maximum risk of an audit is the probability that an audit stops, given that the underlying election is a tie. (Vora show that this is the maximum risk \cite{Bayesian-RLA}.) 
+All of the audits discussed in this paper are modeled as binary hypothesis tests. Under the alternative hypothesis, $H_a$, the announced outcome is correct. In particular, the true underlying ballot distribution is given by the announced ballot tallies. Under the null hypothesis, $H_0$, the true outcome is a tie (or the announced winner lost by one vote, and the number of ballots is large enough that the probability of drawing a ballot for the winner is that of drawing one for the loser).
+The maximum risk of an audit is the probability that an audit stops, given that the underlying election is a tie. (Vora shows that this is the maximum risk \cite{Bayesian-RLA}.) 
 \begin{definition}[Risk]
 The maximum risk $R$ of audit $\mathcal{A}$ with sample $X\in \{0,1\}^*$ drawn from 
 the true underlying distribution of ballots is
-$$R(\mathcal{A})=\Pr[\mathcal{A}(X)=Correct \mid H_0]$$
+$R(\mathcal{A})=\Pr[\mathcal{A}(X)=Correct \mid H_0].$
 \end{definition}
 
 This leads us to the following definition of an $\alpha$-RLA.
 \begin{definition}[Risk Limiting Audit ($\alpha$-RLA)]
 An audit $\mathcal{A}$ is a Risk Limiting Audit with 
 risk limit $\alpha$ iff 
-$$R(\mathcal{A}) \le \alpha.$$
+$R(\mathcal{A}) \le \alpha.$
 \end{definition}
+Note that an audit $\mathcal{A}$ includes all audit parameters (risk limit, round sizes, etc.). 
 
 We present measures of stopping probability in the $j^{th}$ round of the audit, given that the underlying election is as announced.
 \begin{definition}[Stopping Probability]
@@ -47,7 +41,7 @@ $$\chi_j (\mathcal{A})=\Pr[\mathcal{A}(X)=Correct ~in~round~j~\mid H_a \land \ma
 \end{definition}
 Experimentally, using our simulations, $\chi_j$ would be estimated by the ratio of the audits that stop in round $j$ to those that ``entered'' round $j$, i.e. those that did not stop before round $j$. 
 
-We simulated audits for a risk limit of $10\%$ using margins from the 2020 US Presidential election, limiting ourselves to pairwise margins for the two main candidates of $0.05$ or larger. 
+We simulated audits for a risk limit of $10\%$ (as in \cite{bravo} and \cite{usenix_minerva}) using margins from the 2020 US Presidential election, limiting ourselves to pairwise margins for the two main candidates of $0.05$ or larger. 
 Note that both \BRAVO and \Minerva can be extended for multiple-candidate, multiple-winner plurality contests by performing pairwise tests between the winners and the losers\cite{RLA, arxiv_athena}. Therefore, the two candidate plurality contest is a general case, and these simulations provide insight for multiple-candidate and multiple-winner contests too.
 Round sizes increase roughly proportional to the inverse
 square of the margin, so 
