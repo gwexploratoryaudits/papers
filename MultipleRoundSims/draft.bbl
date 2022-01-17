@@ -3,10 +3,6 @@
 \providecommand{\urlprefix}{URL }
 \providecommand{\doi}[1]{https://doi.org/#1}
 
-\bibitem{r2b2_anon}
-Anonymized: The {R2B2} ({R}ound-by-{R}ound, {B}allot-by-{B}allot) library,
-  https://github.com/xxxx
-
 \bibitem{bernhard-diss}
 Bernhard, M.: Election Security Is Harder Than You Think. Ph.D. thesis,
   University of Michigan (2020)
@@ -53,6 +49,10 @@ McLaughlin, K., Stark, P.B.: Simulations of risk-limiting audit techniques and
 McLaughlin, K., Stark, P.B.: Workload estimates for risk-limiting audits of
   large contests  (2011),
   \url{https://www.stat.berkeley.edu/~stark/Preprints/workload11.pdf}
+
+\bibitem{r2b2}
+Morin, S., McClearn, G.: The {R2B2} ({R}ound-by-{R}ound, {B}allot-by-{B}allot)
+  library, https://github.com/gwexploratoryaudits/r2b2
 
 \bibitem{bernoulli-ballot-polling}
 Ottoboni, K., Bernhard, M., Halderman, J.A., Rivest, R.L., Stark, P.B.:
