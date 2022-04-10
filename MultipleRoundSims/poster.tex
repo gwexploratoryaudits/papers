@@ -18,7 +18,22 @@
 \usepackage{booktabs}
 \usepackage{tikz}
 \usepackage{pgfplots}
-\pgfplotsset{compat=1.17}
+\pgfplotsset{compat=1.14}
+
+\usepackage{float}
+\usepackage{xspace}
+\usepackage{graphicx}
+\graphicspath{{./imgs/}}
+\usepackage{comment}
+\usepackage{listings,hyperref}
+\usepackage{cite}
+
+% nice looking audit titles
+\newcommand{\Minerva}{\textsc{Minerva}\xspace}
+\newcommand{\B}{{{B2}}\xspace}
+\newcommand{\R}{{{R2}}\xspace}
+\newcommand{\BRAVO}{\textsc{Bravo}\xspace}
+
 
 % ====================
 % Lengths
@@ -81,9 +96,9 @@ Filip Zag{\'o}rski\inst{2}\inst{3}}
 {
     \begin{tikzpicture}[remember picture,overlay]
       \node [anchor=north west, inner sep=3cm] at ([xshift=0.0cm,yshift=3cm]current page.north west)
-      {\includegraphics[height=8.5cm]{logos/ucf_logo2.png}}; % also try shield-white.eps
+      {\includegraphics[height=8.5cm]{logos/gw.png}}; % also try shield-white.eps
       \node [anchor=north east, inner sep=3cm] at ([xshift=0.0cm,yshift=3cm]current page.north east)
-      {\includegraphics[height=8.5cm]{logos/lab_logo.jpg}};
+      {\includegraphics[height=8.5cm]{logos/gw.png}};
     \end{tikzpicture}
 }
 
@@ -94,29 +109,39 @@ Filip Zag{\'o}rski\inst{2}\inst{3}}
 \begin{column}{\colwidth}
 
   \begin{block}{A block title}
+    In this paper we present simulation results comparing the risk, stopping probability, and number of ballots required over multiple rounds of ballot polling risk-limiting audits (RLAs) \Minerva, Selection-Ordered (SO) \BRAVO, and End-of-Round (EoR) \BRAVO.    
+    \BRAVO is the most commonly used ballot polling RLA and requires the smallest expected number of ballots when ballots are drawn one at a time and the (true) underlying election is as announced. 
+    In real audits, multiple ballots are drawn at a time, and \BRAVO is implemented as SO \BRAVO or EoR \BRAVO. 
+    \Minerva is a recently proposed ballot polling RLA that requires fewer ballots than either implementation of \BRAVO in a first round with stopping probability $0.9$ but requires a predetermined round schedule.
+    %\BRAVO is the most commonly used ballot polling RLA and requires the smallest expected number of ballots when ballots are drawn one at a time and the (true) underlying election is as announced. In real audits, election officials draw multiple ballots at a time, and \BRAVO rules may be implemented as SO \BRAVO or EoR \BRAVO, with neither being optimal for large first round sizes. \Minerva was recently proposed for use when the first-round stopping probability is large. It requires fewer first-round ballots, on average, than both SO \BRAVO and EoR \BRAVO for first round stopping probabilities of $0.9$ when the (true) underlying election is as announced. 
+    It is an open question how these audits compare over multiple rounds and for lower stopping probabilities. 
+    Our simulations use stopping probabilities of $0.9$ and $0.25$.
+    %In this paper, we present results from simulations of multiple round audits with stopping probabilities of $0.9$ and $0.25$.
+    %We examine both: first-round stopping probabilities of $0.9$, a common choice among election officials, and $0.25$, which would be more favorable to \BRAVO. 
+    The results are consistent with predictions of the R2B2 open-source library for ballot polling audits. 
+    %Because the \Minerva round schedule needs to be predetermined, we observe that the simulator is useful as a tool for understanding the behavior of \Minerva with the fixed round schedule. 
+    We observe that both \BRAVO audits are more conservative than \Minerva, which stops with fewer ballots, for both first round stopping probabilities. 
+    However, the advantage of using \Minerva decreases considerably for the smaller first round stopping probability, as one would expect. 
 
-    Some block contents, followed by a diagram, followed by a dummy paragraph.
 
-    \begin{figure}
-      \centering
-      \begin{tikzpicture}[scale=6]
-        \draw[step=0.25cm,color=gray] (-1,-1) grid (1,1);
-        \draw (1,0) -- (0.2,0.2) -- (0,1) -- (-0.2,0.2) -- (-1,0)
-          -- (-0.2,-0.2) -- (0,-1) -- (0.2,-0.2) -- cycle;
-      \end{tikzpicture}
-      \caption{A figure caption.}
-    \end{figure}
-
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi ultricies
-    eget libero ac ullamcorper. Integer et euismod ante. Aenean vestibulum
-    lobortis augue, ut lobortis turpis rhoncus sed. Proin feugiat nibh a
-    lacinia dignissim. Proin scelerisque, risus eget tempor fermentum, ex
-    turpis condimentum urna, quis malesuada sapien arcu eu purus.
+%
+%    Some block contents, followed by a diagram, followed by a dummy paragraph.
+%
+%    \begin{figure}
+%      \centering
+%      \begin{tikzpicture}[scale=6]
+%%        \draw[step=0.25cm,color=gray] (-1,-1) grid (1,1);
+%        \draw (1,0) -- (0.2,0.2) -- (0,1) -- (-0.2,0.2) -- (-1,0)
+%          -- (-0.2,-0.2) -- (0,-1) -- (0.2,-0.2) -- cycle;
+%      \end{tikzpicture}
+%      \caption{A figure caption.}
+%%%    \end{figure}
 
   \end{block}
 
-% here
-definitions.
+\begin{block}{Introduction}
+%Definitions
+In this section, we motivate and describe the experiments. We consider a two candidate plurality contest, and assume that ballots are sampled with replacement, as is common in the literature. Note that sampling without replacement is more efficient for large sampling fractions, but \Minerva has not been extended for sampling without replacement. We first present relevant definitions.
 
 \begin{definition}
 An audit $\mathcal{A}$ takes a sample of ballots $X$ as input and gives as output either
