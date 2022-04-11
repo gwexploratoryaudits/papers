@@ -11,7 +11,7 @@
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
 \usepackage[size=custom,width=120,height=72,scale=1.0]{beamerposter}
-\geometry{paperwidth=42in,paperheight=32.5in}
+\geometry{paperwidth=48in,paperheight=36in}
 \usetheme{gemini}
 \usecolortheme{ucf}
 \usepackage{graphicx}
@@ -32,7 +32,7 @@
 \newcommand{\Minerva}{\textsc{Minerva}\xspace}
 \newcommand{\B}{{{B2}}\xspace}
 \newcommand{\R}{{{R2}}\xspace}
-\newcommand{\BRAVO}{\textsc{Bravo}\xspace}
+\newcommand{\BRAVO}{\textsc{BRAVO}\xspace}
 
 
 % ====================
@@ -43,8 +43,8 @@
 % (N+1)*\sepwidth + N*\colwidth = \paperwidth
 \newlength{\sepwidth}
 \newlength{\colwidth}
-\setlength{\sepwidth}{0.01\paperwidth}
-\setlength{\colwidth}{0.22\paperwidth}
+\setlength{\sepwidth}{0.001\paperwidth}
+\setlength{\colwidth}{0.23\paperwidth}
 
 \newcommand{\separatorcolumn}{\begin{column}{\sepwidth}\end{column}}
 
@@ -61,7 +61,7 @@ Filip Zag{\'o}rski\inst{2}\inst{3}}
 % First names are abbreviated in the running head.
 % If there are more than two authors, 'et al.' is used.
 %
-\institute[shortinst]{\inst{1} Department of Computer Science, The George Washington University [odbroadrick@gmail.com]%\thanks{Supported in part by NSF Award 2015253} 
+\institute[shortinst]{\inst{1} Department of Computer Science, The George Washington University%\thanks{Supported in part by NSF Award 2015253} 
 \samelineand \inst{2} Wroclaw University of Science and Technology%\thanks{Author was partially supported by Polish National Science Centre contract number DEC-2013/09/D/ST6/03927} and 
 \samelineand \inst{3} Votifica
 }
@@ -74,9 +74,8 @@ Filip Zag{\'o}rski\inst{2}\inst{3}}
 % ====================
 
 \footercontent{
-  \href{https://www.example.com}{https://www.example.com} \hfill
-  ABC Conference 2025, New York --- XYZ-1234 \hfill
-  \href{mailto:alyssa.p.hacker@example.com}{nitish.gupta@example.com}}
+  \href{odbroadrick@gmail.com}{odbroadrick@gmail.com}
+}
 % (can be left out to remove footer)
 
 % ====================
@@ -108,89 +107,139 @@ Filip Zag{\'o}rski\inst{2}\inst{3}}
 
 \begin{column}{\colwidth}
 
-  \begin{block}{Abstract}
-    In this paper we present simulation results comparing the risk, stopping probability, and number of ballots required over multiple rounds of ballot polling risk-limiting audits (RLAs) \Minerva, Selection-Ordered (SO) \BRAVO, and End-of-Round (EoR) \BRAVO.    
-    \BRAVO is the most commonly used ballot polling RLA and requires the smallest expected number of ballots when ballots are drawn one at a time and the (true) underlying election is as announced. 
-    In real audits, multiple ballots are drawn at a time, and \BRAVO is implemented as SO \BRAVO or EoR \BRAVO. 
-    \Minerva is a recently proposed ballot polling RLA that requires fewer ballots than either implementation of \BRAVO in a first round with stopping probability $0.9$ but requires a predetermined round schedule.
-    It is an open question how these audits compare over multiple rounds and for lower stopping probabilities. 
-    Our simulations use stopping probabilities of $0.9$ and $0.25$.
-    The results are consistent with predictions of the R2B2 open-source library for ballot polling audits. 
-    We observe that both \BRAVO audits are more conservative than \Minerva, which stops with fewer ballots, for both first round stopping probabilities. 
-    However, the advantage of using \Minerva decreases considerably for the smaller first round stopping probability, as one would expect. 
+\begin{block}{Risk-Limiting Audits}
+\begin{itemize}
+\item
+In election security, a risk-limiting audit (RLA) draws trusted paper ballots in rounds, stopping if a rigorous statistical criterion is satisfied, or proceeding to a full hand count. If the announced outcome of the election is erroneous, an RLA will detect the error with high, predetermined minimum probability. 
 
+\item
+An audit $\mathcal{A}$ takes a sample of ballots $X$ as input and gives as output either
+(1) $Correct$: the audit is complete, or (2) $Uncertain$: continue the audit.
 
+%\item
 %
-%    Some block contents, followed by a diagram, followed by a dummy paragraph.
-%
-%    \begin{figure}
-%      \centering
-%      \begin{tikzpicture}[scale=6]
-%%        \draw[step=0.25cm,color=gray] (-1,-1) grid (1,1);
-%        \draw (1,0) -- (0.2,0.2) -- (0,1) -- (-0.2,0.2) -- (-1,0)
-%          -- (-0.2,-0.2) -- (0,-1) -- (0.2,-0.2) -- cycle;
-%      \end{tikzpicture}
-%      \caption{A figure caption.}
-%%%    \end{figure}
+%In this work, we present simulation results comparing the risk, stopping probability, and number of ballots required over multiple rounds of RLAs Minerva, Selection-Ordered (SO) Bravo, and End-of-Round (EoR) Bravo. We show that Minerva requires fewer ballots on average than either version of Bravo for round sizes that are chosen to give probabilities of stopping 0.9 and 0.25. In particular, the advantage of Minerva is less for the smaller stopping probabil- ity. We also present Providence, a novel ballot polling RLA. Based on initial simulation results, Providence has efficiency similar to Minerva but is also resistant to an adversary who can choose future round sizes with knowledge of previous samples. Thus, unlike Minerva, Providence allows election officials to choose round sizes during the audit to optimize for workload and safety.
+%\end{block}
 
-  \end{block}
-
-\begin{block}{Introduction}
+%\begin{block}{Risk}
 %Definitions
 %In this section, we motivate and describe the experiments. We consider a two candidate plurality contest, and assume that ballots are sampled with replacement, as is common in the literature. Note that sampling without replacement is more efficient for large sampling fractions, but \Minerva has not been extended for sampling without replacement. We first present relevant definitions.
 
-\heading{Definition: Audit}
 %\begin{definition}
-An audit $\mathcal{A}$ takes a sample of ballots $X$ as input and gives as output either
-(1) $Correct$: the audit is complete, or (2) $Uncertain$: continue the audit.
+%An audit $\mathcal{A}$ takes a sample of ballots $X$ as input and gives as output either
+%(1) $Correct$: the audit is complete, or (2) $Uncertain$: continue the audit.
 %\end{definition}
 
 %All of the audits discussed in this paper are modeled as binary hypothesis tests. Under the alternative hypothesis, $H_a$, the announced outcome is correct. In particular, the true underlying ballot distribution is given by the announced ballot tallies. Under the null hypothesis, $H_0$, a tie is the correct outcome \footnote{or the announced winner lost by one vote, and the number of ballots is large enough that the probability of drawing a ballot for the winner is that of drawing one for the loser}.
 %The maximum risk of an audit is the probability that an audit stops, given that the underlying election is a tie \cite{Bayesian-RLA}. Note that an audit $\mathcal{A}$ includes all audit parameters (maximum risk, round sizes, etc.). 
 
 %\begin{definition}[Risk]
-\heading{Definition: Risk}
+%\heading{Definition: Risk}
+\item
 The maximum risk $R$ of audit $\mathcal{A}$ with sample $X\in \{0,1\}^*$ drawn from 
 the true underlying distribution of ballots is
-$R(\mathcal{A})=\Pr[\mathcal{A}(X)=Correct \mid H_0].$
+$$R(\mathcal{A})=\Pr[\mathcal{A}(X)=Correct \mid H_0],$$ where $H_0$ is the null
+hypothesis: the true underlying election is a tie.
 %\end{definition}
 
 %This leads us to the following definition of an $\alpha$-RLA.
-\heading{Definition: Risk-Limiting Audit ($\alpha$-RLA)}
+%\heading{Definition: Risk-Limiting Audit ($\alpha$-RLA)}
 %\begin{definition}[Risk Limiting Audit ($\alpha$-RLA)]
+\item
 An audit $\mathcal{A}$ is a Risk-Limiting Audit with 
 risk limit $\alpha$ iff 
-$R(\mathcal{A}) \le \alpha.$
+$$R(\mathcal{A}) \le \alpha.$$
 %\end{definition}
+\end{itemize}
+\end{block}
+\begin{block}{\BRAVO and \Minerva}
+\begin{itemize}
+\item Existing RLAs include \BRAVO (which can be implemented as End-of-Round (EoR) \BRAVO or Selection-Ordered (SO) \BRAVO)
+and \Minerva. In a first round with a large sample size (probabilty of stopping at least 90\%), \Minerva is known to require roughly
+half as many ballots as EoR \BRAVO. 
+\item We provide the first simulations that compare these audits beyond a first round and for various
+round schedules.
+\end{itemize}
+\end{block}
 
-We present measures of stopping probability in the $j^{th}$ round of the audit, given that the underlying election is as announced.
-%\begin{definition}[Stopping Probability]
-\heading{Definition: Stopping Probability}
-The stopping probability $S_j$ of an audit $\mathcal{A}$ in round $j$ is 
-$$S_j(\mathcal{A})=\Pr[\mathcal{A}(X)=Correct ~in~round~j~\land \mathcal{A}(X) \neq Correct ~previously \mid H_a]$$
-%\end{definition}
-Experimentally, using our simulations, $S_j$ would be estimated by the fraction of audits that stop in round $j$. Note that $\sum _j S_j(\mathcal{A})=1$. We can also consider the cumulative stopping probability: 
-%\begin{definition}[Cumulative Stopping Probability]
-The cumulative stopping probability $C_j$ of an audit $\mathcal{A}$ in round $j$ is $C_j(\mathcal{A})= \sum_{i=1}^j S_j$
-%\end{definition}
-Experimentally, using our simulations, $C_j$ would be estimated by the fraction of audits that stop in or before round $j$. 
-%
-Finally, we are also interested in the probability that an audit will stop in round $j$ given that it did not stop earlier: 
-%\begin{definition}[Conditional Stopping Probability]
-The conditional stopping probability  of an audit $\mathcal{A}$ in round $j$ is 
-$$\chi_j (\mathcal{A})=\Pr[\mathcal{A}(X)=Correct ~in~round~j~\mid H_a \land \mathcal{A}(X) \neq Correct ~previously]$$
-%\end{definition}
-Experimentally, using our simulations, $\chi_j$ would be estimated by the ratio of the audits that stop in round $j$ to those that ``entered'' round $j$, i.e. those that did not stop before round $j$. 
-%
-We simulated audits for a risk limit of $10\%$ (as in \cite{bravo} and \cite{usenix_minerva}) using margins from the 2020 US Presidential election, limiting ourselves to pairwise margins for the two main candidates of $0.05$ or larger. 
-Note that both \BRAVO and \Minerva can be extended for multiple-candidate, multiple-winner plurality contests by performing pairwise tests between the winners and the losers\cite{RLA, arxiv_athena}. Therefore, the two candidate plurality contest is a general case, and these simulations provide insight for multiple-candidate and multiple-winner contests too.
-Round sizes increase roughly proportional to the inverse
-square of the margin, so 
-smaller margins are computationally much more expensive to simulate.
+\begin{block}{Simulations}
+\begin{itemize}
+%\item
+%Simulations can be used to provide evidence for theoretical claims about risk-limiting audits.
+\item
+We ran simulations to gain further insight into audit behavior 
+and provide additional evidence for theoretical claims.
+\item 
+We simulated audits for a risk limit of 10\% using margins
+from the 2020 US Presidential election, limiting ourselves to pairwise margins
+for the two main candidates of $0.05$ or larger.
+\item 
+We used the R2B2 library, which provides a framework for the exploration
+of round-by-round and ballot-by-ballot RLAs. It has implementations of several
+ballot polling risk-limiting audits as well as a simulator, all written in Python.
+\item
 For each of these states, we simulated 
-$10,000=10^4$ audits assuming the underlying election was as announced ($H_a$),  
-and an additional $10,000=10^4$ audits assuming the underlying election was a tie ($H_0$). 
-  \end{block}
+$10,000=10^4$ audits assuming the underlying election was as announced,  
+and an additional $10,000=10^4$ audits assuming the underlying election was a tie. 
+\end{itemize}
+\end{block}
+
+\heading{Round Schedules}
+\begin{itemize}
+\item
+A round schedule is a list of positive integers corresponding to the number of ballots 
+sampled in each round.
+To begin, first round sizes are selected (by search) to achieve a $0.90$
+probability of stopping assuming the underlying election is as announced.
+\item
+Subsequent EoR and SO \BRAVO round sizes can be found given the preceding evidence to 
+again achieve a probability of stopping $0.90$. It is not known whether \Minerva is 
+risk-limiting for round sizes chosen based on preceding evidence like this, and 
+so subsequent round sizes in \Minerva must be predetermined. We run simulations with
+\Minerva round schedules where each round has size given by multiplying the previous
+round size by $1.5$ or by $1.0$.
+
+\end{itemize}
+
+\begin{block}{Risk}
+\begin{figure}
+\includegraphics[width=\textwidth]{both_risk_plots.png}
+\caption{The left hand plot shows the fraction of EoR \BRAVO audits (all states with margins at least $0.05$) and SO \BRAVO audits (the 13 states for which our simulations are complete so far) that stopped in any of the $5$ rounds when the underlying election was a tie. The right hand plot, for each state margin, shows the fraction of \Minerva audits with a round size multiple of $1.5$ that stopped in any of the $5$ rounds when the underlying election was a tie.}
+\label{fig:risk}
+%\end{centering}
+\end{figure}
+%
+\end{block}
+
+%\begin{block}{more}
+%We present measures of stopping probability in the $j^{th}$ round of the audit, given that the underlying election is as announced.
+%%%\begin{definition}[Stopping Probability]
+%\heading{Definition: Stopping Probability}
+%The stopping probability $S_j$ of an audit $\mathcal{A}$ in round $j$ is 
+%$$S_j(\mathcal{A})=\Pr[\mathcal{A}(X)=Correct ~in~round~j~\land \mathcal{A}(X) \neq Correct ~previously \mid H_a]$$
+%%\end{definition}
+%Experimentally, using our simulations, $S_j$ would be estimated by the fraction of audits that stop in round $j$. Note that $\sum _j S_j(\mathcal{A})=1$. We can also consider the cumulative stopping probability: 
+%%\begin{definition}[Cumulative Stopping Probability]
+%The cumulative stopping probability $C_j$ of an audit $\mathcal{A}$ in round $j$ is $C_j(\mathcal{A})= \sum_{i=1}^j S_j$
+%%\end{definition}
+%Experimentally, using our simulations, $C_j$ would be estimated by the fraction of audits that stop in or before round $j$. 
+%%
+%We are also interested in the probability that an audit will stop in round $j$ given that it did not stop earlier: 
+%%\begin{definition}[Conditional Stopping Probability]
+%The conditional stopping probability  of an audit $\mathcal{A}$ in round $j$ is 
+%$$\chi_j (\mathcal{A})=\Pr[\mathcal{A}(X)=Correct ~in~round~j~\mid H_a \land \mathcal{A}(X) \neq Correct ~previously]$$
+%%\end{definition}
+%Experimentally, using our simulations, $\chi_j$ would be estimated by the ratio of the audits that stop in round $j$ to those that ``entered'' round $j$, i.e. those that did not stop before round $j$. 
+%%
+%We simulated audits for a risk limit of $10\%$ (as in \cite{bravo} and \cite{usenix_minerva}) using margins from the 2020 US Presidential election, limiting ourselves to pairwise margins for the two main candidates of $0.05$ or larger. 
+%Note that both \BRAVO and \Minerva can be extended for multiple-candidate, multiple-winner plurality contests by performing pairwise tests between the winners and the losers\cite{RLA, arxiv_athena}. Therefore, the two candidate plurality contest is a general case, and these simulations provide insight for multiple-candidate and multiple-winner contests too.
+%%Round sizes increase roughly proportional to the inverse
+%square of the margin, so 
+%smaller margins are computationally much more expensive to simulate.
+%For each of these states, we simulated 
+%$10,000=10^4$ audits assuming the underlying election was as announced ($H_a$),  
+%and an additional $10,000=10^4$ audits assuming the underlying election was a tie ($H_0$). 
+%  \end{block}
 
 
 %  \begin{block}{A block containing a list}
@@ -241,157 +290,273 @@ and an additional $10,000=10^4$ audits assuming the underlying election was a ti
 
   \begin{block}{Stopping Probability}
 
-Finally, we are also interested in the probability that an audit will stop in round $j$ given that it did not stop earlier: 
+We are also interested in the probability that an audit will stop in round $j$ given that it did not stop earlier: 
 %\begin{definition}[Conditional Stopping Probability]
 The conditional stopping probability  of an audit $\mathcal{A}$ in round $j$ is 
 $$\chi_j (\mathcal{A})=\Pr[\mathcal{A}(X)=Correct ~in~round~j~\mid H_a \land \mathcal{A}(X) \neq Correct ~previously]$$
 %\end{definition}
 Experimentally, using our simulations, $\chi_j$ would be estimated by the ratio of the audits that stop in round $j$ to those that ``entered'' round $j$, i.e. those that did not stop before round $j$. 
 %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[h]
+\centering
+
+\begin{minipage}{.49\textwidth}
+\begin{centering}
+\includegraphics[width=1.0\textwidth]{eor_bravo_90perc_10^4_corrected/sprob_first_three_cropped.png}\caption{
+This plot shows, for each state margin, when the underlying election is as announced, the number of EoR \BRAVO audits that stopped in the $j^{th}$ round,
+as a fraction of all EoR \BRAVO audits which had not yet stopped before the $j^{th}$ round for $j=1,2,3$ and $\chi_j=0.9$.}
+\label{fig:eor_bravo_sprob}
+\end{centering}\end{minipage}
+\begin{minipage}{.49\textwidth}
+\begin{centering}
+\includegraphics[width=1.0\textwidth]{so_bravo_90perc_10^4/sprob_first_three.png}\caption{
+This plot shows, for each state margin, when the underlying election is as announced, the number of SO \BRAVO audits that stopped in the $j^{th}$ round,
+as a fraction of all SO \BRAVO audits which had not yet stopped before the $j^{th}$ round for $j=1,2,3$ and $\chi_j=0.9$.}
+\label{fig:so_bravo_sprob}
+\end{centering}
+\end{minipage}
+
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\begin{figure}
+%\begin{centering}
+%\includegraphics[width=0.6\textwidth]{eor_bravo_90perc_10^4_corrected/sprob_first_three_cropped.png}\caption{
+%This plot shows, for each state margin, when the underlying election is as announced, the number of EoR \BRAVO audits that stopped in the $j^{th}$ round,
+%as a fraction of all EoR \BRAVO audits which had not yet stopped before the $j^{th}$ round for $j=1,2,3$ and $S_1=0.9$.}
+%%\label{fig:eor_bravo_sprob}
+%\end{centering}
+%\end{figure}
+%
+%\begin{figure}
+%\begin{centering}
+%\includegraphics[width=0.6\textwidth]{so_bravo_90perc_10^4/sprob_first_three.png}\caption{
+%This plot shows, for each state margin, when the underlying election is as announced, the number of SO \BRAVO audits that stopped in the $j^{th}$ round,
+%as a fraction of all SO \BRAVO audits which had not yet stopped before the $j^{th}$ round for $j=1,2,3$ and $S_1=0.9$.}
+%%\label{fig:so_bravo_sprob}
+%\end{centering}
+%\end{figure}
+%
+\begin{figure}[h]
+\centering
+
+\begin{minipage}{.49\textwidth}
+%\begin{figure}
+\begin{centering}
+\includegraphics[width=1\textwidth]{minerva_multiround_1x_10^4/sprobs_first_three.png}
+\caption{This plot shows, for each state margin, when the underlying election is as announced, the number of \Minerva audits that stopped in the $j^{th}$ round,
+as a fraction of all \Minerva audits which had not yet stopped before the $j^{th}$ round for $j=1,2,3$, round size multiple of $1.0$ and $\chi_1=0.9$.}
+\label{fig:minerva1_sprob}
+\end{centering}
+%\end{figure}
+\end{minipage}
+\begin{minipage}{.49\textwidth}
+%\begin{figure}
+\begin{centering}
+\includegraphics[width=1\textwidth]{minerva_multiround_1p5x_10^4/sprobs_first_three.png}
+\caption{This plot shows, for each state margin, when the underlying election is as announced, the number of \Minerva audits that stopped in the $j^{th}$ round,
+as a fraction of all \Minerva audits which had not yet stopped before the $j^{th}$ round for $j=1,2,3$, round size multiple of $1.5$ and $\chi_1=0.9$.}
+\label{fig:minerva1p5_sprob}
+\end{centering}
+%\end{figure}
+\end{minipage}
+\end{figure}
+
+We can perform a similar study for a first round size with $\chi_1=0.25$. 
+See Figure~\ref{fig:minerva_25} for an example, \Minerva with round mutiplier $1.5$. 
+
+\begin{figure}
+\begin{centering}
+\includegraphics[width=0.6\textwidth]{minerva25percthen1p5_sprob.png}
+\caption{This plot shows, for each state margin, when the underlying election is as announced, the number of \Minerva audits that stopped in the $j^{th}$ round,
+as a fraction of all \Minerva audits which had not yet stopped before the $j^{th}$ round for $j=1,2,3$, round size multiple of $1.5$ and $\chi_1 = 0.25$.}
+\label{fig:minerva_25}
+\end{centering}
+\end{figure}
 
   \end{block}
 
-  \begin{block}{Fusce aliquam magna velit}
-
-    Et rutrum ex euismod vel. Pellentesque ultricies, velit in fermentum
-    vestibulum, lectus nisi pretium nibh, sit amet aliquam lectus augue vel
-    velit. Suspendisse rhoncus massa porttitor augue feugiat molestie. Sed
-    molestie ut orci nec malesuada. Sed ultricies feugiat est fringilla
-    posuere.
-
-    \begin{figure}
-      \centering
-      \begin{tikzpicture}
-        \begin{axis}[
-            scale only axis,
-            no markers,
-            domain=0:2*pi,
-            samples=100,
-            axis lines=center,
-            axis line style={-},
-            ticks=none]
-          \addplot[red] {sin(deg(x))};
-          \addplot[blue] {cos(deg(x))};
-        \end{axis}
-      \end{tikzpicture}
-      \caption{Another figure caption.}
-    \end{figure}
-
-  \end{block}
-
-  \begin{block}{Nam cursus consequat egestas}
-
-    Nulla eget sem quam. Ut aliquam volutpat nisi vestibulum convallis. Nunc a
-    lectus et eros facilisis hendrerit eu non urna. Interdum et malesuada fames
-    ac ante \textit{ipsum primis} in faucibus. Etiam sit amet velit eget sem
-    euismod tristique. Praesent enim erat, porta vel mattis sed, pharetra sed
-    ipsum. Morbi commodo condimentum massa, \textit{tempus venenatis} massa
-    hendrerit quis. Maecenas sed porta est. Praesent mollis interdum lectus,
-    sit amet sollicitudin risus tincidunt non.
-
-    Etiam sit amet tempus lorem, aliquet condimentum velit. Donec et nibh
-    consequat, sagittis ex eget, dictum orci. Etiam quis semper ante. Ut eu
-    mauris purus. Proin nec consectetur ligula. Mauris pretium molestie
-    ullamcorper. Integer nisi neque, aliquet et odio non, sagittis porta justo.
-
-    \begin{itemize}
-      \item \textbf{Sed consequat} id ante vel efficitur. Praesent congue massa
-        sed est scelerisque, elementum mollis augue iaculis.
-        \begin{itemize}
-          \item In sed est finibus, vulputate
-            nunc gravida, pulvinar lorem. In maximus nunc dolor, sed auctor eros
-            porttitor quis.
-          \item Fusce ornare dignissim nisi. Nam sit amet risus vel lacus
-            tempor tincidunt eu a arcu.
-          \item Donec rhoncus vestibulum erat, quis aliquam leo
-            gravida egestas.
-        \end{itemize}
-      \item \textbf{Sed luctus, elit sit amet} dictum maximus, diam dolor
-        faucibus purus, sed lobortis justo erat id turpis.
-      \item \textbf{Pellentesque facilisis dolor in leo} bibendum congue.
-        Maecenas congue finibus justo, vitae eleifend urna facilisis at.
-    \end{itemize}
-    
-    Nulla eget sem quam. Ut aliquam volutpat nisi vestibulum convallis. Nunc a
-    lectus et eros facilisis hendrerit eu non urna. Interdum et malesuada fames
-    ac ante \textit{ipsum primis} in faucibus. Etiam sit amet velit eget sem
-    euismod tristique. Praesent enim erat, porta vel mattis sed, pharetra sed
-    ipsum. Morbi commodo condimentum massa, \textit{tempus venenatis} massa
-    hendrerit quis. Maecenas sed porta est. Praesent mollis interdum lectus,
-    sit amet sollicitudin risus tincidunt non.
-  \end{block}
-
+%  \begin{block}{Fusce aliquam magna velit}
+%
+%    Et rutrum ex euismod vel. Pellentesque ultricies, velit in fermentum
+%    vestibulum, lectus nisi pretium nibh, sit amet aliquam lectus augue vel
+%    velit. Suspendisse rhoncus massa porttitor augue feugiat molestie. Sed
+%    molestie ut orci nec malesuada. Sed ultricies feugiat est fringilla
+%    posuere.
+%
+%    \begin{figure}
+%      \centering
+%      \begin{tikzpicture}
+%        \begin{axis}[
+%            scale only axis,
+%            no markers,
+%            domain=0:2*pi,
+%            samples=100,
+%            axis lines=center,
+%            axis line style={-},
+%            ticks=none]
+%          \addplot[red] {sin(deg(x))};
+%          \addplot[blue] {cos(deg(x))};
+%        \end{axis}
+%      \end{tikzpicture}
+%      \caption{Another figure caption.}
+%    \end{figure}
+%
+%  \end{block}
+%
+%  \begin{block}{Nam cursus consequat egestas}
+%
+%    Nulla eget sem quam. Ut aliquam volutpat nisi vestibulum convallis. Nunc a
+%    lectus et eros facilisis hendrerit eu non urna. Interdum et malesuada fames
+%    ac ante \textit{ipsum primis} in faucibus. Etiam sit amet velit eget sem
+%    euismod tristique. Praesent enim erat, porta vel mattis sed, pharetra sed
+%    ipsum. Morbi commodo condimentum massa, \textit{tempus venenatis} massa
+%    hendrerit quis. Maecenas sed porta est. Praesent mollis interdum lectus,
+%    sit amet sollicitudin risus tincidunt non.
+%
+%    Etiam sit amet tempus lorem, aliquet condimentum velit. Donec et nibh
+%    consequat, sagittis ex eget, dictum orci. Etiam quis semper ante. Ut eu
+%    mauris purus. Proin nec consectetur ligula. Mauris pretium molestie
+%    ullamcorper. Integer nisi neque, aliquet et odio non, sagittis porta justo.
+%
+%    \begin{itemize}
+%      \item \textbf{Sed consequat} id ante vel efficitur. Praesent congue massa
+%        sed est scelerisque, elementum mollis augue iaculis.
+%        \begin{itemize}
+%          \item In sed est finibus, vulputate
+%            nunc gravida, pulvinar lorem. In maximus nunc dolor, sed auctor eros
+%            porttitor quis.
+%          \item Fusce ornare dignissim nisi. Nam sit amet risus vel lacus
+%            tempor tincidunt eu a arcu.
+%          \item Donec rhoncus vestibulum erat, quis aliquam leo
+%            gravida egestas.
+%        \end{itemize}
+%      \item \textbf{Sed luctus, elit sit amet} dictum maximus, diam dolor
+%        faucibus purus, sed lobortis justo erat id turpis.
+%      \item \textbf{Pellentesque facilisis dolor in leo} bibendum congue.
+%        Maecenas congue finibus justo, vitae eleifend urna facilisis at.
+%    \end{itemize}
+%    
+%    Nulla eget sem quam. Ut aliquam volutpat nisi vestibulum convallis. Nunc a
+%    lectus et eros facilisis hendrerit eu non urna. Interdum et malesuada fames
+%    ac ante \textit{ipsum primis} in faucibus. Etiam sit amet velit eget sem
+%    euismod tristique. Praesent enim erat, porta vel mattis sed, pharetra sed
+%    ipsum. Morbi commodo condimentum massa, \textit{tempus venenatis} massa
+%    hendrerit quis. Maecenas sed porta est. Praesent mollis interdum lectus,
+%    sit amet sollicitudin risus tincidunt non.
+%  \end{block}
+%
 \end{column}
 
 \separatorcolumn
 
 \begin{column}{\colwidth}
 
-  \begin{block}{A block containing some math}
 
-    Nullam non est elit. In eu ornare justo. Maecenas porttitor sodales lacus,
-    ut cursus augue sodales ac.
+\begin{block}{Number of Ballots}
 
-    $$
-    \int_{-\infty}^{\infty} e^{-x^2}\,dx = \sqrt{\pi}
-    $$
+\begin{figure}
+\begin{centering}
+\includegraphics[width=0.6\textwidth]{texas25.png}
+\caption{This plot shows the cumulative fraction of audits that stopped as a function of average number of sampled ballots for all four audits we studied, for the state of Texas, margin $0.057$, and first round stopping probability $S_1=0.25$.}
+\label{fig:texas_25}
+\end{centering}
+\end{figure}
 
-    Interdum et malesuada fames $\{1, 4, 9, \ldots\}$ ac ante ipsum primis in
-    faucibus. Cras eleifend dolor eu nulla suscipit suscipit. Sed lobortis non
-    felis id vulputate.
 
-    \heading{A heading inside a block}
+\begin{figure}
+\begin{centering}
+\includegraphics[width=0.65\textwidth]{missouri25.png}
+\caption{This plot shows the cumulative fraction of audits that stopped as a function of average number of sampled ballots for all four audits we studied, for the state of Missouri, margin $0.157$, and first round stopping probability $S_1=0.25$.}
+\label{fig:missouri_25}
+\end{centering}
+\end{figure}
 
-    Praesent consectetur mi $x^2 + y^2$ metus, nec vestibulum justo viverra
-    nec. Proin eget nulla pretium, egestas magna aliquam, mollis neque. Vivamus
-    dictum $\mathbf{u}^\intercal\mathbf{v}$ sagittis odio, vel porta erat
-    congue sed. Maecenas ut dolor quis arcu auctor porttitor.
+\begin{figure}
+\begin{centering}
+\includegraphics[width=0.65\textwidth]{massachusetts25.png}
+\caption{This plot shows the cumulative fraction of audits that stopped as a function of average number of sampled ballots for all four audits we studied, for the state of Massachusetts, margin $0.342$, and first round stopping probability $S_1=0.25$.}
+\label{fig:mass_25}
+\end{centering}
+\end{figure}
 
-    \heading{Another heading inside a block}
+\begin{figure}
+\begin{centering}
+\includegraphics[width=0.605\textwidth]{texas90.png}
+\caption{This plot shows the cumulative fraction of audits that stopped as a function of average number of sampled ballots for all four audits we studied, for the state of Texas, margin $0.057$, and first round stopping probability $S_1=0.9$.}
+\label{fig:texas_90}
+\end{centering}
+\end{figure}
 
-    Sed augue erat, scelerisque a purus ultricies, placerat porttitor neque.
-    Donec $P(y \mid x)$ fermentum consectetur $\nabla_x P(y \mid x)$ sapien
-    sagittis egestas. Duis eget leo euismod nunc viverra imperdiet nec id
-    justo.
 
-  \end{block}
 
-  \begin{block}{Nullam vel erat at velit convallis laoreet}
+\end{block}
 
-    Class aptent taciti sociosqu ad litora torquent per conubia nostra, per
-    inceptos himenaeos. Phasellus libero enim, gravida sed erat sit amet,
-    scelerisque congue diam. Fusce dapibus dui ut augue pulvinar iaculis.
-
-    \begin{table}
-      \centering
-      \begin{tabular}{l r r c}
-        \toprule
-        \textbf{First column} & \textbf{Second column} & \textbf{Third column} & \textbf{Fourth} \\
-        \midrule
-        Foo & 13.37 & 384,394 & $\alpha$ \\
-        Bar & 2.17 & 1,392 & $\beta$ \\
-        Baz & 3.14 & 83,742 & $\delta$ \\
-        Qux & 7.59 & 974 & $\gamma$ \\
-        \bottomrule
-      \end{tabular}
-      \caption{A table caption.}
-    \end{table}
-
-    Donec quis posuere ligula. Nunc feugiat elit a mi malesuada consequat. Sed
-    imperdiet augue ac nibh aliquet tristique. Aenean eu tortor vulputate,
-    eleifend lorem in, dictum urna. Proin auctor ante in augue tincidunt
-    tempor. Proin pellentesque vulputate odio, ac gravida nulla posuere
-    efficitur. Aenean at velit vel dolor blandit molestie. Mauris laoreet
-    commodo quam, non luctus nibh ullamcorper in. Class aptent taciti sociosqu
-    ad litora torquent per conubia nostra, per inceptos himenaeos.
-
-    Nulla varius finibus volutpat. Mauris molestie lorem tincidunt, iaculis
-    libero at, gravida ante. Phasellus at felis eu neque suscipit suscipit.
-    Integer ullamcorper, dui nec pretium ornare, urna dolor consequat libero,
-    in feugiat elit lorem euismod lacus. Pellentesque sit amet dolor mollis,
-    auctor urna non, tempus sem.
-
-  \end{block}
+%  \begin{block}{A block containing some math}
+%
+%    Nullam non est elit. In eu ornare justo. Maecenas porttitor sodales lacus,
+%    ut cursus augue sodales ac.
+%
+%    $$
+%    \int_{-\infty}^{\infty} e^{-x^2}\,dx = \sqrt{\pi}
+%    $$
+%
+%    Interdum et malesuada fames $\{1, 4, 9, \ldots\}$ ac ante ipsum primis in
+%    faucibus. Cras eleifend dolor eu nulla suscipit suscipit. Sed lobortis non
+%    felis id vulputate.
+%
+%    \heading{A heading inside a block}
+%
+%    Praesent consectetur mi $x^2 + y^2$ metus, nec vestibulum justo viverra
+%    nec. Proin eget nulla pretium, egestas magna aliquam, mollis neque. Vivamus
+%    dictum $\mathbf{u}^\intercal\mathbf{v}$ sagittis odio, vel porta erat
+%    congue sed. Maecenas ut dolor quis arcu auctor porttitor.
+%
+%    \heading{Another heading inside a block}
+%
+%    Sed augue erat, scelerisque a purus ultricies, placerat porttitor neque.
+%    Donec $P(y \mid x)$ fermentum consectetur $\nabla_x P(y \mid x)$ sapien
+%    sagittis egestas. Duis eget leo euismod nunc viverra imperdiet nec id
+%    justo.
+%
+%  \end{block}
+%
+%  \begin{block}{Nullam vel erat at velit convallis laoreet}
+%
+%%    Class aptent taciti sociosqu ad litora torquent per conubia nostra, per
+%    inceptos himenaeos. Phasellus libero enim, gravida sed erat sit amet,
+%    scelerisque congue diam. Fusce dapibus dui ut augue pulvinar iaculis.
+%%
+%    \begin{table}
+%      \centering
+%%      \begin{tabular}{l r r c}
+%        \toprule
+%%        \textbf{First column} & \textbf{Second column} & \textbf{Third column} & \textbf{Fourth} \\
+%        \midrule
+%        Foo & 13.37 & 384,394 & $\alpha$ \\
+%%        Bar & 2.17 & 1,392 & $\beta$ \\
+%        Baz & 3.14 & 83,742 & $\delta$ \\
+%        Qux & 7.59 & 974 & $\gamma$ \\
+%%        \bottomrule
+%      \end{tabular}
+%      \caption{A table caption.}
+%%    \end{table}
+%
+%    Donec quis posuere ligula. Nunc feugiat elit a mi malesuada consequat. Sed
+%%    imperdiet augue ac nibh aliquet tristique. Aenean eu tortor vulputate,
+%    eleifend lorem in, dictum urna. Proin auctor ante in augue tincidunt
+%%    tempor. Proin pellentesque vulputate odio, ac gravida nulla posuere
+%    efficitur. Aenean at velit vel dolor blandit molestie. Mauris laoreet
+%%    commodo quam, non luctus nibh ullamcorper in. Class aptent taciti sociosqu
+%    ad litora torquent per conubia nostra, per inceptos himenaeos.
+%
+%    Nulla varius finibus volutpat. Mauris molestie lorem tincidunt, iaculis
+%%    libero at, gravida ante. Phasellus at felis eu neque suscipit suscipit.
+%    Integer ullamcorper, dui nec pretium ornare, urna dolor consequat libero,
+%    in feugiat elit lorem euismod lacus. Pellentesque sit amet dolor mollis,
+%%    auctor urna non, tempus sem.
+%
+%%  \end{block}
 
 \end{column}
 
