@@ -30,6 +30,7 @@
 
 % nice looking audit titles
 \newcommand{\Minerva}{\textsc{Minerva}\xspace}
+\newcommand{\Prov}{\textsc{Providence}\xspace}
 \newcommand{\B}{{{B2}}\xspace}
 \newcommand{\R}{{{R2}}\xspace}
 \newcommand{\BRAVO}{\textsc{BRAVO}\xspace}
@@ -174,7 +175,7 @@ We simulated audits for a risk limit of 10\% using margins
 from the 2020 US Presidential election, limiting ourselves to pairwise margins
 for the two main candidates of $0.05$ or larger.
 \item 
-We used the R2B2 library, which provides a framework for the exploration
+We used the R2B2 library\cite{r2b2}, which provides a framework for the exploration
 of round-by-round and ballot-by-ballot RLAs. It has implementations of several
 ballot polling risk-limiting audits as well as a simulator, all written in Python.
 \item
@@ -202,6 +203,7 @@ round size by $1.5$ or by $1.0$.
 \end{itemize}
 
 \begin{block}{Risk}
+
 \begin{figure}
 \includegraphics[width=\textwidth]{both_risk_plots.png}
 \caption{The left hand plot shows the fraction of EoR \BRAVO audits (all states with margins at least $0.05$) and SO \BRAVO audits (the 13 states for which our simulations are complete so far) that stopped in any of the $5$ rounds when the underlying election was a tie. The right hand plot, for each state margin, shows the fraction of \Minerva audits with a round size multiple of $1.5$ that stopped in any of the $5$ rounds when the underlying election was a tie.}
@@ -303,20 +305,16 @@ Experimentally, using our simulations, $\chi_j$ would be estimated by the ratio 
 
 \begin{minipage}{.49\textwidth}
 \begin{centering}
-\includegraphics[width=1.0\textwidth]{eor_bravo_90perc_10^4_corrected/sprob_first_three_cropped.png}\caption{
-This plot shows, for each state margin, when the underlying election is as announced, the number of EoR \BRAVO audits that stopped in the $j^{th}$ round,
-as a fraction of all EoR \BRAVO audits which had not yet stopped before the $j^{th}$ round for $j=1,2,3$ and $\chi_j=0.9$.}
+\includegraphics[width=1.0\textwidth]{eor_bravo_90perc_10^4_corrected/sprob_first_three_cropped.png}%\caption{This plot shows, for each state margin, when the underlying election is as announced, the number of EoR \BRAVO audits that stopped in the $j^{th}$ round, as a fraction of all EoR \BRAVO audits which had not yet stopped before the $j^{th}$ round for $j=1,2,3$ and $\chi_j=0.9$.}
 \label{fig:eor_bravo_sprob}
 \end{centering}\end{minipage}
 \begin{minipage}{.49\textwidth}
 \begin{centering}
-\includegraphics[width=1.0\textwidth]{so_bravo_90perc_10^4/sprob_first_three.png}\caption{
-This plot shows, for each state margin, when the underlying election is as announced, the number of SO \BRAVO audits that stopped in the $j^{th}$ round,
-as a fraction of all SO \BRAVO audits which had not yet stopped before the $j^{th}$ round for $j=1,2,3$ and $\chi_j=0.9$.}
+\includegraphics[width=1.0\textwidth]{so_bravo_90perc_10^4/sprob_first_three.png}%\caption{This plot shows, for each state margin, when the underlying election is as announced, the number of SO \BRAVO audits that stopped in the $j^{th}$ round,as a fraction of all SO \BRAVO audits which had not yet stopped before the $j^{th}$ round for $j=1,2,3$ and $\chi_j=0.9$.}
 \label{fig:so_bravo_sprob}
 \end{centering}
 \end{minipage}
-
+\caption{These plots show, for each state margin, when the underlying election is as announced, the number of audits that stopped in the $j^{th}$ round, as a fraction of all audits which had not yet stopped before the $j^{th}$ round for $j=1,2,3$ and $\chi_j=0.9$. The left shows EoR \BRAVO and the right shows SO \BRAVO.}
 \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %\begin{figure}
@@ -344,8 +342,7 @@ as a fraction of all SO \BRAVO audits which had not yet stopped before the $j^{t
 %\begin{figure}
 \begin{centering}
 \includegraphics[width=1\textwidth]{minerva_multiround_1x_10^4/sprobs_first_three.png}
-\caption{This plot shows, for each state margin, when the underlying election is as announced, the number of \Minerva audits that stopped in the $j^{th}$ round,
-as a fraction of all \Minerva audits which had not yet stopped before the $j^{th}$ round for $j=1,2,3$, round size multiple of $1.0$ and $\chi_1=0.9$.}
+%\caption{This plot shows, for each state margin, when the underlying election is as announced, the number of \Minerva audits that stopped in the $j^{th}$ round, as a fraction of all \Minerva audits which had not yet stopped before the $j^{th}$ round for $j=1,2,3$, round size multiple of $1.0$ and $\chi_1=0.9$.}
 \label{fig:minerva1_sprob}
 \end{centering}
 %\end{figure}
@@ -354,12 +351,12 @@ as a fraction of all \Minerva audits which had not yet stopped before the $j^{th
 %\begin{figure}
 \begin{centering}
 \includegraphics[width=1\textwidth]{minerva_multiround_1p5x_10^4/sprobs_first_three.png}
-\caption{This plot shows, for each state margin, when the underlying election is as announced, the number of \Minerva audits that stopped in the $j^{th}$ round,
-as a fraction of all \Minerva audits which had not yet stopped before the $j^{th}$ round for $j=1,2,3$, round size multiple of $1.5$ and $\chi_1=0.9$.}
+%\caption{This plot shows, for each state margin, when the underlying election is as announced, the number of \Minerva audits that stopped in the $j^{th}$ round, as a fraction of all \Minerva audits which had not yet stopped before the $j^{th}$ round for $j=1,2,3$, round size multiple of $1.5$ and $\chi_1=0.9$.}
 \label{fig:minerva1p5_sprob}
 \end{centering}
 %\end{figure}
 \end{minipage}
+\caption{These plots show, for each state margin, when the underlying election is as announced, the number of \Minerva audits that stopped in the $j^{th}$ round, as a fraction of all \Minerva audits which had not yet stopped before the $j^{th}$ round for $j=1,2,3$. The left shows \Minerva with the round schedule obtained by $\chi_1=0.9$ and round size multiple $1.5$.}
 \end{figure}
 
 We can perform a similar study for a first round size with $\chi_1=0.25$. 
@@ -454,41 +451,69 @@ as a fraction of all \Minerva audits which had not yet stopped before the $j^{th
 
 
 \begin{block}{Number of Ballots}
+\begin{itemize}
+\item
+The number of ballots sampled is one crude measure of the workload of an audit.
+To keep the costs of RLAs low, audits should be designed to stop with as few ballots as possible.
+\item
+The following plots show the probability of stopping as a function of the average number of ballots
+sampled by round in our simulations.
+\end{itemize}
 
-\begin{figure}
+\begin{figure}[h]
+\centering
+\begin{minipage}{.49\textwidth}
 \begin{centering}
-\includegraphics[width=0.6\textwidth]{texas25.png}
-\caption{This plot shows the cumulative fraction of audits that stopped as a function of average number of sampled ballots for all four audits we studied, for the state of Texas, margin $0.057$, and first round stopping probability $S_1=0.25$.}
+\includegraphics[width=1\textwidth]{texas25.png}
+%\caption{This plot shows the cumulative fraction of audits that stopped as a function of average number of sampled ballots for all four audits we studied, for the state of Texas, margin $0.057$, and first round stopping probability $S_1=0.25$.}
 \label{fig:texas_25}
 \end{centering}
-\end{figure}
-
-
-\begin{figure}
+\end{minipage}
+\begin{minipage}{.49\textwidth}
 \begin{centering}
-\includegraphics[width=0.65\textwidth]{missouri25.png}
-\caption{This plot shows the cumulative fraction of audits that stopped as a function of average number of sampled ballots for all four audits we studied, for the state of Missouri, margin $0.157$, and first round stopping probability $S_1=0.25$.}
+\includegraphics[width=1\textwidth]{missouri25.png}
+%\caption{This plot shows the cumulative fraction of audits that stopped as a function of average number of sampled ballots for all four audits we studied, for the state of Missouri, margin $0.157$, and first round stopping probability $S_1=0.25$.}
 \label{fig:missouri_25}
 \end{centering}
+\end{minipage}
+\caption{These plots show the cumulative fraction of audits that stopped as a function of average number of sampled ballots for all four audits we studied, for the states of Texas with margin $.057$ (left) and Missouri with margin $0.157$ (right), both with first round stopping probability $\chi_1=0.25$.}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[h]
+\centering
+\begin{minipage}{.49\textwidth}
 \begin{centering}
-\includegraphics[width=0.65\textwidth]{massachusetts25.png}
-\caption{This plot shows the cumulative fraction of audits that stopped as a function of average number of sampled ballots for all four audits we studied, for the state of Massachusetts, margin $0.342$, and first round stopping probability $S_1=0.25$.}
+\includegraphics[width=1\textwidth]{massachusetts25.png}
+%\caption{This plot shows the cumulative fraction of audits that stopped as a function of average number of sampled ballots for all four audits we studied, for the state of Massachusetts, margin $0.342$, and first round stopping probability $\chi_1=0.25$.}
 \label{fig:mass_25}
 \end{centering}
-\end{figure}
-
-\begin{figure}
+\end{minipage}
+\begin{minipage}{.49\textwidth}
 \begin{centering}
-\includegraphics[width=0.605\textwidth]{texas90.png}
-\caption{This plot shows the cumulative fraction of audits that stopped as a function of average number of sampled ballots for all four audits we studied, for the state of Texas, margin $0.057$, and first round stopping probability $S_1=0.9$.}
+\includegraphics[width=1\textwidth]{texas90.png}
+%\caption{This plot shows the cumulative fraction of audits that stopped as a function of average number of sampled ballots for all four audits we studied, for the state of Texas, margin $0.057$, and first round stopping probability $\chi_1=0.9$.}
 \label{fig:texas_90}
 \end{centering}
+\end{minipage}
+\caption{These plots show the cumulative fraction of audits that stopped as a function of average number of sampled ballots for all four audits we studied, for the states Massachusetts (left) with margin $0.342$ and $\chi_1=0.25$ and Texas (right) with margin $0.057$ and $\chi_1=0.9$.}
 \end{figure}
 
+For $\chi_1=0.25$, the ratio of first round size of EoR \BRAVO to \Minerva is $1.45$, $1.37$, $1.23$ for states Texas, Missouri and Massachusetts, and margins $0.057$, $0.157$ and $0.342$ respectively. This may be compared to $2.03$, $1.99$ and $1.8$ respectively for $\chi_1=0.9$. Similarly, for $\chi_1=0.25$, the ratio of first round size of SO \BRAVO to \Minerva is $1.13$, $1.08$, $1.12$ for states Texas, Missouri and Massachusetts, and margins $0.057$, $0.157$ and $0.342$ respectively. This may be compared to $1.38$, $1.38$ and $1.30$ respectively for $\chi_1=0.9$. 
 
+
+\end{block}
+
+
+\begin{block}{Modeling Workload}
+
+\BRAVO requires the smallest expected number of ballots when ballots are drawn one at a time and the (true) underlying election is as announced. 
+In real audits, election officials draw ballots in rounds because their is some overhead with each round (e.g. opening ballot boxes).
+Therefore a more sophisticated workload model has a per ballot cost $c_b$ and a per round cost $c_r$. 
+Let $n$ be the number of ballots sampled and $j$ be the number of rounds. Then the cost $C$ is given by 
+$$C(n,j) = c_b\cdot n + c_r\cdot j,$$
+and depending on the ratio between $c_b$ and $c_r$, we should expect that certain round schedules
+achieve lower expected cost.
+ 
 
 \end{block}
 
@@ -563,16 +588,43 @@ as a fraction of all \Minerva audits which had not yet stopped before the $j^{th
 \separatorcolumn
 
 \begin{column}{\colwidth}
-
 \begin{block}{Providence}
 
-Providence is great! Efficient like Minerva but flexible like BRAVO.
+\begin{itemize}
+\item
+The efficiency of \Minerva is great, but it lacks the flexibility of \BRAVO in choosing round sizes based on previous samples.
+\item
+\Prov is our novel RLA which has the efficiency of \Minerva and the flexibility of \BRAVO.
+\item For alternative hypothesis $H_a$ that the election is truly as announced and null
+hypothesis $H_0$ that the true election is a tie, \BRAVO has the stopping condition that
+for $k$ cumulative ballots for the winner and $n$ cumulative sampled ballots,
+$$\sigma(k,n,p_a,p_0) \triangleq \frac{\Pr[K=k\mid H_a]}{\Pr[K=k\mid H_0]}\ge \frac{1}{\alpha}.$$
+\item \Minerva has the stopping condition that in round $j$ with cumulative winner ballots $k_j$ and round sizes $n_1,n_2,\ldots,n_j$
+$$\tau_j(k_j,n_1,n_2,\ldots,n_j,p_a,p_0) \triangleq \frac{\Pr[K_j\ge k_j \wedge \mathcal{A}_{i<j}(X)\neq Correct \mid H_a]}{\Pr[K_j\ge k_j \wedge \mathcal{A}_{i<j}(X)\neq Correct \mid H_0]}\ge \frac{1}{\alpha}.$$ Testing this stopping condition requires computationaly expensive convolutions.
+\item The \Prov stopping condition uses ideas from both \BRAVO and \Minerva and requires no convolution to test:
+$$\omega_j(k_{j-1},k_j,n_{j-1},n_j,p_a,p_0)\triangleq \sigma(k_{j-1},n_{j-1},p_a,p_0)\cdot \tau_1(k_j,n_j,p_a,p_0) \ge \frac{1}{\alpha}.$$ 
+
+\end{itemize}
+
+\heading {Resistance against an adversary} 
+If adversary $\mathcal{A}$ has knowledge of previous samples and chooses round size $n_j$ in round $j$, 
+\Prov is still risk-limiting.
+
+\heading {\Prov pilot}
+In February 2022, The Rhode Island Board of Elections hosted a public pilot \Prov RLA which passed 
+in the first round.
+
+\begin{figure}
+\includegraphics[width=1.0\textwidth]{dice.jpg}
+\caption{Professor Vora tosses her random-seed-generating 10-sided die, in a roll she dedicated to election officials everywhere.}
+\end{figure}
 
 \end{block}
 
 \begin{block}{Simulations}
 
-Look, Providence does pretty ok!
+Need to fill in simulation results here. I am thinking (a) risk simulations as evidence that \Prov is an RLA, 
+and (b) number of ballot results if I get them done quickly enough.
 
 \end{block}
 
@@ -580,8 +632,10 @@ Look, Providence does pretty ok!
 
   \begin{block}{References}
 
-    \nocite{*}
-    \footnotesize{\bibliographystyle{plain}\bibliography{poster}}
+    %\nocite{*}
+    \footnotesize{\bibliographystyle{plain}\bibliography{audits}}
+    %\bibliographystyle{splncs04}
+    %\bibliography{audits}
 
   \end{block}
 
