@@ -1,0 +1,143 @@
+% This is a draft of the coming paper "Multiple Round Ballot Polling Risk-Limiting Audit Simulations".
+% 2021.
+%
+\documentclass{beamer}
+%
+\usepackage{float}
+\usepackage{xspace}
+\usepackage{graphicx}
+\graphicspath{{./imgs/}}
+\usepackage{comment}
+\usepackage{listings,hyperref}
+\usepackage{cite}
+
+% \usepackage{graphicx}  --> Used for displaying a sample figure. If possible, figure files should
+% be included in EPS format.
+%
+% If you use the hyperref package, please uncomment the following line
+% to display URLs in blue roman font according to Springer's eBook style:
+% \renewcommand\UrlFont{\color{blue}\rmfamily}
+
+
+% nice looking audit titles
+\newcommand{\Minerva}{\textsc{Minerva}\xspace}
+\newcommand{\B}{{{B2}}\xspace}
+\newcommand{\R}{{{R2}}\xspace}
+\newcommand{\BRAVO}{\textsc{Bravo}\xspace}
+
+\usepackage{color}
+\definecolor{green}{rgb}{0.31, 0.78, 0.47}
+\newcommand{\fpo}[1]{\textcolor{green}{#1}}
+
+\def\code#1{\texttt{#1}}
+
+\begin{document}
+\lstset{language=Python}
+%
+\title{Simulations of Ballot Polling Risk-Limiting Audits}
+%add \thanks{} within the title brackets if want to refer to supporting organization ^^
+%
+%\titlerunning{Abbreviated paper title}
+% If the paper title is too long for the running head, you can set
+% an abbreviated paper title here
+%
+\author{Oliver Broadrick\inst{1} \and
+Sarah Morin\inst{1} \and
+Grant McClearn\inst{2}\\ \and Neal McBurnett \and Poorvi L. Vora\inst{1} \and
+Filip Zag{\'o}rski\inst{3}\inst{4}}
+%
+% First names are abbreviated in the running head.
+% If there are more than two authors, 'et al.' is used.
+%
+\institute{\inst{1} Department of Computer Science, The George Washington University (odbroadrick@gmail.com)
+%\thanks{Supported in part by NSF Award 2015253} 
+\and \inst{2} Department of Computer Science, Stanford University (grantmcc@stanford.edu)
+\and \inst{3} Wroclaw University of Science and Technology (filip.zagorski@gmail.com)
+%\thanks{Author was partially supported by Polish National Science Centre contract number DEC-2013/09/D/ST6/03927} and 
+\and \inst{4} Votifica
+}
+%
+
+%\maketitle              % typeset the header of the contribution
+\frame{\titlepage}
+%
+
+\begin{frame}
+\frametitle{Outline}
+
+\begin{itemize}
+\item Risk-Limiting Audits
+\begin{itemize}
+\item \BRAVO and \Minerva
+\end{itemize}
+\item 
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}
+%\begin{abstract}
+    In this paper we present simulation results comparing the risk, stopping probability, and number of ballots required over multiple rounds of ballot polling risk-limiting audits (RLAs) \Minerva, Selection-Ordered (SO) \BRAVO, and End-of-Round (EoR) \BRAVO.    
+    \BRAVO is the most commonly used ballot polling RLA and requires the smallest expected number of ballots when ballots are drawn one at a time and the (true) underlying election is as announced. 
+    In real audits, multiple ballots are drawn at a time, and \BRAVO is implemented as SO \BRAVO or EoR \BRAVO. 
+    \Minerva is a recently proposed ballot polling RLA that requires fewer ballots than either implementation of \BRAVO in a first round with stopping probability $0.9$ but requires a predetermined round schedule.
+    %\BRAVO is the most commonly used ballot polling RLA and requires the smallest expected number of ballots when ballots are drawn one at a time and the (true) underlying election is as announced. In real audits, election officials draw multiple ballots at a time, and \BRAVO rules may be implemented as SO \BRAVO or EoR \BRAVO, with neither being optimal for large first round sizes. \Minerva was recently proposed for use when the first-round stopping probability is large. It requires fewer first-round ballots, on average, than both SO \BRAVO and EoR \BRAVO for first round stopping probabilities of $0.9$ when the (true) underlying election is as announced. 
+    It is an open question how these audits compare over multiple rounds and for lower stopping probabilities. 
+    Our simulations use stopping probabilities of $0.9$ and $0.25$.
+    %In this paper, we present results from simulations of multiple round audits with stopping probabilities of $0.9$ and $0.25$.
+    %We examine both: first-round stopping probabilities of $0.9$, a common choice among election officials, and $0.25$, which would be more favorable to \BRAVO. 
+    The results are consistent with predictions of the R2B2 open-source library for ballot polling audits. 
+    %Because the \Minerva round schedule needs to be predetermined, we observe that the simulator is useful as a tool for understanding the behavior of \Minerva with the fixed round schedule. 
+    We observe that both \BRAVO audits are more conservative than \Minerva, which stops with fewer ballots, for both first round stopping probabilities. 
+    However, the advantage of using \Minerva decreases considerably for the smaller first round stopping probability, as one would expect. 
+
+\keywords{risk-limiting audit (RLA)  \and ballot polling audit \and evidence-based elections \and statistical election audit}
+\end{frame}
+%\end{abstract}
+%
+%
+\section{Introduction}
+\label{sec:intro}
+\input{sections/01-intro}
+
+\section{Related work}
+\label{sec:related}
+\input{sections/02-related}
+
+%\section{Software}
+%\label{sec:software}
+%\input{sections/03-software}
+
+\section{Experiments}
+\label{sec:expts}
+\input{sections/04-expts}
+
+\section{Stopping Probability and Risk}
+\label{sec:results1}
+\input{sections/05-results1}
+
+\section{Number of Ballots}
+\label{sec:results2}
+\input{sections/06-results2}
+
+\section{Conclusions and Future Work}
+\label{sec:conc}
+\input{sections/07-conc}
+
+%\section{Acknowledgements}
+%\label{sec:ack}
+%This research was supported in part by NSF Awards 2015253
+%and 1421373.
+
+
+%
+% ---- Bibliography ----
+%
+% BibTeX users should specify bibliography style 'splncs04'.
+% References will then be sorted and formatted in the correct style.
+%
+\bibliographystyle{splncs04}
+\bibliography{audits}
+%
+\end{document}
+

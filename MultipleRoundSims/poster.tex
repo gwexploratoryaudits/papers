@@ -108,181 +108,78 @@ Filip Zag{\'o}rski\inst{2}\inst{3}}
 
 \begin{column}{\colwidth}
 
-\begin{block}{Risk-Limiting Audits}
+\begin{block}{Original Contributions}
+
+Risk-Limiting Audits (RLAs) are rigorous election audits performed in rounds. 
+Most commonly used RLAs EoR \BRAVO and SO \BRAVO (Stark) rely on the Sequential Probability Ratio Test (SPRT), using
+a ratio of sample probabilities conditioned on alternative and null hypotheses.
+Newer RLA \Minerva (Vora) uses a ratio of the tails of those distributions, requiring half as many
+ballots as EoR \BRAVO in the first round when probability of stopping is $0.9$.
+\Minerva was used in a pilot RLA in Montgomery County, Ohio in 2020,
+and is recommended by the largest US voting organizations: Verified Voting, the Brennan Center, and Common Cause, 
+It is unknown how the audits compare in later rounds or with lower stopping probabilities, a problem with no easy analytical approach.
+Unlike EoR and SO \BRAVO, \Minerva is proven to be risk-limiting only when round sizes are predetermined, 
+meaning round sizes cannot be chosen based on previous samples.
 \begin{itemize}
 \item
-In election security, a risk-limiting audit (RLA) draws trusted paper ballots in rounds, stopping if a rigorous statistical criterion is satisfied, or proceeding to a full hand count. If the announced outcome of the election is erroneous, an RLA will detect the error with high, predetermined minimum probability. 
+We provide simulations of EoR \BRAVO, SO \BRAVO, and \Minerva that help us understand their behavior across multiple rounds and with lower
+first round stopping probability; this information can be used to advise election officials.
+\item
+We introduce \Prov, an RLA which has the efficient tail ratio approach of \Minerva but is resistant to an adversary who can pick
+future round sizes with knowledge of previous samples. \Prov was named after the Rhode Island city where it was used for a public
+pilot audit in February 2022.
+\end{itemize}
+\end{block}
 
+\begin{block}{Results}
+
+\begin{itemize}
+\item Both \BRAVO audits are more conservative than \Minerva, which stops with fewer ballots, for both first round stopping probabilities. 
+However, the advantage of using \Minerva decreases considerably for the smaller first round stopping probability.
+\item Proofs that \Prov is risk-limiting and resistant to an adversary who can pick future round sizes with knowledge of previous samples.
+\end{itemize}
+\end{block}
+
+\begin{block}{Risk-Limiting Audits}
+
+\begin{itemize}
+\item
+A risk-limiting audit (RLA) draws paper ballots in rounds, stopping if a rigorous statistical criterion is satisfied, or proceeding to a full hand count. If the announced outcome of the election is erroneous, an RLA will detect the error with high, predetermined minimum probability. 
 \item
 An audit $\mathcal{A}$ takes a sample of ballots $X$ as input and gives as output either
 (1) $Correct$: the audit is complete, or (2) $Uncertain$: continue the audit.
-
-%\item
-%
-%In this work, we present simulation results comparing the risk, stopping probability, and number of ballots required over multiple rounds of RLAs Minerva, Selection-Ordered (SO) Bravo, and End-of-Round (EoR) Bravo. We show that Minerva requires fewer ballots on average than either version of Bravo for round sizes that are chosen to give probabilities of stopping 0.9 and 0.25. In particular, the advantage of Minerva is less for the smaller stopping probabil- ity. We also present Providence, a novel ballot polling RLA. Based on initial simulation results, Providence has efficiency similar to Minerva but is also resistant to an adversary who can choose future round sizes with knowledge of previous samples. Thus, unlike Minerva, Providence allows election officials to choose round sizes during the audit to optimize for workload and safety.
-%\end{block}
-
-%\begin{block}{Risk}
-%Definitions
-%In this section, we motivate and describe the experiments. We consider a two candidate plurality contest, and assume that ballots are sampled with replacement, as is common in the literature. Note that sampling without replacement is more efficient for large sampling fractions, but \Minerva has not been extended for sampling without replacement. We first present relevant definitions.
-
-%\begin{definition}
-%An audit $\mathcal{A}$ takes a sample of ballots $X$ as input and gives as output either
-%(1) $Correct$: the audit is complete, or (2) $Uncertain$: continue the audit.
-%\end{definition}
-
-%All of the audits discussed in this paper are modeled as binary hypothesis tests. Under the alternative hypothesis, $H_a$, the announced outcome is correct. In particular, the true underlying ballot distribution is given by the announced ballot tallies. Under the null hypothesis, $H_0$, a tie is the correct outcome \footnote{or the announced winner lost by one vote, and the number of ballots is large enough that the probability of drawing a ballot for the winner is that of drawing one for the loser}.
-%The maximum risk of an audit is the probability that an audit stops, given that the underlying election is a tie \cite{Bayesian-RLA}. Note that an audit $\mathcal{A}$ includes all audit parameters (maximum risk, round sizes, etc.). 
-
-%\begin{definition}[Risk]
-%\heading{Definition: Risk}
 \item
 The maximum risk $R$ of audit $\mathcal{A}$ with sample $X\in \{0,1\}^*$ drawn from 
 the true underlying distribution of ballots is
 $$R(\mathcal{A})=\Pr[\mathcal{A}(X)=Correct \mid H_0],$$ where $H_0$ is the null
 hypothesis: the true underlying election is a tie.
-%\end{definition}
-
-%This leads us to the following definition of an $\alpha$-RLA.
-%\heading{Definition: Risk-Limiting Audit ($\alpha$-RLA)}
-%\begin{definition}[Risk Limiting Audit ($\alpha$-RLA)]
 \item
 An audit $\mathcal{A}$ is a Risk-Limiting Audit with 
 risk limit $\alpha$ iff 
 $$R(\mathcal{A}) \le \alpha.$$
-%\end{definition}
-\end{itemize}
-\end{block}
-\begin{block}{\BRAVO and \Minerva}
-\begin{itemize}
-\item Existing RLAs include \BRAVO (which can be implemented as End-of-Round (EoR) \BRAVO or Selection-Ordered (SO) \BRAVO)
-and \Minerva. In a first round with a large sample size (probabilty of stopping at least 90\%), \Minerva is known to require roughly
-half as many ballots as EoR \BRAVO. 
-\item We provide the first simulations that compare these audits beyond a first round and for various
-round schedules.
 \end{itemize}
 \end{block}
 
 \begin{block}{Simulations}
-\begin{itemize}
-%\item
-%Simulations can be used to provide evidence for theoretical claims about risk-limiting audits.
-\item
-We ran simulations to gain further insight into audit behavior 
-and provide additional evidence for theoretical claims.
-\item 
-We simulated audits for a risk limit of 10\% using margins
-from the 2020 US Presidential election, limiting ourselves to pairwise margins
-for the two main candidates of $0.05$ or larger.
-\item 
-We used the R2B2 library\cite{r2b2}, which provides a framework for the exploration
-of round-by-round and ballot-by-ballot RLAs. It has implementations of several
-ballot polling risk-limiting audits as well as a simulator, all written in Python.
-\item
-For each of these states, we simulated 
-$10,000=10^4$ audits assuming the underlying election was as announced,  
-and an additional $10,000=10^4$ audits assuming the underlying election was a tie. 
-\end{itemize}
-\end{block}
 
-\heading{Round Schedules}
 \begin{itemize}
+\item 
+Software: R2B2 library\cite{r2b2} which has Python implementations of several RLAs as well as a simulator
+\item 
+Risk limit: 10\%
 \item
-A round schedule is a list of positive integers corresponding to the number of ballots 
-sampled in each round.
-To begin, first round sizes are selected (by search) to achieve a $0.90$
-probability of stopping assuming the underlying election is as announced.
-\item
-Subsequent EoR and SO \BRAVO round sizes can be found given the preceding evidence to 
-again achieve a probability of stopping $0.90$. It is not known whether \Minerva is 
-risk-limiting for round sizes chosen based on preceding evidence like this, and 
-so subsequent round sizes in \Minerva must be predetermined. We run simulations with
-\Minerva round schedules where each round has size given by multiplying the previous
+Margins: 2020 US Presidential election statewide results, limiting ourselves to pairwise margins
+for the two main candidates of $0.05$ or larger
+\item 
+Trials per state: $10,000=10^4$ audits assuming the underlying election is as announced,  
+and $10,000=10^4$ audits assuming the underlying election is a tie
+\item 
+Round schedules: EoR \BRAVO and SO \BRAVO round sizes are chosen to achieve the same
+probability of stopping in each round given preceding samples. \Minerva first round sizes
+are chosen to achieve some probability of stopping and subsequent round sizes are given by multiplying the previous
 round size by $1.5$ or by $1.0$.
-
 \end{itemize}
-
-\begin{block}{Risk}
-
-\begin{figure}
-\includegraphics[width=\textwidth]{both_risk_plots.png}
-\caption{The left hand plot shows the fraction of EoR \BRAVO audits (all states with margins at least $0.05$) and SO \BRAVO audits (the 13 states for which our simulations are complete so far) that stopped in any of the $5$ rounds when the underlying election was a tie. The right hand plot, for each state margin, shows the fraction of \Minerva audits with a round size multiple of $1.5$ that stopped in any of the $5$ rounds when the underlying election was a tie.}
-\label{fig:risk}
-%\end{centering}
-\end{figure}
-%
 \end{block}
-
-%\begin{block}{more}
-%We present measures of stopping probability in the $j^{th}$ round of the audit, given that the underlying election is as announced.
-%%%\begin{definition}[Stopping Probability]
-%\heading{Definition: Stopping Probability}
-%The stopping probability $S_j$ of an audit $\mathcal{A}$ in round $j$ is 
-%$$S_j(\mathcal{A})=\Pr[\mathcal{A}(X)=Correct ~in~round~j~\land \mathcal{A}(X) \neq Correct ~previously \mid H_a]$$
-%%\end{definition}
-%Experimentally, using our simulations, $S_j$ would be estimated by the fraction of audits that stop in round $j$. Note that $\sum _j S_j(\mathcal{A})=1$. We can also consider the cumulative stopping probability: 
-%%\begin{definition}[Cumulative Stopping Probability]
-%The cumulative stopping probability $C_j$ of an audit $\mathcal{A}$ in round $j$ is $C_j(\mathcal{A})= \sum_{i=1}^j S_j$
-%%\end{definition}
-%Experimentally, using our simulations, $C_j$ would be estimated by the fraction of audits that stop in or before round $j$. 
-%%
-%We are also interested in the probability that an audit will stop in round $j$ given that it did not stop earlier: 
-%%\begin{definition}[Conditional Stopping Probability]
-%The conditional stopping probability  of an audit $\mathcal{A}$ in round $j$ is 
-%$$\chi_j (\mathcal{A})=\Pr[\mathcal{A}(X)=Correct ~in~round~j~\mid H_a \land \mathcal{A}(X) \neq Correct ~previously]$$
-%%\end{definition}
-%Experimentally, using our simulations, $\chi_j$ would be estimated by the ratio of the audits that stop in round $j$ to those that ``entered'' round $j$, i.e. those that did not stop before round $j$. 
-%%
-%We simulated audits for a risk limit of $10\%$ (as in \cite{bravo} and \cite{usenix_minerva}) using margins from the 2020 US Presidential election, limiting ourselves to pairwise margins for the two main candidates of $0.05$ or larger. 
-%Note that both \BRAVO and \Minerva can be extended for multiple-candidate, multiple-winner plurality contests by performing pairwise tests between the winners and the losers\cite{RLA, arxiv_athena}. Therefore, the two candidate plurality contest is a general case, and these simulations provide insight for multiple-candidate and multiple-winner contests too.
-%%Round sizes increase roughly proportional to the inverse
-%square of the margin, so 
-%smaller margins are computationally much more expensive to simulate.
-%For each of these states, we simulated 
-%$10,000=10^4$ audits assuming the underlying election was as announced ($H_a$),  
-%and an additional $10,000=10^4$ audits assuming the underlying election was a tie ($H_0$). 
-%  \end{block}
-
-
-%  \begin{block}{A block containing a list}
-%
-%    Nam vulputate nunc felis, non condimentum lacus porta ultrices. Nullam sed
-%    sagittis metus. Etiam consectetur gravida urna quis suscipit.
-%
-%    \begin{itemize}
-%      \item \textbf{Mauris tempor} risus nulla, sed ornare
-%      \item \textbf{Libero tincidunt} a duis congue vitae
-%      \item \textbf{Dui ac pretium} morbi justo neque, ullamcorper
-%    \end{itemize}
-%
-%    Eget augue porta, bibendum venenatis tortor.
-%
-%  \end{block}
-%
-%  \begin{alertblock}{A highlighted block}
-%
-%    This block catches your eye, so \textbf{important stuff} should probably go
-%%    here.
-%%
-%%%    Curabitur eu libero vehicula, cursus est fringilla, luctus est. Morbi
-%%    consectetur mauris quam, at finibus elit auctor ac. Aliquam erat volutpat.
-%%%    Aenean at nisl ut ex ullamcorper eleifend et eu augue. Aenean quis velit
-%    tristique odio convallis ultrices a ac odio.
-%
-%    \begin{itemize}
-%      \item \textbf{Fusce dapibus tellus} vel tellus semper finibus. In
-%        consequat, nibh sed mattis luctus, augue diam fermentum lectus.
-%      \item \textbf{In euismod erat metus} non ex. Vestibulum luctus augue in
-%        mi condimentum, at sollicitudin lorem viverra.
-%      \item \textbf{Suspendisse vulputate} mauris vel placerat consectetur.
-%        Mauris semper, purus ac hendrerit molestie, elit mi dignissim odio, in
-%        suscipit felis sapien vel ex.
-%    \end{itemize}
-%
-%    Aenean tincidunt risus eros, at gravida lorem sagittis vel. Vestibulum ante
-%    ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae.
-%
-%  \end{alertblock}
 
 \end{column}
 
@@ -290,77 +187,70 @@ round size by $1.5$ or by $1.0$.
 
 \begin{column}{\colwidth}
 
-  \begin{block}{Stopping Probability}
+\begin{block}{Risk}
 
-We are also interested in the probability that an audit will stop in round $j$ given that it did not stop earlier: 
-%\begin{definition}[Conditional Stopping Probability]
-The conditional stopping probability  of an audit $\mathcal{A}$ in round $j$ is 
-$$\chi_j (\mathcal{A})=\Pr[\mathcal{A}(X)=Correct ~in~round~j~\mid H_a \land \mathcal{A}(X) \neq Correct ~previously]$$
-%\end{definition}
-Experimentally, using our simulations, $\chi_j$ would be estimated by the ratio of the audits that stop in round $j$ to those that ``entered'' round $j$, i.e. those that did not stop before round $j$. 
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{itemize}
+\item 
+All audits have estimated risks below the risk limit
+\item
+EoR \BRAVO falls an order of magnitude less than the others, unnecessarily conservative
+\end{itemize}
+
 \begin{figure}[h]
 \centering
+\begin{minipage}{.49\textwidth}
+\includegraphics[width=\textwidth]{bravo_risks.png}
+\label{fig:bravo_risk}
+\end{minipage}
+\begin{minipage}{.49\textwidth}
+\includegraphics[width=1.0\textwidth]{riskminerva1p5_10t4.png}
+\label{fig:minerva_risk}
+\end{minipage}
+\caption{These plots show for $\chi_1=0.9$ the fraction of audits (EoR \BRAVO (left), SO \BRAVO (left), and \Minerva with multiplier $1.5$ (right)) that stopped in any of the $5$ rounds when the underlying election was a tie. (For SO \BRAVO audits we show the 13 states for which simulations are complete.)}
+%\label{fig:risk}
+\end{figure}
 
+\end{block}
+
+
+\begin{block}{Stopping Probability}
+
+\begin{itemize}
+\item
+Conditional stopping probability, $\chi_j$, is the probability that an audit will stop in round $j$ given that it did not stop earlier, and in 
+simulations $\chi_j$ is estimated by the proportion of audits that stop in a round to those that ``entered'' that round
+i.e. those that did not stop before round $j$. 
+%The conditional stopping probability  of an audit $\mathcal{A}$ in round $j$ is 
+%$$\chi_j (\mathcal{A})=\Pr[\mathcal{A}(X)=Correct ~in~round~j~\mid H_a \land \mathcal{A}(X) \neq Correct ~previously]$$
+\end{itemize}
+
+\begin{figure}[h]
+\centering
 \begin{minipage}{.49\textwidth}
-\begin{centering}
-\includegraphics[width=1.0\textwidth]{eor_bravo_90perc_10^4_corrected/sprob_first_three_cropped.png}%\caption{This plot shows, for each state margin, when the underlying election is as announced, the number of EoR \BRAVO audits that stopped in the $j^{th}$ round, as a fraction of all EoR \BRAVO audits which had not yet stopped before the $j^{th}$ round for $j=1,2,3$ and $\chi_j=0.9$.}
+\includegraphics[width=1.0\textwidth]{eor_bravo_90perc_10^4_corrected/sprob_first_three_cropped.png}
 \label{fig:eor_bravo_sprob}
-\end{centering}\end{minipage}
+\end{minipage}
 \begin{minipage}{.49\textwidth}
-\begin{centering}
-\includegraphics[width=1.0\textwidth]{so_bravo_90perc_10^4/sprob_first_three.png}%\caption{This plot shows, for each state margin, when the underlying election is as announced, the number of SO \BRAVO audits that stopped in the $j^{th}$ round,as a fraction of all SO \BRAVO audits which had not yet stopped before the $j^{th}$ round for $j=1,2,3$ and $\chi_j=0.9$.}
+\includegraphics[width=1.0\textwidth]{so_bravo_90perc_10^4/sprob_first_three.png}
 \label{fig:so_bravo_sprob}
-\end{centering}
 \end{minipage}
 \caption{These plots show, for each state margin, when the underlying election is as announced, the number of audits that stopped in the $j^{th}$ round, as a fraction of all audits which had not yet stopped before the $j^{th}$ round for $j=1,2,3$ and $\chi_j=0.9$. The left shows EoR \BRAVO and the right shows SO \BRAVO.}
 \end{figure}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%\begin{figure}
-%\begin{centering}
-%\includegraphics[width=0.6\textwidth]{eor_bravo_90perc_10^4_corrected/sprob_first_three_cropped.png}\caption{
-%This plot shows, for each state margin, when the underlying election is as announced, the number of EoR \BRAVO audits that stopped in the $j^{th}$ round,
-%as a fraction of all EoR \BRAVO audits which had not yet stopped before the $j^{th}$ round for $j=1,2,3$ and $S_1=0.9$.}
-%%\label{fig:eor_bravo_sprob}
-%\end{centering}
-%\end{figure}
-%
-%\begin{figure}
-%\begin{centering}
-%\includegraphics[width=0.6\textwidth]{so_bravo_90perc_10^4/sprob_first_three.png}\caption{
-%This plot shows, for each state margin, when the underlying election is as announced, the number of SO \BRAVO audits that stopped in the $j^{th}$ round,
-%as a fraction of all SO \BRAVO audits which had not yet stopped before the $j^{th}$ round for $j=1,2,3$ and $S_1=0.9$.}
-%%\label{fig:so_bravo_sprob}
-%\end{centering}
-%\end{figure}
-%
+
 \begin{figure}[h]
 \centering
-
 \begin{minipage}{.49\textwidth}
-%\begin{figure}
-\begin{centering}
 \includegraphics[width=1\textwidth]{minerva_multiround_1x_10^4/sprobs_first_three.png}
-%\caption{This plot shows, for each state margin, when the underlying election is as announced, the number of \Minerva audits that stopped in the $j^{th}$ round, as a fraction of all \Minerva audits which had not yet stopped before the $j^{th}$ round for $j=1,2,3$, round size multiple of $1.0$ and $\chi_1=0.9$.}
 \label{fig:minerva1_sprob}
-\end{centering}
-%\end{figure}
 \end{minipage}
 \begin{minipage}{.49\textwidth}
-%\begin{figure}
-\begin{centering}
 \includegraphics[width=1\textwidth]{minerva_multiround_1p5x_10^4/sprobs_first_three.png}
-%\caption{This plot shows, for each state margin, when the underlying election is as announced, the number of \Minerva audits that stopped in the $j^{th}$ round, as a fraction of all \Minerva audits which had not yet stopped before the $j^{th}$ round for $j=1,2,3$, round size multiple of $1.5$ and $\chi_1=0.9$.}
 \label{fig:minerva1p5_sprob}
-\end{centering}
-%\end{figure}
 \end{minipage}
 \caption{These plots show, for each state margin, when the underlying election is as announced, the number of \Minerva audits that stopped in the $j^{th}$ round, as a fraction of all \Minerva audits which had not yet stopped before the $j^{th}$ round for $j=1,2,3$. The left shows \Minerva with the round schedule obtained by $\chi_1=0.9$ and round size multiple $1.5$.}
 \end{figure}
 
-We can perform a similar study for a first round size with $\chi_1=0.25$. 
-See Figure~\ref{fig:minerva_25} for an example, \Minerva with round mutiplier $1.5$. 
+We also consider a first round size with $\chi_1=0.25$. 
 
 \begin{figure}
 \begin{centering}
@@ -504,19 +394,26 @@ For $\chi_1=0.25$, the ratio of first round size of EoR \BRAVO to \Minerva is $1
 \end{block}
 
 
-\begin{block}{Modeling Workload}
 
-\emph{I initially wrote this section since I'd really like to have some evidence that for certain workload parameters, we see an optimal
-number of rounds greater than 1 with Providence. I am working on that code now.}
 
-\BRAVO requires the smallest expected number of ballots when ballots are drawn one at a time and the (true) underlying election is as announced. 
-In real audits, election officials draw ballots in rounds because their is some overhead with each round (e.g. opening ballot boxes).
-Therefore a more sophisticated workload model has a per ballot cost $c_b$ and a per round cost $c_r$. 
-Let $n$ be the number of ballots sampled and $j$ be the number of rounds. Then the cost $C$ is given by 
-$$C(n,j) = c_b\cdot n + c_r\cdot j,$$
-and depending on the ratio between $c_b$ and $c_r$, we should expect that certain round schedules
-achieve lower expected cost.
-\end{block}
+
+%work load workload WORKLOAD
+%\begin{block}{Modeling Workload}
+%
+%\emph{I initially wrote this section since I'd really like to have some evidence that for certain workload parameters, we see an optimal
+%number of rounds greater than 1 with Providence. I am working on that code now.}
+%
+%\BRAVO requires the smallest expected number of ballots when ballots are drawn one at a time and the (true) underlying election is as announced. 
+%In real audits, election officials draw ballots in rounds because their is some overhead with each round (e.g. opening ballot boxes).
+%Therefore a more sophisticated workload model has a per ballot cost $c_b$ and a per round cost $c_r$. 
+%Let $n$ be the number of ballots sampled and $j$ be the number of rounds. Then the cost $C$ is given by 
+%$$C(n,j) = c_b\cdot n + c_r\cdot j,$$
+%and depending on the ratio between $c_b$ and $c_r$, we should expect that certain round schedules
+%achieve lower expected cost.
+%\end{block}
+
+
+
 
 %  \begin{block}{A block containing some math}
 %
@@ -617,7 +514,11 @@ in the first round.
 
 \begin{figure}
 \includegraphics[width=1.0\textwidth]{dice.jpg}
-\caption{Professor Vora tosses her random-seed-generating 10-sided die, in a roll she dedicated to election officials everywhere.}
+\caption{
+Professor Vora tosses her random-seed-generating 10-sided die, in a roll she dedicated to election officials everywhere.
+The standing people from left to right are (1) Miguel Nunez, Rhode Island Deputy Director of Elections, 
+(2) Professor Vora, and (3) Mark Lindeman, Verified Voting Director.
+}
 \end{figure}
 
 \end{block}
