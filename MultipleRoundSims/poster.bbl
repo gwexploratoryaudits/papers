@@ -1,0 +1,27 @@
+\begin{thebibliography}{1}
+
+\bibitem{simulations}
+Oliver Broadrick, Sarah Morin, Grant McClearn, Neal McBurnett, Poorvi~L. Vora,
+  and Filip Zag\'{o}rski.
+\newblock Simulations of ballot polling risk-limiting audits.
+\newblock In {\em Seventh Workshop on Advances in Secure Electronic Voting, in
+  Association with Financial Crypto}, 2022.
+
+\bibitem{bravo}
+Mark Lindeman, Philip~B Stark, and Vincent~S Yates.
+\newblock {BRAVO}: Ballot-polling risk-limiting audits to verify outcomes.
+\newblock In {\em EVT/WOTE}, 2012.
+
+\bibitem{r2b2}
+Sarah Morin and Grant McClearn.
+\newblock The {R2B2} ({R}ound-by-{R}ound, {B}allot-by-{B}allot) library,
+  https://github.com/gwexploratoryaudits/r2b2.
+
+\bibitem{usenix_minerva}
+Filip Zag{\'o}rski, Grant McClearn, Sarah Morin, Neal McBurnett, and Poorvi~L.
+  Vora.
+\newblock Minerva{\textendash} an efficient risk-limiting ballot polling audit.
+\newblock In {\em 30th {USENIX} Security Symposium ({USENIX} Security 21)},
+  pages 3059--3076. {USENIX} Association, August 2021.
+
+\end{thebibliography}
