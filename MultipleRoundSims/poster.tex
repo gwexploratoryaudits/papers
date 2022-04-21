@@ -76,7 +76,7 @@ Filip Zag{\'o}rski\inst{2}\inst{3}}
 % ====================
 
 \footercontent{
-  \href{odbroadrick@gmail.com}{odbroadrick@gmail.com}
+  odbroadrick@gmail.com
 }
 % (can be left out to remove footer)
 
@@ -97,9 +97,9 @@ Filip Zag{\'o}rski\inst{2}\inst{3}}
 {
     \begin{tikzpicture}[remember picture,overlay]
       \node [anchor=north west, inner sep=3cm] at ([xshift=0.0cm,yshift=3cm]current page.north west)
-      {\includegraphics[height=8cm]{logos/gw.png}}; % also try shield-white.eps
+      {\includegraphics[height=9cm]{logos/gw.png}}; % also try shield-white.eps
       \node [anchor=north east, inner sep=3cm] at ([xshift=0.0cm,yshift=3cm]current page.north east)
-      {\includegraphics[height=8cm]{logos/gw.png}};
+      {\includegraphics[height=9cm]{logos/gw.png}};
     \end{tikzpicture}
 }
 
@@ -123,7 +123,7 @@ and is recommended by the largest US voting organizations: Verified Voting, the 
 
 \begin{itemize}
 \item
-We provide simulations \cite{simulations} of EoR \BRAVO, SO \BRAVO, and \Minerva that help us understand their behavior across multiple rounds and with lower
+We provide simulations~\cite{simulations} of EoR \BRAVO, SO \BRAVO, and \Minerva that help us understand their behavior across multiple rounds and with lower
 first round stopping probability; this information can be used to advise election officials.
 \end{itemize}
 
@@ -171,7 +171,7 @@ $$R(\mathcal{A}) \le \alpha.$$
 
 \begin{itemize}
 \item 
-Software: R2B2 library\cite{r2b2} which has Python implementations of several RLAs as well as a simulator
+Software: R2B2 library \cite{r2b2} which has Python implementations of several RLAs as well as a simulator
 \item 
 Risk limit: 10\%
 \item
@@ -370,11 +370,11 @@ The standing people from left to right are (1) Miguel Nunez, Rhode Island Deputy
 \centering
 \begin{minipage}{.49\textwidth}
 \includegraphics[width=\textwidth]{prov_risk.png}
-\label{fig:bravo_risk}
+\label{fig:prov_risk}
 \end{minipage}
 \begin{minipage}{.49\textwidth}
 \includegraphics[width=1.0\textwidth]{prov_sprob.png}
-\label{fig:minerva_risk}
+\label{fig:prov_sprob}
 \end{minipage}
 \caption{
 The left plot shows the fraction of \Prov audits that stopped in any of the $5$ rounds when the underlying election was a tie
@@ -385,13 +385,11 @@ $j=1,2,3$ and $\chi_j=0.9$.
 \label{fig:prov-risk-sprob}
 \end{figure}
 
-
 \begin{figure}
 \includegraphics[width=.65\textwidth]{prov_asn.png}
 \caption{Cumulative fraction of audits that stopped as a function of average number of sampled ballots for the state of Texas with margin $.057$ with first round stopping probability $\chi_1=0.9$. \Prov, \Minerva with multiplier $1.5$, and both implementations of \BRAVO are included.}
+\label{fig:prov-asn}
 \end{figure}
-
-
 
 \end{block}
 
@@ -407,6 +405,8 @@ $j=1,2,3$ and $\chi_j=0.9$.
 \end{column}
 
 \separatorcolumn
+
 \end{columns}
+
 \end{frame}
 \end{document}
