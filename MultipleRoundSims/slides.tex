@@ -66,17 +66,31 @@ Filip Zag{\'o}rski\inst{3}\inst{4}}
 \frametitle{Outline}
 
 \begin{itemize}
-\item Risk-Limiting Audits
+\item Risk-Limiting Audits (RLAs)
 \begin{itemize}
 \item \BRAVO and \Minerva
+\pause
+\item Both are options in Arlo, statistical election audit software used by election officials across the US
 \end{itemize}
-\item Experiments
-\item Results
+\pause 
+\item Experiments: simulated $10000=10^4$ audits for various margins with both
 \begin{itemize}
-\item Stopping Probability
-\item Risk
-\item Number of Ballots
+\item a correctly announced outcome 
+\item an underlying tie
 \end{itemize}
+\pause 
+\item Observed: stopping probability, maximum risk, number of ballots
+\pause 
+\item Results:
+\begin{itemize}
+\item \Minerva requires fewer ballots over multiple rounds for both 
+\begin{itemize}
+\item high stopping probability (0.90)
+\item low stopping probability (0.25)
+\end{itemize}
+\item less advantage for the lower stopping probability
+\end{itemize}
+\pause 
 \item Discussion and Future Work
 \end{itemize}
 
@@ -84,34 +98,42 @@ Filip Zag{\'o}rski\inst{3}\inst{4}}
 
 
 \begin{frame}
-\frametitle{Post-tabulation audits}
+\frametitle{Risk-Limiting Audits}
 
 \begin{itemize}
-\item Scanning machines are used to tabulate ballots
+\item Scanners are used to tabulate ballots
+\pause 
 \begin{itemize}
 \item Cannot trust the machines: bugs, configuration errors, hacking
+\pause 
 \end{itemize}
-\item Post-tabulation audits
+\item Compliance and tabulation audits
+\pause 
 \item Risk-Limiting Audits
+\begin{itemize}
+\item
+Given that the election outcome is incorrect,
+the probability with which the audit stops, declaring the outcome correct, is at most the risk limit, $\alpha$.
+\end{itemize}
 \end{itemize}
 \end{frame}
 
 \begin{frame}
-\frametitle{Risk-Limiting Audits}
+\frametitle{Ballot Polling Risk-Limiting Audits: A Procedure}
 
 \begin{itemize}
-\item Risk-Limiting Audit (RLA) is a post-tabulation audit that manualy
-checks a random sample of voters' ballots
-\item Relies on a voter-verified paper trail
+\item Is a manual audit, which relies on a voter-verified paper trail and successfully completed compliance audits
+\pause 
 \item Sketch:
 \begin{enumerate}
-\item election results announced
-\item sample ballots randomly
-\item check if the sample is 'statistically similar' to the announced tally
+\item Election results announced
+\pause 
+\item In a public procedure, sample ballots at random and manually interpret them
+\pause 
+\item Compute a pre-specified error measure, the maximum risk, and compare to the risk limit
 \begin{itemize}
-\item "Yes" - correct - stop the audit
-\item "No" - incorrect - proceed to a full hand count
-\item "Don't know yet" - undetermined - sample more (goto 2)
+\item If smaller, stop the audit
+\item Else, sample more (goto 2)
 \end{itemize}
 \end{enumerate}
 \end{itemize}
@@ -121,12 +143,20 @@ checks a random sample of voters' ballots
 \frametitle{\BRAVO}
 \begin{itemize}
 \item Most commonly used ballot polling RLA
+\pause 
 \item In the two candidate case is an instance of Wald's Sequential Probability Ratio Test (SPRT)
-\item Is thus the most efficient RLA when ballots are drawn sequentially (i.e. ballot-by-ballot)
-\item Real audits are performed in rounds for which \BRAVO can be implemented as:
+\pause 
+\item Is thus the most efficient RLA when 
+the decision of whether to stop the audit is made after each ballot is drawn (ballot-by-ballot)
+\pause 
+\item In real audits, decisions are taken after many ballots are drawn (round-by-round)
+\pause 
+\item \BRAVO can be implemented as:
 \begin{itemize}
-\item Selection-Ordered (SO) \BRAVO
-\item End-of-Round (EoR) \BRAVO
+\item Selection-Ordered (SO) \BRAVO, 
+where ballot selection order is retained, and the decisions are taken as though the audit were ballot-by-ballot
+\item End-of-Round (EoR) \BRAVO, where
+the decision using the \BRAVO stopping rule is taken once, after the entire round of ballots is drawn
 \end{itemize}
 \end{itemize}
 \end{frame}
@@ -135,9 +165,22 @@ checks a random sample of voters' ballots
 \frametitle{\Minerva}
 \begin{itemize}
 \item Recent RLA designed for round-by-round use
-\item Uses a ratio of the \emph{tails} of the probability distributions used in \BRAVO
-\item Known to require half the number of ballots as EoR \BRAVO in a first round to achieve a large ($0.90$) probability of stopping
+\pause 
+\item \BRAVO uses the likelihood ratio; that is the ratio of points on two probability distribution functions
+\pause 
+\item \Minerva uses a ratio of the \emph{tails} of the pdfs used in \BRAVO
+\pause 
+\begin{itemize}
+\item Shown to be risk-limiting if all round sizes are pre-committed, before the audit begins
+\pause 
+\item In a first round chosen to give a $0.90$ probability of stopping, \Minerva requires
+\begin{itemize}
+\item $~50\%$ as many ballots as EoR \BRAVO 
+\item $~70\text{-}80\%$ as many ballots as SO \BRAVO 
+\end{itemize}
+\pause 
 \item Unknown how the audits compare for smaller stopping probability or for rounds after the first
+\end{itemize}
 \end{itemize}
 \end{frame}
 
@@ -145,18 +188,24 @@ checks a random sample of voters' ballots
 \frametitle{Experiments}
 \begin{itemize}
 \item Use simulations to provide evidence for theoretical claims
+\pause 
 \item R2B2 software library for round-by-round and ballot-by-ballot RLAs
+\pause 
 \item Simulate RLAs for election results from the 2020 Presidential election (all margins above $0.05$)
 \begin{itemize}
-\item $10000=10^4$ trials assuming the underlying election is as announced
-\item $10000=10^4$ trials assuming the underlying election is a tie
+\item $10000=10^4$ trials assuming the underlying election was as announced
+\item $10000=10^4$ trials assuming the underlying election was a tie
 \end{itemize}
+\pause 
 \item Risk limit: $10\%$
+\pause 
 \item Round schedules:
 \begin{itemize}
 \item \BRAVO round sizes to achieve a chosen probability of stopping in each round given that the audit has already reached that round
+\pause 
 \item \Minerva first round sizes to achieve a chosen probability of stopping, and subsequent round sizes found by multiplying the previous round size by a constant ($1.5$ and $1$)
 \end{itemize}
+\pause 
 \item Stopping probabilities: $0.90$ and $0.25$
 \end{itemize}
 \end{frame}
@@ -168,18 +217,29 @@ An audit $\mathcal{A}$ takes a sample of ballots $X$ as input and gives as outpu
 (1) $Correct$: the audit is complete, or (2) $Uncertain$: continue the audit.
 \end{definition}
 
+\pause 
 \begin{itemize}
 \item Binary hypothesis test: $H_0$ (a tie) and $H_a$ (announced results)
+\pause 
+\item The tie is the hardest incorrect outcome to detect 
+\pause 
+\item Probability of stopping given a tie should be low
+\pause 
+\item Probability of stopping given a correctly announced outcome should be high for as few ballots as possible 
 \end{itemize}
+\end{frame}
 
-\begin{definition}[Risk]
+\begin{frame}
+\frametitle{Experiments}
+\begin{definition}[Maximum Risk]
 The maximum risk $R$ of audit $\mathcal{A}$ with sample $X\in \{0,1\}^*$ drawn from 
-the true underlying distribution of ballots is
+the ballots is
 $R(\mathcal{A})=\Pr[\mathcal{A}(X)=Correct \mid H_0].$
 \end{definition}
 
-\begin{definition}[Risk Limiting Audit ($\alpha$-RLA)]
-An audit $\mathcal{A}$ is a Risk Limiting Audit with 
+\pause 
+\begin{definition}[Risk-Limiting Audit ($\alpha$-RLA)]
+An audit $\mathcal{A}$ is a Risk-Limiting Audit with 
 risk limit $\alpha$ iff 
 $R(\mathcal{A}) \le \alpha.$
 \end{definition}
@@ -193,10 +253,12 @@ $S_j(\mathcal{A})=$
 $$\Pr[\mathcal{A}(X)=Correct ~in~round~j~\land \mathcal{A}(X) \neq Correct ~previously \mid H_a]$$
 \end{definition}
 
+\pause 
 \begin{definition}[Cumulative Stopping Probability]
 The cumulative stopping probability $C_j$ of an audit $\mathcal{A}$ in round $j$ is $C_j(\mathcal{A})= \sum_{i=1}^j S_j$
 \end{definition}
 
+\pause 
 \begin{definition}[Conditional Stopping Probability]
 The conditional stopping probability  of an audit $\mathcal{A}$ in round $j$ is 
 $\chi_j (\mathcal{A})=$
@@ -206,12 +268,16 @@ $$\Pr[\mathcal{A}(X)=Correct ~in~round~j~\mid H_a \land \mathcal{A}(X) \neq Corr
 
 \begin{frame}
 \frametitle{Results: Stopping Probability ($\chi_1=0.9$)}
+\pause 
 
-\includegraphics[width=0.5\textwidth]{eor_bravo_90perc_10^4_corrected/sprob_first_three_cropped.png}
-\includegraphics[width=0.5\textwidth]{so_bravo_90perc_10^4/sprob_first_three.png}
+\includegraphics[width=0.5\textwidth]{scale/eor.png}
+\pause 
+\includegraphics[width=0.5\textwidth]{scale/so.png}
 
-\includegraphics[width=0.5\textwidth]{minerva_multiround_1x_10^4/sprobs_first_three.png}
-\includegraphics[width=0.5\textwidth]{minerva_multiround_1p5x_10^4/sprobs_first_three.png}
+\pause 
+\includegraphics[width=0.5\textwidth]{scale/minerva1.png}
+\pause 
+\includegraphics[width=0.5\textwidth]{scale/minerva1p5.png}
 \end{frame}
 
 \begin{frame}
@@ -222,36 +288,65 @@ $$\Pr[\mathcal{A}(X)=Correct ~in~round~j~\mid H_a \land \mathcal{A}(X) \neq Corr
 
 
 \begin{frame}
-\frametitle{Results: Risk}
+\frametitle{Results: Risk ($\chi_1=0.9$)}
+
 
 \centering
-\noindent \includegraphics[width=1.07\textwidth]{both_risk_plots.png}
+\includegraphics[width=.5\textwidth]{bravo_risks.png}
+\pause 
+\includegraphics[width=.5\textwidth]{riskminerva1p5_10t4.png}
+
 \end{frame}
 
 \begin{frame}
-\frametitle{Results: Number of Ballots}
+\frametitle{Results: Number of Ballots ($\chi_1=0.9$)}
+\centering
 
-\includegraphics[width=0.5\textwidth]{texas25.png}
-\includegraphics[width=0.5\textwidth]{missouri25.png}
-
-\includegraphics[width=0.5\textwidth]{massachusetts25.png}
-\includegraphics[width=0.5\textwidth]{texas90.png}
+\pause 
+\includegraphics[width=1\textwidth]{texas90.png}
 \end{frame}
+
+\begin{frame}
+\frametitle{Results: Number of Ballots ($\chi_1=0.25$)}
+
+\centering
+\includegraphics[width=1\textwidth]{texas25.png}
+\end{frame}
+
+
 
 \begin{frame}
 \frametitle{Results: Round Size Proportions}
 
 For $\chi_1 = 0.25$, the number of ballots required for \Minerva is smaller than that required by SO \BRAVO and EoR \BRAVO
+\pause 
 \begin{itemize}
-\item Improvement considerably smaller than that when the stopping probability is $0.9$
-\item Number of ballots for SO \BRAVO for $\chi_1 =0.9$ is about a third more than that required by \Minerva, but for $\chi_1 = 0.25$, it requires only about a tenth more ballots than does \Minerva
-\item Number of ballots for EoR \BRAVO for $\chi_1 = 0.9$ is about twice those required by \Minerva, but for $\chi_1 =0.25$, it requires only about a fourth to a half more ballots (depending on margin) than does \Minerva
+\item Improvement considerably smaller than that when $\chi_1=0.9$
+\pause 
+\item SO \BRAVO: 
+\begin{itemize}
+\item for $\chi_1 =0.9$ requires a third more than does \Minerva
+\item for $\chi_1 = 0.25$ requires a tenth more than does \Minerva
+\end{itemize}
+\pause 
+\item EoR \BRAVO:
+\begin{itemize}
+\item for $\chi_1 = 0.9$ requires twice as many as \Minerva
+\item for $\chi_1 =0.25$ requires a fourth to a half more (depending on margin) than does \Minerva
+\end{itemize}
 
 \end{itemize}
-For $\chi_1 = 0.9$ with multiplying factor $1$, \Minerva consequent conditional stopping probabilities are about $0.75$ and $0.74$ respectively for rounds two and three. 
-\begin{itemize}
-\item When the multiplying factor is $1.5$, we see $\chi_2\approx 0.91$
-and $\chi_3=0.83$
+\end{frame}
+\begin{frame}
+\frametitle{Results: \Minerva Stopping Probabilities}
+
+
+For $\chi_1 = 0.9$, \Minerva consequent conditional stopping probabilities for rounds two and three are respectively:
+\begin{itemize} 
+\pause
+\item with multiplying factor $1$, $\chi_2\approx 0.75$ and $\chi_3\approx 0.74$
+\pause
+\item with multiplying factor $1.5$, $\chi_2\approx 0.91$ and $\chi_3\approx 0.83$
 \end{itemize}
 
 \end{frame}
@@ -263,12 +358,17 @@ and $\chi_3=0.83$
 
 \item We describe use of the R2B2 library and simulator to characterize: 
 \begin{itemize}
-\item risk, 
+\pause
+\item maximum risk, 
+\pause
 \item stopping probability, and 
+\pause
 \item number of ballots 
+\pause
 \item for various round schedules.
+\pause
 \end{itemize}
-\item \Minerva requires fewer ballots than either implementation of \BRAVO in all cases we study, but the advantage decreases for a smaller stopping probability
+\item \Minerva requires fewer ballots than either implementation of \BRAVO in all cases we study, but the advantage decreases for a smaller stopping probability for each round
 
 \end{itemize}
 
@@ -278,6 +378,7 @@ and $\chi_3=0.83$
 \frametitle{Future Work}
 \begin{itemize}
 \item More detailed study of the impact of different round schedules
+\pause
 \item Simulations with other underlying distributions
 \end{itemize}
 \end{frame}
@@ -285,7 +386,17 @@ and $\chi_3=0.83$
 
 \begin{frame}
 \centering 
-{Thank you}
+\bigskip
+\bigskip
+\bigskip
+Thank you
+
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+
+odbroadrick@gmail.com
 \end{frame}
 
 
