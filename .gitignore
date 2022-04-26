@@ -12,3 +12,7 @@ MultipleRoundSims/.DS_Store
 .DS_Store
 .DS_Store
 .DS_Store
+*.out
+*.nav
+*.snm
+*.toc
