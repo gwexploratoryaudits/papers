@@ -1,7 +1,7 @@
 % This is a draft of the coming paper "Multiple Round Ballot Polling Risk-Limiting Audit Simulations".
 % 2021.
 %
-\documentclass{beamer}
+\documentclass[aspectratio=169]{beamer}
 %
 \usepackage{float}
 \usepackage{xspace}
@@ -10,6 +10,7 @@
 \usepackage{comment}
 \usepackage{listings,hyperref}
 \usepackage{cite}
+\usepackage{rotating}
 
 % \usepackage{graphicx}  --> Used for displaying a sample figure. If possible, figure files should
 % be included in EPS format.
@@ -266,37 +267,43 @@ $$\Pr[\mathcal{A}(X)=Correct ~in~round~j~\mid H_a \land \mathcal{A}(X) \neq Corr
 \end{definition}
 \end{frame}
 
+\thispagestyle{empty}
 \begin{frame}
-\frametitle{Results: Stopping Probability ($\chi_1=0.9$)}
+% \frametitle{Results: Stopping Probability ($\chi_1=0.9$)}
+% \pause 
+\hspace{-1cm}
+\begin{turn}{-90}
+ Results: Stopping Probability ($\chi_1=0.9$)
+\end{turn}
+
+
+\pause
+\vspace{-.8\textheight}
+\includegraphics[width=0.425\textwidth]{scale/eor.png}
+\pause 
+\includegraphics[width=0.425\textwidth]{scale/so.png}
 \pause 
 
-\vspace{.1cm}
-\hspace{-.25cm}
-\includegraphics[width=0.5\textwidth]{scale/eor.png}
+% \vspace{-.25cm}
+\includegraphics[width=0.425\textwidth]{scale/minerva1.png}
 \pause 
-\includegraphics[width=0.5\textwidth]{scale/so.png}
-
-\pause 
-
-\vspace{.1cm}
-\hspace{-.25cm}
-\includegraphics[width=0.5\textwidth]{scale/minerva1.png}
-\pause 
-\includegraphics[width=0.5\textwidth]{scale/minerva1p5.png}
+\includegraphics[width=0.425\textwidth]{scale/minerva1p5.png}
 \end{frame}
 
 \begin{frame}
 \frametitle{Results: Stopping Probability ($\chi_1=0.25$)}
 
-\includegraphics[width=1\textwidth]{minerva25percthen1p5_sprob.png}
+% \vspace{-.25cm}
+\includegraphics[width=.75\textwidth]{minerva25percthen1p5_sprob.png}
 \end{frame}
+
 
 
 \begin{frame}
 \frametitle{Results: Risk ($\chi_1=0.9$)}
 
 
-\hspace{-.5cm} 
+\hspace{-1cm}
 \includegraphics[width=.5\textwidth]{bravo_risks.png}
 \pause 
 \includegraphics[width=.5\textwidth]{riskminerva1p5_10t4.png}
@@ -308,14 +315,18 @@ $$\Pr[\mathcal{A}(X)=Correct ~in~round~j~\mid H_a \land \mathcal{A}(X) \neq Corr
 \centering
 
 \pause 
-\includegraphics[width=1\textwidth]{texas90.png}
+
+\hspace{-2cm}
+\includegraphics[width=.8\textwidth]{texas90.png}
 \end{frame}
 
 \begin{frame}
 \frametitle{Results: Number of Ballots ($\chi_1=0.25$)}
 
 \centering
-\includegraphics[width=1\textwidth]{texas25.png}
+
+\hspace{-2cm}
+\includegraphics[width=.8\textwidth]{texas25.png}
 \end{frame}
 
 
