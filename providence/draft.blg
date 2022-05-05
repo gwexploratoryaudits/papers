@@ -1,0 +1,49 @@
+This is BibTeX, Version 0.99d (TeX Live 2017)
+Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
+The top-level auxiliary file: draft.aux
+The style file: splncs04.bst
+Database file #1: audits.bib
+Warning--empty journal in simulations_house
+Warning--empty journal in mclaughlin_thesis
+You've used 17 entries,
+            2850 wiz_defined-function locations,
+            702 strings with 8321 characters,
+and the built_in function-call counts, 8970 in all, are:
+= -- 698
+> -- 298
+< -- 13
++ -- 123
+- -- 102
+* -- 574
+:= -- 1165
+add.period$ -- 23
+call.type$ -- 17
+change.case$ -- 106
+chr.to.int$ -- 0
+cite$ -- 19
+duplicate$ -- 818
+empty$ -- 824
+format.name$ -- 116
+if$ -- 1931
+int.to.chr$ -- 0
+int.to.str$ -- 17
+missing$ -- 171
+newline$ -- 57
+num.names$ -- 38
+pop$ -- 339
+preamble$ -- 1
+purify$ -- 78
+quote$ -- 0
+skip$ -- 230
+stack$ -- 0
+substring$ -- 433
+swap$ -- 430
+text.length$ -- 13
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 68
+warning$ -- 2
+while$ -- 70
+width$ -- 19
+write$ -- 177
+(There were 2 warnings)

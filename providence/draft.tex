@@ -1,0 +1,126 @@
+% This is a draft of the coming paper "Providence: A Flexible Round-by-Round Risk-Limiting Audit"
+% 2021.
+%
+\documentclass[runningheads]{llncs}
+%
+\usepackage{float}
+\usepackage{xspace}
+\usepackage{graphicx}
+\graphicspath{{./imgs/}}
+\usepackage{comment}
+\usepackage{listings,hyperref}
+\usepackage{cite}
+
+% \usepackage{graphicx}  --> Used for displaying a sample figure. If possible, figure files should
+% be included in EPS format.
+%
+% If you use the hyperref package, please uncomment the following line
+% to display URLs in blue roman font according to Springer's eBook style:
+% \renewcommand\UrlFont{\color{blue}\rmfamily}
+
+
+% nice looking audit titles
+\newcommand{\Minerva}{\textsc{Minerva}\xspace}
+\newcommand{\Providence}{\textsc{Providence}\xspace}
+\newcommand{\B}{{{B2}}\xspace}
+\newcommand{\R}{{{R2}}\xspace}
+\newcommand{\BRAVO}{\textsc{Bravo}\xspace}
+
+\usepackage{color}
+\definecolor{green}{rgb}{0.31, 0.78, 0.47}
+\newcommand{\fpo}[1]{\textcolor{green}{#1}}
+
+\def\code#1{\texttt{#1}}
+
+\begin{document}
+\lstset{language=Python}
+%
+\title{Simulations of Ballot Polling Risk-Limiting Audits}
+%add \thanks{} within the title brackets if want to refer to supporting organization ^^
+%
+%\titlerunning{Abbreviated paper title}
+% If the paper title is too long for the running head, you can set
+% an abbreviated paper title here
+%
+%\author{Oliver Broadrick\inst{1} \and
+%Sarah Morin\inst{1} \and
+%Grant McClearn\inst{2} \and Neal McBurnett \and Poorvi L. Vora\inst{1} \and
+%Filip Zag{\'o}rski\inst{3}\inst{4}}
+%
+%\authorrunning{Broadrick, Morin et al.}
+% First names are abbreviated in the running head.
+% If there are more than two authors, 'et al.' is used.
+%
+\institute{Department of Computer Science, The George Washington University\thanks{Supported in part by NSF Award 2015253} 
+\email{odbroadrick@gmail.com}\\
+\and
+Department of Computer Science, Stanford University 
+\email{grantmcc@stanford.edu}
+\\
+\and Wroclaw University of Science and Technology\thanks{Author was partially supported by Polish National Science Centre contract number DEC-2013/09/D/ST6/03927} and 
+\and Votifica
+\\
+\email{filip.zagorski@gmail.com}
+}
+%
+
+\maketitle              % typeset the header of the contribution
+%
+\begin{abstract}
+A Risk-Limiting Audit (RLA) draws paper election ballots in subsequent samples called rounds. 
+After each round, a rigorous error criterion decides whether to stop (confirming the announced outcome) or continue (draw another round).
+The most commonly used RLA, \BRAVO (Stark), requires the fewest ballots when round sizes are 1. 
+Recent RLA \Minerva requires fewer ballots than \BRAVO but requires round sizes to be fixed before the audit begins.
+We present \Providence, and audit that has similar efficiency to \Minerva and supports choosing round sizes during the audit.
+We prove \Providence is Risk-Limiting and resistant to an adversary who can choose subsequent round sizes given previous samples.
+We present simulations in which \Providence has similar efficiency to \Minerva.
+Finally, we describe the pilot use of \Providence by the Rhode Island Board of Elections.
+Our implementation of \Providence in the R2B2 software library provides standard functionality 
+plus a function which gives the probability with which an announced loser will appear to be winning
+after a round, a potentially useful metric to election officials when choosing round sizes.
+% and integrated into Arlo, election audit software used across the US.
+\keywords{risk-limiting audit (RLA)  \and ballot polling audit \and evidence-based elections \and statistical election audit}
+\end{abstract}
+%
+%
+\section{Introduction}
+\label{sec:intro}
+\input{sections/intro}
+
+\section{Related work}
+\label{sec:related}
+\input{sections/related}
+
+\section{\Providence}
+\label{sec:prov}
+\input{sections/prov}
+
+\section{Simulations}
+\label{sec:sims}
+\input{sections/sims}
+
+\section{Pilot}
+\label{sec:pilot}
+\input{sections/pilot}
+
+\section{Conclusion}
+\label{sec:conc}
+\input{sections/conc}
+
+%\section{Acknowledgements}
+%\label{sec:ack}
+%This research was supported in part by NSF Awards 2015253
+%and 1421373.
+
+
+%
+% ---- Bibliography ----
+%
+% BibTeX users should specify bibliography style 'splncs04'.
+% References will then be sorted and formatted in the correct style.
+%
+\bibliographystyle{splncs04}
+\bibliography{audits}
+%
+\end{document}
+

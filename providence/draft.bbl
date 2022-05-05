@@ -1,0 +1,97 @@
+\begin{thebibliography}{10}
+\providecommand{\url}[1]{\texttt{#1}}
+\providecommand{\urlprefix}{URL }
+\providecommand{\doi}[1]{https://doi.org/#1}
+
+\bibitem{bernhard-diss}
+Bernhard, M.: Election Security Is Harder Than You Think. Ph.D. thesis,
+  University of Michigan (2020)
+
+\bibitem{blom_IRV}
+Blom, M.L., Stuckey, P.J., Teague, V.J.: Ballot-polling risk limiting audits
+  for {IRV} elections. In: Krimmer, R., Volkamer, M., Cortier, V., Gor{\'{e}},
+  R., Hapsara, M., Serd{\"{u}}lt, U., Duenas{-}Cid, D. (eds.) Electronic Voting
+  - Third International Joint Conference, E-Vote-ID 2018, Bregenz, Austria,
+  October 2-5, 2018, Proceedings. Lecture Notes in Computer Science, vol.
+  11143, pp. 17--34. Springer (2018). \doi{10.1007/978-3-030-00419-4\_2},
+  \url{https://doi.org/10.1007/978-3-030-00419-4\_2}
+
+\bibitem{RI-report}
+Cause, C., VerifiedVoting, Center, B.: Pilot implementation study of
+  risk-limiting audit methods in the state of rhode island.
+  \url{https://www.brennancenter.org/sites/default/files/2019-09/Report-RI-Design-FINAL-WEB4.pdf}
+
+\bibitem{DBLP:conf/evoteid/HuangRSTV20}
+Huang, Z., Rivest, R.L., Stark, P.B., Teague, V.J., Vukcevic, D.: A unified
+  evaluation of two-candidate ballot-polling election auditing methods. In:
+  Krimmer, R., Volkamer, M., Beckert, B., K{\"{u}}sters, R., Kulyk, O.,
+  Duenas{-}Cid, D., Solvak, M. (eds.) Electronic Voting - 5th International
+  Joint Conference, E-Vote-ID 2020, Bregenz, Austria, October 6-9, 2020,
+  Proceedings. Lecture Notes in Computer Science, vol. 12455, pp. 112--128.
+  Springer (2020). \doi{10.1007/978-3-030-60347-2\_8},
+  \url{https://doi.org/10.1007/978-3-030-60347-2\_8}
+
+\bibitem{RLA}
+Lindeman, M., Stark, P.B.: A gentle introduction to risk-limiting audits. IEEE
+  Security \& Privacy  \textbf{10}(5),  42--49 (2012)
+
+\bibitem{bravo}
+Lindeman, M., Stark, P.B., Yates, V.S.: {BRAVO}: Ballot-polling risk-limiting
+  audits to verify outcomes. In: EVT/WOTE (2012)
+
+\bibitem{simulations_house}
+McLaughlin, K., Stark, P.B.: Simulations of risk-limiting audit techniques and
+  the effects of reducing batch size on the 2008 {California House of
+  Representatives} elections  (2010),
+  \url{https://www.stat.berkeley.edu/users/vigre/undergrad/reports/McLaughlin_Stark.pdf}
+
+\bibitem{mclaughlin_thesis}
+McLaughlin, K., Stark, P.B.: Workload estimates for risk-limiting audits of
+  large contests  (2011),
+  \url{https://www.stat.berkeley.edu/~stark/Preprints/workload11.pdf}
+
+\bibitem{bernoulli-ballot-polling}
+Ottoboni, K., Bernhard, M., Halderman, J.A., Rivest, R.L., Stark, P.B.:
+  Bernoulli ballot polling: A manifest improvement for risk-limiting audits.
+  International Conference on Financial Cryptography and Data Security pp.
+  226--241 (2019)
+
+\bibitem{bayesian-audits}
+Rivest, R.L., Shen, E.: A {B}ayesian method for auditing elections. In:
+  EVT/WOTE (2012)
+
+\bibitem{dice}
+Stark, P.B.: Simulating a ballot-polling audit with cards and dice. In:
+  Multidisciplinary Conference on Election Auditing, MIT (december 2018),
+  \url{http://electionlab.mit.edu/sites/default/files/2018-12/eas-ballotpollingsimulation.pdf}
+
+\bibitem{evidence-based}
+Stark, P.B., Wagner, D.A.: Evidence-based elections. {IEEE} Secur. Priv.
+  \textbf{10}(5),  33--41 (2012). \doi{10.1109/MSP.2012.62},
+  \url{https://doi.org/10.1109/MSP.2012.62}
+
+\bibitem{virginia_rla}
+{Virginia Department of Elections}: Results of risk-limiting audit of nov. 3,
+  2020 general election in virginia.
+  \url{https://www.elections.virginia.gov/rla-results_nov-3-2020/}
+
+\bibitem{arlo}
+VotingWorks: Arlo, https://voting.works/risk-limiting-audits/
+
+\bibitem{wald}
+Wald, A.: Sequential tests of statistical hypotheses. The Annals of
+  Mathematical Statistics  \textbf{16}(2),  117--186 (1945)
+
+\bibitem{arxiv_athena}
+Zag{\'{o}}rski, F., McClearn, G., Morin, S., McBurnett, N., Vora, P.L.: The
+  {Athena} class of risk-limiting ballot polling audits. CoRR
+  \textbf{abs/2008.02315} (2020), \url{https://arxiv.org/abs/2008.02315}
+
+\bibitem{usenix_minerva}
+Zag{\'o}rski, F., McClearn, G., Morin, S., McBurnett, N., Vora, P.L.:
+  Minerva{\textendash} an efficient risk-limiting ballot polling audit. In:
+  30th {USENIX} Security Symposium ({USENIX} Security 21). pp. 3059--3076.
+  {USENIX} Association (Aug 2021),
+  \url{https://www.usenix.org/conference/usenixsecurity21/presentation/zagorski}
+
+\end{thebibliography}

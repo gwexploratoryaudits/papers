@@ -1,0 +1,216 @@
+
+\begin{definition}[$(\alpha,p_a, p_0,k_{j-1},n_{j-1},n_j)$-\Providence]
+    \label{def:minervatwo}
+    For cumulative round size $n_i$ for round $i$ and a cumulative $k_i$ ballots for the reported winner found in round $i$, the \R \Providence stopping rule for the $j^{th}$ round is:
+$$
+\mathcal{A}(X_{j})=  \left\{ \begin{array}{ll} \text{Correct} ~~~~ \omega_{j}(k_{j}, k_{j-1}, p_a, p_0, n_j, n_{j-1}) \geq \frac{1}{\alpha}\\
+        % & \\
+        % incorrect& ~~~ \sigma_n < \frac{\beta}{1-\alpha} \\
+        % & \\
+        Undetermined ~~else \\
+    \end{array}
+    \right .
+$$
+where $\omega _{1}\triangleq \tau_{1}$ and for $j\ge 2$, we define $\omega _{j}$ as follows:
+\begin{equation}
+    \begin{aligned}
+    \omega_{j}(k_{j}, k_{j-1}, p_a, p_0, n_{j}, n_{j-1})\triangleq
+    \sigma(k_{j-1},p_a,p_0,n_{j-1})\cdot \tau_1(k_{j}-k_{j-1},p_a,p_0,n_j-n_{j-1})
+    \end{aligned}
+\end{equation}
+\end{definition}
+% old definition of omega_j for j\ge 2
+
+Notice that for $j\ge 2$, unlike $\tau_j$, computing $\omega_j$ requires no convolution.
+
+\section{Proofs: Minerva 2.0 is Risk Limiting}
+\begin{lemma}
+    \label{lemma:sigma_increasing}
+For $0<p_0< p_a< 1$ and $n>0$, the ratio $\sigma(k,p_a,p_0,n)$ is strictly increasing as a function of $k$ for $0\le k\le n$.
+\end{lemma}
+\begin{proof}
+From $0<p_0< p_a< 1$, we get
+$$
+\frac{p_a}{p_0}>1
+$$
+and
+$$
+1-p_0>1-p_a\implies \frac{1-p_0}{1-p_a}>1,
+$$
+and thus
+$$
+\frac{p_a(1-p_0)}{p_0(1-p_a)}>1.
+$$
+Now simply observe that
+$$
+\frac{p_a(1-p_0)}{p_0(1-p_a)}\cdot\sigma(k, p_a, p_0, n)
+=\frac{p_a(1-p_0)}{p_0(1-p_a)}\cdot\frac{p_a^{k} (1-p_a)^{n-k}}{p_a^{k} (1-p_a)^{n-k}}
+=\frac{p_a^{k+1} (1-p_a)^{n-(k+1)}}{p_a^{k+1} (1-p_a)^{n-(k+1)}}
+=\sigma(k+1, p_a, p_0, n).
+$$
+\end{proof}
+
+
+\begin{lemma}
+    \label{lemma:frac_sums_increasing}
+    Given a monotone increasing sequence: $\frac{a_1}{b_1}, \frac{a_2}{b_2}, \ldots, \frac{a_n}{b_n}$, for $a_i, b_i > 0$, the sequence:
+    $$z_i = \frac{\sum_{j=i}^n a_j}{\sum_{j=i}^n b_j}$$
+    is also monotone increasing.
+\end{lemma}
+
+\begin{proof}
+    Note that $z_i$ is a weighted average of the values of $\frac{a_j}{b_j}$ for $j \geq i$:
+    $$z_i = \sum_{j=i}^n y_j \frac{a_j}{b_j}$$  ~for~ $$y_j = \frac{b_j}{\sum _{j=i}^n b_j} > 0.$$
+    Further, $\sum _{j=i}^n y_j = 1$ and hence  $y_j \leq 1$ ~and~ $y_j = 1 \Leftrightarrow i=j=n$.
+    Observe that, because $\frac{a_i}{b_i}$ is monotone increasing,
+    $z_i \geq \frac{a_i}{b_i}$
+    with equality if and only if $i=n$.
+    Suppose $i < n$. Then
+    $$z_{i+1} \geq \frac{a_{i+1}}{b_{i+1}} > \frac{a_i}{b_i}, $$
+    and
+    $$z_i = y_i \frac{a_i}{b_i} + (1-y_i) z_{i+1} < z_{i+1}.$$
+    Thus $z_i$ is also monotone increasing.
+\end{proof}
+
+\begin{lemma}
+    \label{lemma:tau1_increasing}
+For $0<p_0< p_a< 1$ and $n>0$, the ratio $\tau_1(k,p_a,p_0,n)$ is strictly increasing as a function $k$ for $0\le k\le n$.
+\end{lemma}
+\begin{proof}
+    Apply Lemmas \ref{lemma:sigma_increasing}-\ref{lemma:frac_sums_increasing}.
+\end{proof}
+\begin{lemma}
+    \label{lemma:imin-exists}
+    Given a strictly monotone increasing sequence: $x_1, x_2, \ldots x_n $ and some constant $A$,
+    %there exists an $i_{min}$ such that
+    $$A \le x_i \Leftrightarrow \exists i_{min} \le i ~\text{s.t.}~   x_{i_{min} -1} < A \le x_{i_{min}} \le x_{i},$$
+    unless $A\le x_1$, in which case $i_{min} =1 $.
+\end{lemma}
+\begin{proof}
+    Evident.
+\end{proof}
+
+\begin{lemma}
+    \label{lemma:minerva2_kmin_exists}
+    For $\mathcal{A}=(\alpha,p_a, p_0,k_{j-1},n_{j-1},n_j)$-\Providence, there exists\\ a $k_{min,j}(\Providence, p_a, p_0, k_{j-1}, n_{j-1}, n_j)$ such that $$\mathcal{A}(X_j)=\text{Correct}\iff k_j\ge k_{min,j}(\Providence,  \bm{n_j}, p_a, p_0).$$
+\end{lemma}
+\begin{proof}
+    From Definition~\ref{def:minervatwo}, $$\mathcal{A}(X_j)=\text{Correct}\iff \omega_j(k_{j}, k_{j-1}, p_a, p_0, n_j, n_{j-1}) \ge \frac{1}{\alpha}.$$
+    Now to apply Lemma~\ref{lemma:imin-exists}, it suffices to show that
+    $\omega_j$ is monotone increasing with respect to $k_j$.
+    For $j=1$, we have $\omega_1=\tau_1$, so $\omega_1$ is strictly increasing by Lemma \ref{lemma:tau1_increasing}. For $j\ge 2$,
+    $$\omega_j(k_j,k_{j-1},p_a,p_0,n_j,n_{j-1},\alpha)=\sigma(k_{j-1},p_a,p_0,n_{j-1})\cdot \tau_1(k_{j}-k_{j-1},p_a,p_0,n_j-n_{j-1}).$$
+    As a function of $k_j$, $\sigma$ is constant, and thus $\omega$ is strictly increasing by Lemma \ref{lemma:tau1_increasing}. Therefore by Lemma \ref{lemma:imin-exists}, we have the desired property.
+\end{proof}
+
+
+%Here we introduce the notion of the history of an audit.
+%In round $j+1$, all previous round sizes and cumulative
+%tallies of winner ballots are together relevant information to the new round.
+%We call this information the history of the audit through round $j$,
+%and we denote it as follows:
+%$$\bm{k}_j\triangleq(k_1,k_2,\ldots,k_j,n_1,n_2,\ldots,n_j)$$
+\begin{lemma}
+\label{lemma:any_ratio_is_sigma_simple}
+For $j\ge 1$,
+$$\frac{Pr[\bm{K_j}=\bm{k_j} \mid \bm{n_j}, H_a]}{Pr[\bm{K_j}=\bm{k_j} \mid \bm{n_j}, H_0]} = \sigma(k_j, p_a, p_0, n_j).$$
+%$$\frac{Pr[K_j = k_{j} \mid n_{j-1}^*, k_{j-1}^*, H_a]}{Pr[K_j = k_{j} \mid n_{j-1}^*, k_{j-1}^*, H_0]} = \sigma(k_j, p_a, p_0, n_j).$$
+\end{lemma}
+\begin{proof}
+We induct on the number of rounds.
+For $j=1$, we have
+$$\frac{Pr[\bm{K_1}=\bm{k_1} \mid \bm{n_1},H_a]}{Pr[\bm{K_1}=\bm{k_1} \mid  \bm{n_1},H_0]} =\frac{Pr[K_1 = k_{1} \mid n_1,H_a]}{Pr[K_1 = k_1 \mid n_1,H_0]} = \frac{\text{Bin}(k_1,n_1,p_a)}{\text{Bin}(k_1,n_1,p_0)}=\sigma(k_1, p_a, p_0, n_1).$$
+%
+% Suppose the lemma is true for $j=m$.
+% That is,
+% $$\frac{Pr[\bm{K_m}=\bm{k_m} \mid H_a]}{Pr[\bm{K_m}=\bm{k_m} \mid  H_0]} = \sigma(k_m, p_a, p_0, n_m).$$
+%
+Suppose the lemma is true for round $j=m$ with history $\bm{k_m}$.
+%We will show it is true for $j=m+1$.
+Observe that
+ $$\frac{Pr[\bm{K_{m+1}}=\bm{k_{m+1}} \mid \bm{n_{m+1}},H_a]}{Pr[\bm{K_{m+1}}=\bm{k_{m+1}} \mid \bm{n_{m+1}}, H_0]} = \frac{ Pr[\bm{K_{m}}=\bm{k_{m}}\mid \bm{n_{m+1}},H_a] \cdot Pr[K_{m+1}'=k_{m+1}'|\bm{k_m},\bm{n_{m+1}},H_a]}{ Pr[\bm{K_{m}}= \bm{k_{m}} \mid  \bm{n_{m+1}},H_0]  \cdot  Pr[K_{m+1}'=k_{m+1}'|\bm{k_m},\bm{n_{m+1}},H_0]  }$$
+ $$=\sigma(k_m, p_a, p_0, n_m) \cdot \frac{Pr[K_{m+1}'=k_{m+1}'|\bm{k_m}, \bm{n_{m+1}}, H_a]}{Pr[K_{m+1}'=k_{m+1}'|\bm{k_m},\bm{n_{m+1}},H_0]}$$
+ by the induction hypothesis.
+Then this is simply equal to
+ $$\sigma(k_m, p_a, p_0, n_m)\cdot\frac{\text{Bin}(k_{m+1}',n_{m+1}',p_a)}{\text{Bin}(k_{m+1}',n_{m+1}',p_0)}
+ $$$$
+ =\frac{p_a^{k_m} (1-p_a)^{n_m-k_m}}{p_0^{k_m} (1-p_0)^{n_m-k_m}} \cdot
+ \frac{p_a^{k_{m+1}'} (1-p_a)^{n_{m+1}'-k_{m+1}'}}{p_0^{k_{m+1}'} (1-p_0)^{n_{m+1}'-k_{m+1}'}}
+ $$
+ $$
+ =\sigma(k_{m+1}, p_a, p_0, n_{m+1})
+ $$
+\end{proof}
+
+\begin{theorem}
+\label{thm:minerva2_is_rla_new}
+An $(\alpha,p_a, p_0,k_{j-1},n_{j-1},n_j)$-\Providence audit is an
+$\alpha$-RLA.
+\end{theorem}
+\begin{proof}
+Let $\mathcal{A}=(\alpha,p_a, p_0,k_{j-1},n_{j-1},n_j)$-\Providence.
+Let $\bm{n_j}$ be the cumulative roundsizes used in this
+audit, with corresponding cumulative tallies of
+ballots for the reported winner $\bm{k_j}$.
+For round $j=1$, by Definitions \ref{def:minervatwo}
+and \ref{def:minerva_ratio}, we see that
+the $\mathcal{A}=\text{Correct}$ (the audit stops) only when
+$$
+\tau_1(k_{1},p_a,p_0,n_1)
+=\frac{Pr[K_{1} \geq k_{1} \mid H_a, n_1]}{Pr[K_{1} \geq k_{1} \mid H_0, n_1]}
+\ge \frac{1}{\alpha}.
+$$
+By Lemma \ref{lemma:minerva2_kmin_exists}, we see that this
+is equivalent to the following:
+$$
+\frac{Pr[K_{1} \geq k_{min,1} \mid H_a, n_1]}{Pr[K_{1} \geq k_{min, 1} \mid H_0, n_1]}
+\ge \frac{1}{\alpha}.
+$$
+
+For any round $j\ge 2$, by Definition \ref{def:minervatwo}
+and Lemma \ref{lemma:minerva2_kmin_exists},
+$\mathcal{A}=\text{Correct}$ (the audit stops) only when
+$$
+\omega_{j}(k_{j}, k_{j-1}, p_a, p_0, n_{j}, n_{j-1}, \alpha )\triangleq
+\sigma(k_{j-1},p_a,p_0,n_{j-1})\cdot \tau_1(k_{j}-k_{j-1},p_a,p_0,n_j-n_{j-1})
+\ge \frac{1}{\alpha}.
+$$
+%Let $d_j=k_j-k_{j-1}$ be shorthand for the new draw.
+%could do this for simpler notation^
+By Lemma \ref{lemma:any_ratio_is_sigma_simple}
+and Definition \ref{def:minerva_ratio}, this is equivalent to
+$$
+\frac{\Pr[\bm{k_{j-1}} \mid H_a]\cdot Pr[K_{j} \ge k_{j} \mid \bm{k_{j-1}}, H_a, n{j}]}{\Pr[\bm{k_{j-1}} \mid H_0]\cdot Pr[K_{j} \ge k_{j} \mid \bm{k_{j-1}}, H_0, n{j}]}\ge \frac{1}{\alpha}.
+$$
+By Lemma~\ref{lemma:minerva2_kmin_exists} and Definition~\ref{def:minervatwo},
+we see that there exists a $k_{min, j}\le k_j$ for which
+$$
+\frac{\Pr[\bm{k_{j-1}} \mid H_a]\cdot Pr[K_{j} \ge k_{min, j} \mid \bm{k_{j-1}}, H_a, n{j}]}{\Pr[\bm{k_{j-1}} \mid H_0]\cdot Pr[K_{j} \ge k_{min, j} \mid \bm{k_{j-1}}, H_0, n{j}]} \ge
+\frac{\Pr[\bm{k_{j-1}} \mid H_a]\cdot Pr[K_{j} \ge k_{j} \mid \bm{k_{j-1}}, H_a, n{j}]}{\Pr[\bm{k_{j-1}} \mid H_0]\cdot Pr[K_{j} \ge k_{j} \mid \bm{k_{j-1}}, H_0, n{j}]}\ge \frac{1}{\alpha}.
+$$
+
+%Equivalently,
+%$$
+%\frac{Pr[K_{j} \ge k_{min, j}\wedge K_{j-1} = k_{j-1} \mid n_{j}^*, k_{j-2}^*, H_a]}{Pr[K_{j}\ge k_{min, j} \wedge K_{j-1} = k_{j-1} \mid n_{j}^*, k_{j-2}^*, H_0]}\ge \frac{1}{\alpha}.
+%$$
+%Taking the sum over all possible rounds and corresponding preceding values
+%of $k$, we get
+Taking the sum over all possible audit histories, we get
+$$
+\frac{\sum_{\bm{k_j}}\Pr[\bm{k_{j-1}} \mid H_a]\cdot Pr[K_{j} \ge k_{min, j} \mid \bm{k_{j-1}}, H_a, n{j}]}{\sum_{\bm{k_j}}\Pr[\bm{k_{j-1}} \mid H_0]\cdot Pr[K_{j} \ge k_{min, j} \mid \bm{k_{j-1}}, H_0, n{j}]}\ge \frac{1}{\alpha}.
+$$
+Finally, because the total probability of stopping the audit under
+the alternative hypothesis is less than 1, we get
+$$
+\frac{Pr[\mathcal{A}=\text{Correct} \mid H_a]}{Pr[\mathcal{A}=\text{Correct} \mid H_0]}\ge \frac{1}{\alpha}
+$$
+$$
+Pr[\mathcal{A}=\text{Correct} \mid H_0]
+\le
+Pr[\mathcal{A}=\text{Correct} \mid H_a] \cdot \alpha
+\le
+\alpha.
+$$
+\end{proof}
+
+\subsection{Resistance against an adversary choosing round sizes}
