@@ -18,21 +18,21 @@ Pr[\mathcal{A}(X)
 $$
 \end{definition}
 
-\begin{definition}[\Bravo Ratio] \label{def:bravo-ratio} The \Bravo audit uses the ratio $\sigma$. Consider a sample size of $n$ ballots with $k$ for the reported winner. The proportion of ballots for the reported winner under the alternative hypothesis and null hypothesis are $p_a$ and $p_0$ respectively.
+\begin{definition}[\BRAVO Ratio] \label{def:bravo-ratio} The \BRAVO audit uses the ratio $\sigma$. Consider a sample size of $n$ ballots with $k$ for the reported winner. The proportion of ballots for the reported winner under the alternative hypothesis and null hypothesis are $p_a$ and $p_0$ respectively.
 \begin{equation}
     \sigma(k, p_a, p_0, n) \triangleq \frac{p_a^{k} (1-p_a)^{n-k}}{p_0^{k} (1-p_0)^{n-k}} 
     \label{eqn:bravoratio}
 \end{equation}
 \end{definition}
 
-In \Bravo, $p_0=\frac{1}{2}$. If testing the \Bravo stopping condition after each individual ballot
-is drawn (a \B \Bravo audit), clearly $\sigma$ is equivalent to the 
+In \BRAVO, $p_0=\frac{1}{2}$. If testing the \BRAVO stopping condition after each individual ballot
+is drawn (a \B \BRAVO audit), clearly $\sigma$ is equivalent to the 
 likelihood ratio:
 $$
 \frac{Pr[K=k|H_a,n]}{Pr[K=k|H_0,n]}= \frac{\binom{n}{k}p_a^{k} (1-p_a)^{n-k}}{\binom{n}{k}(\frac{1}{2})^n} =\sigma(k, p_a, \frac{1}{2}, n)
 $$
 
-\begin{definition}[$(\alpha,p)$-\Bravo]\label{def:bravo}  An audit $\mathcal{A}$ is the \B~$(\alpha, p)$-\Bravo audit iff the following stopping condition is tested at each ballot draw. If the sample $X$ is of size $n$ and has $k$ ballots for the winner,  
+\begin{definition}[$(\alpha,p)$-\BRAVO ]\label{def:bravo}  An audit $\mathcal{A}$ is the \B~$(\alpha, p)$-\BRAVO audit iff the following stopping condition is tested at each ballot draw. If the sample $X$ is of size $n$ and has $k$ ballots for the winner,  
 \begin{equation}
     \mathcal{A}(X) =  \left\{ \begin{array}{ll} \text{Correct} & ~\sigma(k, p, \frac{1}{2}, n) 
          %\triangleq \frac{p^{k} (1-p)^{n-k}}{(\frac{1}{2})^n} 
@@ -60,7 +60,7 @@ $$\bm{n_j}\triangleq(n_1,n_2,\ldots,n_j)$$
 
 \begin{definition}[$ (\alpha, p, \bm{n_j} ) $-\Minerva]
      \label{def:minerva}
-     Given \B $(\alpha, p)$-\Bravo and cumulative round sizes\\ $\bm{n_j}$, the corresponding \R \Minerva stopping rule for the $j^{th}$ round is:
+     Given \B $(\alpha, p)$-\BRAVO and cumulative round sizes\\ $\bm{n_j}$, the corresponding \R \Minerva stopping rule for the $j^{th}$ round is:
  \begin{equation}
      \mathcal{A}(X_{j})=  \left\{ \begin{array}{ll} \text{Correct} ~~~~ \tau_{j}(k_{j}, p_a, \frac{1}{2}, \bm{n_j}, \alpha ) \geq \frac{1}{\alpha}\\
              % & \\
