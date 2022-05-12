@@ -55,6 +55,11 @@ Katherine McLaughlin and Philip~B. Stark.
 \newblock Workload estimates for risk-limiting audits of large contests.
 \newblock 2011.
 
+\bibitem{r2b2}
+Sarah Morin and Grant McClearn.
+\newblock The {R2B2} ({R}ound-by-{R}ound, {B}allot-by-{B}allot) library,
+  https://github.com/gwexploratoryaudits/r2b2.
+
 \bibitem{bernoulli-ballot-polling}
 Kellie Ottoboni, Matthew Bernhard, J.~Alex Halderman, Ronald~L Rivest, and
   Philip~B. Stark.

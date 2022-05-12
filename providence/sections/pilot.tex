@@ -1,5 +1,23 @@
 % pilot
-A pilot audit was performed in Providence, Rhode Island in February 2022 from November 2021 special elections.
-The audited contest was a question on School Construction and Renovation Projects which had an announced $25.67\%$ margin.
+A pilot audit was performed in Providence, Rhode Island in February 2022 of November 2021 special elections.
+The audited contest was a yes-or-no question on School Construction and Renovation Projects and had an announced $25.67\%$ margin.
 The risk-limit was $10\%$.
-A large first round size of $140$ with probability of stopping $95\%$ was selected in order to give many ballots for more interesting analysis afterwards.
+A first round size of $140$ ballots with large probability of stopping ($95\%$) was selected, and selection order was tracked, in order to give the potential for more interesting analysis afterwards. 
+As expected, the audit concluded in the first round with a \Providence risk of $4.18\%$. Table~\ref{fig:pilot-risks} shows risk measures for the drawn sample using \Minerva and \BRAVO (both EoR and SO).
+
+\begin{figure}
+\begin{center}
+\begin{tabular}{ |c|c|c|c|c| } 
+\hline
+%\diagbox[dir=NW]{First \\Round \\Size}{RLA}
+ballots& \rotatebox{45}{\Providence} & \rotatebox{45}{\Minerva} & \rotatebox{45}{EoR \BRAVO} & \rotatebox{45}{SO \BRAVO} \\
+\hline
+140 & \bf{4.18\%} & \bf{4.18\%} & \bf{5.41\%} & 36.6\% \\
+\hline
+\end{tabular}
+\end{center}
+\caption{Risk measures for the drawn first round of $140$ ballots in the Providence, RI pilot audit. Risks in bold meet the risk-limit ($10\%$) and thus correspond to audits that would stop.}
+\label{fig:pilot-risks}
+\end{figure}
+
+TODO: Add examples of how the audits perform for various hypothetical round schedules. I wait to do this until I'm done with the workload estimates since the examples here should be chosen to motivate that section.
