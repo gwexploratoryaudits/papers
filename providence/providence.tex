@@ -152,9 +152,9 @@ Second Institution
 %\end{abstract}
 \begin{abstract}
 A Risk-Limiting Audit (RLA) draws consecutive random samples (rounds) of paper election ballots. 
-After each round, a rigorous error criterion decides whether to stop (confirming the announced outcome) or continue (draw another round).
-The most commonly used ballot polling RLA, \BRAVO (Stark), requires the fewest ballots when all round sizes are 1. 
-Recent RLA \Minerva draws signficantly fewer ballots than \BRAVO but requires round sizes to be fixed before the audit begins.
+After each round, a rigorous error criterion is used to decide whether to stop (confirming the announced outcome) or continue (draw another round).
+The most commonly used ballot polling RLA, \BRAVO (Stark), requires the fewest ballots when each round is just one ballot. 
+Recent RLA \Minerva draws signficantly fewer ballots than \BRAVO for larger round sizes but requires the round schedule to be fixed before the audit begins.
 We present \Providence, and audit that has similar efficiency to \Minerva and supports choosing round sizes during the audit.
 We prove \Providence is Risk-Limiting and resistant to an adversary who can choose subsequent round sizes given previous samples.
 We present simulations in which \Providence has similar efficiency to \Minerva.
