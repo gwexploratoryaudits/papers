@@ -19,6 +19,7 @@ Now simply observe that
 $$
 \frac{p_a(1-p_0)}{p_0(1-p_a)}\cdot\sigma(k, p_a, p_0, n)
 =\frac{p_a(1-p_0)}{p_0(1-p_a)}\cdot\frac{p_a^{k} (1-p_a)^{n-k}}{p_a^{k} (1-p_a)^{n-k}}
+$$$$
 =\frac{p_a^{k+1} (1-p_a)^{n-(k+1)}}{p_a^{k+1} (1-p_a)^{n-(k+1)}}
 =\sigma(k+1, p_a, p_0, n).
 $$
@@ -72,7 +73,7 @@ For $0<p_0< p_a< 1$ and $n>0$, the ratio $\tau_1(k,p_a,p_0,n)$ is strictly incre
     Now to apply Lemma~\ref{lemma:imin-exists}, it suffices to show that
     $\omega_j$ is monotone increasing with respect to $k_j$.
     For $j=1$, we have $\omega_1=\tau_1$, so $\omega_1$ is strictly increasing by Lemma \ref{lemma:tau1_increasing}. For $j\ge 2$,
-    $$\omega_j(k_j,k_{j-1},p_a,p_0,n_j,n_{j-1},\alpha)=\sigma(k_{j-1},p_a,p_0,n_{j-1})\cdot \tau_1(k_{j}-k_{j-1},p_a,p_0,n_j-n_{j-1}).$$
+    $$\omega_j(k_j,k_{j-1},p_a,p_0,n_j,n_{j-1},\alpha)=$$$$\sigma(k_{j-1},p_a,p_0,n_{j-1})\cdot \tau_1(k_{j}-k_{j-1},p_a,p_0,n_j-n_{j-1}).$$
     As a function of $k_j$, $\sigma$ is constant, and thus $\omega$ is strictly increasing by Lemma \ref{lemma:tau1_increasing}. Therefore by Lemma \ref{lemma:imin-exists}, we have the desired property.
 \end{proof}
 
@@ -84,10 +85,10 @@ $$\frac{Pr[\bm{K_j}=\bm{k_j} \mid \bm{n_j}, H_a]}{Pr[\bm{K_j}=\bm{k_j} \mid \bm{
 \begin{proof}
 We induct on the number of rounds.
 For $j=1$, we have
-$$\frac{Pr[\bm{K_1}=\bm{k_1} \mid \bm{n_1},H_a]}{Pr[\bm{K_1}=\bm{k_1} \mid  \bm{n_1},H_0]} =\frac{Pr[K_1 = k_{1} \mid n_1,H_a]}{Pr[K_1 = k_1 \mid n_1,H_0]} = \frac{\text{Bin}(k_1,n_1,p_a)}{\text{Bin}(k_1,n_1,p_0)}=\sigma(k_1, p_a, p_0, n_1).$$
+$$\frac{Pr[\bm{K_1}=\bm{k_1} \mid \bm{n_1},H_a]}{Pr[\bm{K_1}=\bm{k_1} \mid  \bm{n_1},H_0]} =\frac{Pr[K_1 = k_{1} \mid n_1,H_a]}{Pr[K_1 = k_1 \mid n_1,H_0]} $$$$= \frac{\text{Bin}(k_1,n_1,p_a)}{\text{Bin}(k_1,n_1,p_0)}=\sigma(k_1, p_a, p_0, n_1).$$
 Suppose the lemma is true for round $j=m$ with history $\bm{k_m}$.
 Observe that
- $$\frac{Pr[\bm{K_{m+1}}=\bm{k_{m+1}} \mid \bm{n_{m+1}},H_a]}{Pr[\bm{K_{m+1}}=\bm{k_{m+1}} \mid \bm{n_{m+1}}, H_0]} = \frac{ Pr[\bm{K_{m}}=\bm{k_{m}}\mid \bm{n_{m+1}},H_a] \cdot Pr[K_{m+1}'=k_{m+1}'|\bm{k_m},\bm{n_{m+1}},H_a]}{ Pr[\bm{K_{m}}= \bm{k_{m}} \mid  \bm{n_{m+1}},H_0]  \cdot  Pr[K_{m+1}'=k_{m+1}'|\bm{k_m},\bm{n_{m+1}},H_0]  }$$
+ $$\frac{Pr[\bm{K_{m+1}}=\bm{k_{m+1}} \mid \bm{n_{m+1}},H_a]}{Pr[\bm{K_{m+1}}=\bm{k_{m+1}} \mid \bm{n_{m+1}}, H_0]} $$$$= \frac{ Pr[\bm{K_{m}}=\bm{k_{m}}\mid \bm{n_{m+1}},H_a] \cdot Pr[K_{m+1}'=k_{m+1}'|\bm{k_m},\bm{n_{m+1}},H_a]}{ Pr[\bm{K_{m}}= \bm{k_{m}} \mid  \bm{n_{m+1}},H_0]  \cdot  Pr[K_{m+1}'=k_{m+1}'|\bm{k_m},\bm{n_{m+1}},H_0]  }$$
  $$=\sigma(k_m, p_a, p_0, n_m) \cdot \frac{Pr[K_{m+1}'=k_{m+1}'|\bm{k_m}, \bm{n_{m+1}}, H_a]}{Pr[K_{m+1}'=k_{m+1}'|\bm{k_m},\bm{n_{m+1}},H_0]}$$
  by the induction hypothesis.
 Then this is simply equal to

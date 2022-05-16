@@ -15,6 +15,13 @@ Michelle~L. Blom, Peter~J. Stuckey, and Vanessa~J. Teague.
   11143 of {\em Lecture Notes in Computer Science}, pages 17--34. Springer,
   2018.
 
+\bibitem{simulations}
+Oliver Broadrick, Sarah Morin, Grant McClearn, Neal McBurnett, Poorvi~L. Vora,
+  and Filip Zag\'{o}rski.
+\newblock Simulations of ballot polling risk-limiting audits.
+\newblock In {\em Seventh Workshop on Advances in Secure Electronic Voting, in
+  Association with Financial Crypto}, 2022.
+
 \bibitem{RI-report}
 Common Cause, VerifiedVoting, and Brennan Center.
 \newblock Pilot implementation study of risk-limiting audit methods in the
@@ -83,12 +90,6 @@ Philip~B. Stark.
 Philip~B. Stark and David~A. Wagner.
 \newblock Evidence-based elections.
 \newblock {\em {IEEE} Secur. Priv.}, 10(5):33--41, 2012.
-
-\bibitem{virginia_rla}
-{Virginia Department of Elections}.
-\newblock Results of risk-limiting audit of nov. 3, 2020 general election in
-  virginia.
-\newblock \url{https://www.elections.virginia.gov/rla-results_nov-3-2020/}.
 
 \bibitem{arlo}
 VotingWorks.

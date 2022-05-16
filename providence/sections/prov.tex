@@ -14,16 +14,14 @@ $$
 where $\omega _{1}\triangleq \tau_{1}$ and for $j\ge 2$, we define $\omega _{j}$ as follows:
 \begin{equation}
     \begin{aligned}
-    \omega_{j}(k_{j}, k_{j-1}, p_a, p_0, n_{j}, n_{j-1})\triangleq
+    \omega_{j}(k_{j}, k_{j-1}, p_a, p_0, n_{j}, n_{j-1})
+    \triangleq\\
     \sigma(k_{j-1},p_a,p_0,n_{j-1})\cdot \tau_1(k_{j}-k_{j-1},p_a,p_0,n_j-n_{j-1})
     \end{aligned}
 \end{equation}
 \end{definition}
-% old definition of omega_j for j\ge 2
 
-Notice that for $j\ge 2$, unlike $\tau_j$, computing $\omega_j$ requires no convolution.
-
-Now we prove that \Providence is risk-limiting.
+Notice that for $j\ge 2$, unlike $\tau_j$, computing $\omega_j$ requires no convolution. We now we prove that \Providence is risk-limiting using lemmas from basic algebra in Appendix~\ref{sec:proofs}.
 
 \begin{theorem}
 \label{thm:minerva2_is_rla_new}
@@ -39,7 +37,7 @@ For round $j=1$, by Definitions \ref{def:minervatwo}
 and \ref{def:minerva_ratio}, we see that
 the $\mathcal{A}=\text{Correct}$ (the audit stops) only when
 $$
-\tau_1(k_{1},p_a,p_0,n_1)
+\tau_1(k_{1},p_a,p_0,n_1)\\
 =\frac{Pr[K_{1} \geq k_{1} \mid H_a, n_1]}{Pr[K_{1} \geq k_{1} \mid H_0, n_1]}
 \ge \frac{1}{\alpha}.
 $$
@@ -68,7 +66,12 @@ $$
 By Lemma~\ref{lemma:minerva2_kmin_exists} and Definition~\ref{def:minervatwo},
 we see that there exists a $k_{min, j}\le k_j$ for which
 $$
-\frac{\Pr[\bm{k_{j-1}} \mid H_a]\cdot Pr[K_{j} \ge k_{min, j} \mid \bm{k_{j-1}}, H_a, n{j}]}{\Pr[\bm{k_{j-1}} \mid H_0]\cdot Pr[K_{j} \ge k_{min, j} \mid \bm{k_{j-1}}, H_0, n{j}]} \ge
+\frac{\Pr[\bm{k_{j-1}} \mid H_a]\cdot Pr[K_{j} \ge k_{j} \mid \bm{k_{j-1}}, H_a, n{j}]}{\Pr[\bm{k_{j-1}} \mid H_0]\cdot Pr[K_{j} \ge k_{j} \mid \bm{k_{j-1}}, H_0, n{j}]}\ge
+$$
+$$
+\frac{\Pr[\bm{k_{j-1}} \mid H_a]\cdot Pr[K_{j} \ge k_{min, j} \mid \bm{k_{j-1}}, H_a, n{j}]}{\Pr[\bm{k_{j-1}} \mid H_0]\cdot Pr[K_{j} \ge k_{min, j} \mid \bm{k_{j-1}}, H_0, n{j}]} \ge 
+$$
+$$
 \frac{\Pr[\bm{k_{j-1}} \mid H_a]\cdot Pr[K_{j} \ge k_{j} \mid \bm{k_{j-1}}, H_a, n{j}]}{\Pr[\bm{k_{j-1}} \mid H_0]\cdot Pr[K_{j} \ge k_{j} \mid \bm{k_{j-1}}, H_0, n{j}]}\ge \frac{1}{\alpha}.
 $$
 
@@ -97,3 +100,4 @@ $$
 \end{proof}
 
 \subsection{Resistance against an adversary choosing round sizes}
+I don't feel very comfortable with how to word/present this argument... I have not yet made an attempt at doing so.

@@ -8,37 +8,37 @@ Warning--empty journal in simulations_house
 Warning--empty journal in mclaughlin_thesis
 You've used 18 entries,
             2118 wiz_defined-function locations,
-            599 strings with 7462 characters,
-and the built_in function-call counts, 6052 in all, are:
-= -- 563
-> -- 325
+            600 strings with 7548 characters,
+and the built_in function-call counts, 6244 in all, are:
+= -- 575
+> -- 351
 < -- 6
-+ -- 129
-- -- 106
-* -- 395
-:= -- 1005
++ -- 139
+- -- 116
+* -- 420
+:= -- 1040
 add.period$ -- 55
 call.type$ -- 18
-change.case$ -- 99
+change.case$ -- 104
 chr.to.int$ -- 0
 cite$ -- 20
-duplicate$ -- 233
-empty$ -- 474
-format.name$ -- 106
-if$ -- 1274
+duplicate$ -- 240
+empty$ -- 480
+format.name$ -- 116
+if$ -- 1308
 int.to.chr$ -- 0
 int.to.str$ -- 18
-missing$ -- 13
+missing$ -- 14
 newline$ -- 91
 num.names$ -- 40
-pop$ -- 127
+pop$ -- 132
 preamble$ -- 1
-purify$ -- 82
+purify$ -- 87
 quote$ -- 0
-skip$ -- 187
+skip$ -- 186
 stack$ -- 0
 substring$ -- 282
-swap$ -- 62
+swap$ -- 63
 text.length$ -- 6
 text.prefix$ -- 0
 top$ -- 0
@@ -46,5 +46,5 @@ type$ -- 72
 warning$ -- 2
 while$ -- 55
 width$ -- 20
-write$ -- 186
+write$ -- 187
 (There were 3 warnings)
