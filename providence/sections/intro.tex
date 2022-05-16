@@ -11,7 +11,9 @@ The \BRAVO audit is designed for use as a B2 audit: it requires the smallest exp
 They also present first-round simulations which show that \Minerva draws fewer ballots than SO \BRAVO in the first round for first round sizes with a large probability of stopping when the (true) underlying election is as announced. 
 Broadrick {\em et al.} provide further simulations that show \Minerva requires fewer ballots over multiple rounds and for lower stopping probability.
 
-Both \BRAVO and \Minerva have been integrated into election audit software {\em Arlo} \cite{arlo}, and, as such, are available for use in real election audits. Both have been used in real election audits\cite{usenix_minerva, virginia_rla}. For this reason, it is important to understand their properties over multiple rounds. 
+While more efficient than \BRAVO, \Minerva requires that the round schedule is fixed in advance of the audit. This may lead to significant unnecessary work. For example, suppose the fixed round schedule for \Minerva is $10,000$ ballots per round (a reasonable number in a state-wide contest with a narrow margin), and the first round sample finds a number of ballots for the winner just short of that necessary for the audit to stop. It then may be sufficient to draw a very small second round and still stop with high probability in the second round, but the additional $10,000$ ballots must be drawn. In contrast, subsequent \BRAVO round sizes can be chosen based on preceding samples.
+
+An open question is whether a ballot polling RLA exists with the efficiency of \Minerva and this flexibility of \BRAVO.
 
 \subsection{Our Contributions}
 We present \Providence, and provide the following:
@@ -19,9 +21,10 @@ We present \Providence, and provide the following:
 \item Proof that \Providence is an RLA and resistant to an adversary who can choose subsequent round sizes with knowledge of previous samples
 \item Simulations of \Providence, \Minerva, SO \BRAVO, and EoR \BRAVO which show that \Providence has similar efficiency to \Minerva, both greater than either implementation of \BRAVO
 \item Results and analysis from the use of \Providence in a pilot audit in Rhode Island
-\item Open source implementation of \Providence including the novel metric Probability of Misleading(name?)
+\item Open source implementation of \Providence 
+%including the novel metric Probability of Misleading(name?)
 \end{enumerate}
 
-\subsection{Organization} 
-Section \ref{sec:related} describes related work. The experiments we performed are described in section \ref{sec:expts}, and sections \ref{sec:results1} and \ref{sec:results2} present our results. Section \ref{sec:conc} has our conclusions. 
+%\subsection{Organization} 
+%Section \ref{sec:related} describes related work. The experiments we performed are described in section \ref{sec:expts}, and sections \ref{sec:results1} and \ref{sec:results2} present our results. Section \ref{sec:conc} has our conclusions. 
 
