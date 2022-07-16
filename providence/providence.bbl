@@ -75,11 +75,6 @@ Kellie Ottoboni, Matthew Bernhard, J.~Alex Halderman, Ronald~L Rivest, and
 \newblock {\em International Conference on Financial Cryptography and Data
   Security}, pages 226--241, 2019.
 
-\bibitem{bayesian-audits}
-Ronald~L Rivest and Emily Shen.
-\newblock A {B}ayesian method for auditing elections.
-\newblock In {\em EVT/WOTE}, 2012.
-
 \bibitem{dice}
 Philip~B. Stark.
 \newblock Simulating a ballot-polling audit with cards and dice.
