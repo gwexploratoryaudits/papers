@@ -1,2 +1,23 @@
-%TODO
-This section could be great, but I'll have to write it first.
+Some election audits have benefited from a one-and-done approach: draw a large sample with high probability of stopping in the first round and usually avoid a second round altogether. This is appealing for two reasons. Firstly, rounds have some overhead in time and effort. Thus the workload (cost and time) of an audit grows not just with the number of ballots sampled but also with the number of rounds. On the other hand, a one-and-done audit often draws more ballots than are necessary. We propose a simple workload model under which our simulation results suggest that a few smaller rounds gives lower average workload. 
+
+We begin with the simple assumption that part of the workload grows linearly with the number of ballots, giving us the per ballot cost parameter $c_{b}$. It is less clear how cost is related to the number of rounds, but we propose a simple model in which the round cost is also linear, with constant per round cost $c_{r}$. This is a reasonable assumption for contests with small margin in which all or nearly all ballot boxes need to be opened in each round. [@Poorvi, I need help justifying the workload model.]
+
+So for an audit $\mathcal{A}$ with expected number of ballots $E_{b}$ and expected number of rounds $E_{r}$, we get that the cost $C$ of the audit is
+$$C(\mathcal{A}) = E_b * c_b + E_r * c_r.$$
+
+Analytical approximation of the expected audit behavior ($E_b$ and $E_r$) is challenging since the number of possible sequences of samples grows exponentially with the number of rounds. 
+%A very rough approximation scheme is possible and may be useful when choosing round sizes in practice. We implement such a scheme, available at \cite{software}.
+%We will use the more standard approach of simulations to give an example here.
+Therefore we again use the standard approach of simulations.
+
+Consider the US state of Pennsylvania. In the 2020 US Presidential contest, Pennsylvania had a margin of $99999\%$.
+
+We let the per ballot cost be one, $c_b=1$. Then the per round cost $c_r$ tells us the cost of a round as a number of ballots. We begin with an example in which $c_r=1000$. That is, we suppose that the overhead of a round is equal to the workload of sampling $1000$ ballots.
+
+We now consider a simple round schedule for our example. Each round is selected to give the same probability of stopping, $p$. If the audit does not stop in the first round, we find a round size which, given the sample drawn in the first round, will give a probability of stopping $p$ in the second round. For this round schedule scheme, a one-and-done audit is achieved by choosing large $p$, say $p=.9$ or $p=.95$.
+
+The simulation results for our example are given in Figure~\ref{fig:workload}. 
+For various round schedules, given by the varying parameter $p$ on the horizontal axis, we see that the average audit cost varies with a minimum at roughly $.xx$(TODO). In particular, the one-and-done $p=.9$ audits have an average of $zz\%$ higher cost than the $p=.xx$ audits.
+
+Without extensive workload measurements, it is hard to know the most accurate value for $c_r$, and so we also evaluate the simulation results with varying $c_r$. 
+
