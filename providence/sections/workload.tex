@@ -13,11 +13,11 @@ Analytical approximation of the expected audit behavior ($E_b$ and $E_r$) is cha
 %We will use the more standard approach of simulations to give an example here.
 Therefore we again use the standard approach of simulations.
 
-Consider the US state of Pennsylvania. In the 2020 US Presidential contest, Pennsylvania had a margin of $99999\%$.
+Consider the US state of Michigan. In the 2020 US Presidential contest, Michigan had a margin of $2.8\%$.
 
 We let the per ballot cost be one, $c_b=1$. Then the per round cost $c_r$ tells us the cost of a round as a number of ballots. We begin with an example in which $c_r=10$. That is, we suppose that the overhead of a round is equal to the workload of sampling $10$ ballots.
 
-We now consider a simple round schedule for our example. Each round is selected to give the same probability of stopping, $p$. If the audit does not stop in the first round, we find a round size which, given the sample drawn in the first round, will give a probability of stopping $p$ in the second round. For this round schedule scheme, a one-and-done audit is achieved by choosing large $p$, say $p=.9$ or $p=.95$. For this particular round schedule scheme, computing the expected number of rounds is straightforward; . Our simulations are then used to estimate the expected number of ballots.
+We now consider a simple round schedule for our example. Each round is selected to give the same probability of stopping, $p$. If the audit does not stop in the first round, we find a round size which, given the sample drawn in the first round, will give a probability of stopping $p$ in the second round. For this round schedule scheme, a one-and-done audit is achieved by choosing large $p$, say $p=.9$ or $p=.95$. For this particular round schedule scheme, computing the expected number of rounds is possible analytically(TODO: I worked it out, just need to add here). Our simulations are then used to estimate the expected number of ballots.
 
 \begin{figure}
 \includegraphics[width=.5\textwidth]{workload.png}
@@ -28,8 +28,13 @@ We now consider a simple round schedule for our example. Each round is selected 
 The simulation results for our example are given in Figure~\ref{fig:workload}. 
 For various round schedules, given by the varying parameters $p$ on the horizontal axis, we see that the average audit cost varies with a minimum at roughly $.8$. In particular, the one-and-done $p=.9$ audits have an average of $zz\%$TODO higher cost than the $p=.8$ audits. Especially for low margin contests, using the cost-minimizing round schedule could translate to significant reduction in cost or savings in time, a particularly important factor given tight certification deadlines.
 
-Without extensive workload measurements, it is hard to know the most accurate value for $c_r$, and so we also evaluate the simulation results with varying $c_r$. 
-For each $c_r$, we find the value of $p$ which minimizes the expected workload as we did in Figure~\ref{fig:workload}. Figure~\ref{fig:optimal_ps} presents, for varying $c_r$ the round schedule parameter $p$ which minimizes expected workload. 
+Without workload measurements from multiple round audits, it is difficult to know an accurate value for $c_r$, and so we also evaluate the simulation results with varying $c_r$. 
+For each $c_r$, we find the value of $p$ which minimizes the expected workload as we did in Figure~\ref{fig:workload}. Rather than use the minimum cost estimate among the sparsely sampled points, we fit a quadratic polynomial and use its minimum to get a smoother relationship between $c_r$ and optimal $p$. Figure~\ref{fig:optimal_ps} presents, for varying $c_r$ the round schedule parameter $p$ which minimizes expected workload. 
+We observe that for a workload model with no overhead for each round (i.e. $c_r=0$), the optimal round schedule is that with $p=0.72$. As $c_r$ increases, the optimal value of $p$ also increases, up to as much as $p=.9$ for $c_r=10^4$.
+
+Analysis like this can be used to select round schedules for audits. 
+
+% check that report to see if we can at least suggest what might be reasonable
 
 \begin{figure}
 \includegraphics[width=.5\textwidth]{optimal_ps.png}
