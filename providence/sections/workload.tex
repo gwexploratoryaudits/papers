@@ -13,11 +13,12 @@ Analytical approximation of the expected audit behavior ($E_b$ and $E_r$) is cha
 %We will use the more standard approach of simulations to give an example here.
 Therefore we again use the standard approach of simulations.
 
-Consider the US state of Michigan. In the 2020 US Presidential contest, Michigan had a margin of $2.8\%$.
+Consider the US state of Michigan. In the 2020 US Presidential contest, Michigan had a margin of $2.8\%$. We again use risk-limit $\alpha = .1$. 
 
 We let the per ballot cost be one, $c_b=1$. Then the per round cost $c_r$ tells us the cost of a round as a number of ballots. We begin with an example in which $c_r=10$. That is, we suppose that the overhead of a round is equal to the workload of sampling $10$ ballots.
 
 We now consider a simple round schedule for our example. Each round is selected to give the same probability of stopping, $p$. If the audit does not stop in the first round, we find a round size which, given the sample drawn in the first round, will give a probability of stopping $p$ in the second round. For this round schedule scheme, a one-and-done audit is achieved by choosing large $p$, say $p=.9$ or $p=.95$. For this particular round schedule scheme, computing the expected number of rounds is possible analytically(TODO: I worked it out, just need to add here). Our simulations are then used to estimate the expected number of ballots.
+We run $10^4$ trials for each value of $p$.
 
 \begin{figure}
 \includegraphics[width=.5\textwidth]{workload.png}
