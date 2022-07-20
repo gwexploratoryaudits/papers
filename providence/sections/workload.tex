@@ -32,16 +32,20 @@ For various round schedules, given by the varying parameters $p$ on the horizont
 Without workload measurements from multiple round audits, it is difficult to know an accurate value for $c_r$, and so we also evaluate the simulation results with varying $c_r$. 
 For each $c_r$, we find the value of $p$ which minimizes the expected workload as we did in Figure~\ref{fig:workload}. Rather than use the minimum cost estimate among the sparsely sampled points, we fit a quadratic polynomial and use its minimum to get a smoother relationship between $c_r$ and optimal $p$. Figure~\ref{fig:optimal_ps} presents, for varying $c_r$ the round schedule parameter $p$ which minimizes expected workload. 
 We observe that for a workload model with no overhead for each round (i.e. $c_r=0$), the optimal round schedule is that with $p=0.72$. As $c_r$ increases, the optimal value of $p$ also increases, up to as much as $p=.9$ for $c_r=10^4$.
-
-Analysis like this can be used to select round schedules for audits. 
-
-% check that report to see if we can at least suggest what might be reasonable
+(TODO: check report(s) for any bit of an estimate we can give of what these values might be in practice, noting the issues/error expected)
 
 \begin{figure}
 \includegraphics[width=.5\textwidth]{optimal_ps.png}
 \caption{The optimal (cost-minimizing) stopping probability $p$ for varying cost model parameters $c_r$. With $c_b=1$, the varying value of $c_r$ can equivalently be thought of as the ratio of the cost of a round to the cost of a ballot.}
 \label{fig:optimal_ps}
 \end{figure}
+
+Analysis like this may be useful to election officials for selecting round schedules for audits. 
+It remains an open question whether a fast, accurate analytical approach for estimating $E_b$ and $E_r$ exists.
+
+Since the simulations are relatively computationally expensive, an analytical alternative is desirable. (TODO: need to compare my best analytical approach to the simulation results now)
+
+
 
 
 
