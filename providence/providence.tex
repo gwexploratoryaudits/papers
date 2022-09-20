@@ -151,14 +151,11 @@ Second Institution
 %Not more than 200 words, if possible, and preferably closer to 150.
 %\end{abstract}
 \begin{abstract}
-A Risk-Limiting Audit (RLA) draws consecutive random samples (rounds) of paper election ballots. 
-After each round, a rigorous error criterion is used to decide whether to stop (confirming the announced outcome) or continue (draw another round).
-The most commonly used ballot polling RLA, \BRAVO \cite{bravo}, requires the fewest ballots when each round is just one ballot. 
-Recent RLA \Minerva \cite{usenix_minerva} draws significantly fewer ballots than \BRAVO (half as many for large round sizes) but requires the round schedule to be fixed before the audit begins.
-We present \Providence, an audit with the efficiency of \Minerva and flexibility of \BRAVO.
-We prove \Providence is Risk-Limiting in the presence of an adversary who can choose subsequent round sizes given knowledge of previous samples, and we present simulation results demonstrating its efficiency.
-Finally, we describe the pilot use of \Providence by the Rhode Island Board of Elections.
-An implementation of \Providence is provided in the open source R2B2 library including novel functionality that allows election officials to select round sizes with information as to the probability of a round giving a misleading outcome, a desirable feature given political context\footnote{https://www.brennancenter.org/our-work/analysis-opinion/poll-local-election-officials-finds-safety-fears-colleagues-and}.
+A Risk-Limiting Audit (RLA) is a statistical election tabulation audit with a rigorous error guarantee. Ballot polling audits draw ballots in rounds, each round typically consisting of multiple ballots. Recently-proposed RLA \Minerva draws significantly fewer ballots than commonly-used RLA \BRAVO (half as many for large round sizes) but requires that the round schedule be fixed before the audit begins. 
+
+We present \Providence, an audit with the efficiency of \Minerva and flexibility of \BRAVO. We prove \Providence is risk-limiting in the presence of an adversary who can choose subsequent round sizes given knowledge of previous samples. We describe an efficiency measure that includes both the number of ballots drawn, as well as a variable representing the additional overhead of each round, and present simulation results demonstrating the superior efficiency of \Providence. We describe the use of \Providence by the Rhode Island Board of Elections in a statutory tabulation audit of the 2021 election.
+An implementation of \Providence is provided in the open source R2B2 library; it includes novel functionality enabling election officials to determine the probability that a too-small round would provide a misleading audit outcome. 
+% footnotes not common in abstracts. This footnote not sufficiently compelling: \footnote{https://www.brennancenter.org/our-work/analysis-opinion/poll-local-election-officials-finds-safety-fears-colleagues-and}.
 % and integrated into Arlo, election audit software used across the US.
 %\keywords{risk-limiting audit (RLA)  \and ballot polling audit \and evidence-based elections \and statistical election audit}
 \end{abstract}
