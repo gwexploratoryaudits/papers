@@ -9,6 +9,9 @@ Therefore we use the typical approach of simulations, again with risk-limit $10\
 We consider a simple round schedule, in which each round is selected to give the same probability of stopping, $p$. That is, if the audit does not stop in the first round, we select a second round size which, given the sample drawn in the first round, will again give a probability of stopping $p$ in the second round. For this round schedule scheme, a one-and-done audit is achieved by choosing large $p$, say $p=.9$ or $p=.95$.\footnote{For this particular round schedule scheme, computing the expected number of rounds is possible analytically, but the expected number of ballots is still difficult, and so we use simulations.} We run $10^4$ trials for each value of $p$, assuming the announced results are correct. 
 
 \subsection{Person-hours}
+
+Average ballots
+
 The simplest workload models are a function of just the total number of a ballots sampled. Figure~\ref{fig:avg_bals} shows the average total number of ballots sampled in our simulations for each value of $p$, which gives an estimate of the expected total number of ballots.
 Figure~\ref{fig:avg_bals_ratio} gives the same number as a ratio of the Providence values.
 It is straightforward to show that Providence and both forms of BRAVO collapse to the same test in the case where each round is a single ballot. Figures~\ref{fig:avg_bals} and \ref{fig:avg_bals_ratio} show that for larger stopping probabilities $p$ (i.e. larger rounds), Providence requires fewer ballots on average. In particular, the savings of Providence become larger as $p$ increases; for $p=.95$, EoR BRAVO and SO BRAVO require more than $2$ and $1.4$ times as many ballots as Providence respectively. 
@@ -24,6 +27,9 @@ It is straightforward to show that Providence and both forms of BRAVO collapse t
 \caption{The total number of ballots sampled on average in our simulations given as a fraction of those sampled by Providence, for various round schedules parameterized by $p$ the conditional stopping probability used to select each round size.}
 \label{fig:avg_bals_ratio}
 \end{figure}
+
+
+Round overhead
 
 It is clear that average number of ballots alone is an inadequate workload measure. 
 (Consider a state conducting its audit by selecting a single ballot at random, 
@@ -66,8 +72,12 @@ Figure~\ref{fig:optimal_costs} shows the optimal achievable workload for a wide 
 \label{fig:optimal_ps}
 \end{figure}
 
+Misleading probability
+
 Another consideration for election officals is the sensitivit
 Election officials may also want to choose larger sample sizes in order to avoid small samples with misleading tallies. In particular, it may be desirable to avoid with very high probability a case in which a sample shows a true loser winning. Assuming a correctly announced outcome, it is straightforward to compute the probability with which a reported loser has more votes than the true winner in a sample, and so we incorporate this into our tool as well. As an illustrating example, our simulations ... TODO
+
+Precinct overhead
 
 For a more complete model, we can also introduce container-level workload. The time to sample a ballot from an entirely new box is typically much greater than to sample a ballot from an already-open box. [rhode islandd numbers shows it is abou tthis] Available election results give per-precinct granularity of vote tallies, as opposed to individual box informatoin. In Virginia, however, most precincts have a single ballot scanner whose one box has sufficient capacity for the ballots cast in that precinct anyways, and so we model the per-container workload as a per-precinct constant cost, $c_p$. In this model, the workload estimate incurs an additional cost of $c_p$ every time a precinct is sampled from for the first time in a round. That is, let $E_{pi}$ be the expected number of distinct precincts sampled from in round $i$, and let $E_p=\sum_i E_{pi}$. Then the new model is
 \begin{equation}
@@ -82,8 +92,6 @@ We can again explore the minimum achievable workloads under this model, as shown
 \caption{The average cost of the audits we simulated using workload function \ref{eq:round_and_precinct_cost}.}
 \label{fig:optimal_ps}
 \end{figure}
-
-
 
 
 \subsection{Real time}
