@@ -62,7 +62,7 @@ Figure~\ref{fig:optimal_costs} shows the optimal achievable workload for a wide 
 
 \begin{figure}
 \includegraphics[width=.5\textwidth]{optimal_costs.png}
-\caption{For varying round cost $c_r$, the optimal average cost achievable by each audit, as a fraction of the Providence values.}
+\caption{For varying round cost $c_r$, the optimal average cost achievable by each audit, as a fraction of the Providence values. (We show the value for varying $c_r$ since the value of $c_r$ may differ significantly from case to case.) Note that values lower than $10^3$ are probably unrealistic in US statewide contests; in Virginia, $c_r=10^3$ corresponds to only about $15$ minutes of persontime per county as the overhead per round.}
 \label{fig:optimal_costs}
 \end{figure}
 
@@ -101,7 +101,7 @@ C(E_b, E_r, E_p) = E_b c_b + E_r c_r + E_p c_p
 We can again explore the minimum achievable workloads under this model, as shown in Figure~\ref{fig:optimal_costs_with_precinct}.
 
 \begin{figure}
-\includegraphics[width=.5\textwidth]{optimal_costs_with_precinct.png}
+\includegraphics[width=.5\textwidth]{optima_with_precinct_cost.png}
 \caption{The average cost of the audits we simulated using workload function \ref{eq:round_and_precinct_cost}.}
 \label{fig:optimal_ps}
 \end{figure}
