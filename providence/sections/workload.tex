@@ -74,8 +74,21 @@ Figure~\ref{fig:optimal_costs} shows the optimal achievable workload for a wide 
 
 Misleading probability
 
-Another consideration for election officals is the sensitivit
-Election officials may also want to choose larger sample sizes in order to avoid small samples with misleading tallies. In particular, it may be desirable to avoid with very high probability a case in which a sample shows a true loser winning. Assuming a correctly announced outcome, it is straightforward to compute the probability with which a reported loser has more votes than the true winner in a sample, and so we incorporate this into our tool as well. As an illustrating example, our simulations ... TODO
+Election officials may also want to choose larger sample sizes in order to avoid small samples with misleading tallies. It is desirable to avoid, with very high probability, a case where a sample shows a true loser winning. Assuming a correctly announced outcome, it is straightforward to compute the probability with which a reported loser has more votes than the true winner in a sample, and so we incorporate this into our tool as well. 
+As an illustrating example, we consider the expected occurence of misleading samples using our simulations. Figure~\ref{fig:misleading} gives the proportion of simulated audits that had a misleading cumulative sample at any point. Notably, this proportion is as high as 1 in 5 for the smaller stopping probability round schedules. Accordingly, we introduce a new parameter to our audit-planning tool, the maximum acceptable probability that the audit is misleading, the \emph{misleading limit}.
+In Figure~\reg{fig:misleading}, a horizontal line is included to illustrate the implication of a small \emph{misleading limit} of $0.1$.
+Observe that to achieve a probability of misleading of roughly $0.01$, a round schedule with $p=0.8$ is neeeded, and to achieve a probability of misleading of roughly $0.001$, a round schedule with $p=0.95$ is needed.
+It is not unreasonable to think that election officials might choose a \emph{misleading limit} of $0.01$, or smaller, given the state of public perception of election security in the US.
+Consequently, the desired \emph{misleading limit} may be a decided constraint in the choice of round schedule.
+
+\begin{figure}
+\includegraphics[width=.5\textwidth]{misleading.png}
+\caption{The proportion of simulated Providence audits that had a \emph{misleading} cumulative sample in any round.}
+\label{fig:misleading}
+\end{figure}
+
+
+
 
 Precinct overhead
 
