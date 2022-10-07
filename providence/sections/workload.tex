@@ -48,7 +48,7 @@ C(\mathcal{A}) = E_b c_b + E_r c_r
 \end{equation}
 
 For simplicity, (and without loss of generality), we assume the per ballot cost is one, $c_b=1$. Then the per round cost $c_r$ tells us the cost of a round as a number of ballots. We begin with $c_r=1000$ as a conservative example. 
-That is, we set the overhead of a round equal to the workload of sampling $1000$ ballots. Based on available data[rhode island nums], the time retrieving and analyzing each individual ballot is on the order of $75$ seconds which means that $c_r=1000$ is equivalent to roughly $20$ person-hours of workload. This corresponds to about $15$ minutes being spent per round in each of the $133$ counties of Virginia, a clearly conservative workload estimate. 
+That is, we set the overhead of a round equal to the workload of sampling $1000$ ballots. Based on available data\cite{RI-report}, the time retrieving and analyzing each individual ballot is on the order of $75$ seconds which means that $c_r=1000$ is equivalent to roughly $20$ person-hours of workload. This corresponds to about $15$ minutes being spent per round in each of the $133$ counties of Virginia, a clearly conservative workload estimate. 
 As shown in Figure~\ref{fig:with_round_cost}, lower average costs are achieved by selecting higher stopping probability; Providence achieves the lowest minimum average cost is achieved at roughly $0.7$.
 
 \begin{figure}
@@ -79,7 +79,7 @@ Election officials may also want to choose larger sample sizes in order to avoid
 
 Precinct overhead
 
-For a more complete model, we can also introduce container-level workload. The time to sample a ballot from an entirely new box is typically much greater than to sample a ballot from an already-open box. [rhode islandd numbers shows it is abou tthis] Available election results give per-precinct granularity of vote tallies, as opposed to individual box informatoin. In Virginia, however, most precincts have a single ballot scanner whose one box has sufficient capacity for the ballots cast in that precinct anyways, and so we model the per-container workload as a per-precinct constant cost, $c_p$. In this model, the workload estimate incurs an additional cost of $c_p$ every time a precinct is sampled from for the first time in a round. That is, let $E_{pi}$ be the expected number of distinct precincts sampled from in round $i$, and let $E_p=\sum_i E_{pi}$. Then the new model is
+For a more complete model, we can also introduce container-level workload. The time to sample a ballot from an entirely new box is typically greater than to sample a ballot from an already-open box. Based on a Rhode Island pilot RLA report\cite{RI-report}, this may mean that a ballot from a new container requires roughly twice the time as a ballot from an already-opened container. Typically available election results give per-precinct granularity of vote tallies, rather than individual container information. In Virginia, however, most precincts have a single ballot scanner whose one box has sufficient capacity for all the ballots cast in that precinct anyways, and so we model the per-container workload with an additional per-precinct constant cost, $c_p$. In this model, the workload estimate incurs an additional cost of $c_p$ every time a precinct is sampled from for the first time in a round. That is, let $E_{pi}$ be the expected number of distinct precincts sampled from in round $i$, and let $E_p=\sum_i E_{pi}$. Then the new model is
 \begin{equation}
 C(E_b, E_r, E_p) = E_b c_b + E_r c_r + E_p c_p
 \label{eq:round_and_precinct_cost}
