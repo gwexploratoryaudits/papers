@@ -10,9 +10,7 @@ We consider a simple round schedule, in which each round is selected to give the
 
 \subsection{Person-hours}
 
-Average ballots
-
-The simplest workload models are a function of just the total number of a ballots sampled. Figure~\ref{fig:avg_bals} shows the average total number of ballots sampled in our simulations for each value of $p$, which gives an estimate of the expected total number of ballots.
+\emph{Average total ballots.} The simplest workload models are a function of just the total number of a ballots sampled. Figure~\ref{fig:avg_bals} shows the average total number of ballots sampled in our simulations for each value of $p$, which gives an estimate of the expected total number of ballots.
 Figure~\ref{fig:avg_bals_ratio} gives the same number as a ratio of the Providence values.
 It is straightforward to show that Providence and both forms of BRAVO collapse to the same test in the case where each round is a single ballot. Figures~\ref{fig:avg_bals} and \ref{fig:avg_bals_ratio} show that for larger stopping probabilities $p$ (i.e. larger rounds), Providence requires fewer ballots on average. In particular, the savings of Providence become larger as $p$ increases; for $p=.95$, EoR BRAVO and SO BRAVO require more than $2$ and $1.4$ times as many ballots as Providence respectively. 
 
@@ -29,16 +27,13 @@ It is straightforward to show that Providence and both forms of BRAVO collapse t
 \end{figure}
 
 
-Round overhead
-
-It is clear that average number of ballots alone is an inadequate workload measure. 
+\emph{Round overhead.} It is clear that average number of ballots alone is an inadequate workload measure. 
 (Consider a state conducting its audit by selecting a single ballot at random, 
 notifying just the county where the ballot is located, and then waiting to hear back for the manual interpretation of the ballot before moving on to the next one. 
 This of course is preposterous and is why audits are actually performed in rounds.
 
 In a US state-wide RLA, the state organizes the audit by determining the random sample and communicating with the counties, but election officials at the county level physically sample and inspect the ballots from their precincts. 
 Therefore each audit round requires some number of person-hours for set up and communication between state and county. This overhead for a round includes choosing the round size, generating the random sample, and communicating that random sample to the counties, as well as the communication of the results back to the state afterwards. 
-%To make it clear that this overhead exists, 
 
 Consequently, we now consider a model with a constant per-ballot cost $c_b$ and a constant per-round cost $c_r$.
 So for an audit $\mathcal{A}$ with expected number of ballots $E_{b}$ and expected number of rounds $E_{r}$, we estimate that the cost $C$ of the audit is
@@ -72,11 +67,33 @@ Figure~\ref{fig:optimal_costs} shows the optimal achievable workload for a wide 
 \label{fig:optimal_ps}
 \end{figure}
 
-Misleading probability
+
+\emph{Precinct overhead.} For a more complete model, we can also introduce container-level workload. The time to sample a ballot from an entirely new box is typically greater than to sample a ballot from an already-open box. Based on a Rhode Island pilot RLA report\cite{RI-report}, this may mean that a ballot from a new container requires roughly twice the time as a ballot from an already-opened container. Typically available election results give per-precinct granularity of vote tallies, rather than individual container information. In Virginia, however, most precincts have a single ballot scanner whose one box has sufficient capacity for all the ballots cast in that precinct anyways, and so we model the per-container workload with an additional per-precinct constant cost, $c_p$. In this model, the workload estimate incurs an additional cost of $c_p$ every time a precinct is sampled from for the first time in a round. That is, let $E_{pi}$ be the expected number of distinct precincts sampled from in round $i$, and let $E_p=\sum_i E_{pi}$. Then the new model is
+\begin{equation}
+C(E_b, E_r, E_p) = E_b c_b + E_r c_r + E_p c_p
+\label{eq:round_and_precinct_cost}
+\end{equation}
+
+We can again explore the minimum achievable workloads under this model, as shown in Figure~\ref{fig:optimal_cost_precinct_cost_ratio}.
+
+\begin{figure}
+\includegraphics[width=.5\textwidth]{optimal_cost_precinct_cost_ratio.png}
+\caption{The average cost of the audits we simulated using workload function \ref{eq:round_and_precinct_cost}.}
+\label{fig:optimal_cost_precinct_cost_ratio}
+\end{figure}
+
+
+\subsection{Real time}
+Given tight certification deadlines\footnote{Virginia recently passed legislation requiring pre-certification RLAs TODO check exactly.}, the total real time spent is also an important factor to consider when planning audits.
+
+TODO
+
+
+\subsection{Misleading samples}
 
 Election officials may also want to choose larger sample sizes in order to avoid small samples with misleading tallies. It is desirable to avoid, with very high probability, a case where a sample shows a true loser winning. Assuming a correctly announced outcome, it is straightforward to compute the probability with which a reported loser has more votes than the true winner in a sample, and so we incorporate this into our tool as well. 
 As an illustrating example, we consider the expected occurence of misleading samples using our simulations. Figure~\ref{fig:misleading} gives the proportion of simulated audits that had a misleading cumulative sample at any point. Notably, this proportion is as high as 1 in 5 for the smaller stopping probability round schedules. Accordingly, we introduce a new parameter to our audit-planning tool, the maximum acceptable probability that the audit is misleading, the \emph{misleading limit}.
-In Figure~\reg{fig:misleading}, a horizontal line is included to illustrate the implication of a small \emph{misleading limit} of $0.1$.
+In Figure~\ref{fig:misleading}, a horizontal line is included to illustrate the implication of a small \emph{misleading limit} of $0.1$.
 Observe that to achieve a probability of misleading of roughly $0.01$, a round schedule with $p=0.8$ is neeeded, and to achieve a probability of misleading of roughly $0.001$, a round schedule with $p=0.95$ is needed.
 It is not unreasonable to think that election officials might choose a \emph{misleading limit} of $0.01$, or smaller, given the state of public perception of election security in the US.
 Consequently, the desired \emph{misleading limit} may be a decided constraint in the choice of round schedule.
@@ -87,30 +104,6 @@ Consequently, the desired \emph{misleading limit} may be a decided constraint in
 \label{fig:misleading}
 \end{figure}
 
-
-
-
-Precinct overhead
-
-For a more complete model, we can also introduce container-level workload. The time to sample a ballot from an entirely new box is typically greater than to sample a ballot from an already-open box. Based on a Rhode Island pilot RLA report\cite{RI-report}, this may mean that a ballot from a new container requires roughly twice the time as a ballot from an already-opened container. Typically available election results give per-precinct granularity of vote tallies, rather than individual container information. In Virginia, however, most precincts have a single ballot scanner whose one box has sufficient capacity for all the ballots cast in that precinct anyways, and so we model the per-container workload with an additional per-precinct constant cost, $c_p$. In this model, the workload estimate incurs an additional cost of $c_p$ every time a precinct is sampled from for the first time in a round. That is, let $E_{pi}$ be the expected number of distinct precincts sampled from in round $i$, and let $E_p=\sum_i E_{pi}$. Then the new model is
-\begin{equation}
-C(E_b, E_r, E_p) = E_b c_b + E_r c_r + E_p c_p
-\label{eq:round_and_precinct_cost}
-\end{equation}
-
-We can again explore the minimum achievable workloads under this model, as shown in Figure~\ref{fig:optimal_costs_with_precinct}.
-
-\begin{figure}
-\includegraphics[width=.5\textwidth]{optima_with_precinct_cost.png}
-\caption{The average cost of the audits we simulated using workload function \ref{eq:round_and_precinct_cost}.}
-\label{fig:optimal_ps}
-\end{figure}
-
-
-\subsection{Real time}
-Given tight certification deadlines\footnote{Virginia recently passed legislation requiring pre-certification RLAs TODO check exactly.}, the total real time spent is also an important factor to consider when planning audits.
-
-TODO
 
 
 
