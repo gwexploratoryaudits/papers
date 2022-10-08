@@ -78,15 +78,31 @@ We can again explore the minimum achievable workloads under this model, as shown
 
 \begin{figure}
 \includegraphics[width=.5\textwidth]{optimal_cost_precinct_cost_ratio.png}
-\caption{The average cost of the audits we simulated using workload function \ref{eq:round_and_precinct_cost}.}
+\caption{The optimal average cost of the audits we simulated using workload function \ref{eq:round_and_precinct_cost} for varying $c_p$, given as a fraction of the value for Providence}
 \label{fig:optimal_cost_precinct_cost_ratio}
 \end{figure}
 
 
 \subsection{Real time}
-Given tight certification deadlines\footnote{Virginia recently passed legislation requiring pre-certification RLAs TODO check exactly.}, the total real time spent is also an important factor to consider when planning audits.
+Given tight certification deadlines\footnote{Virginia recently passed legislation requiring pre-certification RLAs TODO check exactly.}, the total real time to conduct the RLA is also an important factor to consider when planning audits.
+Because each county can sample ballots for the same round concurrently, the total real time for a round depends only on the slowest county. 
+In Virginia, Fairfax County typically has the most votes cast by a significant difference; in the contest we consider, Fairfax County had ~551 thousand votes cast, more than double the ~203 thousand of second-highest Virginia Beach City.
+Consequently, we model the expected total real time $T$ of an audit using just the largest county, and we define analagous variables for the expected values in just the largest county.
+For the largest county, let the expected total ballots sampled be $\bar E_b$, the expected number of rounds $\bar E_r$, and the expected number of distinct precinct samples summed over all rounds be $\bar E_c$.
+Similarly, we use real time per-ballot, per-round, and per-precinct cost variables, $t_b$, $t_r$, and $t_p$. So the real time of the audit is estimated by
+\begin{equation}
+T(\bar E_b, \bar E_r, \bar E_p ) = \bar E_b t_b + \bar E_r t_r + \bar E_p t_p
+\label{eq:real_time}
+\end{equation}
 
-TODO
+As before, we can use our simulations to estimate $\bar E_b$, $\bar E_r$, and $\bar E_p$ using the corresponding averages over the trials. 
+Available data to estimate values for $t_b$, $t_r$, and $t_p$ is limited, and so we take as an example the values $t_b=75$ seconds, $t_r=3$ hours, and $t_p=75$ seconds. In practice, election officials could use our software and their own estimates of these values to explore choices for round schedules. Figure~\ref{fig:real_time} shows how the esimated real time for these values differs as a function of $p$. 
+
+\begin{figure}
+\includegraphics[width=.5\textwidth]{real_time.png}
+\caption{The real time as estimated by Equation~\ref{eq:real_time} for varying $p$ with expected values as estimated by our simulations.}
+\label{fig:real_time}
+\end{figure}
 
 
 \subsection{Misleading samples}
