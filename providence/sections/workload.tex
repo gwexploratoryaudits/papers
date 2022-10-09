@@ -1,38 +1,66 @@
-Some election audits have benefited from a one-and-done approach: draw a large sample with high probability of stopping in the first round and usually avoid a second round altogether. This is appealing for two reasons. Firstly, rounds have some overhead in time and effort. Thus the workload (cost and time) of an audit grows not just with the number of ballots sampled but also with the number of rounds. Secondly, smaller first round sizes give a higher probability that the result after the first round is misleading in the sense that the true winner is losing by the tally of the sampled ballots. On the other hand, a one-and-done audit may draw more ballots than are necessary. To evaluate the efficiency of various round schedules, we propose a simple workload model. Under this model, our simulation results suggest that slightly smaller round sizes give lower average workload. 
 
-We begin with the simple assumption that part of the workload grows linearly with the number of ballots, giving us the per ballot cost parameter $c_{b}$. It is less clear how cost is related to the number of rounds, but we propose a simple model in which the round cost is also linear, with constant per round cost $c_{r}$. This is a reasonable assumption for contests with small margin in which all or nearly all ballot boxes need to be opened in each round. [@Poorvi, I need help justifying the workload model.]
+Some election audits have benefited from a one-and-done approach: draw a large sample with high probability of stopping in the first round and usually avoid a second round altogether. This is appealing for two reasons. Firstly, rounds have some overhead in both time and effort. Thus the time and personhours of an audit grows not just with the number of ballots sampled but also with the number of rounds. Secondly, smaller first round sizes give a higher probability that the result after the first round is misleading in the sense that the true winner recieves has fewer votest than some other candidate according to the tally of the sampled ballots. On the other hand, a one-and-done audit may draw more ballots than are necessary; a more efficient round schedule could require less effort and time pre-certification. To evaluate the quality of various round schedules, we construct a simple workload model. Under this model we show how optimal round schedules can be chosen. We provide software that can be used by election officials to choose round schedules based on estimates of the model parameters like desired probability of a nonmisleading result.
 
-So for an audit $\mathcal{A}$ with expected number of ballots $E_{b}$ and expected number of rounds $E_{r}$, we get that the cost $C$ of the audit is
-\begin{equation}
-C(\mathcal{A}) = E_b c_b + E_r c_r
-\label{eq:cost}
-\end{equation}
-
-Analytical approximation of the expected audit behavior ($E_b$ and $E_r$) is challenging since the number of possible sequences of samples grows exponentially with the number of rounds. 
+As an example, we consider the US Presidential contest in the 2016 Virginia statewide general election. This contest had a margin of $5.3\%$ between the two candidates with the most votes.
+Analytical approximation of the expected audit behavior ($E_b$ and $E_r$) is challenging because the number of possible sequences of samples grows exponentially with the number of rounds. 
 %A very rough approximation scheme is possible and may be useful when choosing round sizes in practice. We implement such a scheme, available at \cite{software}.
 %We will use the more standard approach of simulations to give an example here.
-Therefore we again use the standard approach of simulations.
+Therefore we use the typical approach of simulations, again with risk-limit $10\%$.
+We consider a simple round schedule, in which each round is selected to give the same probability of stopping, $p$. That is, if the audit does not stop in the first round, we select a second round size which, given the sample drawn in the first round, will again give a probability of stopping $p$ in the second round. For this round schedule scheme, a one-and-done audit is achieved by choosing large $p$, say $p=.9$ or $p=.95$.\footnote{For this particular round schedule scheme, computing the expected number of rounds is possible analytically, but the expected number of ballots is still difficult, and so we use simulations.} We run $10^4$ trials for each value of $p$, assuming the announced results are correct. 
 
-Consider the US state of Michigan. In the 2020 US Presidential contest, Michigan had a margin of $2.8\%$. We again use risk-limit $\alpha = .1$. 
+\subsection{Person-hours}
 
-We let the per ballot cost be one, $c_b=1$. Then the per round cost $c_r$ tells us the cost of a round as a number of ballots. We begin with an example in which $c_r=10$. That is, we suppose that the overhead of a round is equal to the workload of sampling $10$ ballots.
-
-We now consider a simple round schedule for our example. Each round is selected to give the same probability of stopping, $p$. If the audit does not stop in the first round, we find a round size which, given the sample drawn in the first round, will give a probability of stopping $p$ in the second round. For this round schedule scheme, a one-and-done audit is achieved by choosing large $p$, say $p=.9$ or $p=.95$. For this particular round schedule scheme, computing the expected number of rounds is possible analytically(TODO: I worked it out, just need to add here). Our simulations are then used to estimate the expected number of ballots.
-We run $10^4$ trials for each value of $p$.
+\emph{Average total ballots.} The simplest workload models are a function of just the total number of a ballots sampled. Figure~\ref{fig:avg_bals} shows the average total number of ballots sampled in our simulations for each value of $p$, which gives an estimate of the expected total number of ballots.
+Figure~\ref{fig:avg_bals_ratio} gives the same number as a ratio of the Providence values.
+It is straightforward to show that Providence and both forms of BRAVO collapse to the same test in the case where each round is a single ballot. Figures~\ref{fig:avg_bals} and \ref{fig:avg_bals_ratio} show that for larger stopping probabilities $p$ (i.e. larger rounds), Providence requires fewer ballots on average. In particular, the savings of Providence become larger as $p$ increases; for $p=.95$, EoR BRAVO and SO BRAVO require more than $2$ and $1.4$ times as many ballots as Providence respectively. 
 
 \begin{figure}
-\includegraphics[width=.5\textwidth]{workload.png}
-\caption{For cost parameters $c_b=1$ and $c_r=10$, this plot shows the expected cost for various round schedule parameters $p$. Expected cost is found using Equation~\ref{eq:cost} and the average number of ballots and rounds in our simulations as the expected number of ballots and rounds.}
-\label{fig:workload}
+\includegraphics[width=.5\textwidth]{avg_bals.png}
+\caption{The total number of ballots sampled on average in our simulations for various round schedules parameterized by $p$ the conditional stopping probability used to select each round size.}
+\label{fig:avg_bals}
 \end{figure}
 
-The simulation results for our example are given in Figure~\ref{fig:workload}. 
-For various round schedules, given by the varying parameters $p$ on the horizontal axis, we see that the average audit cost varies with a minimum at roughly $.8$. In particular, the one-and-done $p=.9$ audits have an average of $zz\%$TODO higher cost than the $p=.8$ audits. Especially for low margin contests, using the cost-minimizing round schedule could translate to significant reduction in cost or savings in time, a particularly important factor given tight certification deadlines.
+\begin{figure}
+\includegraphics[width=.5\textwidth]{avg_bals_ratio.png}
+\caption{The total number of ballots sampled on average in our simulations given as a fraction of those sampled by Providence, for various round schedules parameterized by $p$ the conditional stopping probability used to select each round size.}
+\label{fig:avg_bals_ratio}
+\end{figure}
 
-Without workload measurements from multiple round audits, it is difficult to know an accurate value for $c_r$, and so we also evaluate the simulation results with varying $c_r$. 
-For each $c_r$, we find the value of $p$ which minimizes the expected workload as we did in Figure~\ref{fig:workload}. Rather than use the minimum cost estimate among the sparsely sampled points, we fit a quadratic polynomial and use its minimum to get a smoother relationship between $c_r$ and optimal $p$. Figure~\ref{fig:optimal_ps} presents, for varying $c_r$ the round schedule parameter $p$ which minimizes expected workload. 
-We observe that for a workload model with no overhead for each round (i.e. $c_r=0$), the optimal round schedule is that with $p=0.72$. As $c_r$ increases, the optimal value of $p$ also increases, up to as much as $p=.9$ for $c_r=10^4$.
-(TODO: check report(s) for any bit of an estimate we can give of what these values might be in practice, noting the issues/error expected)
+
+\emph{Round overhead.} It is clear that average number of ballots alone is an inadequate workload measure. 
+(Consider a state conducting its audit by selecting a single ballot at random, 
+notifying just the county where the ballot is located, and then waiting to hear back for the manual interpretation of the ballot before moving on to the next one. 
+This of course is preposterous and is why audits are actually performed in rounds.
+
+In a US state-wide RLA, the state organizes the audit by determining the random sample and communicating with the counties, but election officials at the county level physically sample and inspect the ballots from their precincts. 
+Therefore each audit round requires some number of person-hours for set up and communication between state and county. This overhead for a round includes choosing the round size, generating the random sample, and communicating that random sample to the counties, as well as the communication of the results back to the state afterwards. 
+
+Consequently, we now consider a model with a constant per-ballot cost $c_b$ and a constant per-round cost $c_r$.
+So for an audit $\mathcal{A}$ with expected number of ballots $E_{b}$ and expected number of rounds $E_{r}$, we estimate that the cost $C$ of the audit is
+\begin{equation}
+C(\mathcal{A}) = E_b c_b + E_r c_r
+\label{eq:round_cost}
+\end{equation}
+
+For simplicity, (and without loss of generality), we assume the per ballot cost is one, $c_b=1$. Then the per round cost $c_r$ tells us the cost of a round as a number of ballots. We begin with $c_r=1000$ as a conservative example. 
+That is, we set the overhead of a round equal to the workload of sampling $1000$ ballots. Based on available data\cite{RI-report}, the time retrieving and analyzing each individual ballot is on the order of $75$ seconds which means that $c_r=1000$ is equivalent to roughly $20$ person-hours of workload. This corresponds to about $15$ minutes being spent per round in each of the $133$ counties of Virginia, a clearly conservative workload estimate. 
+As shown in Figure~\ref{fig:with_round_cost}, lower average costs are achieved by selecting higher stopping probability; Providence achieves the lowest minimum average cost is achieved at roughly $0.7$.
+
+\begin{figure}
+\includegraphics[width=.5\textwidth]{with_round_cost.png}
+\caption{For cost parameters $c_b=1$ and $c_r=1000$, this plot shows the expected cost for various round schedule parameters $p$. Expected cost is found using Equation~\ref{eq:cost} and the average number of ballots and rounds in our simulations as the expected number of ballots and rounds.}
+\label{fig:with_round_cost}
+\end{figure}
+
+Importantly, this gives us a way to estimate the expected cost, as well as which round schedule value $p$ achieves it, for arbitrary round cost. For each round cost $c_r$, we produce a dataset analagous to that of Figure~\ref{fig:with_round_cost} and then find the minimum average cost achieved for each of the audits and its corresponding stopping probability $p$. 
+Figure~\ref{fig:optimal_costs} shows the optimal achievable workload for a wide range of per round costs. For very low round costs, the workload function approaches just the total number of ballots, and so, as seen in Figure~\ref{fig:abv_bals}, the three approaches differ by less. On the other hand, for extremely larger values of round cost, the average number of ballots has little impact on the workload function, and so the three audits again have similar values. For more reasonable values of the round cost $c_r$, SO BRAVO and EoR BRAVO achieve minimum cost roughly $1.1$ and $1.3$ times greater than that of Providence.
+Figure~\ref{fig:optimal_ps} shows the corresponding round schedule parameters $p$ that achieve these minimal workloads. As expected, a overhead for each round means that larger round sizes are needed to achieve an optimal audit, and so for all three audit $p$ increases as a function of $c_r$. Notice that Providence is generally above and to the left of SO BRAVO, and SO BRAVO is generally above and to the left of EOR BRAVO. This relationship reflects the fact that for the same round cost, Providence can get away with a larger stopping probability because it requires fewer ballots.
+
+\begin{figure}
+\includegraphics[width=.5\textwidth]{optimal_costs.png}
+\caption{For varying round cost $c_r$, the optimal average cost achievable by each audit, as a fraction of the Providence values. (We show the value for varying $c_r$ since the value of $c_r$ may differ significantly from case to case.) Note that values lower than $10^3$ are probably unrealistic in US statewide contests; in Virginia, $c_r=10^3$ corresponds to only about $15$ minutes of persontime per county as the overhead per round.}
+\label{fig:optimal_costs}
+\end{figure}
 
 \begin{figure}
 \includegraphics[width=.5\textwidth]{optimal_ps.png}
@@ -40,13 +68,58 @@ We observe that for a workload model with no overhead for each round (i.e. $c_r=
 \label{fig:optimal_ps}
 \end{figure}
 
-Analysis like this may be useful to election officials for selecting round schedules for audits. 
-It remains an open question whether a fast, accurate analytical approach for estimating $E_b$ and $E_r$ exists.
 
-Since the simulations are relatively computationally expensive, an analytical alternative is desirable. (TODO: need to compare my best analytical approach to the simulation results now)
+\emph{Precinct overhead.} For a more complete model, we can also introduce container-level workload. The time to sample a ballot from an entirely new box is typically greater than to sample a ballot from an already-open box. Based on a Rhode Island pilot RLA report\cite{RI-report}, this may mean that a ballot from a new container requires roughly twice the time as a ballot from an already-opened container. Typically available election results give per-precinct granularity of vote tallies, rather than individual container information. In Virginia, however, most precincts have a single ballot scanner whose one box has sufficient capacity for all the ballots cast in that precinct anyways, and so we model the per-container workload with an additional per-precinct constant cost, $c_p$. In this model, the workload estimate incurs an additional cost of $c_p$ every time a precinct is sampled from for the first time in a round. That is, let $E_{pi}$ be the expected number of distinct precincts sampled from in round $i$, and let $E_p=\sum_i E_{pi}$. Then the new model is
+\begin{equation}
+C(E_b, E_r, E_p) = E_b c_b + E_r c_r + E_p c_p
+\label{eq:round_and_precinct_cost}
+\end{equation}
+
+We can again explore the minimum achievable workloads under this model, as shown in Figure~\ref{fig:optimal_cost_precinct_cost_ratio}.
+
+\begin{figure}
+\includegraphics[width=.5\textwidth]{optimal_cost_precinct_cost_ratio.png}
+\caption{The optimal average cost of the audits we simulated using workload function \ref{eq:round_and_precinct_cost} for varying $c_p$, given as a fraction of the value for Providence}
+\label{fig:optimal_cost_precinct_cost_ratio}
+\end{figure}
 
 
+\subsection{Real time}
+Given tight certification deadlines\footnote{Virginia recently passed legislation requiring pre-certification RLAs TODO check exactly.}, the total real time to conduct the RLA is also an important factor to consider when planning audits.
+Because each county can sample ballots for the same round concurrently, the total real time for a round depends only on the slowest county. 
+In Virginia, Fairfax County typically has the most votes cast by a significant difference; in the contest we consider, Fairfax County had ~551 thousand votes cast, more than double the ~203 thousand of second-highest Virginia Beach City.
+Consequently, we model the expected total real time $T$ of an audit using just the largest county, and we define analagous variables for the expected values in just the largest county.
+For the largest county, let the expected total ballots sampled be $\bar E_b$, the expected number of rounds $\bar E_r$, and the expected number of distinct precinct samples summed over all rounds be $\bar E_c$.
+Similarly, we use real time per-ballot, per-round, and per-precinct cost variables, $t_b$, $t_r$, and $t_p$. So the real time of the audit is estimated by
+\begin{equation}
+T(\bar E_b, \bar E_r, \bar E_p ) = \bar E_b t_b + \bar E_r t_r + \bar E_p t_p
+\label{eq:real_time}
+\end{equation}
 
+As before, we can use our simulations to estimate $\bar E_b$, $\bar E_r$, and $\bar E_p$ using the corresponding averages over the trials. 
+Available data to estimate values for $t_b$, $t_r$, and $t_p$ is limited, and so we take as an example the values $t_b=75$ seconds, $t_r=3$ hours, and $t_p=75$ seconds. In practice, election officials could use our software and their own estimates of these values to explore choices for round schedules. Figure~\ref{fig:real_time} shows how the esimated real time for these values differs as a function of $p$. 
+
+\begin{figure}
+\includegraphics[width=.5\textwidth]{real_time.png}
+\caption{The real time as estimated by Equation~\ref{eq:real_time} for varying $p$ with expected values as estimated by our simulations.}
+\label{fig:real_time}
+\end{figure}
+
+
+\subsection{Misleading samples}
+
+Election officials may also want to choose larger sample sizes in order to avoid small samples with misleading tallies. It is desirable to avoid, with very high probability, a case where a sample shows a true loser winning. Assuming a correctly announced outcome, it is straightforward to compute the probability with which a reported loser has more votes than the true winner in a sample, and so we incorporate this into our tool as well. 
+As an illustrating example, we consider the expected occurence of misleading samples using our simulations. Figure~\ref{fig:misleading} gives the proportion of simulated audits that had a misleading cumulative sample at any point. Notably, this proportion is as high as 1 in 5 for the smaller stopping probability round schedules. Accordingly, we introduce a new parameter to our audit-planning tool, the maximum acceptable probability that the audit is misleading, the \emph{misleading limit}.
+In Figure~\ref{fig:misleading}, a horizontal line is included to illustrate the implication of a small \emph{misleading limit} of $0.1$.
+Observe that to achieve a probability of misleading of roughly $0.01$, a round schedule with $p=0.8$ is neeeded, and to achieve a probability of misleading of roughly $0.001$, a round schedule with $p=0.95$ is needed.
+It is not unreasonable to think that election officials might choose a \emph{misleading limit} of $0.01$, or smaller, given the state of public perception of election security in the US.
+Consequently, the desired \emph{misleading limit} may be a decided constraint in the choice of round schedule.
+
+\begin{figure}
+\includegraphics[width=.5\textwidth]{misleading.png}
+\caption{The proportion of simulated Providence audits that had a \emph{misleading} cumulative sample in any round.}
+\label{fig:misleading}
+\end{figure}
 
 
 
