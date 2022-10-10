@@ -65,7 +65,7 @@ Figure~\ref{fig:optimal_ps} shows the corresponding round schedule parameters $p
 
 \begin{figure}
 \includegraphics[width=.5\textwidth]{optimal_ps.png}
-\caption{The optimal (cost-minimizing) stopping probability $p$ for varying cost model parameters $c_r$. With $c_b=1$, the varying value of $c_r$ can equivalently be thought of as the ratio of the cost of a round to the cost of a ballot.}
+\caption{The optimal (cost-minimizing) stopping probability $p$ for varying cost model parameters $c_r$. With $c_b=1$, the varying value of $c_r$ can equivalently be thought of as the ratio of the cost of a round to the cost of a ballot. (Note that the steps in this function are a consequence of our subsampling the workload function. That is, the workload-minimizing value of $p$ for each $c_r$ is only allowed to take on values at increments of $0.5$.)}
 \label{fig:optimal_ps}
 \end{figure}
 
@@ -133,7 +133,7 @@ Consequently, the desired \emph{misleading limit} may be a deciding constraint i
 \label{fig:misleading}
 \end{figure}
 
-If election officials wish to achieve a maximum \emph{misleading limit} for all the rounds, our simulation analysis could help. On the other hand, for a given round, it is straightforward to compute analytically the probability that a loser has more votes than the winner in the sample. Table~\ref{tab:misleading} shows for various margins the minimum first round size $n$ that guarantees a probability of a \emph{misleading sample} at most $M\in\{0.1,0.01,0.001\}$. For all values of $M$ and all margins, \Providence achieves a higher probability of stopping than either EoR \BRAVO or SO \BRAVO. 
+If election officials wish to enforce a \emph{misleading limit} for all the rounds, our simulation analysis could help. On the other hand, for a given round, it is straightforward to compute analytically the probability that a loser has more votes than the winner in the sample. Table~\ref{tab:misleading} shows for various margins the minimum first round size $n$ that guarantees a probability of a \emph{misleading sample} at most $M\in\{0.1,0.01,0.001\}$. For all values of $M$ and all margins, \Providence achieves a higher probability of stopping than either EoR \BRAVO or SO \BRAVO. 
     As seen in the Table~\ref{tab:misleading}, for $M=0.01$, the the minimum round sizes require at least roughly a $0.8$ probability of stopping in the first round. Even if the most efficient audit schedule (by either workload or real time measures) would use a lower stopping probability $p$, the election officials may use this constraint on the probability of a \emph{misleading sample} as the deciding factor in selecting a first round size.
 
 \begin{table}
