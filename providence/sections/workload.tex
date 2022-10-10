@@ -1,4 +1,3 @@
-
 Some election audits have benefited from a one-and-done approach: draw a large sample with high probability of stopping in the first round and usually avoid a second round altogether. This is appealing for two reasons. Firstly, rounds have some overhead in both time and effort. Thus the time and personhours of an audit grows not just with the number of ballots sampled but also with the number of rounds. Secondly, smaller first round sizes give a higher probability that the result after the first round is misleading in the sense that the true winner recieves has fewer votest than some other candidate according to the tally of the sampled ballots. On the other hand, a one-and-done audit may draw more ballots than are necessary; a more efficient round schedule could require less effort and time pre-certification. To evaluate the quality of various round schedules, we construct a simple workload model. Under this model we show how optimal round schedules can be chosen. We provide software that can be used by election officials to choose round schedules based on estimates of the model parameters like desired probability of a nonmisleading result.
 
 As an example, we consider the US Presidential contest in the 2016 Virginia statewide general election. This contest had a margin of $5.3\%$ between the two candidates with the most votes.
@@ -10,9 +9,10 @@ We consider a simple round schedule, in which each round is selected to give the
 
 \subsection{Person-hours}
 
-\emph{Average total ballots.} The simplest workload models are a function of just the total number of a ballots sampled. Figure~\ref{fig:avg_bals} shows the average total number of ballots sampled in our simulations for each value of $p$, which gives an estimate of the expected total number of ballots.
-Figure~\ref{fig:avg_bals_ratio} gives the same number as a ratio of the Providence values.
-It is straightforward to show that Providence and both forms of BRAVO collapse to the same test in the case where each round is a single ballot. Figures~\ref{fig:avg_bals} and \ref{fig:avg_bals_ratio} show that for larger stopping probabilities $p$ (i.e. larger rounds), Providence requires fewer ballots on average. In particular, the savings of Providence become larger as $p$ increases; for $p=.95$, EoR BRAVO and SO BRAVO require more than $2$ and $1.4$ times as many ballots as Providence respectively. 
+\noindent\textbf{Average total ballots.} 
+The simplest workload models are a function of just the total number of a ballots sampled. Figure~\ref{fig:avg_bals} shows the average total number of ballots sampled in our simulations for each value of $p$, which gives an estimate of the expected total number of ballots.
+Figure~\ref{fig:avg_bals_ratio} gives the same number as a ratio of the \Providence values.
+It is straightforward to show that \Providence and both forms of \BRAVO collapse to the same test in the case where each round is a single ballot. Figures~\ref{fig:avg_bals} and \ref{fig:avg_bals_ratio} show that for larger stopping probabilities $p$ (i.e. larger rounds), \Providence requires fewer ballots on average. In particular, the savings of \Providence become larger as $p$ increases; for $p=.95$, EoR \BRAVO and SO \BRAVO require more than $2$ and $1.4$ times as many ballots as \Providence respectively. 
 
 \begin{figure}
 \includegraphics[width=.5\textwidth]{avg_bals.png}
@@ -22,15 +22,16 @@ It is straightforward to show that Providence and both forms of BRAVO collapse t
 
 \begin{figure}
 \includegraphics[width=.5\textwidth]{avg_bals_ratio.png}
-\caption{The total number of ballots sampled on average in our simulations given as a fraction of those sampled by Providence, for various round schedules parameterized by $p$ the conditional stopping probability used to select each round size.}
+\caption{The total number of ballots sampled on average in our simulations given as a fraction of those sampled by \Providence, for various round schedules parameterized by $p$ the conditional stopping probability used to select each round size.}
 \label{fig:avg_bals_ratio}
 \end{figure}
 
 
-\emph{Round overhead.} It is clear that average number of ballots alone is an inadequate workload measure. 
+\noindent\textbf{Round overhead.} 
+It is clear that average number of ballots alone is an inadequate workload measure. 
 (Consider a state conducting its audit by selecting a single ballot at random, 
 notifying just the county where the ballot is located, and then waiting to hear back for the manual interpretation of the ballot before moving on to the next one. 
-This of course is preposterous and is why audits are actually performed in rounds.
+This of course is inefficient and is why audits are actually performed in rounds.)
 
 In a US state-wide RLA, the state organizes the audit by determining the random sample and communicating with the counties, but election officials at the county level physically sample and inspect the ballots from their precincts. 
 Therefore each audit round requires some number of person-hours for set up and communication between state and county. This overhead for a round includes choosing the round size, generating the random sample, and communicating that random sample to the counties, as well as the communication of the results back to the state afterwards. 
@@ -44,7 +45,7 @@ C(\mathcal{A}) = E_b c_b + E_r c_r
 
 For simplicity, (and without loss of generality), we assume the per ballot cost is one, $c_b=1$. Then the per round cost $c_r$ tells us the cost of a round as a number of ballots. We begin with $c_r=1000$ as a conservative example. 
 That is, we set the overhead of a round equal to the workload of sampling $1000$ ballots. Based on available data\cite{RI-report}, the time retrieving and analyzing each individual ballot is on the order of $75$ seconds which means that $c_r=1000$ is equivalent to roughly $20$ person-hours of workload. This corresponds to about $15$ minutes being spent per round in each of the $133$ counties of Virginia, a clearly conservative workload estimate. 
-As shown in Figure~\ref{fig:with_round_cost}, lower average costs are achieved by selecting higher stopping probability; Providence achieves the lowest minimum average cost is achieved at roughly $0.7$.
+As shown in Figure~\ref{fig:with_round_cost}, lower average costs are achieved by selecting higher stopping probability; \Providence achieves the lowest minimum average cost is achieved at roughly $0.7$.
 
 \begin{figure}
 \includegraphics[width=.5\textwidth]{with_round_cost.png}
@@ -53,23 +54,23 @@ As shown in Figure~\ref{fig:with_round_cost}, lower average costs are achieved b
 \end{figure}
 
 Importantly, this gives us a way to estimate the expected cost, as well as which round schedule value $p$ achieves it, for arbitrary round cost. For each round cost $c_r$, we produce a dataset analagous to that of Figure~\ref{fig:with_round_cost} and then find the minimum average cost achieved for each of the audits and its corresponding stopping probability $p$. 
-Figure~\ref{fig:optimal_costs} shows the optimal achievable workload for a wide range of per round costs. For very low round costs, the workload function approaches just the total number of ballots, and so, as seen in Figure~\ref{fig:abv_bals}, the three approaches differ by less. On the other hand, for extremely larger values of round cost, the average number of ballots has little impact on the workload function, and so the three audits again have similar values. For more reasonable values of the round cost $c_r$, SO BRAVO and EoR BRAVO achieve minimum cost roughly $1.1$ and $1.3$ times greater than that of Providence.
-Figure~\ref{fig:optimal_ps} shows the corresponding round schedule parameters $p$ that achieve these minimal workloads. As expected, a overhead for each round means that larger round sizes are needed to achieve an optimal audit, and so for all three audit $p$ increases as a function of $c_r$. Notice that Providence is generally above and to the left of SO BRAVO, and SO BRAVO is generally above and to the left of EOR BRAVO. This relationship reflects the fact that for the same round cost, Providence can get away with a larger stopping probability because it requires fewer ballots.
+Figure~\ref{fig:optimal_costs} shows the optimal achievable workload for a wide range of per round costs. For very low round costs, the workload function approaches just the total number of ballots, and so, as seen in Figure~\ref{fig:abv_bals}, the three approaches differ by less. On the other hand, for extremely larger values of round cost, the average number of ballots has little impact on the workload function, and so the three audits again have similar values. For more reasonable values of the round cost $c_r$, SO \BRAVO and EoR \BRAVO achieve minimum cost roughly $1.1$ and $1.3$ times greater than that of \Providence.
+Figure~\ref{fig:optimal_ps} shows the corresponding round schedule parameters $p$ that achieve these minimal workloads. As expected, a overhead for each round means that larger round sizes are needed to achieve an optimal audit, and so for all three audit $p$ increases as a function of $c_r$. Notice that \Providence is generally above and to the left of SO \BRAVO, and SO \BRAVO is generally above and to the left of EoR \BRAVO. This relationship reflects the fact that for the same round cost, \Providence can get away with a larger stopping probability because it requires fewer ballots.
 
 \begin{figure}
 \includegraphics[width=.5\textwidth]{optimal_costs.png}
-\caption{For varying round cost $c_r$, the optimal average cost achievable by each audit, as a fraction of the Providence values. (We show the value for varying $c_r$ since the value of $c_r$ may differ significantly from case to case.) Note that values lower than $10^3$ are probably unrealistic in US statewide contests; in Virginia, $c_r=10^3$ corresponds to only about $15$ minutes of persontime per county as the overhead per round.}
+\caption{For varying round cost $c_r$, the optimal average cost achievable by each audit, as a fraction of the \Providence values. (We show the value for varying $c_r$ since the value of $c_r$ may differ significantly from case to case.) Note that values lower than $10^3$ are probably unrealistic in US statewide contests; in Virginia, $c_r=10^3$ corresponds to only about $15$ minutes of persontime per county as the overhead per round.}
 \label{fig:optimal_costs}
 \end{figure}
 
 \begin{figure}
 \includegraphics[width=.5\textwidth]{optimal_ps.png}
-\caption{The optimal (cost-minimizing) stopping probability $p$ for varying cost model parameters $c_r$. With $c_b=1$, the varying value of $c_r$ can equivalently be thought of as the ratio of the cost of a round to the cost of a ballot.}
+\caption{The optimal (cost-minimizing) stopping probability $p$ for varying cost model parameters $c_r$. With $c_b=1$, the varying value of $c_r$ can equivalently be thought of as the ratio of the cost of a round to the cost of a ballot. (Note that the steps in this function are a consequence of our subsampling the workload function. That is, the workload-minimizing value of $p$ for each $c_r$ is only allowed to take on values at increments of $0.5$.)}
 \label{fig:optimal_ps}
 \end{figure}
 
 
-\emph{Precinct overhead.} For a more complete model, we can also introduce container-level workload. The time to sample a ballot from an entirely new box is typically greater than to sample a ballot from an already-open box. Based on a Rhode Island pilot RLA report\cite{RI-report}, this may mean that a ballot from a new container requires roughly twice the time as a ballot from an already-opened container. Typically available election results give per-precinct granularity of vote tallies, rather than individual container information. In Virginia, however, most precincts have a single ballot scanner whose one box has sufficient capacity for all the ballots cast in that precinct anyways, and so we model the per-container workload with an additional per-precinct constant cost, $c_p$. In this model, the workload estimate incurs an additional cost of $c_p$ every time a precinct is sampled from for the first time in a round. That is, let $E_{pi}$ be the expected number of distinct precincts sampled from in round $i$, and let $E_p=\sum_i E_{pi}$. Then the new model is
+\noindent\textbf{Precinct overhead.} For a more complete model, we can also introduce container-level workload. The time to sample a ballot from an entirely new box is typically greater than to sample a ballot from an already-open box. Based on a Rhode Island pilot RLA report\cite{RI-report}, this may mean that a ballot from a new container requires roughly twice the time as a ballot from an already-opened container. Typically available election results give per-precinct granularity of vote tallies, rather than individual container information. In Virginia, however, most precincts have a single ballot scanner whose one box has sufficient capacity for all the ballots cast in that precinct anyways, and so we model the per-container workload with an additional per-precinct constant cost, $c_p$. In this model, the workload estimate incurs an additional cost of $c_p$ every time a precinct is sampled from for the first time in a round. That is, let $E_{pi}$ be the expected number of distinct precincts sampled from in round $i$, and let $E_p=\sum_i E_{pi}$. Then the new model is
 \begin{equation}
 C(E_b, E_r, E_p) = E_b c_b + E_r c_r + E_p c_p
 \label{eq:round_and_precinct_cost}
@@ -79,7 +80,7 @@ We can again explore the minimum achievable workloads under this model, as shown
 
 \begin{figure}
 \includegraphics[width=.5\textwidth]{optimal_cost_precinct_cost_ratio.png}
-\caption{The optimal average cost of the audits we simulated using workload function \ref{eq:round_and_precinct_cost} for varying $c_p$, given as a fraction of the value for Providence}
+\caption{The optimal average cost of the audits we simulated using workload function \ref{eq:round_and_precinct_cost} for varying $c_p$, given as a fraction of the value for \Providence}
 \label{fig:optimal_cost_precinct_cost_ratio}
 \end{figure}
 
@@ -97,7 +98,7 @@ T(\bar E_b, \bar E_r, \bar E_p ) = \bar E_b t_b + \bar E_r t_r + \bar E_p t_p
 \end{equation}
 
 As before, we can use our simulations to estimate $\bar E_b$, $\bar E_r$, and $\bar E_p$ using the corresponding averages over the trials. 
-Available data to estimate values for $t_b$, $t_r$, and $t_p$ is limited, and so we take as an example the values $t_b=75$ seconds, $t_r=3$ hours, and $t_p=75$ seconds. In practice, election officials could use our software and their own estimates of these values to explore choices for round schedules. Figure~\ref{fig:real_time} shows how the esimated real time for these values differs as a function of $p$. 
+Available data to estimate values for $t_b$, $t_r$, and $t_p$ is limited, and so we take as an example the values $t_b=75$ seconds, $t_r=3$ hours, and $t_p=75$ seconds.\footnote{The value $t_b=75$ seconds corresponds to a serial retrieval and interpretation of the ballots based on the \cite{RI-report} timing, $t_p=75$ seconds corresponds to the approximate doubling in time for new-box ballots as reported in \cite{RI-report} in the ballot-level comparison timing data, and $t_r=3$ hours is just a guess at an approximate order for this variable.} In practice, election officials could use our software and their own estimates of these values to explore choices for round schedules. Figure~\ref{fig:real_time} shows how the esimated real time for these values differs as a function of $p$. It should be noted that real values of $t_b$, $t_r$, and $t_p$ will vary greatly based on the number of parallel teams retreiving and checking ballots, the distribution of ballots and containers both in number and physical space, and other factors. We provide Figure~\ref{fig:real_time} only as an example of the general shape and behavior of this function. Use of this optimal scheduling tool would depend on parameter estimates tailored to each case.
 
 \begin{figure}
 \includegraphics[width=.5\textwidth]{real_time.png}
@@ -108,19 +109,76 @@ Available data to estimate values for $t_b$, $t_r$, and $t_p$ is limited, and so
 
 \subsection{Misleading samples}
 
-Election officials may also want to choose larger sample sizes in order to avoid small samples with misleading tallies. It is desirable to avoid, with very high probability, a case where a sample shows a true loser winning. Assuming a correctly announced outcome, it is straightforward to compute the probability with which a reported loser has more votes than the true winner in a sample, and so we incorporate this into our tool as well. 
-As an illustrating example, we consider the expected occurence of misleading samples using our simulations. Figure~\ref{fig:misleading} gives the proportion of simulated audits that had a misleading cumulative sample at any point. Notably, this proportion is as high as 1 in 5 for the smaller stopping probability round schedules. Accordingly, we introduce a new parameter to our audit-planning tool, the maximum acceptable probability that the audit is misleading, the \emph{misleading limit}.
-In Figure~\ref{fig:misleading}, a horizontal line is included to illustrate the implication of a small \emph{misleading limit} of $0.1$.
-Observe that to achieve a probability of misleading of roughly $0.01$, a round schedule with $p=0.8$ is neeeded, and to achieve a probability of misleading of roughly $0.001$, a round schedule with $p=0.95$ is needed.
-It is not unreasonable to think that election officials might choose a \emph{misleading limit} of $0.01$, or smaller, given the state of public perception of election security in the US.
-Consequently, the desired \emph{misleading limit} may be a decided constraint in the choice of round schedule.
+Unfortunately, efficiency alone is not sufficient for planning audits. In the US today, election officials need to make legitimate safety considerations.
+When drawing a random sample of the ballots, it is always possible that the tally of the sample provides misleading information. In a random sample, a true loser may recieve more votes than the true winner. This happens more often when the sample sizes are small.
+In these RLAs, a misleading sample in an early round is dealt with by drawing more ballots (moving on to another round), but in practice the implications of this approach may be dangerous.
+
+Imagine that Alice beats Bob in an election contest both truly and by the announced results, but Bob's supporters are insistent he really won. When election officials carry out the RLA, they choose a small first round size in the hopes of achieving an efficient audit by getting to stop sooner. After the first round, by chance, there are more votes for Bob than for Alice in the sample. Bob's supporters celebrate their victory that the audit has in fact revealed that Bob really won, but the election officials have to explain that they are moving on to a second round. After the second round, there are more votes in the sample for Alice and sufficiently many that the risk limit is met and the audit now ends confirming the announced result that Alice won. This is an undesirable situation.
+
+We introduce the notion of a \emph{misleading sample}, any cumulative sample which, assuming the announced outcome is correct, contains more ballots for a loser than for the winner.
+We can again use our simulations to gain insight into the frequency of \emph{misleading samples}.
+For each stopping probability $p$, Figure~\ref{fig:misleading} gives the proportion of simulated audits that had a \emph{misleading sample} at any point. 
+Notably, this proportion is as high as 1 in 5 for the smaller stopping probability round schedules.
+Accordingly, we introduce a new parameter to our audit-planning tool, the maximum acceptable probability that the audit is misleading, the \emph{misleading limit}.
+
+In Figure~\ref{fig:misleading}, horizontal lines are included to show \emph{misleading limits} of $0.1$, $0.01$, and $0.001$.
+To achieve a probability of a misleading sample of at most $0.1$, a round schedule with at least roughly $p=.3$ is needed.
+To achieve a probability of misleading of roughly $0.01$, a round schedule with $p=0.8$ is neeeded, and to achieve a probability of misleading of roughly $0.001$, a round schedule with $p=0.95$ is needed.
+It is not unreasonable to think that election officials might choose a \emph{misleading limit} of $0.01$, or smaller, given the state of public perception of election security in the US and the associated threats of violence.
+Consequently, the desired \emph{misleading limit} may be a deciding constraint in the choice of round schedule. 
 
 \begin{figure}
-\includegraphics[width=.5\textwidth]{misleading.png}
-\caption{The proportion of simulated Providence audits that had a \emph{misleading} cumulative sample in any round.}
+\includegraphics[width=.5\textwidth]{misleading_limits.png}
+\caption{The proportion of simulated \Providence audits that had a \emph{misleading sample} in any round.}
 \label{fig:misleading}
 \end{figure}
 
+If election officials wish to enforce a \emph{misleading limit} for all the rounds, our simulation analysis could help. On the other hand, for a given round, it is straightforward to compute analytically the probability that a loser has more votes than the winner in the sample. Table~\ref{tab:misleading} shows for various margins the minimum first round size $n$ that guarantees a probability of a \emph{misleading sample} at most $M\in\{0.1,0.01,0.001\}$. For all values of $M$ and all margins, \Providence achieves a higher probability of stopping than either EoR \BRAVO or SO \BRAVO. 
+    As seen in the Table~\ref{tab:misleading}, for $M=0.01$, the the minimum round sizes require at least roughly a $0.8$ probability of stopping in the first round. Even if the most efficient audit schedule (by either workload or real time measures) would use a lower stopping probability $p$, the election officials may use this constraint on the probability of a \emph{misleading sample} as the deciding factor in selecting a first round size.
+
+\begin{table}
+\center
+\begin{tabular}{ |l|l|r|c|c|c| }
+\hline
+$M$ & margin & $n$ & Prov & SO & EoR \\
+\hline
+0.1&0.25&25&0.221&0.152&0.115\\
+&0.2&41&0.178&0.169&0.105\\
+&0.15&73&0.202&0.186&0.141\\
+&0.1&163&0.222&0.182&0.107\\
+&0.05&657&0.227&0.192&0.127\\
+&0.04&1027&0.237&0.193&0.124\\
+&0.03&1825&0.246&0.194&0.124\\
+&0.02&4105&0.246&0.195&0.124\\
+&0.01&16423&0.246&0.196&0.124\\
+\hline
+0.01&0.25&85&0.792&0.707&0.559\\
+&0.2&133&0.826&0.71&0.593\\
+&0.15&239&0.817&0.712&0.549\\
+&0.1&539&0.805&0.717&0.567\\
+&0.05&2163&0.817&0.721&0.569\\
+&0.04&3381&0.82&0.722&0.563\\
+&0.03&6011&0.824&0.723&0.573\\
+&0.02&13527&0.824&0.723&0.57\\
+&0.01&54117&0.824&0.724&0.57\\
+\hline
+0.001&0.25&149&0.962&0.889&0.783\\
+&0.2&235&0.963&0.89&0.768\\
+&0.15&421&0.958&0.894&0.801\\
+&0.1&951&0.958&0.894&0.793\\
+&0.05&3815&0.96&0.896&0.785\\
+&0.04&5965&0.961&0.896&0.791\\
+&0.03&10607&0.961&0.897&0.787\\
+&0.02&23869&0.962&0.897&0.787\\
+&0.01&95491&0.962&0.897&0.787\\
+\hline
+\end{tabular}
+\caption{For various margins, this table gives the minimum first round size $n$ to achieve at most a probability $M$ of a \emph{misleading sample} in the first round. The corresponding stopping probabilities of \Providence, SO \BRAVO, and EoR \BRAVO are given for each value of $n$.}
+\label{tab:misleading}
+\end{table}
+
+
+\textbf{Other misleading RLA results.}
 
 
 
