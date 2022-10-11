@@ -5,6 +5,12 @@ Matthew Bernhard.
 \newblock {\em Election Security Is Harder Than You Think}.
 \newblock PhD thesis, University of Michigan, 2020.
 
+\bibitem{bernhard-sok}
+Matthew Bernhard.
+\newblock Risk-limiting {A}udits: A practical systematization of knowledge.
+\newblock In {\em In Proceedings, Seventh International Joint Conference on
+  Electronic Voting (E-Vote-ID'21), October 2021}, 2021.
+
 \bibitem{blom_IRV}
 Michelle~L. Blom, Peter~J. Stuckey, and Vanessa~J. Teague.
 \newblock Ballot-polling risk limiting audits for {IRV} elections.

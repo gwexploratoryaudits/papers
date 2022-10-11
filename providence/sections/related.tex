@@ -1,4 +1,6 @@
 %Related Work
+Bernhard provides a good description of the RLA and its assumptions, and also describes the process on the ground \cite{bernhard-sok}. 
+
 The \BRAVO audit \cite{bravo} is the most popular ballot polling audit. When ballots are sampled one at a time, it is the audit with the smallest expected number of ballots drawn. 
 
 The \Minerva audit \cite{usenix_minerva,arxiv_athena} was developed for use with large first round sizes, and has been proven to be risk limiting when the round schedule for the audit is fixed before any ballots are drawn. First-round sizes for a stopping probability of $0.9$ when the announced tally is correct have been shown to be smaller than those for EoR and SO \BRAVO for a wide range of margins; simulations \cite{arxiv_athena} support these observations. Additional simulations \cite{simulations} have shown that \Minerva requires fewer ballots than EoR and SO \BRAVO over multiple rounds and for smaller stopping probability. As expected, the advantage of \Minerva decreases for smaller stopping probability (smaller round sizes) as such round schedules approach the B2 round schedule (1,1,1,\ldots) for which \BRAVO is known to be most efficient.
