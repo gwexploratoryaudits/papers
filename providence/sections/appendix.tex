@@ -120,7 +120,9 @@ Then if $k_r \geq k^{p_a, p_0, \alpha, k_{r-1}}_{min, r, [n_1, \ldots, n_r]}$ th
 The following lemma shows a Markov-like property of \Providence audit (\textit{i.e.,}
 for an audit that has not stopped in the first $r-1$ rounds, results of the round $r-1$ matter: cumulative sample size $n_{j-1}$ and the number of ballots for the winner $k_{r-1}$).
 
-\begin{lemma}\label{lemma:markov}
+\fpo{if we want to have lemmas in appendix formulated, we would need to set the lemma counter by hand}
+\setcounter{lemma}{0}
+\begin{lemma}
 Let $[n_1, \ldots, n_{r-1}, n_r]$ be a round schedule for an execution of  \Providence audit that has not stopped
 in any of its first $r-1$ rounds (\textit{i.e.,} for every $j = 1, \ldots, r-1$:
 $k_j < k^{p_a, p_0, \alpha}_{min, r, [n_1, \ldots, n_j]}$), then: 

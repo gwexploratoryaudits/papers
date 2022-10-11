@@ -3,19 +3,19 @@
 % \fpo{(old notes)}
 
 \Minerva was proven to be risk-limiting audit for a predetermined round schedule.
-As explained in section \ref{sec:prov_motivation}, it is not clear that \Minerva is risk-limiting if an adversary can 
+As explained in Section~\ref{sec:prov_motivation}, it is not clear that \Minerva is risk-limiting if an adversary can 
 adaptively select the round schedule as the audit proceeds. In this section we prove that \Providence does not have this problem, and is risk-limiting even when the adversary can choose next round sizes based on knowledge of the current sample. 
 
 \begin{definition}
 Let $d \in \{0, a\}$ stand for the null or the alternative hypothesis respectively.
-Let $s_{i, d, [n_1, \ldots, n_r]}$ be the probability of observing $i$ ballots for the winner at the end of the $r^{th}$ round of an audit with round schedule $[n_1, \ldots, n_r]$ conditioned on hypothesis $H_d$ \textit{i.e.,} 
+Let $s_{i, d, (n_1, \ldots, n_j)}$ be the probability of observing $i$ ballots for the winner at the end of the $j^{th}$ round of an audit with round schedule $(n_1, \ldots, n_j)$ conditioned on hypothesis $H_d$ \textit{i.e.,} 
 \[
-s_{i, d, [n_1, \ldots, n_r]} = P\left[K_r = i | (n_1, \ldots, n_r), H_d\right]. 
+s_{i, d, (n_1, \ldots, n_j)} = \Pr\left[K_j = i | H_d, n_1, \ldots, n_j\right]. 
 %  = s_{i, d, [n_r]},
 \]
-For $r = 1$ 
+For $j = 1$ 
 \[
- s_{i, d, [n_r]} = \mathsf{Bin}(n_r, p_d, i).
+ s_{i, d, (n_j)} = \mathsf{Bin}(n_j, p_d, i).
 \]
 \end{definition}
 
@@ -29,23 +29,33 @@ Let us assume a malicious auditor with the following strategy for \Minerva audit
 This leads to the situation that computed values of $r_{i, d}$ are not correct anymore \textit{i.e.,} value $s_{k^*}$ is missing for probabilities that go into $n'_2$.
 
 \[
- s^{k^*, up}_{i, d, [n_1, n_{2}]} = \sum_{j = x}^{\min\{i, k^{p_a, p_0, \alpha}_{min, 1}-1\}} Bin(n_{2} - n_1, p_d, i - j) \cdot s_{j, d, [n_1]},
+ s^{k^*, up}_{i, d, (n_1, n_{2})} = \sum_{j = x}^{\min\{i, k^{p_a, p_0, \alpha}_{min, 1}-1\}} Bin(n_{2} - n_1, p_d, i - j) \cdot s_{j, d, (n_1)},
 \]
 
 \[
- s^{k^*, down}_{i, d, [n_1, n'_{2}]} = \sum_{j = \max\{0, i - (n'_2 - n_1)\}}^{k^*-1} Bin(n'_{2} - n_1, p_d, i - j) \cdot s_{j, d, [n_1]},
+ s^{k^*, down}_{i, d, (n_1, n'_{2})} = \sum_{j = \max\{0, i - (n'_2 - n_1)\}}^{k^*-1} Bin(n'_{2} - n_1, p_d, i - j) \cdot s_{j, d, (n_1)},
 \]
 
 One would need to to prove that for $n_2, n'_2$ and for any choice of $k^*$ the following holds:
 \[
-\sum_{i = k^{p_a, p_0, \alpha}_{min, 2, [n_1, n_2]}}^{n_r} s^{k^*, up}_{i, 0, [n_1, n_2]} \le \alpha \sum_{i = k^{p_a, p_0, \alpha}_{min, 2, [n_1, n_2]}}^{n_r} s^{k^*}_{i, A, [n_1, n_2]}.
+\sum_{i = k^{p_a, p_0, \alpha}_{min, 2, (n_1, n_2)}}^{n_2} s^{k^*, up}_{i, 0, [n_1, n_2]} \le \alpha \sum_{i = k^{p_a, p_0, \alpha}_{min, 2, (n_1, n_2)}}^{n_2} s^{k^*}_{i, a, (n_1, n_2)}.
 \]
 \end{example}
 
+\begin{lemma}\label{lemma:markov}
+Let $(n_1, \ldots, n_{j-1}, n_j)$ be a round schedule for an execution of  \Providence audit that has not stopped
+in any of its first $j-1$ rounds (\textit{i.e.,} for every $i = 1, \ldots, j-1$:
+$k_i < k^{p_a, p_0, \alpha}_{min, j, (n_1, \ldots, n_j)}$), then: 
 
-\begin{definition}[Strong RLA]
+\[ 
+k^{p_a, p_0, \alpha, k_{j-1}}_{min, (n_1, \ldots, n_{j-1}, n_j)} = k^{p_a, p_0, \alpha, k_{j-1}}_{min, (n_{j-1}, n_j)}.
+\]
+\end{lemma}
+Proof of Lemma~\ref{lemma:markov} is in the Appendix.
+
+\begin{definition}[Strategy-immune RLA]
  An audit $\mathcal{A}$ is a Strong Risk Limiting Audit with risk limit $\alpha$ iff for
- all strategies of selecting round schedule and for sample $X$ 
+ all strategies of selecting round schedule and for a sample $X$ 
  \[
   \Pr\left[\mathcal{A}(X) = \text{Correct} | H_0\right] \leq \alpha.
  \]
@@ -53,7 +63,7 @@ One would need to to prove that for $n_2, n'_2$ and for any choice of $k^*$ the 
 \end{definition}
 
 \begin{lemma}
-\Providence is Strong RLA. 
+\Providence is Strategy-immune RLA. 
 \end{lemma}
 \begin{proof}
  The property comes as a conclusion of Theorem~\ref{thm:minerva2_is_rla_new} and Lemma~\ref{lemma:markov}.
