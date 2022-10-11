@@ -24,4 +24,8 @@ ballots& \rotatebox{45}{\Providence} & \rotatebox{45}{\Minerva} & \rotatebox{45}
 \label{tab:pilot-risks}
 \end{table}
 
-TODO: Add examples of how the audits perform for various hypothetical round schedules. I wait to do this until I'm done with the workload estimates since the examples here should be chosen to motivate that section.
+Note that the risk measures shown in Table~\ref{tab:pilot-risk} imply that, for the sample obtained in the pilot audit, an EoR \BRAVO audit would not have been able to stop in the first round, despite the large round size. Further, if the risk limit had been $0.05$ instead of $0.10$, SO \BRAVO also would have required moving on to a second round. 
+
+We can use simulations to better understand typical audit behavior for the margin of this pilot audit and contextualize the results we obtained in the pilot. We run $10^4$ trial audits for several stopping probabilities $p$. Each round size is chosen to give a probability of stopping $p$ assuming the announced tally and given the results of previous rounds. We use the same $10\%$ risk limit and margin of $25.57\%$. Figure~\ref{fig:pilot_sims} shows the average number of ballots sampled for each value of $p$.
+
+Section~\ref{sec:workload} addresses more appropriate measures of workload
