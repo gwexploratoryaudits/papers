@@ -131,8 +131,16 @@ Consequently, the desired \emph{misleading limit} may be a deciding constraint i
 
 \begin{figure}
 \includegraphics[width=.5\textwidth]{misleading_limits.png}
-\caption{The proportion of simulated \Providence audits that had a \emph{misleading sample} in any round.}
+\caption{The proportion of simulated \Providence audits for the Virginia contest parameters that had a \emph{misleading sample} in any round.}
 \label{fig:misleading}
+\end{figure}
+
+We observe a similar behavior in our simulations of audits on the contest from the pilot audit. Figure~\ref{fig:pilot_misleading} shows the proportion of the pilot simulations which contained a \emph{misleading sample} in any round. Despite the large difference in margin ($\sim 5\%$ in Virginia and $\sim 25\%$ in the pilot) we still observe that a \emph{misleading limit} of $0.01$ is first achieved at roughly $p=0.8$ and $0.001$ at $p=0.95$.
+
+\begin{figure}
+\includegraphics[width=.5\textwidth]{pilot_misleading_prop.png}
+\caption{The proportion of simulated \Providence audits for the pilot audit parameters that had a \emph{misleading sample} in any round.}
+\label{fig:pilot_misleading}
 \end{figure}
 
 If election officials wish to enforce a \emph{misleading limit} for all the rounds, our simulation analysis could help. On the other hand, for a given round, it is straightforward to compute analytically the probability that a loser has more votes than the winner in the sample. Table~\ref{tab:misleading} shows for various margins the minimum first round size $n$ that guarantees a probability of a \emph{misleading sample} at most $M\in\{0.1,0.01,0.001\}$. For all values of $M$ and all margins, \Providence achieves a higher probability of stopping than either EoR \BRAVO or SO \BRAVO. 
