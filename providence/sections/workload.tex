@@ -95,7 +95,7 @@ Consequently, we model the expected total real time $T$ of an audit using just t
 For the largest county, let the expected total ballots sampled be $\bar E_b$, the expected number of rounds $\bar E_r$, and the expected number of distinct precinct samples summed over all rounds be $\bar E_c$.
 Similarly, we use real time per-ballot, per-round, and per-precinct workload variables, $t_b$, $t_r$, and $t_p$. So the real time of the audit is estimated by
 \begin{equation}
-T(\bar E_b, \bar E_r, \bar E_p ) = \bar E_b t_b + \bar E_r t_r + \bar E_p t_p
+T(\bar E_b, \bar E_r, \bar E_p ) = \bar E_b t_b + \bar E_r t_r + \bar E_p t_p + C
 \label{eq:real_time}
 \end{equation}
 
@@ -112,7 +112,7 @@ Available data to estimate values for $t_b$, $t_r$, and $t_p$ is limited, and so
 \subsection{Misleading samples}
 
 Unfortunately, efficiency alone is not sufficient for planning audits. In the US today, election officials need to make legitimate safety considerations.
-When drawing a random sample of the ballots, it is always possible that the tally of the sample provides misleading information. In a random sample, a true loser may recieve more votes than the true winner. This happens more often when the sample sizes are small.
+When drawing a random sample of the ballots, it is always possible that the tally of the sample provides misleading information. In a random sample, a true loser may recieve more votes than the true winner. This happens more often when the sample sizes are small, like for a hypothetical first round size of $11$ in the pilot audit, as seen in Figure~\ref{sec:pilot_selection}.
 In these RLAs, a misleading sample in an early round is dealt with by drawing more ballots (moving on to another round), but in practice the implications of this approach may be dangerous.
 
 Imagine that Alice beats Bob in an election contest both truly and by the announced results, but Bob's supporters are insistent he really won. When election officials carry out the RLA, they choose a small first round size in the hopes of achieving an efficient audit by getting to stop sooner. After the first round, by chance, there are more votes for Bob than for Alice in the sample. Bob's supporters celebrate their victory that the audit has in fact revealed that Bob really won, but the election officials have to explain that they are moving on to a second round. After the second round, there are more votes in the sample for Alice and sufficiently many that the risk limit is met and the audit now ends confirming the announced result that Alice won. This is an undesirable situation.
