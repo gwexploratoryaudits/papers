@@ -112,6 +112,16 @@ Poorvi~L. Vora.
 Verified Voting.
 \newblock Audit law database, https://verifiedvoting.org/auditlaws/.
 
+\bibitem{wald}
+Abraham Wald.
+\newblock Sequential tests of statistical hypotheses.
+\newblock {\em The Annals of Mathematical Statistics}, 16(2):117--186, 1945.
+
+\bibitem{athena}
+Filip Zag\'{o}rski.
+\newblock Athena - risk limiting audit (round-by-round),
+  https://github.com/filipzz/athena.
+
 \bibitem{arxiv_athena}
 Filip Zag{\'{o}}rski, Grant McClearn, Sarah Morin, Neal McBurnett, and
   Poorvi~L. Vora.

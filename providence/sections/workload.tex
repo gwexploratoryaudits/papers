@@ -11,7 +11,7 @@ We consider a simple round schedule, in which each round is selected to give the
 \subsection{Person-hours}
 
 \noindent\textbf{Average total ballots.} 
-The simplest workload models are a function of just the total number of a ballots sampled. Figure~\ref{fig:avg_bals} shows the average total number of ballots sampled in our simulations for each value of $p$, which gives an estimate of the expected total number of ballots.
+The simplest workload models are a function of just the total number of a ballots sampled.\footnote{Sometimes total \emph{distinct} ballots sampled is used, but for the margins we use in our examples in this section, the difference between total distinct ballots and total ballots is insignificant\cite{athena}. Modifying the model we discuss here to account for total distinct ballots is easy.} Figure~\ref{fig:avg_bals} shows the average total number of ballots sampled in our simulations for each value of $p$, which gives an estimate of the expected total number of ballots.
 Figure~\ref{fig:avg_bals_ratio} gives the same number as a ratio of the \Providence values.
 It is straightforward to show that \Providence and both forms of \BRAVO collapse to the same test in the case where each round is a single ballot. Figures~\ref{fig:avg_bals} and \ref{fig:avg_bals_ratio} show that for larger stopping probabilities $p$ (i.e. larger rounds), \Providence requires fewer ballots on average. In particular, the savings of \Providence become larger as $p$ increases; for $p=.95$, EoR \BRAVO and SO \BRAVO require more than $2$ and $1.4$ times as many ballots as \Providence respectively. 
 

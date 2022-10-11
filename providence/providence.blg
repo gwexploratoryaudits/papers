@@ -1,46 +1,46 @@
-This is BibTeX, Version 0.99d (TeX Live 2020)
+This is BibTeX, Version 0.99d (TeX Live 2022)
 Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: providence.aux
 The style file: plain.bst
 Database file #1: audits.bib
-You've used 20 entries,
+You've used 22 entries,
             2118 wiz_defined-function locations,
-            611 strings with 8071 characters,
-and the built_in function-call counts, 6682 in all, are:
-= -- 619
-> -- 365
+            622 strings with 8290 characters,
+and the built_in function-call counts, 7172 in all, are:
+= -- 667
+> -- 379
 < -- 6
-+ -- 144
-- -- 120
-* -- 432
-:= -- 1110
-add.period$ -- 61
-call.type$ -- 20
-change.case$ -- 112
++ -- 150
+- -- 124
+* -- 459
+:= -- 1190
+add.period$ -- 66
+call.type$ -- 22
+change.case$ -- 120
 chr.to.int$ -- 0
-cite$ -- 20
-duplicate$ -- 251
-empty$ -- 531
-format.name$ -- 120
-if$ -- 1411
+cite$ -- 22
+duplicate$ -- 269
+empty$ -- 580
+format.name$ -- 124
+if$ -- 1514
 int.to.chr$ -- 0
-int.to.str$ -- 20
-missing$ -- 13
-newline$ -- 101
-num.names$ -- 44
-pop$ -- 146
+int.to.str$ -- 22
+missing$ -- 14
+newline$ -- 110
+num.names$ -- 48
+pop$ -- 156
 preamble$ -- 1
-purify$ -- 93
+purify$ -- 99
 quote$ -- 0
-skip$ -- 202
+skip$ -- 219
 stack$ -- 0
-substring$ -- 297
-swap$ -- 67
+substring$ -- 332
+swap$ -- 69
 text.length$ -- 6
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 80
+type$ -- 88
 warning$ -- 0
-while$ -- 59
-width$ -- 22
-write$ -- 209
+while$ -- 65
+width$ -- 24
+write$ -- 227
