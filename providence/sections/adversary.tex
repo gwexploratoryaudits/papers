@@ -1,0 +1,354 @@
+
+% \subsection{Motivation for considering adaptive adversary}
+% \fpo{(old notes)}
+
+\Minerva was proven to be risk-limiting audit for pre-commited round schedule.
+It is not clear that \Minerva is still risk-limiting if an adversary can select
+adaptively round schedule as the audit goes.
+Problem: does stopping condition holds for adaptive choice of round sizes?
+
+\begin{definition}
+Let $d \in \{0, a\}$ stand for the null or the alternative hypothesis respectively.
+Let $s_{i, d, [n_1, \ldots, n_r]}$ be the probability of observing $i$ ballots for the winner at the end of the $r^{th}$ round of an audit with round schedule $[n_1, \ldots, n_r]$ conditioned on hypothesis $H_d$ \textit{i.e.,} 
+\[
+s_{i, d, [n_1, \ldots, n_r]} = P\left[K = i | (n_1, \ldots, n_r), H_d\right]. 
+%  = s_{i, d, [n_r]},
+\]
+For $r = 1$ 
+\[
+ s_{i, d, [n_r]} = \mathsf{Bin}(n_r, p_d, i).
+\]
+\end{definition}
+
+
+\begin{example}[Adaptive round size selection] 
+Let us assume a malicious auditor with the following strategy for \Minerva audit:
+\begin{itemize}
+ \item select round size $n_2$ if $k = k^* = k^{p_a, p_0, \alpha}_{min, 1} - 1$,
+ \item select round size $n'_2$ for $k \leq k^{p_a, p_0, \alpha}_{min, 1} - 2$.
+\end{itemize}
+This leads to the situation that computed values of $r_{i, d}$ are not correct anymore \textit{i.e.,} value $s_{k^*}$ is missing for probabilities that go into $n'_2$.
+
+\[
+ s^{k^*, up}_{i, d, [n_1, n_{2}]} = \sum_{j = x}^{\min\{i, k^{p_a, p_0, \alpha}_{min, 1}-1\}} Bin(n_{2} - n_1, p_d, i - j) \cdot s_{j, d, [n_1]},
+\]
+
+\[
+ s^{k^*, down}_{i, d, [n_1, n'_{2}]} = \sum_{j = \max\{0, i - (n'_2 - n_1)\}}^{k^*-1} Bin(n'_{2} - n_1, p_d, i - j) \cdot s_{j, d, [n_1]},
+\]
+
+One would need to to prove that for $n_2, n'_2$ and for any choice of $k^*$ the following holds:
+\[
+\sum_{i = k^{p_a, p_0, \alpha}_{min, 2, [n_1, n_2]}}^{n_r} s^{k^*, up}_{i, 0, [n_1, n_2]} \le \alpha \sum_{i = k^{p_a, p_0, \alpha}_{min, 2, [n_1, n_2]}}^{n_r} s^{k^*}_{i, A, [n_1, n_2]}.
+\]
+\end{example}
+
+
+\begin{definition}[Strong RLA]
+ An audit $\mathcal{A}$ is a Strong Risk Limiting Audit with risk limit $\alpha$ iff for
+ all strategies of selecting round schedule and for sample $X$ 
+ \[
+  \Pr\left[\mathcal{A}(X) = \text{Correct} | H_0\right] \leq \alpha.
+ \]
+
+\end{definition}
+
+\begin{lemma}
+\Providence is Strong RLA. 
+\end{lemma}
+\begin{proof}
+ The property comes as a conclusion of Theorem~\ref{thm:minerva2_is_rla_new} and Lemma~\ref{lemma:markov}.
+\end{proof}
+
+
+
+% \newpage
+
+% \subsection{Round extensions}
+
+% The end of a round of size $n_1$, with $k^{p_a, p_0, \alpha}_{min, 1}$ and observed ballots for
+% the winner $k$.
+
+
+% The size of the next round is selected to be $n_{r+1}$.
+% The \Providence k-mins are computed as follows. 
+% 
+% (1) The probability distribution at the end of $(r+1)^{st}$ round is computed:
+% % \[
+% %  s_{i, d, [n_1, \ldots, n_{r+1}]} = \sum_{j = \max\{0, i - (n_{r+1} - n_r)\}}^{\min\{i, k^{p_a, p_0, \alpha}_{min, r}-1\}} Bin(n_{r+1} - n_r, p_d, i - j) \cdot s_{j, d, [n_1, \ldots, n_r]},
+% % \]
+% \[
+%  s_{i, d, [n_1, \ldots, n_{r+1}]} = \sum_{j = \max\{0, i - (n_{r+1} - n_r)\}}^{\min\{i, k^{p_a, p_0, \alpha}_{min, r}-1\}} Bin(n_{r+1} - n_r, p_d, i - j) \cdot s_{j, d, [n_1, \ldots, n_r]},
+% \]
+% where $p_d = p_0 = \frac{1}{2}$ or $p_d = p_A$.
+% 
+% (2) The $k^{p_a, p_0, \alpha}_{min, r}$ is found as:
+% \[
+%  k^{p_a, p_0, \alpha}_{min, r} =  k^{p_a, p_0, \alpha}_{min, r, [n_1, \ldots, n_r]} = \min\left\{ k: \sum_{i = k}^{n_r} s_{i, 0, [n_1, \ldots, n_r]} \le \alpha \sum_{i = k}^{n_r} s_{i, A, [n_1, \ldots, n_r]} \right\}.
+% \]
+
+% 
+% \begin{definition} 
+% Let $[n_1, \ldots, n_r]$ be the round schedule of an audit that has not stopped by the round $r-1$. Let us define 
+% \begin{small}
+% \begin{equation}\label{eq:kMin}
+% k^{p_a, p_0, \alpha, k_{r-1}}_{min, r, [n_1, \ldots, n_r]} =
+%   \min\left\{k : \omega_r(k, k_{r-1},p_a,p_0,n_r, n_{r-1}) \geq \frac{1}{\alpha}  \right\}.
+% %  \min\left\{k : \sigma(k_{r-1},p_a,p_0,n_{r-1})\cdot \tau_1(k-k_{r-1},p_a,p_0,n_r-n_{r-1}) \geq \frac{1}{\alpha}  \right\}$
+% \end{equation}
+% \end{small}
+% Then if $k_r \geq k^{p_a, p_0, \alpha, k_{r-1}}_{min, r, [n_1, \ldots, n_r]}$ then the result of the audit is Correct (\textit{i.e.,} stopping condition in Definition~\ref{def:minervatwo} holds).
+% \end{definition}
+% 
+% 
+% 
+% \begin{lemma}
+% Let $[n_1, \ldots, n_{r-1}, n_r]$ be a round schedule for an execution of  \Providence audit that has not stopped
+% in any of its first $r-1$ rounds (\textit{i.e.,} for every $j = 1, \ldots, r-1$:
+% $k_j < k^{p_a, p_0, \alpha}_{min, r, [n_1, \ldots, n_j]}$), then: 
+% 
+% \[ 
+% k^{p_a, p_0, \alpha, k_{r-1}}_{min, [n_1, \ldots, n_{r-1}, n_r]} = k^{p_a, p_0, \alpha, k_{r-1}}_{min, [n_{r-1}, n_r]}.
+% \]
+% \end{lemma}
+% \fpo{this can be used to prove that \Providence is more efficient than \Minerva and \BRAVO}
+% \begin{proof}
+% Let $k_{r-1}$ denote the number of ballots drawn for the declared winner up to the round $r-1$ (out of $n_{r-1}$ sampled ballots). The stopping decision for the round $r$ is made as follows:
+% 
+% \[
+%  k^{p_a, p_0, \alpha, k_{r-1}}_{min, r, [n_1, \ldots, n_r]} = \min\left\{k : \omega_{j}(k, k_{r-1}, p_a, p_0, n_r, n_{r-1}) \geq \frac{1}{\alpha}  \right\} = 
+% \]
+% \[
+%   =  k^{p_a, p_0, \alpha, k_{r-1}}_{min, 2, [n_{r-1}, n_r]}
+% \]
+% 
+% \end{proof}
+% Then, from (\ref{eq:prov}) one can write it as:
+% 
+% % \[
+% %     \begin{aligned}
+% %     \omega_{j}(k, k_{r-1}, p_a, p_0, n_{r}, n_{r-1})
+% %     \triangleq\\
+% %     \sigma(k_{r-1},p_a,p_0,n_{r-1})\cdot \tau_1(k-k_{r-1},p_a,p_0,n_r-n_{r-1})
+% %     \end{aligned}
+% % \]
+% \begin{small}
+% \[
+% \begin{aligned}
+%  k^{p_a, p_0, \alpha}_{min, r, [n_1, \ldots, n_r]} =\\ 
+%  \min\left\{k : \sigma(k_{r-1},p_a,p_0,n_{r-1})\cdot \tau_1(k-k_{r-1},p_a,p_0,n_r-n_{r-1}) \geq \frac{1}{\alpha}  \right\} =\\
+%  \min\left\{k :
+% \frac{s_{k_{r-1}, a, n_{r-1}}}{s_{k_{r-1}, 0, n_{r-1}}} \frac{
+% \sum_{i = k}^{n_r} s_{i - k_{r-1}, a, [n_r - n_{r-1}]}
+% }{
+% \sum_{i = k}^{n_r} s_{i - k_{r-1}, 0, [n_r - n_{r-1}]}
+% }\geq \frac{1}{\alpha}  \right\}
+%  \end{aligned}
+%  \]
+% \end{small}
+% 
+% \fpo{should be added: for $k > k_{r-1}$ but it seems to be obvious (from monotonicity of k-min)}
+% % \[
+% % \sigma(k_{r-1},p_a,p_0,n_{r-1}) = \frac{s_{k_{r-1}, a, n_{r-1}}}{s_{k_{r-1}, 0, n_{r-1}}}
+% % \]
+% 
+% % \begin{small}
+% % \begin{equation}\label{eq:kMinLong}
+% % k^{p_a, p_0, \alpha}_{min, r, [n_1, \ldots, n_r]} =\\ 
+% %  \min\left\{k :
+% % \frac{s_{k_{r-1}, a, n_{r-1}}}{s_{k_{r-1}, 0, n_{r-1}}} \frac{
+% % \sum_{i = k}^{n_r} s_{i - k_{r-1}, a, [n_r - n_{r-1}]}
+% % }{
+% % \sum_{i = k}^{n_r} s_{i - k_{r-1}, 0, [n_r - n_{r-1}]}
+% % }\geq \frac{1}{\alpha}  \right\}
+% % \end{equation}
+% % \end{small}
+% %  = \min\left\{ k: \sum_{i = k}^{n_r} s_{i, 0, [n_1, \ldots, n_r]} \le \alpha \sum_{i = k}^{n_r} s_{i, A, [n_1, \ldots, n_r]} \right\}.
+% % \]
+% 
+% Now, one can rewrite the enumerator and the denominator as  follows ($d \in \{a, 0\}$):
+% 
+% \begin{small}
+% \[
+% \begin{aligned}
+%  s_{k_{r-1}, d, n_{r-1}} \sum_{i = k}^{n_r} s_{i - k_{r-1}, d, [n_r - n_{r-1}]} =\\
+%  \mathsf{Bin}(n_{r-1}, p_d, k_{r-1}) \sum_{i = k}^{n_r} 
+%  \mathsf{Bin}({n_r - n_{r-1}, d, i - k_{r-1}}) =\\
+%  {n_{r-1} \choose k_{r-1}} p_d^{k_{r-1}} p_d^{n_{r-1} - k_{r-1}}
+%  \sum_{i = k}^{n_r} 
+%  {n_r - n_{r-1} \choose i - k_{r-1}} p_d^{i - k_{r-1}} p_d^{n_r - n_{r-1} - (i - k_{r-1})} =\\
+%   \sum_{i = k}^{n_r} {n_{r-1} \choose k_{r-1}}
+%  {n_r - n_{r-1} \choose i - k_{r-1}} p_d^{i} p_d^{n_r - i} =
+%  \sum_{i = k}^{n_r} {n_{r} \choose i}
+%  p_d^{i} p_d^{n_r - i} = \sum_{i = k}^{n_r} s_{i, d, [n_r]}.
+%  \end{aligned}
+% \]
+% \end{small}
+% 
+% \begin{small}
+% \[
+% k^{p_a, p_0, \alpha}_{min, r, [n_1, \ldots, n_r]} =\\ 
+%  \min\left\{k :
+% \frac{
+% \sum_{i = k}^{n_r} s_{i, a, [n_r]}
+% }{
+% \sum_{i = k}^{n_r} s_{i, 0, [n_r]}
+% }\geq \frac{1}{\alpha}  \right\}
+% = k^{p_a, p_0, \alpha}_{min, 1, [n_r]}
+% \]
+% \end{small}
+% \fpo{There is no need to put $r$ in $k_{min}$ definition $[n_1, \ldots, n_r]$ is enough}
+% 
+% \end{proof}
+
+% \fpo{Corollary 1: For RO-Bravo you need to pay attention.}
+% 
+% \fpo{Corollary 2: For \Providence you can (1) be late for an audit (round schedule does not
+% matter much); (2) you can be distracted: only the end-of-round matters}
+
+% \begin{lemma}
+%  I
+% \end{lemma}
+
+
+
+
+% \begin{theorem}
+%  \Providence is risk limiting for adversarial choices of round schedules.
+% \end{theorem}
+% \begin{proof}
+% 
+% \end{proof}
+
+\subsection{Efficiency}
+\begin{lemma}
+% For any round schedule %$[n_1, \ldots, n_r]$
+For any risk-limit $\alpha \in (0, 1)$, for any margin
+and for any round schedule $[n_1, \ldots, n_r]$, 
+ \Providence RLA is more efficient than \R \BRAVO.
+\end{lemma}
+\begin{proof}
+ Let $[n_1, \ldots, n_r]$ be a round schedule, and  lets assume that \R \BRAVO audit stopped exactly at
+ round $r$, 
+ after observing $k_1, \ldots, k_r$ ballots for the announced winner in each round respectively. This means that
+ the following conditions hold:
+ \begin{enumerate}
+  \item for all $j = 1, \ldots, r-1$: 
+%   $k_j < k^{p_a, p_0, \alpha}_{min, \BRAVO, n_j}$,
+  $\frac{P[{K_j = k_{j}} | H_a, n_j]}{P[K_j = {k_{j}} | H_0, n_j]} < \frac{1}{\alpha}$,
+  \item for $j = r$ it holds: % $k_r \geq k^{p_a, p_0, \alpha}_{min, \BRAVO, n_r}.$
+  $\frac{P[{K_r = k_{r}} | H_a, n_r]}{P[K_r = {k_{r}} | H_0, n_r]} \geq \frac{1}{\alpha}$,
+ \end{enumerate}
+ 
+ From Lemma~\ref{lemma:tau1_increasing} 
+ \[
+ \tau_1(k, p_a, p_0, n_r) = 
+  \frac{P[K_r = {k} | H_a, n_r]}{P[K_r = {k} | H_0, n_r]}
+ \]
+is a stricly increasing function of $k$ (for $0 < p_0, p_a < 1$ and $n_r > 0$). % for $k \geq k_r$. % (in fact this isk^{p_a, p_0, \alpha}_{min, \BRAVO, n_r} = k^{*}_{n_r}$
+% \textit{i.e.,}
+% \begin{equation}\label{eq_incr}
+% % \frac{1}{\alpha} \leq
+%   \frac{P[K_r = {k_r} | H_a, n_r]}{P[\mathbf{k_r} | H_0, n_r]} \leq   \frac{P[\mathbf{k_r} + 1 | H_a, n_r]}{P[K_r = {k_r} + 1 | H_0, n_r]} \leq \ldots  \leq \frac{P[\mathbf{n_r} | H_a, n_r]}{P[\mathbf{n_r} | H_0, n_r]}. 
+% \end{equation}
+
+If \BRAVO test is satisfied for $k_r$ then:
+
+% From the properties of binomial distribution we obtain:
+% \[
+%    \frac{P[\mathbf{k_r} | H_a, n_r]}{P[\mathbf{k_r} | H_0, n_r]} = 
+%    \frac{P[\mathbf{k_{r-1}} | H_a, n_{r-1}]}{P[\mathbf{k_{r-1}} | H_0, n_{r-1}]}
+%    \frac{P[\mathbf{k_r - k_{r-1}} | H_a, n_r - n_{r-1}]}{P[\mathbf{k_r - k_{r-1}} | H_0, n_r - n_{r-1}]} = 
+% \]
+\[
+ \frac{1}{\alpha} \leq \sigma(k_{r}, p_a, p_0, n_{r}) =
+\]
+\[
+ = \sigma(k_{r-1}, p_a, p_0, n_{r-1}) \cdot \sigma(k_r - k_{r-1}, p_a, p_0, n_r - n_{r-1})  \leq
+\]
+\[
+ \leq^{(*)} \sigma(k_{r-1}, p_a, p_0, n_{r-1}) \cdot \tau_1(k_r - k_{r-1}, p_a, p_0, n_r - n_{r-1}) =
+\]
+\[
+ = \omega_r(k_r, k_{r-1}, p_a, p_0, n_r, n_{r-1}).
+\]
+
+Where inequality $(*)$ follows from Lemma~\ref{lemma:frac_sums_increasing}.
+%the well-known property that if $a_i/b_i$ (for $a_i, b_i > 0$) is monotonicly increasing then
+%(\sum_{i} a_i)/(\sum_{i} b_i)$ is also monotonicly increasing.
+
+
+% 
+% Now, if we consider $k^* = k^{p_a, p_0, \alpha}_{min, \BRAVO, n_r}$ then it is easy to see that:
+% 
+% 
+%  \[
+%  k^{p_a, p_0, \alpha, k_{r-1}}_{min, [n_1, \ldots, n_r]}  
+%   = \min\left\{k :
+% \frac{
+% s_{k_{r-1}, a, [n_{r-1}]}
+% \sum_{i = k}^{n_r - n_{r-1}} s_{i, a, [n_r - n_{r-1}]}
+% }{
+% s_{k_{r-1}, 0, [n_{r-1}]}
+% \sum_{i = k}^{n_r - n_{r-1}} s_{i, 0, [n_r - n_{r-1}]}
+% }\geq \frac{1}{\alpha}  \right\} =
+% \]
+% \[
+%   = \min\left\{k :
+% \frac{
+% s_{k_{r-1}, a, [n_{r-1}]}
+% \left(
+% \sum_{i = k}^{n_r - n_{r-1}} s_{i, a, [n_r - n_{r-1}]}
+% + \sum_{i = k}^{n_r - n_{r-1}} s_{i, a, [n_r - n_{r-1}]}
+% \right)
+% }{
+% s_{k_{r-1}, 0, [n_{r-1}]}
+% \sum_{i = k}^{n_r - n_{r-1}} s_{i, 0, [n_r - n_{r-1}]}
+% }\geq \frac{1}{\alpha}  \right\} =
+% \]
+
+
+
+%  \[
+%  k^{p_a, p_0, \alpha}_{min, [n_1, \ldots, n_j]} =  k^{p_a, p_0, \alpha}_{min, [n_j]}
+%         = \min\left\{k :
+% \frac{
+% \sum_{i = k}^{n_j} s_{i, a, [n_j]}
+% }{
+% \sum_{i = k}^{n_j} s_{i, 0, [n_j]}
+% }\geq \frac{1}{\alpha}  \right\} =
+% \]
+
+
+
+
+ 
+% 
+%  
+%  Now, let us consider $j$-{th} round for $j = 1, \ldots, r$. We are going to show that
+%  $k^{p_a, p_0, \alpha}_{min, [n_1, \ldots, n_j]} \leq k^{p_a, p_0, \alpha}_{min, \BRAVO, n_r}$.
+%  
+%  From Lemma~\ref{eq:kMin} we have:
+%  \[
+%  k^{p_a, p_0, \alpha}_{min, [n_1, \ldots, n_j]} =  k^{p_a, p_0, \alpha}_{min, [n_j]}
+%   = \min\left\{k :
+% \frac{
+% \sum_{i = k}^{n_j} s_{i, a, [n_j]}
+% }{
+% \sum_{i = k}^{n_j} s_{i, 0, [n_j]}
+% }\geq \frac{1}{\alpha}  \right\} =
+% \]
+% 
+% From the definition of $k^{p_a, p_0, \alpha}_{min, \BRAVO, n_r}$ we have that for every $k \geq k^{p_a, p_0, \alpha}_{min, \BRAVO, n_r}$ it holds: $s_{k, a, [n_j]}/s_{k, 0, [n_j]} \geq 1/\alpha$ which means that:
+% \[
+% \frac{
+% \sum_{i = k^{p_a, p_0, \alpha}_{min, \BRAVO, n_r}}^{n_j} s_{i, a, [n_j]}
+% }{
+% \sum_{i = k^{p_a, p_0, \alpha}_{min, \BRAVO, n_r}}^{n_j} s_{i, 0, [n_j]}
+% }\geq \frac{1}{\alpha}
+% \]
+% which means that $k^{p_a, p_0, \alpha}_{min, [n_1, \ldots, n_j]} \leq k^{p_a, p_0, \alpha}_{min, \BRAVO, n_r}$.
+
+\end{proof}
+
+

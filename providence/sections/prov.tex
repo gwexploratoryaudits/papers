@@ -41,7 +41,7 @@ $\alpha$-RLA.
 \end{theorem}
 \begin{proof}
 Let $\mathcal{A}=(\alpha,p_a, p_0,k_{j-1},n_{j-1},n_j)$-\Providence.
-Let $\bm{n_j}$ be the cumulative roundsizes used in this
+Let $\bm{n_j}$ be the cumulative round sizes used in this
 audit, with corresponding cumulative tallies of
 ballots for the reported winner $\bm{k_j}$.
 For round $j=1$, by Definitions \ref{def:minervatwo}
@@ -74,15 +74,17 @@ $\mathcal{A}=\text{Correct}$ (the audit stops) only when
 By Lemma \ref{lemma:any_ratio_is_sigma_simple}
 and Definition \ref{def:minerva_ratio}, this is equivalent to
 $$
-\frac{\Pr[\bm{k_{j-1}} \mid H_a]\cdot Pr[K_{j} \ge k_{j} \mid \bm{k_{j-1}}, H_a, n{j}]}{\Pr[\bm{k_{j-1}} \mid H_0]\cdot Pr[K_{j} \ge k_{j} \mid \bm{k_{j-1}}, H_0, n{j}]}\ge \frac{1}{\alpha}.
+\frac{\Pr[K_{j-1} = {k_{j-1}} \mid H_a, n_{j-1}]\cdot Pr[K_{j} \ge k_{j} \mid {k_{j-1}}, H_a, n_{j-1}, n_{j}]}{\Pr[K_{j-1} = {k_{j-1}} \mid H_0, n_{j-1}]\cdot Pr[K_{j} \ge k_{j} \mid {k_{j-1}}, H_0, n_{j-1}, n_{j}]}\ge \frac{1}{\alpha}.
 $$
 By Lemma~\ref{lemma:minerva2_kmin_exists} and Definition~\ref{def:minervatwo},
-we see that there exists a $k_{min, j}\le k_j$ for which
+we see that there exists a $k_{min, j} = k_{min, j, n_{j-1}, n_j}^{p_a, p_0, k_{j-1}} \leq k_j$ 
+%$k_{min, j}\le k_j$ 
+for which
 $$
-\frac{\Pr[\bm{k_{j-1}} \mid H_a]\cdot Pr[K_{j} \ge k_{j} \mid \bm{k_{j-1}}, H_a, n{j}]}{\Pr[\bm{k_{j-1}} \mid H_0]\cdot Pr[K_{j} \ge k_{j} \mid \bm{k_{j-1}}, H_0, n{j}]}\ge
+\frac{\Pr[K_{j-1} = {k_{j-1}} \mid H_a, n_{j-1}]\cdot Pr[K_{j} \ge k_{j} \mid {k_{j-1}}, H_a, n_{j-1}, n_{j}]}{\Pr[K_{j-1} = {k_{j-1}} \mid H_0, n_{j-1}]\cdot Pr[K_{j} \ge k_{j} \mid {k_{j-1}}, H_0, n_{j-1}, n_{j}]}\ge
 $$
 $$
-\frac{\Pr[\bm{k_{j-1}} \mid H_a]\cdot Pr[K_{j} \ge k_{min, j} \mid \bm{k_{j-1}}, H_a, n{j}]}{\Pr[\bm{k_{j-1}} \mid H_0]\cdot Pr[K_{j} \ge k_{min, j} \mid \bm{k_{j-1}}, H_0, n{j}]} \ge 
+\frac{\Pr[K_{j-1} = {k_{j-1}} \mid H_a, n_{j-1}]\cdot Pr[K_{j} \ge k_{min, j} \mid {k_{j-1}}, H_a, n_{j-1}, n_{j}]}{\Pr[K_{j-1} = {k_{j-1}} \mid H_0, n_{j-1}]\cdot Pr[K_{j} \ge k_{min, j} \mid {k_{j-1}}, H_0, n_{j-1}, n_{j}]} \ge 
 \frac{1}{\alpha}
 $$
 %Equivalently,
@@ -91,9 +93,10 @@ $$
 %$$
 %Taking the sum over all possible rounds and corresponding preceding values
 %of $k$, we get
-Taking the sum over all possible audit histories, we get
+% Taking the sum over all possible audit histories, we get
+It can be rewritten as
 $$
-\frac{\sum_{\bm{k_j}}\Pr[\bm{k_{j-1}} \mid H_a]\cdot Pr[K_{j} \ge k_{min, j} \mid \bm{k_{j-1}}, H_a, n{j}]}{\sum_{\bm{k_j}}\Pr[\bm{k_{j-1}} \mid H_0]\cdot Pr[K_{j} \ge k_{min, j} \mid \bm{k_{j-1}}, H_0, n{j}]}\ge \frac{1}{\alpha}.
+\frac{\Pr[K_{j-1} = {k_{j-1}} \mid H_a, n_{j-1}]\cdot \sum_{{k} = k_{min, j}}^{n_j} Pr[K_{j} = k \mid {k_{j-1}}, H_a, n_{j-1}, n_{j}]}{\Pr[K_{j-1} = {k_{j-1}} \mid H_0, n_{j-1}]\cdot \sum_{{k} = k_{min, j}}^{n_j} Pr[K_{j} = k \mid {k_{j-1}}, H_0, n_{j-1}, n_{j}]}\ge \frac{1}{\alpha}.
 $$
 Finally, because the total probability of stopping the audit under
 the alternative hypothesis is less than 1, we get
@@ -111,4 +114,5 @@ $$
 
 \subsection{Resistance to an adversary choosing round sizes}
 \label{sec:adversary}
-Filip TBD
+% Filip TBD
+\input{sections/adversary}

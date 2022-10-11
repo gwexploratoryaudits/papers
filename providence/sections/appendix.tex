@@ -66,7 +66,9 @@ For $0<p_0< p_a< 1$ and $n>0$, the ratio $\tau_1(k,p_a,p_0,n)$ is strictly incre
 
 \begin{lemma}
     \label{lemma:minerva2_kmin_exists}
-    For $\mathcal{A}=(\alpha,p_a, p_0,k_{j-1},n_{j-1},n_j)$-\Providence, there exists\\ a $k_{min,j}(\Providence, p_a, p_0, k_{j-1}, n_{j-1}, n_j)$ such that $$\mathcal{A}(X_j)=\text{Correct}\iff k_j\ge k_{min,j}(\Providence,  \bm{n_j}, p_a, p_0).$$
+    For $\mathcal{A}=(\alpha,p_a, p_0,k_{j-1},n_{j-1},n_j)$-\Providence, there exists\\ a 
+    $k_{min, j, n_{j-1}, n_j}^{p_a, p_0, k_{j-1}} = 
+    k_{min,j}(\Providence, p_a, p_0, k_{j-1}, n_{j-1}, n_j)$ such that $$\mathcal{A}(X_j)=\text{Correct}\iff k_j\ge k_{min,j}(\Providence,  \bm{n_j}, p_a, p_0).$$
 \end{lemma}
 \begin{proof}
     From Definition~\ref{def:minervatwo}, $$\mathcal{A}(X_j)=\text{Correct}\iff \omega_j(k_{j}, k_{j-1}, p_a, p_0, n_j, n_{j-1}) \ge \frac{1}{\alpha}.$$
@@ -103,3 +105,39 @@ Then this is simply equal to
 \end{proof}
 
 
+\begin{definition} 
+Let $[n_1, \ldots, n_r]$ be the round schedule of an audit that has not stopped by the round $r-1$. Let us define 
+\begin{small}
+\begin{equation}\label{eq:kMin}
+k^{p_a, p_0, \alpha, k_{r-1}}_{min, r, [n_1, \ldots, n_r]} =
+  \min\left\{k : \omega_r(k, k_{r-1},p_a,p_0,n_r, n_{r-1}) \geq \frac{1}{\alpha}  \right\}.
+%  \min\left\{k : \sigma(k_{r-1},p_a,p_0,n_{r-1})\cdot \tau_1(k-k_{r-1},p_a,p_0,n_r-n_{r-1}) \geq \frac{1}{\alpha}  \right\}$
+\end{equation}
+\end{small}
+Then if $k_r \geq k^{p_a, p_0, \alpha, k_{r-1}}_{min, r, [n_1, \ldots, n_r]}$ then the result of the audit is Correct (\textit{i.e.,} stopping condition in Definition~\ref{def:minervatwo} holds).
+\end{definition}
+
+The following lemma shows a Markov-like property of \Providence audit (\textit{i.e.,}
+for an audit that has not stopped in the first $r-1$ rounds, results of the round $r-1$ matter: cumulative sample size $n_{j-1}$ and the number of ballots for the winner $k_{r-1}$).
+
+\begin{lemma}\label{lemma:markov}
+Let $[n_1, \ldots, n_{r-1}, n_r]$ be a round schedule for an execution of  \Providence audit that has not stopped
+in any of its first $r-1$ rounds (\textit{i.e.,} for every $j = 1, \ldots, r-1$:
+$k_j < k^{p_a, p_0, \alpha}_{min, r, [n_1, \ldots, n_j]}$), then: 
+
+\[ 
+k^{p_a, p_0, \alpha, k_{r-1}}_{min, [n_1, \ldots, n_{r-1}, n_r]} = k^{p_a, p_0, \alpha, k_{r-1}}_{min, [n_{r-1}, n_r]}.
+\]
+\end{lemma}
+% \fpo{this can be used to prove that \Providence is more efficient than \Minerva and \BRAVO}
+\begin{proof}
+Let $k_{r-1}$ denote the number of ballots drawn for the declared winner up to the round $r-1$ (out of $n_{r-1}$ sampled ballots). The stopping decision for the round $r$ is made as follows:
+
+\[
+ k^{p_a, p_0, \alpha, k_{r-1}}_{min, r, [n_1, \ldots, n_r]} = \min\left\{k : \omega_{j}(k, k_{r-1}, p_a, p_0, n_r, n_{r-1}) \geq \frac{1}{\alpha}  \right\} = 
+\]
+\[
+  =  k^{p_a, p_0, \alpha, k_{r-1}}_{min, 2, [n_{r-1}, n_r]}
+\]
+
+\end{proof}
