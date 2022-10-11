@@ -178,10 +178,12 @@ $M$ & margin & $n$ & Prov & SO & EoR \\
 \label{tab:misleading}
 \end{table}
 
+\textbf{Misleading SO Risk Measures.} As we consider the idea of misleading samples, it is noteworthy that SO \BRAVO suffers from a different and unique type of misleading result. 
 
-\textbf{Other misleading RLA results.}
+After drawing $n>1$ ballots in a round, some number $k$ of them are votes for the announced winner. There are $\binom{n}{k}$ possible sequences of ballots which can lead to such a sample. Given the value of $k$, however, the particular sequence of the sample contains no additional information about whether the sample is more likely under one the alternative or null hypotheses.
+That said, an SO \BRAVO RLA will not stop as a function of $n$ and $k$ but also as a function of the sequence. In particular, if the sequence of ballots is such that the standard \BRAVO stopping condition was met for some $n'<n$ and corresponding $k'<n$, the audit will stop, even if by the end of the sequence the values $k$ and $n$ no longer meet the \BRAVO condition. To be clear, this is not a mathematical issue; stopping in such cases is still a correct application of Wald's SPRT result. The misleading nature of such stoppages is the note we are making.
 
-
+It is easy to use our simulations to see how often this occurs. 
 
 
 
