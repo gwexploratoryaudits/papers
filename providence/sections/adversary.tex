@@ -2,16 +2,15 @@
 % \subsection{Motivation for considering adaptive adversary}
 % \fpo{(old notes)}
 
-\Minerva was proven to be risk-limiting audit for pre-commited round schedule.
-It is not clear that \Minerva is still risk-limiting if an adversary can select
-adaptively round schedule as the audit goes.
-Problem: does stopping condition holds for adaptive choice of round sizes?
+\Minerva was proven to be risk-limiting audit for a predetermined round schedule.
+As explained in section \ref{sec:prov_motivation}, it is not clear that \Minerva is risk-limiting if an adversary can 
+adaptively select the round schedule as the audit proceeds. In this section we prove that \Providence does not have this problem, and is risk-limiting even when the adversary can choose next round sizes based on knowledge of the current sample. 
 
 \begin{definition}
 Let $d \in \{0, a\}$ stand for the null or the alternative hypothesis respectively.
 Let $s_{i, d, [n_1, \ldots, n_r]}$ be the probability of observing $i$ ballots for the winner at the end of the $r^{th}$ round of an audit with round schedule $[n_1, \ldots, n_r]$ conditioned on hypothesis $H_d$ \textit{i.e.,} 
 \[
-s_{i, d, [n_1, \ldots, n_r]} = P\left[K = i | (n_1, \ldots, n_r), H_d\right]. 
+s_{i, d, [n_1, \ldots, n_r]} = P\left[K_r = i | (n_1, \ldots, n_r), H_d\right]. 
 %  = s_{i, d, [n_r]},
 \]
 For $r = 1$ 
