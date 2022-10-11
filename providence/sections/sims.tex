@@ -1,9 +1,9 @@
 % simulations
-We use simulations to provide additional evidence for theoretical claims and gain insight into audit behavior. As in \cite{simulations}, we use margins from the 2020 US Presidential election---state-wide pairwise margins between the leading two candidates of 5\% or more. Narrower margins are computationally expensive, especially for the simulations with an underyling tie, which, by design, have a low probability of stopping and hence require all rounds and quickly increase in sample size. We use the simulator in the R2B2 software library\cite{r2b2}. For each margin, for each hypothesis, we perform $10^4$ trials. RISK LIMIT. NUMBER OF ROUNDS. STOPPING PROB. 
+We use simulations to provide additional evidence for theoretical claims and gain insight into audit behavior. As in \cite{simulations}, we use margins from the 2020 US Presidential election---state-wide pairwise margins between the leading two candidates of 5\% or more. Narrower margins are computationally expensive, especially for the simulations with an underyling tie, which, by design, have a low probability of stopping and hence require all rounds and quickly increase in sample size. We use the simulator in the R2B2 software library\cite{r2b2}. For each margin, for each hypothesis, we perform $10^4$ trials. All trials use a $10\%$ risk limit, a maximum of $5$ rounds, and a conditional stopping probability of $0.90$ in each round. That is, each subsequent round size is selected to be large enough, assuming the announced tally is correct and given the tally of previous rounds, to give a $0.90$ probability of stopping in the current round.
 
 \begin{figure}
 \includegraphics[width=.5\textwidth]{prov_risk.png}
-\caption{The fraction of simulated \Providence audits on tied elections that stopped in any rounds (we performed five rounds AT WHAT STOPPING PROB? RISK LIMIT?). This value is an estimate of the maximum risk of the \Providence audit.}
+\caption{The fraction of simulated \Providence audits on tied elections that stopped in any rounds (we performed five rounds at a $10\%$ risk limit). This value is an estimate of the maximum risk of the \Providence audit.}
 \label{fig:prov-risk}
 \end{figure}
 
