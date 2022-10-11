@@ -1,0 +1,48 @@
+This is BibTeX, Version 0.99d (TeX Live 2020)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: providence.aux
+The style file: plain.bst
+Database file #1: audits.bib
+Warning--I didn't find a database entry for "sims"
+You've used 19 entries,
+            2118 wiz_defined-function locations,
+            608 strings with 7879 characters,
+and the built_in function-call counts, 6446 in all, are:
+= -- 599
+> -- 358
+< -- 6
++ -- 141
+- -- 118
+* -- 423
+:= -- 1071
+add.period$ -- 58
+call.type$ -- 19
+change.case$ -- 108
+chr.to.int$ -- 0
+cite$ -- 19
+duplicate$ -- 237
+empty$ -- 503
+format.name$ -- 118
+if$ -- 1359
+int.to.chr$ -- 0
+int.to.str$ -- 19
+missing$ -- 12
+newline$ -- 96
+num.names$ -- 42
+pop$ -- 138
+preamble$ -- 1
+purify$ -- 90
+quote$ -- 0
+skip$ -- 195
+stack$ -- 0
+substring$ -- 292
+swap$ -- 65
+text.length$ -- 6
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 76
+warning$ -- 0
+while$ -- 57
+width$ -- 21
+write$ -- 199
+(There was 1 warning)

@@ -1,6 +1,11 @@
-We now introduce the stopping condition of \Providence.
-(TODO: add some more motivation and description of Providence... where minerva insists on a bound on the average risk providence only bounds the current path of the audit... it is nice because it sort of combines the main ratios of bravo and minerva)
+In this section we motivate and introduce the stopping condition of \Providence.
 
+The \Minerva stopping condition tests the tail ratios of the probability distributions (given the null and alternate hypotheses) of winner votes $K_j$ in round $j$. Note that these distributions are not conditioned on $k_{j-1}$. Thus they may be viewed as a weighted average of various distributions, each conditioned on a possible value of $K_{j-1}$. The proof of \Minerva's risk-limiting property relies on the fact that, at every stopping point, the tail of the probability distribution function given $H_0$ is at most $\alpha$ times that given $H_a$. However, because these distributions are averaged over the various values of $K_{j-1}$, this approach to the proof works only if the next round size is the same for all values of $K_{j-1}$. If not, this average pdf will not correctly represent the pdf of $K_j$. For example, if some values of $K_{j-1}$ would result in larger next round sizes, the pdf for these values of $K_{j-1}$ should not contribute to the average distribution function of $K_j$ for smaller round sizes. 
+
+For the \Providence audit we test the tail ratios of the distributions conditioned on $k_{j-1}$ and multiplied by the weighting factor. That is, we test this tail ratio separately for each weighted distribution corresponding to each possible value of $K_{j-1}$. Because of this, we no longer require that all values of $k_{j-1}$ should result in the same next round size. This results in a great deal of flexibility in multiple round audits. 
+
+\subsection{Definition}
+\label{sec:prov_def}
 \begin{definition}[$(\alpha,p_a, p_0,k_{j-1},n_{j-1},n_j)$-\Providence]
     \label{def:minervatwo}
     For cumulative round size $n_i$ for round $i$ and a cumulative $k_i$ ballots for the reported winner found in round $i$, the \R \Providence stopping rule for the $j^{th}$ round is:
@@ -23,7 +28,11 @@ where $\omega _{1}\triangleq \tau_{1}$ and for $j\ge 2$, we define $\omega _{j}$
 \end{equation}
 \end{definition}
 
-Notice that for $j\ge 2$, unlike $\tau_j$, computing $\omega_j$ requires no convolution. We now we prove that \Providence is risk-limiting using lemmas from basic algebra in Appendix~\ref{sec:proofs}.
+Notice that for $j\ge 2$, unlike $\tau_j$, computing $\omega_j$ requires no convolution and is hence considerably more computationally efficient. 
+
+\subsection{Proof of Risk-Limiting Property}
+\label{sec:proof}
+We now prove that \Providence is risk-limiting using lemmas from basic algebra in Appendix~\ref{sec:proofs}.
 
 \begin{theorem}
 \label{thm:minerva2_is_rla_new}
@@ -53,11 +62,13 @@ $$
 For any round $j\ge 2$, by Definition \ref{def:minervatwo}
 and Lemma \ref{lemma:minerva2_kmin_exists},
 $\mathcal{A}=\text{Correct}$ (the audit stops) only when
-$$
-\omega_{j}(k_{j}, k_{j-1}, p_a, p_0, n_{j}, n_{j-1}, \alpha )\triangleq
+\begin{equation*}
+\begin{aligned}
+\omega_{j}(k_{j}, k_{j-1}, p_a, p_0, n_{j}, n_{j-1}, \alpha )\triangleq\\
 \sigma(k_{j-1},p_a,p_0,n_{j-1})\cdot \tau_1(k_{j}-k_{j-1},p_a,p_0,n_j-n_{j-1})
 \ge \frac{1}{\alpha}.
-$$
+\end{aligned}
+\end{equation*}
 %Let $d_j=k_j-k_{j-1}$ be shorthand for the new draw.
 %could do this for simpler notation^
 By Lemma \ref{lemma:any_ratio_is_sigma_simple}
@@ -72,11 +83,8 @@ $$
 $$
 $$
 \frac{\Pr[\bm{k_{j-1}} \mid H_a]\cdot Pr[K_{j} \ge k_{min, j} \mid \bm{k_{j-1}}, H_a, n{j}]}{\Pr[\bm{k_{j-1}} \mid H_0]\cdot Pr[K_{j} \ge k_{min, j} \mid \bm{k_{j-1}}, H_0, n{j}]} \ge 
+\frac{1}{\alpha}
 $$
-$$
-\frac{\Pr[\bm{k_{j-1}} \mid H_a]\cdot Pr[K_{j} \ge k_{j} \mid \bm{k_{j-1}}, H_a, n{j}]}{\Pr[\bm{k_{j-1}} \mid H_0]\cdot Pr[K_{j} \ge k_{j} \mid \bm{k_{j-1}}, H_0, n{j}]}\ge \frac{1}{\alpha}.
-$$
-
 %Equivalently,
 %$$
 %\frac{Pr[K_{j} \ge k_{min, j}\wedge K_{j-1} = k_{j-1} \mid n_{j}^*, k_{j-2}^*, H_a]}{Pr[K_{j}\ge k_{min, j} \wedge K_{j-1} = k_{j-1} \mid n_{j}^*, k_{j-2}^*, H_0]}\ge \frac{1}{\alpha}.
@@ -101,5 +109,6 @@ Pr[\mathcal{A}=\text{Correct} \mid H_a] \cdot \alpha
 $$
 \end{proof}
 
-\subsection{Resistance against an adversary choosing round sizes}
-I don't feel very comfortable with how to word/present this argument... I have not yet made an attempt at doing so.
+\subsection{Resistance to an adversary choosing round sizes}
+\label{sec:adversary}
+Filip TBD

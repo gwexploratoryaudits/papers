@@ -55,12 +55,12 @@ Katherine McLaughlin and Philip~B. Stark.
 \newblock Simulations of risk-limiting audit techniques and the effects of
   reducing batch size on the 2008 {California House of Representatives}
   elections.
-\newblock 2010.
+\newblock NSF report, 2010.
 
 \bibitem{mclaughlin_thesis}
 Katherine McLaughlin and Philip~B. Stark.
 \newblock Workload estimates for risk-limiting audits of large contests.
-\newblock 2011.
+\newblock Honors Thesis, University of California, Berkeley, 2011.
 
 \bibitem{r2b2}
 Sarah Morin and Grant McClearn.
@@ -75,6 +75,17 @@ Kellie Ottoboni, Matthew Bernhard, J.~Alex Halderman, Ronald~L Rivest, and
 \newblock {\em International Conference on Financial Cryptography and Data
   Security}, pages 226--241, 2019.
 
+\bibitem{rivest2008notion}
+Ronald~L Rivest.
+\newblock On the notion of "software independence" in voting systems.
+\newblock {\em Philosophical Transactions of the Royal Society A: Mathematical,
+  Physical and Engineering Sciences}, 366(1881):3759--3767, 2008.
+
+\bibitem{SI-Wack}
+Ronald~L. Rivest and John~P. Wack.
+\newblock On the notion of ``software independence'' in voting systems.
+\newblock Prepared for the TGDC, and posted by NIST at the given url.
+
 \bibitem{dice}
 Philip~B. Stark.
 \newblock Simulating a ballot-polling audit with cards and dice.
@@ -86,14 +97,14 @@ Philip~B. Stark and David~A. Wagner.
 \newblock Evidence-based elections.
 \newblock {\em {IEEE} Secur. Priv.}, 10(5):33--41, 2012.
 
-\bibitem{arlo}
-VotingWorks.
-\newblock Arlo, https://voting.works/risk-limiting-audits/.
+\bibitem{Bayesian-RLA}
+Poorvi~L. Vora.
+\newblock Risk-limiting {B}ayesian polling audits for two candidate elections.
+\newblock {\em CoRR}, abs/1902.00999, 2019.
 
-\bibitem{wald}
-Abraham Wald.
-\newblock Sequential tests of statistical hypotheses.
-\newblock {\em The Annals of Mathematical Statistics}, 16(2):117--186, 1945.
+\bibitem{vv_audits}
+Verified Voting.
+\newblock Audit law database, https://verifiedvoting.org/auditlaws/.
 
 \bibitem{arxiv_athena}
 Filip Zag{\'{o}}rski, Grant McClearn, Sarah Morin, Neal McBurnett, and

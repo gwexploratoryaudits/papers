@@ -1,20 +1,17 @@
 %Related Work
-The \BRAVO audit \cite{bravo} is a well-known ballot polling audit which has been used in numerous pilot and real audits. When used to audit a two-candidate election, it is an instance of Wald's sequential probability ratio test (SPRT) \cite{wald}, and inherits the SPRT property of being the most efficient test (requiring the smallest expected number of ballots) if the election is as announced. The model for \BRAVO and the SPRT is, however, that of a sequential audit: a sample of size one is drawn, and a decision of whether to stop the audit or not is taken. Real election audits invest in drawing large numbers of ballot, called rounds, before making stopping decisions because sequentially sampling individual ballots has significant overhead (unsealing storage boxes and searching for individual ballots). It is possible to apply \BRAVO to the sequence of ballots in a round if the sequential order is retained. This is not, however, the most efficient possible use of the drawn sample because information in consequent ballots is ignored when applying \BRAVO to ballots that were drawn earlier in the sample. 
+The \BRAVO audit \cite{bravo} is the most popular ballot polling audit. When ballots are sampled one at a time, it is the audit with the smallest expected number of ballots drawn. 
 
-We do know a great deal about the properties of \BRAVO. The risk limiting property of \BRAVO follows from the similar property of the SPRT. Stopping probabilities for \BRAVO may be estimated as implemented in \cite{arlo}; this method is due to Mark Lindeman and uses quadratic approximations. A later method for stopping probability estimates presented by Zag{\'o}rski {\em et al.}\cite{usenix_minerva,arxiv_athena} uses a similar technique for narrow margins and a separate algorithm for wider margins, the results of which match simulation results reported by Lindeman {\em et al.} \cite[Table 1]{bravo}.  
+The \Minerva audit \cite{usenix_minerva,arxiv_athena} was developed for use with large first round sizes, and has been proven to be risk limiting when the round schedule for the audit is fixed before any ballots are drawn. First-round sizes for a stopping probability of $0.9$ when the announced tally is correct have been shown to be smaller than those for EoR and SO \BRAVO for a wide range of margins; simulations \cite{arxiv_athena} support these observations. Additional simulations \cite{simulations} have shown that \Minerva requires fewer ballots than EoR and SO \BRAVO over multiple rounds and for smaller stopping probability. As expected, the advantage of \Minerva decreases for smaller stopping probability (smaller round sizes) as such round schedules approach the B2 round schedule (1,1,1,\ldots) for which \BRAVO is known to be most efficient.
 
-The \Minerva audit \cite{usenix_minerva,arxiv_athena} was developed for large first round sizes which enable election officials to be done in one round with large probability. It uses information from the entire sample, and has been proven to be risk limiting when the round schedule for the audit is determined before the audit begins. That is, information about the actual ballots drawn in the first round cannot inform future round sizes. First-round sizes for a $0.9$ stopping probability when the election is as announced have been computed for a wide range of margins and are smaller than those for EoR and SO \BRAVO. First round simulations of \Minerva \cite{arxiv_athena} demonstrate that its first-round properties---regarding the probabilities of stopping when the underlying election is tied and when it is as announced---are as predicted for first round sizes with stopping probability $0.9$. 
-Additional simulations \cite{simulations} have shown that \Minerva requires fewer ballots than EoR and SO \BRAVO over multiple rounds and for smaller stopping probability. As expected, the advantage of \Minerva decreases for smaller stopping probability (smaller round sizes) as such round schedules approach the B2 round schedule (1,1,1,\ldots) for which \BRAVO is known to be most efficient.
+Ballot polling audit simulations provide a means of educating the public and election officials \cite{dice} and to understand audit properties \cite{mclaughlin_thesis,simulations_house, blom_IRV, DBLP:conf/evoteid/HuangRSTV20}. There is work measuring the amount of time taken to examine a single ballot \cite{RI-report}. 
+Simple workload estimates may be obtained by using the number of ballots drawn \cite{bernoulli-ballot-polling}, a more thorough workload estimation model includes the time taken to access individual ballots\cite{bernhard-diss}. 
 
-Ballot polling audit simulations have been used to familiarize election officials and the public with the approach \cite{dice} and to investigate the efficiency of audits \cite{mclaughlin_thesis,simulations_house, blom_IRV, DBLP:conf/evoteid/HuangRSTV20}. 
-Some workload measurements have been made\cite{RI-report}. 
-While total ballots sampled can give naive workload estimates\cite{bernoulli-ballot-polling}, Bernhard presents a more complex workload estimation model\cite{bernhard-diss}. 
+We now summarize the model drawing largely from the notation and terminology of \cite{usenix_minerva,arxiv_athena,simulations,bravo}. The model is related work and not claimed to be original to this work. 
 
-\subsection{Model}
 An audit $\mathcal{A}$ is a function that takes as input the sample of ballots and outputs either (1) \emph{Correct: stop the audit} or (2) \emph{Undetermined: sample more ballots}.
-\BRAVO and \Minerva are modeled as binary hypothesis tests where the null hypothesis $H_0$ corresponds to a true underlying tie and the alternative hypothesis $H_a$ corresponds to the underyling election being as announced. 
-(With an even total number of ballots, $H_0$ corresponds to the announced loser winning by one ballot.)
-Thus the null hypothesis is the incorrectly announced outcome which is most difficult to detect. A risk-limiting audit requires that in the event of an underlying tie, the probability of failing to detect the error is below the risk limit.
+\BRAVO and \Minerva are modeled as binary hypothesis tests where the null hypothesis $H_0$ corresponds to a tied election and the alternative hypothesis $H_a$ to an election tally as announced. 
+(When the number of ballots is odd, $H_0$ corresponds to the announced loser winning by one ballot.)
+Thus the null hypothesis is the outcome distinct from the announced one which is most difficult to detect; the probability of failing to detect it, given that the null hypothesis is true, is the worst case such probability and should be below the risk limit \cite{Bayesian-RLA}.
 
 \begin{definition}[Risk Limiting Audit ($\alpha$-RLA)]
 An audit $\mathcal{A}$ is a Risk Limiting Audit with 
@@ -37,8 +34,9 @@ The stopping conditions of \BRAVO and \Minerva rely on the following ratios.
 In \BRAVO, $p_0=\frac{1}{2}$. A \BRAVO audit outputs correct if and only if
 $$\sigma(k,p_a,\frac{1}{2},n)\ge \frac{1}{\alpha}.$$
 
-If testing the \BRAVO stopping condition after each individual ballot
-is drawn (a \B \BRAVO audit), $\sigma$ is equivalent to the 
+%If testing the \BRAVO stopping condition after each individual ballot
+% is drawn (a \B \BRAVO audit), 
+It is easy to see that the ratio $\sigma$ is the 
 likelihood ratio:
 $$
 \frac{Pr[K=k|H_a,n]}{Pr[K=k|H_0,n]}= \frac{\binom{n}{k}p_a^{k} (1-p_a)^{n-k}}{\binom{n}{k}(\frac{1}{2})^n} =\sigma(k, p_a, \frac{1}{2}, n)
@@ -58,15 +56,15 @@ $$
 \end{definition}
 \end{comment}
 
-It now becomes useful to have shorthand for a sequence of round sizes and a sequence
-of winner ballot tallies.
+It now becomes useful to have shorthand for a sequence of cumulative round sizes and the corresponding sequence
+of cumulative winner ballot tallies.
 We use:
 $$\bm{k_j}\triangleq(k_1,k_2,\ldots,k_j)$$
 $$\bm{n_j}\triangleq(n_1,n_2,\ldots,n_j)$$
 
-Where \BRAVO uses a ratio of points on conditional probability distributions, \Minerva uses a ratio of \emph{tails} of conditional probability distributions.
+Where \BRAVO uses the ratio of the values of the probability distribution functions, \Minerva uses the ratio of their \emph{tails}.
 
-\begin{definition}[\Minerva Ratio] \label{def:minerva_ratio} The \R \Minerva audit uses the ratio $\tau_j$. We use cumulative round sizes $\bm{n_j}$, with corresponding $\bm{k_j}$ ballots for the reported winner in reach round. The proportion of ballots for the reported winner under the alternative hypothesis and null hypothesis are $p_a$ and $p_0$ respectively.
+\begin{definition}[\Minerva Ratio] \label{def:minerva_ratio} The \R \Minerva audit uses the ratio $\tau_j$. We use cumulative round sizes $\bm{n_j}$, with corresponding $\bm{k_j}$ ballots for the reported winner in each round. The proportion of ballots for the reported winner under the alternative hypothesis and null hypothesis are $p_a$ and $p_0$ respectively.
          \begin{equation}
          \begin{aligned}
              \label{eqn:tau}
