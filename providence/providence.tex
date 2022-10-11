@@ -96,7 +96,7 @@
 \newcommand{\B}{{{B2}}\xspace}
 \newcommand{\R}{{{R2}}\xspace}
 \newcommand{\BRAVO}{\textsc{Bravo}\xspace}
-
+\newcommand{\Bravo}{\textsc{Bravo}\xspace}
 
 
 %-------------------------------------------------------------------------------
@@ -153,11 +153,11 @@ Second Institution
 %Not more than 200 words, if possible, and preferably closer to 150.
 %\end{abstract}
 \begin{abstract}
-A Risk-Limiting Audit (RLA) is a statistical election tabulation audit with a rigorous error guarantee. Real ballot polling RLAs draw ballots in rounds of multiple ballots each. For practical round sizes, recently-proposed RLA \Minerva draws fewer ballots than commonly-used RLA \BRAVO (half as many for large round sizes) but is more rigid because it requires that the round schedule not change once the audit begins. 
+A Risk-Limiting Audit (RLA) is a statistical election tabulation audit with a rigorous error guarantee; this paper studies ballot polling RLAs which draw ballots in rounds of multiple ballots each. For practical round sizes, recently-proposed RLA \Minerva draws fewer ballots than commonly-used RLA \BRAVO (half as many for large round sizes) but is more rigid because it requires that the round schedule not change once the audit begins. 
 
 We present \Providence, an audit with the efficiency of \Minerva and flexibility of \BRAVO. We prove that \Providence is risk-limiting in the presence of an adversary who can choose subsequent round sizes given knowledge of previous samples. We describe a measure of audit workload---as a function of the number of rounds, precincts touched and ballots drawn---and quantify the problem of obtaining a misleading audit outcome when rounds are too small. We present simulation results demonstrating the superiority of \Providence using these measures. 
 
-We describe the use of \Providence by the Rhode Island Board of Elections in a tabulation audit of the 2021 election. Our implementation of \Providence in the open source R2B2 library should be useful to the states of Virginia, Georgia and Pennsylvania, which plan pre-certification RLAs for the 2022 general election. 
+We describe the use of \Providence by the Rhode Island Board of Elections in a tabulation audit of the 2021 election. Our implementation of \Providence in the open source R2B2 library should be useful to the states of Georgia and Pennsylvania, which are planning pre-certification ballot polling RLAs for the 2022 general election. 
 % footnotes not common in abstracts. This footnote not sufficiently compelling: \footnote{https://www.brennancenter.org/our-work/analysis-opinion/poll-local-election-officials-finds-safety-fears-colleagues-and}.
 % and integrated into Arlo, election audit software used across the US.
 %\keywords{risk-limiting audit (RLA)  \and ballot polling audit \and evidence-based elections \and statistical election audit}
@@ -362,5 +362,5 @@ The authors are grateful to the Rhode Island Board of Elections for conducting a
 
 %%  LocalWords:  endnotes includegraphics fread ptr nobj noindent
 %%  LocalWords:  pdflatex acks
-% Following each round, a decision is taken whether to end the audit, declaring it successful and the election correct, or to draw another round of ballots. The votes would be fully hand counted after multiple unsuccessful rounds. 
+% Following each round, a decision is taken whether to end the audit, declaring it successful and the election correct, or to draw another round of ballots. The votes would be fully hand counted after multiple unsuccessful rounds. Real ballot polling RLAs draw ballots in rounds of multiple ballots each. 
 
