@@ -6,11 +6,12 @@ The \Minerva audit \cite{usenix_minerva,arxiv_athena} was developed for use with
 Ballot polling audit simulations provide a means of educating the public and election officials \cite{dice} and to understand audit properties \cite{mclaughlin_thesis,simulations_house, blom_IRV, DBLP:conf/evoteid/HuangRSTV20}. There is work measuring the amount of time taken to examine a single ballot \cite{RI-report}. 
 Simple workload estimates may be obtained by using the number of ballots drawn \cite{bernoulli-ballot-polling}, a more thorough workload estimation model includes the time taken to access individual ballots\cite{bernhard-diss}. 
 
-\subsection{Model}
+We now summarize the model drawing largely from the notation and terminology of \cite{usenix_minerva,arxiv_athena,simulations,bravo}. The model is related work and not claimed to be original to this work. 
+
 An audit $\mathcal{A}$ is a function that takes as input the sample of ballots and outputs either (1) \emph{Correct: stop the audit} or (2) \emph{Undetermined: sample more ballots}.
-\BRAVO and \Minerva are modeled as binary hypothesis tests where the null hypothesis $H_0$ corresponds to a true underlying tie and the alternative hypothesis $H_a$ corresponds to the underyling election being as announced. 
-(With an even total number of ballots, $H_0$ corresponds to the announced loser winning by one ballot.)
-Thus the null hypothesis is the incorrectly announced outcome which is most difficult to detect. A risk-limiting audit requires that in the event of an underlying tie, the probability of failing to detect the error is below the risk limit.
+\BRAVO and \Minerva are modeled as binary hypothesis tests where the null hypothesis $H_0$ corresponds to a tied election and the alternative hypothesis $H_a$ to an election tally as announced. 
+(When the number of ballots is odd, $H_0$ corresponds to the announced loser winning by one ballot.)
+Thus the null hypothesis is the outcome distinct from the announced one which is most difficult to detect; the probability of failing to detect it, given that the null hypothesis is true, is the worst case such probability and should be below the risk limit \cite{Bayesian-RLA}.
 
 \begin{definition}[Risk Limiting Audit ($\alpha$-RLA)]
 An audit $\mathcal{A}$ is a Risk Limiting Audit with 
@@ -33,8 +34,9 @@ The stopping conditions of \BRAVO and \Minerva rely on the following ratios.
 In \BRAVO, $p_0=\frac{1}{2}$. A \BRAVO audit outputs correct if and only if
 $$\sigma(k,p_a,\frac{1}{2},n)\ge \frac{1}{\alpha}.$$
 
-If testing the \BRAVO stopping condition after each individual ballot
-is drawn (a \B \BRAVO audit), $\sigma$ is equivalent to the 
+%If testing the \BRAVO stopping condition after each individual ballot
+% is drawn (a \B \BRAVO audit), 
+It is easy to see that the ratio $\sigma$ is the 
 likelihood ratio:
 $$
 \frac{Pr[K=k|H_a,n]}{Pr[K=k|H_0,n]}= \frac{\binom{n}{k}p_a^{k} (1-p_a)^{n-k}}{\binom{n}{k}(\frac{1}{2})^n} =\sigma(k, p_a, \frac{1}{2}, n)
@@ -54,15 +56,15 @@ $$
 \end{definition}
 \end{comment}
 
-It now becomes useful to have shorthand for a sequence of round sizes and a sequence
-of winner ballot tallies.
+It now becomes useful to have shorthand for a sequence of cumulative round sizes and the corresponding sequence
+of cumulative winner ballot tallies.
 We use:
 $$\bm{k_j}\triangleq(k_1,k_2,\ldots,k_j)$$
 $$\bm{n_j}\triangleq(n_1,n_2,\ldots,n_j)$$
 
-Where \BRAVO uses a ratio of points on conditional probability distributions, \Minerva uses a ratio of \emph{tails} of conditional probability distributions.
+Where \BRAVO uses the ratio of the values of the conditional probability distributions, \Minerva uses the ratio of their \emph{tails}.
 
-\begin{definition}[\Minerva Ratio] \label{def:minerva_ratio} The \R \Minerva audit uses the ratio $\tau_j$. We use cumulative round sizes $\bm{n_j}$, with corresponding $\bm{k_j}$ ballots for the reported winner in reach round. The proportion of ballots for the reported winner under the alternative hypothesis and null hypothesis are $p_a$ and $p_0$ respectively.
+\begin{definition}[\Minerva Ratio] \label{def:minerva_ratio} The \R \Minerva audit uses the ratio $\tau_j$. We use cumulative round sizes $\bm{n_j}$, with corresponding $\bm{k_j}$ ballots for the reported winner in each round. The proportion of ballots for the reported winner under the alternative hypothesis and null hypothesis are $p_a$ and $p_0$ respectively.
          \begin{equation}
          \begin{aligned}
              \label{eqn:tau}

@@ -97,18 +97,14 @@ Philip~B. Stark and David~A. Wagner.
 \newblock Evidence-based elections.
 \newblock {\em {IEEE} Secur. Priv.}, 10(5):33--41, 2012.
 
+\bibitem{Bayesian-RLA}
+Poorvi~L. Vora.
+\newblock Risk-limiting {B}ayesian polling audits for two candidate elections.
+\newblock {\em CoRR}, abs/1902.00999, 2019.
+
 \bibitem{vv_audits}
 Verified Voting.
 \newblock Audit law database, https://verifiedvoting.org/auditlaws/.
-
-\bibitem{arlo}
-VotingWorks.
-\newblock Arlo, https://voting.works/risk-limiting-audits/.
-
-\bibitem{wald}
-Abraham Wald.
-\newblock Sequential tests of statistical hypotheses.
-\newblock {\em The Annals of Mathematical Statistics}, 16(2):117--186, 1945.
 
 \bibitem{arxiv_athena}
 Filip Zag{\'{o}}rski, Grant McClearn, Sarah Morin, Neal McBurnett, and
