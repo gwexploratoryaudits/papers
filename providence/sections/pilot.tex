@@ -30,3 +30,11 @@ We can use simulations to better understand typical audit behavior for the margi
 
 Figure~\ref{fig:pilot_sims} shows the average number of ballots sampled for each value of $p$ in the simulations. The vertical line denotes the stopping probability of the first round size chosen in the pilot of $140$ ballots. The average number of ballots for such a high stopping probability round schedule is high. blah blah based on plot and some numbers illustrating that point... Of course, average number of ballots is not the only metric that matters when planning an audit. For this pilot audit, extensive planning of the round schedule was not necessary because the margin was high enough the relatively few ballots were needed even to achieve the high probability of stopping. In Section~\ref{sec:workload} we consider a larger, state-wide contest where selecting the round schedule has more significant implications. Some of the ideas introduced in Section~\ref{sec:workload} we do apply to this pilot case as well.
 
+\begin{figure}
+\includegraphics[width=.5\textwidth]{pilot_sims.png}
+\caption{The total number of ballots sampled on average in our simulations of audits using the same contest parameters and risk limit as the pilot audit. The average total ballots are shown for various round schedules for which we ran simulations, parameterized by $p$ the conditional stopping probability used to select each round size.}
+\label{fig:pilot_sims}
+\end{figure}
+
+
+
