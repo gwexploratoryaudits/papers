@@ -1,50 +1,48 @@
-This is BibTeX, Version 0.99d (TeX Live 2022)
+This is BibTeX, Version 0.99d (TeX Live 2020)
 Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: providence.aux
 The style file: plain.bst
 Database file #1: audits.bib
 Warning--I didn't find a database entry for "sims"
-Warning--empty journal in simulations_house
-Warning--empty journal in mclaughlin_thesis
-You've used 17 entries,
+You've used 19 entries,
             2118 wiz_defined-function locations,
-            597 strings with 7458 characters,
-and the built_in function-call counts, 5970 in all, are:
-= -- 552
-> -- 338
+            608 strings with 7879 characters,
+and the built_in function-call counts, 6446 in all, are:
+= -- 599
+> -- 358
 < -- 6
-+ -- 133
-- -- 112
-* -- 407
-:= -- 995
-add.period$ -- 52
-call.type$ -- 17
-change.case$ -- 99
++ -- 141
+- -- 118
+* -- 423
+:= -- 1071
+add.period$ -- 58
+call.type$ -- 19
+change.case$ -- 108
 chr.to.int$ -- 0
 cite$ -- 19
-duplicate$ -- 226
-empty$ -- 452
-format.name$ -- 112
-if$ -- 1249
+duplicate$ -- 237
+empty$ -- 503
+format.name$ -- 118
+if$ -- 1359
 int.to.chr$ -- 0
-int.to.str$ -- 17
-missing$ -- 13
-newline$ -- 86
-num.names$ -- 38
-pop$ -- 123
+int.to.str$ -- 19
+missing$ -- 12
+newline$ -- 96
+num.names$ -- 42
+pop$ -- 138
 preamble$ -- 1
-purify$ -- 83
+purify$ -- 90
 quote$ -- 0
-skip$ -- 178
+skip$ -- 195
 stack$ -- 0
-substring$ -- 276
-swap$ -- 61
+substring$ -- 292
+swap$ -- 65
 text.length$ -- 6
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 68
-warning$ -- 2
-while$ -- 53
-width$ -- 19
-write$ -- 177
-(There were 3 warnings)
+type$ -- 76
+warning$ -- 0
+while$ -- 57
+width$ -- 21
+write$ -- 199
+(There was 1 warning)
