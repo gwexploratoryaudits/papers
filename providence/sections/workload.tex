@@ -37,12 +37,13 @@ In a US state-wide RLA, the state organizes the audit by determining the random 
 Therefore each audit round requires some number of person-hours for set up and communication between state and county. This overhead for a round includes choosing the round size, generating the random sample, and communicating that random sample to the counties, as well as the communication of the results back to the state afterwards. 
 
 Consequently, we now consider a model with a constant per-ballot workload $w_b$ and a constant per-round workload $w_r$.
-So for an audit with expected number of ballots $E_{b}$ and expected number of rounds $E_{r}$, we estimate that the workload $C$ of the audit is
+So for an audit with expected number of ballots $E_{b}$ and expected number of rounds $E_{r}$, we estimate that the workload $W$ of the audit is
 \begin{equation}
-W(E_b,E_r) = E_b w_b + E_r w_r
+W(E_b,E_r) = E_b w_b + E_r w_r + C
 \label{eq:round_workload}
 \end{equation}
 
+Note there is also some constant overhead of workload for the whole audit, namely $C$ in Equation~\ref{eq:round_workload}, which we take to be zero in our examples but could be used by election officials for their estimates.
 For simplicity, (and without loss of generality), we assume the per ballot workload is one, $w_b=1$. Then the per round workload $w_r$ tells us the workload of a round as a number of ballots. We begin with $w_r=1000$ as a conservative example. 
 That is, we set the overhead of a round equal to the workload of sampling $1000$ ballots. Based on available data\cite{RI-report}, the time retrieving and analyzing each individual ballot is on the order of $75$ seconds which means that $w_r=1000$ is equivalent to roughly $20$ person-hours of workload. This corresponds to about $15$ minutes being spent per round in each of the $133$ counties of Virginia, a clearly conservative workload estimate. 
 As shown in Figure~\ref{fig:with_round_workload}, lower average workloads are achieved by selecting higher stopping probability; \Providence achieves the lowest minimum average workload is achieved at roughly $0.7$.
@@ -72,7 +73,7 @@ Figure~\ref{fig:optimal_ps} shows the corresponding round schedule parameters $p
 
 \noindent\textbf{Precinct overhead.} For a more complete model, we can also introduce container-level workload. The time to sample a ballot from an entirely new box is typically greater than to sample a ballot from an already-open box. Based on a Rhode Island pilot RLA report\cite{RI-report}, this may mean that a ballot from a new container requires roughly twice the time as a ballot from an already-opened container. Typically available election results give per-precinct granularity of vote tallies, rather than individual container information. In Virginia, however, most precincts have a single ballot scanner whose one box has sufficient capacity for all the ballots cast in that precinct anyways, and so we model the per-container workload with an additional per-precinct constant workload, $w_p$. In this model, the workload estimate incurs an additional workload of $w_p$ every time a precinct is sampled from for the first time in a round. That is, let $E_{pi}$ be the expected number of distinct precincts sampled from in round $i$, and let $E_p=\sum_i E_{pi}$. Then the new model is
 \begin{equation}
-W(E_b, E_r, E_p) = E_b w_b + E_r w_r + E_p w_p
+W(E_b, E_r, E_p) = E_b w_b + E_r w_r + E_p w_p + C
 \label{eq:round_and_precinct_workload}
 \end{equation}
 
