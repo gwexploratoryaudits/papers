@@ -36,7 +36,7 @@ where $\omega _{1}\triangleq \tau_{1}$ and for $j\ge 2$, we define $\omega _{j}$
 
 Notice that for $j\ge 2$, unlike $\tau_j$, computing $\omega_j$ requires no convolution and is hence computationally considerably more efficient. 
 
-\subsection{Proof of Risk-Limiting Property}
+\subsection{Risk-Limiting Property: Proof}
 \label{sec:proof}
 We now prove that \Providence is risk-limiting using lemmas from basic algebra in Appendix~\ref{sec:proofs}.
 
@@ -101,9 +101,12 @@ $$
 %of $k$, we get
 % Taking the sum over all possible audit histories, we get
 It can be rewritten as
-$$
-\frac{\Pr[K_{j-1} = {k_{j-1}} \mid H_a, n_{j-1}]\cdot \sum_{{k} = k_{min, j}}^{n_j} Pr[K_{j} = k \mid {k_{j-1}}, H_a, n_{j-1}, n_{j}]}{\Pr[K_{j-1} = {k_{j-1}} \mid H_0, n_{j-1}]\cdot \sum_{{k} = k_{min, j}}^{n_j} Pr[K_{j} = k \mid {k_{j-1}}, H_0, n_{j-1}, n_{j}]}\ge \frac{1}{\alpha}.
-$$
+\begin{equation*}
+\begin{aligned}
+\frac{\Pr[K_{j-1} = {k_{j-1}} \mid H_a, n_{j-1}] \sum_{{k} = k_{min, j}}^{n_j} Pr[K_{j} = k \mid {k_{j-1}}, H_a, n_{j-1}, n_{j}]}{\Pr[K_{j-1} = {k_{j-1}} \mid H_0, n_{j-1}]\sum_{{k} = k_{min, j}}^{n_j} Pr[K_{j} = k \mid {k_{j-1}}, H_0, n_{j-1}, n_{j}]} 
+\\ \ge \frac{1}{\alpha}
+\end{aligned}
+\end{equation*}
 Finally, because the total probability of stopping the audit under
 the alternative hypothesis is less than 1, we get
 $$
