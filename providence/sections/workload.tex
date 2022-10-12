@@ -148,48 +148,7 @@ We observe a similar behavior in our simulations of audits on the contest from t
 If election officials wish to enforce a \emph{misleading limit} for all the rounds, our simulation analysis could help. On the other hand, for a given round, it is straightforward to compute analytically the probability that a loser has more votes than the winner in the sample. Table~\ref{tab:misleading} shows for various margins the minimum first round size $n$ that guarantees a probability of a \emph{misleading sample} at most $M\in\{0.1,0.01,0.001\}$. For all values of $M$ and all margins, \Providence achieves a higher probability of stopping than either EoR \BRAVO or SO \BRAVO. 
     As seen in the Table~\ref{tab:misleading}, to enforce $M=0.01$ requires minimum round sizes with at least roughly a $0.8$ probability of stopping in the first round. Even if the most efficient audit schedule (by either workload or real time measures) would use a lower stopping probability $p$ to choose the first round size, the election officials may opt to use this constraint on the probability of a \emph{misleading sample} as the deciding factor in planning their audits.
 
-\begin{table}
-\center
-\begin{tabular}{ |l|l|r|c|c|c| }
-\hline
-$M$ & margin & $n$ & Prov & SO & EoR \\
-\hline
-0.1&0.25&25&0.221&0.152&0.115\\
-&0.2&41&0.178&0.169&0.105\\
-&0.15&73&0.202&0.186&0.141\\
-&0.1&163&0.222&0.182&0.107\\
-&0.05&657&0.227&0.192&0.127\\
-&0.04&1027&0.237&0.193&0.124\\
-&0.03&1825&0.246&0.194&0.124\\
-&0.02&4105&0.246&0.195&0.124\\
-&0.01&16423&0.246&0.196&0.124\\
-\hline
-0.01&0.25&85&0.792&0.707&0.559\\
-&0.2&133&0.826&0.71&0.593\\
-&0.15&239&0.817&0.712&0.549\\
-&0.1&539&0.805&0.717&0.567\\
-&0.05&2163&0.817&0.721&0.569\\
-&0.04&3381&0.82&0.722&0.563\\
-&0.03&6011&0.824&0.723&0.573\\
-&0.02&13527&0.824&0.723&0.57\\
-&0.01&54117&0.824&0.724&0.57\\
-\hline
-0.001&0.25&149&0.962&0.889&0.783\\
-&0.2&235&0.963&0.89&0.768\\
-&0.15&421&0.958&0.894&0.801\\
-&0.1&951&0.958&0.894&0.793\\
-&0.05&3815&0.96&0.896&0.785\\
-&0.04&5965&0.961&0.896&0.791\\
-&0.03&10607&0.961&0.897&0.787\\
-&0.02&23869&0.962&0.897&0.787\\
-&0.01&95491&0.962&0.897&0.787\\
-\hline
-\end{tabular}
-\caption{For various margins, this table gives the minimum first round size $n$ to achieve at most a probability $M$ of a \emph{misleading sample} in the first round. The corresponding stopping probabilities of \Providence, SO \BRAVO, and EoR \BRAVO are given for each value of $n$.}
-\label{tab:misleading}
-\end{table}
-
-\textbf{Misleading SO \BRAVO sequences.} As we consider the idea of misleading samples, it is noteworthy that SO \BRAVO suffers from a different and unique type of misleading result. 
+\subsubsection{Misleading SO \BRAVO sequences.} As we consider the idea of misleading samples, it is noteworthy that SO \BRAVO suffers from a different and unique type of misleading result. 
 
 After drawing a cumulative $n>1$ ballots in a round, some number $k$ of them are votes for the announced winner. There are $\binom{n}{k}$ possible sequences of ballots which can lead to such a sample. Given a value of $k$, however, the particular sequence of the sample that led to that value of $k$ contains no additional information about whether the sample is more likely under the alternative or null hypotheses. That is to say, $\Pr[K=k|H_a]$ and $\Pr[K=k|H_0]$ have the same value regardless of the sequence.
 Despite this, the SO \BRAVO RLA stopping condition is not just a function of $n$ and $k$ but also a function of the sequence, the selection order. In particular, if the sequence of ballots is such that the standard \BRAVO stopping condition was met for some $n'<n$ and corresponding $k'<n$, the audit will stop, even if by the end of the sequence the values $k$ and $n$ no longer meet the \BRAVO condition. We refer to such sequences which stop under SO \BRAVO, but not under EoR \BRAVO, as \emph{misleading sequences}. To be clear, this is not a mathematical issue; stopping in such cases is still a correct application of Wald's SPRT result\cite{wald}. The misleading nature of such stoppages is the note we are making. This is another case where election officials might have difficulty explaining the misleading situation to the public.
@@ -200,8 +159,8 @@ It is easy to use our simulations to see how often SO \BRAVO \emph{misleading se
 
 \begin{figure}
 \includegraphics[width=.5\textwidth]{so_misleading.png}
-\caption{The total number of ballots sampled on average in our simulations for various round schedules parameterized by $p$ the conditional stopping probability used to select each round size.}
-\label{fig:misleading_2}
+\caption{The proportion of sequences that are misleading sequences in the SO \BRAVO audit as a function of $p$.}
+\label{so_misleading}
 \end{figure}
 
 
