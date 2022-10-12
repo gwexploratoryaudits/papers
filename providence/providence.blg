@@ -1,48 +1,48 @@
-This is BibTeX, Version 0.99d (TeX Live 2020)
+This is BibTeX, Version 0.99d (TeX Live 2022)
 Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: providence.aux
 The style file: plain.bst
 Database file #1: audits.bib
-Warning--I didn't find a database entry for "arxiv-athena"
-You've used 24 entries,
+Warning--I didn't find a database entry for "athena_arxiv"
+You've used 22 entries,
             2118 wiz_defined-function locations,
-            629 strings with 8470 characters,
-and the built_in function-call counts, 7560 in all, are:
-= -- 699
-> -- 393
+            623 strings with 8226 characters,
+and the built_in function-call counts, 7136 in all, are:
+= -- 664
+> -- 373
 < -- 6
-+ -- 157
-- -- 128
-* -- 469
-:= -- 1252
-add.period$ -- 70
-call.type$ -- 24
-change.case$ -- 128
++ -- 148
+- -- 122
+* -- 455
+:= -- 1184
+add.period$ -- 66
+call.type$ -- 22
+change.case$ -- 119
 chr.to.int$ -- 0
-cite$ -- 24
-duplicate$ -- 283
-empty$ -- 624
-format.name$ -- 128
-if$ -- 1598
+cite$ -- 22
+duplicate$ -- 269
+empty$ -- 580
+format.name$ -- 122
+if$ -- 1507
 int.to.chr$ -- 0
-int.to.str$ -- 24
+int.to.str$ -- 22
 missing$ -- 14
-newline$ -- 118
-num.names$ -- 52
-pop$ -- 172
+newline$ -- 110
+num.names$ -- 48
+pop$ -- 155
 preamble$ -- 1
-purify$ -- 105
+purify$ -- 98
 quote$ -- 0
-skip$ -- 239
+skip$ -- 218
 stack$ -- 0
-substring$ -- 343
-swap$ -- 71
+substring$ -- 332
+swap$ -- 69
 text.length$ -- 6
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 96
+type$ -- 88
 warning$ -- 0
-while$ -- 69
-width$ -- 26
-write$ -- 241
+while$ -- 65
+width$ -- 24
+write$ -- 227
 (There was 1 warning)
