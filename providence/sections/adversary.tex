@@ -192,130 +192,14 @@ Both the audits of our toy example therefore begin with a first round size of $1
 % \end{proof}
 
 \subsection{Efficiency}
-\begin{lemma}
+\newtheorem{lem}{Lemma}
+\begin{restatable}{lem}{efficiencylemma}
+\label{lem:efficiency}
 % For any round schedule %$[n_1, \ldots, n_r]$
 For any risk-limit $\alpha \in (0, 1)$, for any margin
 and for any round schedule $[n_1, \ldots, n_j]$, 
 the \Providence RLA is more efficient than EoR \BRAVO.
-\end{lemma}
-\begin{proof}
-Let $[n_1, \ldots, n_j]$ be a round schedule, and assume that an EoR \BRAVO audit stops in round $j$, after observing $k_1, \ldots, k_j$ ballots for the announced winner in each round respectively.
-That is, the EoR \BRAVO stopping condition is true:
-$$\sigma(k_j,p_a,p_0,n_j) \ge \frac{1}{\alpha}.$$
-To see the \Providence stopping condition is fulfilled, we rewrite as 
-%$$\frac{1}{\alpha} \le \sigma(k_j,p_a,p_0,n_j)=\sigma(k_j,p_a,p_0,n_j)$$
-
-
-%% From Lemma~\ref{lemma:tau1_increasing} 
-% \[
-% \tau_1(k, p_a, p_0, n_j) = 
-%  \frac{P[K_r \geq {k} | H_a, n_j]}{P[K_r \geq {k} | H_0, n_j]}
-% \]
-%is a strictly increasing function of $k$ (for $0 < p_0, p_a < 1$ and $n_r > 0$). % for $k \geq k_r$. % (in fact this isk^{p_a, p_0, \alpha}_{min, \BRAVO, n_r} = k^{*}_{n_r}$
-% \textit{i.e.,}
-% \begin{equation}\label{eq_incr}
-% % \frac{1}{\alpha} \leq
-%   \frac{P[K_r = {k_r} | H_a, n_r]}{P[\mathbf{k_r} | H_0, n_r]} \leq   \frac{P[\mathbf{k_r} + 1 | H_a, n_r]}{P[K_r = {k_r} + 1 | H_0, n_r]} \leq \ldots  \leq \frac{P[\mathbf{n_r} | H_a, n_r]}{P[\mathbf{n_r} | H_0, n_r]}. 
-% \end{equation}
-
-%If the \BRAVO test is satisfied for $k_j$ then:
-
-% From the properties of binomial distribution we obtain:
-% \[
-%    \frac{P[\mathbf{k_r} | H_a, n_r]}{P[\mathbf{k_r} | H_0, n_r]} = 
-%    \frac{P[\mathbf{k_{r-1}} | H_a, n_{r-1}]}{P[\mathbf{k_{r-1}} | H_0, n_{r-1}]}
-%    \frac{P[\mathbf{k_r - k_{r-1}} | H_a, n_r - n_{r-1}]}{P[\mathbf{k_r - k_{r-1}} | H_0, n_r - n_{r-1}]} = 
-% \]
-\[
- \frac{1}{\alpha} \leq \sigma(k_{j}, p_a, p_0, n_{j}) 
-\]
-\[
- = \sigma(k_{j-1}, p_a, p_0, n_{j-1}) \cdot \sigma(k_j - k_{j-1}, p_a, p_0, n_j - n_{j-1})  
-\]
-\[
- \leq^{(*)} \sigma(k_{j-1}, p_a, p_0, n_{j-1}) \cdot \tau_1(k_j - k_{j-1}, p_a, p_0, n_j - n_{j-1}) 
-\]
-\[
- = \omega_r(k_j, k_{j-1}, p_a, p_0, n_j, n_{j-1}).
-\]
-
-Where inequality $(*)$ follows from \cite[Theorem 6]{athena}. Note that we apply this result on $\tau_j$ for just $j=1$.
-%Where inequality $(*)$ follows from Lemma~\ref{lemma:frac_sums_increasing}.
-%the well-known property that if $a_i/b_i$ (for $a_i, b_i > 0$) is monotonicly increasing then
-%(\sum_{i} a_i)/(\sum_{i} b_i)$ is also monotonicly increasing.
-
-
-% 
-% Now, if we consider $k^* = k^{p_a, p_0, \alpha}_{min, \BRAVO, n_r}$ then it is easy to see that:
-% 
-% 
-%  \[
-%  k^{p_a, p_0, \alpha, k_{r-1}}_{min, [n_1, \ldots, n_r]}  
-%   = \min\left\{k :
-% \frac{
-% s_{k_{r-1}, a, [n_{r-1}]}
-% \sum_{i = k}^{n_r - n_{r-1}} s_{i, a, [n_r - n_{r-1}]}
-% }{
-% s_{k_{r-1}, 0, [n_{r-1}]}
-% \sum_{i = k}^{n_r - n_{r-1}} s_{i, 0, [n_r - n_{r-1}]}
-% }\geq \frac{1}{\alpha}  \right\} =
-% \]
-% \[
-%   = \min\left\{k :
-% \frac{
-% s_{k_{r-1}, a, [n_{r-1}]}
-% \left(
-% \sum_{i = k}^{n_r - n_{r-1}} s_{i, a, [n_r - n_{r-1}]}
-% + \sum_{i = k}^{n_r - n_{r-1}} s_{i, a, [n_r - n_{r-1}]}
-% \right)
-% }{
-% s_{k_{r-1}, 0, [n_{r-1}]}
-% \sum_{i = k}^{n_r - n_{r-1}} s_{i, 0, [n_r - n_{r-1}]}
-% }\geq \frac{1}{\alpha}  \right\} =
-% \]
-
-
-
-%  \[
-%  k^{p_a, p_0, \alpha}_{min, [n_1, \ldots, n_j]} =  k^{p_a, p_0, \alpha}_{min, [n_j]}
-%         = \min\left\{k :
-% \frac{
-% \sum_{i = k}^{n_j} s_{i, a, [n_j]}
-% }{
-% \sum_{i = k}^{n_j} s_{i, 0, [n_j]}
-% }\geq \frac{1}{\alpha}  \right\} =
-% \]
-
-
-
-
- 
-% 
-%  
-%  Now, let us consider $j$-{th} round for $j = 1, \ldots, r$. We are going to show that
-%  $k^{p_a, p_0, \alpha}_{min, [n_1, \ldots, n_j]} \leq k^{p_a, p_0, \alpha}_{min, \BRAVO, n_r}$.
-%  
-%  From Lemma~\ref{eq:kMin} we have:
-%  \[
-%  k^{p_a, p_0, \alpha}_{min, [n_1, \ldots, n_j]} =  k^{p_a, p_0, \alpha}_{min, [n_j]}
-%   = \min\left\{k :
-% \frac{
-% \sum_{i = k}^{n_j} s_{i, a, [n_j]}
-% }{
-% \sum_{i = k}^{n_j} s_{i, 0, [n_j]}
-% }\geq \frac{1}{\alpha}  \right\} =
-% \]
-% 
-% From the definition of $k^{p_a, p_0, \alpha}_{min, \BRAVO, n_r}$ we have that for every $k \geq k^{p_a, p_0, \alpha}_{min, \BRAVO, n_r}$ it holds: $s_{k, a, [n_j]}/s_{k, 0, [n_j]} \geq 1/\alpha$ which means that:
-% \[
-% \frac{
-% \sum_{i = k^{p_a, p_0, \alpha}_{min, \BRAVO, n_r}}^{n_j} s_{i, a, [n_j]}
-% }{
-% \sum_{i = k^{p_a, p_0, \alpha}_{min, \BRAVO, n_r}}^{n_j} s_{i, 0, [n_j]}
-% }\geq \frac{1}{\alpha}
-% \]
-% which means that $k^{p_a, p_0, \alpha}_{min, [n_1, \ldots, n_j]} \leq k^{p_a, p_0, \alpha}_{min, \BRAVO, n_r}$.
-
-\end{proof}
+\end{restatable}
+\begin{proof} Appendix~\ref{sec:proofs}\end{proof}
 
 
