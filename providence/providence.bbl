@@ -1,5 +1,10 @@
 \begin{thebibliography}{10}
 
+\bibitem{r2b2_anon}
+Anonymized.
+\newblock The {R2B2} ({R}ound-by-{R}ound, {B}allot-by-{B}allot) library,
+  https://github.com/xxxx.
+
 \bibitem{bernhard-diss}
 Matthew Bernhard.
 \newblock {\em Election Security Is Harder Than You Think}.
@@ -111,6 +116,10 @@ Poorvi~L. Vora.
 \bibitem{vv_audits}
 Verified Voting.
 \newblock Audit law database, https://verifiedvoting.org/auditlaws/.
+
+\bibitem{arlo}
+VotingWorks.
+\newblock Arlo, https://voting.works/risk-limiting-audits/.
 
 \bibitem{wald}
 Abraham Wald.
