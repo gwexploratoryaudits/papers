@@ -58,10 +58,11 @@ $$
 \frac{Pr[K_{1} \geq k_{min,1} \mid H_a, n_1]}{Pr[K_{1} \geq k_{min, 1} \mid H_0, n_1]}
 \ge \frac{1}{\alpha}.
 $$
+where $k_{min,1} = k^{p_a, p_0, \alpha, 0}_{min, 1, 0, n_1}$ (see Lemma \ref{lemma:minerva2_kmin_exists} and Definition \ref{def:kmin}). 
 
 For any round $j\ge 2$, by Definition \ref{def:minervatwo}
 and Lemma \ref{lemma:minerva2_kmin_exists},
-$\mathcal{A}=\text{Correct}$ (the audit stops) only when
+$\mathcal{A}=\text{Correct}$ (the audit stops) if and only if
 \begin{equation*}
 \begin{aligned}
 \omega_{j}(k_{j}, k_{j-1}, p_a, p_0, n_{j}, n_{j-1}, \alpha )\triangleq\\
@@ -77,7 +78,7 @@ $$
 \frac{\Pr[K_{j-1} = {k_{j-1}} \mid H_a, n_{j-1}]\cdot Pr[K_{j} \ge k_{j} \mid {k_{j-1}}, H_a, n_{j-1}, n_{j}]}{\Pr[K_{j-1} = {k_{j-1}} \mid H_0, n_{j-1}]\cdot Pr[K_{j} \ge k_{j} \mid {k_{j-1}}, H_0, n_{j-1}, n_{j}]}\ge \frac{1}{\alpha}.
 $$
 By Lemma~\ref{lemma:minerva2_kmin_exists} and Definition~\ref{def:minervatwo},
-we see that there exists a $k_{min, j} = k_{min, j, n_{j-1}, n_j}^{p_a, p_0, k_{j-1}} \leq k_j$ 
+we see that there exists a $k_{min, j} = k^{p_a, p_0, \alpha, k_{j-1}}_{min, j, n_{j-1}, n_j}  \leq k_j$ 
 %$k_{min, j}\le k_j$ 
 for which
 $$
@@ -94,7 +95,7 @@ $$
 %Taking the sum over all possible rounds and corresponding preceding values
 %of $k$, we get
 % Taking the sum over all possible audit histories, we get
-It can be rewritten as
+The above may be rewritten as
 \begin{equation*}
 \begin{aligned}
 \sum_{{k} = k_{min, j}}^{n_j} Pr[(K_{j} , K_{j-1}) = (k, k_{j-1}) \mid H_0, n_{j-1}, n_{j}] \leq \\
