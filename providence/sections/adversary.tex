@@ -2,46 +2,9 @@
 % \subsection{Motivation for considering adaptive adversary}
 % \fpo{(old notes)}
 
-\Minerva was proven to be risk-limiting audit for a predetermined round schedule.
-As explained in section \ref{sec:prov_motivation}, it is not clear that \Minerva is risk-limiting if an adversary can 
+\Minerva was proven to be a risk-limiting audit for a predetermined round schedule.
+As explained earlier, it is not clear that \Minerva is risk-limiting if an adversary can 
 adaptively select the round schedule as the audit proceeds. In this section we prove that \Providence does not have this problem, and is risk-limiting even when the adversary can choose next round sizes based on knowledge of the current sample. 
-
-\begin{definition}
-Let $d \in \{0, a\}$ stand for the null or the alternative hypothesis respectively.
-Let $s_{i, d, [n_1, \ldots, n_r]}$ be the probability of observing $i$ ballots for the winner after drawing the $r^{th}$ round of an audit with round schedule $[n_1, \ldots, n_r]$ conditioned on hypothesis $H_d$ \textit{i.e.,} 
-\[
-s_{i, d, [n_1, \ldots, n_r]} = P\left[K_r = i | (n_1, \ldots, n_r), H_d\right]. 
-%  = s_{i, d, [n_r]},
-\]
-For $r = 1$ 
-\[
- s_{i, d, [n_r]} = \mathsf{Bin}(n_r, p_d, i).
-\]
-\end{definition}
-
-
-\begin{example}[Adaptive round size selection] 
-Let us assume a malicious auditor with the following strategy for \Minerva audit:
-\begin{itemize}
- \item select second round size $n_2$ if $k_{1} = k^* = k^{p_a, p_0, \alpha}_{min, 1} - 1$,
- \item select round size $n'_2$ for $k_1 \leq k^{p_a, p_0, \alpha}_{min, 1} - 2$.
-\end{itemize}
-This leads to the situation where the true value of $s_{i, d, [n_1, n_2]}$ is missing any contributions from $K_1=k^*$.
-
-\[
- s^{k^*, up}_{i, d, [n_1, n_{2}]} = \sum_{j = x}^{\min\{i, k^{p_a, p_0, \alpha}_{min, 1}-1\}} Bin(n_{2} - n_1, p_d, i - j) \cdot s_{j, d, [n_1]},
-\]
-
-\[
- s^{k^*, down}_{i, d, [n_1, n'_{2}]} = \sum_{j = \max\{0, i - (n'_2 - n_1)\}}^{k^*-1} Bin(n'_{2} - n_1, p_d, i - j) \cdot s_{j, d, [n_1]},
-\]
-
-One would need to to prove that for $n_2, n'_2$ and for any choice of $k^*$ the following holds:
-\[
-\sum_{i = k^{p_a, p_0, \alpha}_{min, 2, [n_1, n_2]}}^{n_r} s^{k^*, up}_{i, 0, [n_1, n_2]} \le \alpha \sum_{i = k^{p_a, p_0, \alpha}_{min, 2, [n_1, n_2]}}^{n_r} s^{k^*}_{i, A, [n_1, n_2]}.
-\]
-\end{example}
-
 
 \begin{definition}[Strategy-Proof RLA]
  An audit $\mathcal{A}$ is a Strategy-Proof Risk Limiting Audit with risk limit $\alpha$ iff for
@@ -56,7 +19,7 @@ One would need to to prove that for $n_2, n'_2$ and for any choice of $k^*$ the 
 \Providence is a Strategy-Proof RLA. 
 \end{lemma}
 \begin{proof}
-This property follow from Theorem~\ref{thm:minerva2_is_rla_new} and Lemma~\ref{lemma:markov}.
+This property follows from Theorem~\ref{thm:minerva2_is_rla_new} and Lemma~\ref{lemma:markov}. Note that, as described in section \ref{sec:proof}, the proof of the risk-limiting nature of the audit does not rely on round sizes $n_j$ being identical for all values of $k_{j-1}$. 
 \end{proof}
 
 % To see the practical implication of this result, we consider a toy example: an RLA of a two-candidate contest with margin $10\%$ and risk limit $10\%$. 
