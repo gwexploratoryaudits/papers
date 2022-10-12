@@ -77,17 +77,20 @@ $\mathcal{A}=\text{Correct}$ (the audit stops) if and only if
 By Lemma \ref{lemma:any_ratio_is_sigma_simple}
 and Definition \ref{def:minerva_ratio}, this is equivalent to
 $$
-\frac{\Pr[K_{j-1} = {k_{j-1}} \mid H_a, n_{j-1}]\cdot Pr[K_{j} \ge k_{j} \mid {k_{j-1}}, H_a, n_{j-1}, n_{j}]}{\Pr[K_{j-1} = {k_{j-1}} \mid H_0, n_{j-1}]\cdot Pr[K_{j} \ge k_{j} \mid {k_{j-1}}, H_0, n_{j-1}, n_{j}]}\ge \frac{1}{\alpha}.
+\frac{\Pr[K_{j-1} = {k_{j-1}} \mid H_a, n_{j-1}] Pr[K_{j} \ge k_{j} \mid {k_{j-1}}, H_a, n_{j-1}, n_{j}]}{\Pr[K_{j-1} = {k_{j-1}} \mid H_0, n_{j-1}] Pr[K_{j} \ge k_{j} \mid {k_{j-1}}, H_0, n_{j-1}, n_{j}]}
+$$$$\ge \frac{1}{\alpha}.
 $$
 By Lemma~\ref{lemma:minerva2_kmin_exists} and Definition~\ref{def:minervatwo},
 we see that there exists a $k_{min, j} = k^{p_a, p_0, \alpha, k_{j-1}}_{min, j, n_{j-1}, n_j}  \leq k_j$ 
 %$k_{min, j}\le k_j$ 
 for which
 $$
-\frac{\Pr[K_{j-1} = {k_{j-1}} \mid H_a, n_{j-1}]\cdot Pr[K_{j} \ge k_{j} \mid {k_{j-1}}, H_a, n_{j-1}, n_{j}]}{\Pr[K_{j-1} = {k_{j-1}} \mid H_0, n_{j-1}]\cdot Pr[K_{j} \ge k_{j} \mid {k_{j-1}}, H_0, n_{j-1}, n_{j}]}\ge
+\frac{\Pr[K_{j-1} = {k_{j-1}} \mid H_a, n_{j-1}] Pr[K_{j} \ge k_{j} \mid {k_{j-1}}, H_a, n_{j-1}, n_{j}]}{\Pr[K_{j-1} = {k_{j-1}} \mid H_0, n_{j-1}] Pr[K_{j} \ge k_{j} \mid {k_{j-1}}, H_0, n_{j-1}, n_{j}]}\ge
 $$
 $$
-\frac{\Pr[K_{j-1} = {k_{j-1}} \mid H_a, n_{j-1}]\cdot Pr[K_{j} \ge k_{min, j} \mid {k_{j-1}}, H_a, n_{j-1}, n_{j}]}{\Pr[K_{j-1} = {k_{j-1}} \mid H_0, n_{j-1}]\cdot Pr[K_{j} \ge k_{min, j} \mid {k_{j-1}}, H_0, n_{j-1}, n_{j}]} \ge 
+\frac{\Pr[K_{j-1} = {k_{j-1}} \mid H_a, n_{j-1}] Pr[K_{j} \ge k_{min, j} \mid {k_{j-1}}, H_a, n_{j-1}, n_{j}]}{\Pr[K_{j-1} = {k_{j-1}} \mid H_0, n_{j-1}] Pr[K_{j} \ge k_{min, j} \mid {k_{j-1}}, H_0, n_{j-1}, n_{j}]} 
+$$$$
+\ge 
 \frac{1}{\alpha}
 $$
 %Equivalently,
