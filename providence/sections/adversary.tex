@@ -23,11 +23,13 @@ This property follows from Theorem~\ref{thm:minerva2_is_rla_new} and Lemma~\ref{
 \end{proof}
 
 To illustrate the practical implication of this property, we consider a toy example: an RLA of a two-candidate contest with margin $1\%$ and risk limit $10\%$. 
-Suppose we wish to achieve a conditional stopping probability $0.9$ in each round of the audit. For \Providence, we can compute a new round size for each round based on the previous samples, but for \Minerva we need to commit to a round schedule in advance. So for \Minerva we choose a first round size which gives a $0.9$ probability of stopping, and then we set the subsequent marginal round sizes to be $1.5$ times each previous round size. This multiplier of $1.5$ is known to give a probability of stopping roughly $0.9$ in the second round if the first round size has probability of stopping $0.9$. Audit software ARLO, used by many states, commits to this round schedule by default. Both audits therefore begin with first round size of $17,272$ to give a $0.9$ probability of stopping, and both will stop in the first round if the sample contains at least $8,725$ ballots for the winner. We now consider two cases for which the audit proceeds to a second round. 
+Suppose we wish to achieve a conditional stopping probability $0.9$ in each round of the audit. For \Providence, we can compute a new round size for each round based on the previous samples. For \Minerva, however, we would have a predetermined round schedule. We use the default \Minerva round schedule of audit software Arlo \cite{arlo} (used by most states performing an RLA), which is is $[x, 2.5x, 6.25x, ...]$; that is, the next marginal round size is $1.5$ times the current one. This multiplier of $1.5$ is known to give, over a wide range of margins, a probability of stopping roughly $0.9$ in the second round if the first round size has probability of stopping $0.9$. 
 
-In one case there are $8,724$ votes for the winner in the sample, just one fewer than the minimum needed to meet the risk limit. In the \Minerva audit, we are already committed to a second round size of $43,180$ which, given the nearly-passing sample of the first round is higher than necessary, achieving a stopping probability in the second round of $.954$. The \Providence audit samples more than $9,000$ fewer ballots with a round size of $34,078$, achieving the desired $0.9$ probability of stopping.
-
-In a less lucky sample, the winner recieves $8,637$ ballots, few more than the loser recieves. In the \Minerva audit, we again have to use a second round size of $43,180$, but now this round size only achieves a $0.727$ probability of stopping, significantly less than the desired $0.9$. Again, the \Providence audit can scale up the second round size according to the first sample and achieve the desired $0.9$ probability of stopping with $58,007$ ballots.
+Both the audits of our toy example therefore begin with a first round size of $17,272$ with a $0.9$ probability of stopping, and both will stop in the first round if the sample contains at least $8,725$ ballots for the winner. We now consider two cases for which the audit proceeds to a second round. 
+\begin{description}
+\item In one case there are $8,724$ votes for the winner in the sample, just one fewer than the minimum needed to meet the risk limit. In the \Minerva audit, we are already committed to a second round size of $43,180$ which, given the nearly-passing sample of the first round is higher than necessary, achieving a stopping probability in the second round of $.954$. The \Providence audit samples more than $9,000$ fewer ballots with a round size of $34,078$, achieving the desired $0.9$ probability of stopping.
+\item In a less lucky sample, the winner recieves $8,637$ ballots, few more than the loser recieves. In the \Minerva audit, we again have to use a second round size of $43,180$, but now this round size only achieves a $0.727$ probability of stopping, significantly less than the desired $0.9$. Again, the \Providence audit can scale up the second round size according to the first sample and achieve the desired $0.9$ probability of stopping with $58,007$ ballots.
+\end{description}
 
 
 
@@ -193,35 +195,35 @@ In a less lucky sample, the winner recieves $8,637$ ballots, few more than the l
 \begin{lemma}
 % For any round schedule %$[n_1, \ldots, n_r]$
 For any risk-limit $\alpha \in (0, 1)$, for any margin
-and for any round schedule $[n_1, \ldots, n_r]$, 
- \Providence RLA is more efficient than \R \BRAVO.
+and for any round schedule $[n_1, \ldots, n_j]$, 
+the \Providence RLA is more efficient than EoR \BRAVO.
 \end{lemma}
 \begin{proof}
- Let $[n_1, \ldots, n_r]$ be a round schedule, and  lets assume that \R \BRAVO audit stopped exactly at
- round $r$, 
- after observing $k_1, \ldots, k_r$ ballots for the announced winner in each round respectively. This means that
+ Let $[n_1, \ldots, n_j]$ be a round schedule, and lets assume that an EoR \BRAVO audit stopped exactly at
+ round $j$, 
+ after observing $k_1, \ldots, k_j$ ballots for the announced winner in each round respectively. This means that
  the following conditions hold:
  \begin{enumerate}
-  \item for all $j = 1, \ldots, r-1$: 
+  \item for all $i = 1, \ldots, j-1$: 
 %   $k_j < k^{p_a, p_0, \alpha}_{min, \BRAVO, n_j}$,
-  $\frac{P[{K_j = k_{j}} | H_a, n_j]}{P[K_j = {k_{j}} | H_0, n_j]} < \frac{1}{\alpha}$,
-  \item for $j = r$ it holds: % $k_r \geq k^{p_a, p_0, \alpha}_{min, \BRAVO, n_r}.$
-  $\frac{P[{K_r = k_{r}} | H_a, n_r]}{P[K_r = {k_{r}} | H_0, n_r]} \geq \frac{1}{\alpha}$,
+  $\frac{P[{K_i = k_{i}} | H_a, n_i]}{P[K_i = {k_{i}} | H_0, n_i]} < \frac{1}{\alpha}$,
+  \item for $i = j$: % $k_r \geq k^{p_a, p_0, \alpha}_{min, \BRAVO, n_r}.$
+  $\frac{P[{K_j = k_{j}} | H_a, n_j]}{P[K_j = {k_{j}} | H_0, n_j]} \geq \frac{1}{\alpha}$,
  \end{enumerate}
  
  From Lemma~\ref{lemma:tau1_increasing} 
  \[
- \tau_1(k, p_a, p_0, n_r) = 
-  \frac{P[K_r = {k} | H_a, n_r]}{P[K_r = {k} | H_0, n_r]}
+ \tau_1(k, p_a, p_0, n_j) = 
+  \frac{P[K_r \geq {k} | H_a, n_j]}{P[K_r \geq {k} | H_0, n_j]}
  \]
-is a stricly increasing function of $k$ (for $0 < p_0, p_a < 1$ and $n_r > 0$). % for $k \geq k_r$. % (in fact this isk^{p_a, p_0, \alpha}_{min, \BRAVO, n_r} = k^{*}_{n_r}$
+is a strictly increasing function of $k$ (for $0 < p_0, p_a < 1$ and $n_r > 0$). % for $k \geq k_r$. % (in fact this isk^{p_a, p_0, \alpha}_{min, \BRAVO, n_r} = k^{*}_{n_r}$
 % \textit{i.e.,}
 % \begin{equation}\label{eq_incr}
 % % \frac{1}{\alpha} \leq
 %   \frac{P[K_r = {k_r} | H_a, n_r]}{P[\mathbf{k_r} | H_0, n_r]} \leq   \frac{P[\mathbf{k_r} + 1 | H_a, n_r]}{P[K_r = {k_r} + 1 | H_0, n_r]} \leq \ldots  \leq \frac{P[\mathbf{n_r} | H_a, n_r]}{P[\mathbf{n_r} | H_0, n_r]}. 
 % \end{equation}
 
-If \BRAVO test is satisfied for $k_r$ then:
+If the \BRAVO test is satisfied for $k_j$ then:
 
 % From the properties of binomial distribution we obtain:
 % \[
@@ -230,16 +232,16 @@ If \BRAVO test is satisfied for $k_r$ then:
 %    \frac{P[\mathbf{k_r - k_{r-1}} | H_a, n_r - n_{r-1}]}{P[\mathbf{k_r - k_{r-1}} | H_0, n_r - n_{r-1}]} = 
 % \]
 \[
- \frac{1}{\alpha} \leq \sigma(k_{r}, p_a, p_0, n_{r}) =
+ \frac{1}{\alpha} \leq \sigma(k_{j}, p_a, p_0, n_{j}) =
 \]
 \[
- = \sigma(k_{r-1}, p_a, p_0, n_{r-1}) \cdot \sigma(k_r - k_{r-1}, p_a, p_0, n_r - n_{r-1})  \leq
+ = \sigma(k_{j-1}, p_a, p_0, n_{j-1}) \cdot \sigma(k_j - k_{j-1}, p_a, p_0, n_j - n_{j-1})  
 \]
 \[
- \leq^{(*)} \sigma(k_{r-1}, p_a, p_0, n_{r-1}) \cdot \tau_1(k_r - k_{r-1}, p_a, p_0, n_r - n_{r-1}) =
+ \leq^{(*)} \sigma(k_{j-1}, p_a, p_0, n_{j-1}) \cdot \tau_1(k_j - k_{j-1}, p_a, p_0, n_j - n_{j-1}) =
 \]
 \[
- = \omega_r(k_r, k_{r-1}, p_a, p_0, n_r, n_{r-1}).
+ = \omega_r(k_j, k_{j-1}, p_a, p_0, n_j, n_{j-1}).
 \]
 
 Where inequality $(*)$ follows from Lemma~\ref{lemma:frac_sums_increasing}.
