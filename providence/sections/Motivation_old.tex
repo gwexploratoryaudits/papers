@@ -1,0 +1,10 @@
+\subsection{Motivation}
+\label{sec:prov_motivation}
+The \Minerva stopping condition tests the tail ratios of the probability distributions\footnote{given the alternate and null hypotheses respectively} of winner votes $K_j$ in round $j$. Note that these distributions are not conditioned on $k_{j-1}$. Thus each may be viewed as a weighted average of the corresponding conditional distributions---each conditioned on a possible value of $K_{j-1}$, with the weights corresponding to the probabilities of drawing that value of $K_{j-1}$. (See \cite{usenix_minerva} for more details). 
+
+The proof of \Minerva's risk-limiting property relies on the fact that, at every stopping point, the tail of the probability distribution function given $H_0$ is at most $\alpha$ times that given $H_a$. However, because these distributions are averaged over the various values of $K_{j-1}$, this approach to the proof works only if $n_j$ is the same for all values of $K_{j-1}$. If not, the average distribution will not correctly represent the distribution of $K_j$. 
+
+For example, if the current sample is used to determine a next round size of a certain fixed stopping probability, small values of $K_{j-1}$ would be followed by larger values of $n_j$.  In this case, the pdf for the small values of $K_{j-1}$ should not contribute to the average distribution function of $K_j$ for smaller values of $n_j$. This is the reason why the round schedule is predetermined for \Minerva, in order to ensure in an enforceable manner that all values of $k_{j-1}$ lead to the same value of $n_j$ if the audit does not stop in round $j-1$. 
+
+For the \Providence audit we test the tail ratios of the distributions conditioned on $k_{j-1}$ and multiplied by the weighting factor. That is, we test this tail ratio separately for each weighted distribution corresponding to each possible value of $K_{j-1}$. Because of this, we no longer require that all values of $k_{j-1}$ should be followed by the same values of $n_j$ if the audit does not stop in round $j-1$. This results in a great deal of flexibility in multiple round audits. 
+
