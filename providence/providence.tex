@@ -130,7 +130,8 @@
 % make title bold and 14 pt font (Latex default is non-bold, 16 pt)
 \title{\Large \bf \Providence: a Flexible Round-by-Round Risk-Limiting Audit}
 \author{
-{\rm Oliver Broadrick$^1$, Poorvi L. Vora$^1$, and Filip Zag{\'o}rski$^{23}$}\\
+{\rm Oliver Broadrick$^1$\thanks{odbroadrick@gmail.com}, Poorvi L. Vora$^1$\thanks{poorvi@gwu.edu}, and Filip Zag{\'o}rski$^{23}$}\thanks{filip.zagorski@gmail.com}\\
+odbroadrick@gmail.com\\
 $^1$Department of Computer Science, The George Washington University\\
 $^2$
 Wroclaw University of Science and Technology\\
@@ -188,12 +189,6 @@ We describe the use of \Providence by the Rhode Island Board of Elections in a t
 \label{sec:conc}
 \input{sections/conc}
 
-\section{Availability}
-\label{sec:avail}
-\Providence is implemented in the open source R2B2 software library for \R and \B audits \cite{r2b2_anon} 
-% The software library includes implementations of SO and EoR \BRAVO also. 
-We provide software to test stopping conditions, find round sizes to achieve a given probability of stopping, and find round sizes that have acceptable probabilities of a \emph{misleading sample}. The software also includes the simulator for all these audits and the functionality to perform the workload and real time analysis we present in this paper.
-
 \begin{table}[h!]
 \center
 \begin{tabular}{ |l|l|r|c|c|c| }
@@ -234,6 +229,14 @@ $M$ & margin & $n$ & Prov & SO & EoR \\
 \caption{For various margins, this table gives the minimum first round size $n$ to achieve at most a probability $M$ of a \emph{misleading sample} in the first round. The corresponding stopping probabilities of \Providence, SO \BRAVO, and EoR \BRAVO are given for each value of $n$.}
 \label{tab:misleading}
 \end{table}
+
+
+
+\section{Availability}
+\label{sec:avail}
+\Providence is implemented in the open source R2B2 software library for \R and \B audits \cite{r2b2_anon} 
+% The software library includes implementations of SO and EoR \BRAVO also. 
+We provide software to test stopping conditions, find round sizes to achieve a given probability of stopping, and find round sizes that have acceptable probabilities of a \emph{misleading sample}. The software also includes the simulator for all these audits and the functionality to perform the workload and real time analysis we present in this paper.
 
 \section{Acknowledgements}
 \label{sec:ack}
