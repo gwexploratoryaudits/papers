@@ -130,11 +130,15 @@
 % make title bold and 14 pt font (Latex default is non-bold, 16 pt)
 \title{\Large \bf \Providence: a Flexible Round-by-Round Risk-Limiting Audit}
 \author{
-%{\rm Your N.\ Here}\\
-%Your Institution
-%\and
-%{\rm Second Name}\\
-%Second Institution
+{\rm Oliver Broadrick$^1$\thanks{odbroadrick@gmail.com}, Poorvi L. Vora$^1$, and Filip Zag{\'o}rski$^{23}$}\thanks{Author was partially supported by Polish National Science Centre contract number
+DEC-2013/09/D/ST6/03927}\\
+odbroadrick@gmail.com\\
+$^1$
+Department of Computer Science, The George Washington University\thanks{Authors supported in part by NSF Award 2015253}\\
+$^2$
+Wroclaw University of Science and Technology\\
+$^3$
+Votifica
 % copy the following lines to add more authors
 % \and
 % {\rm Name}\\
@@ -187,12 +191,6 @@ We describe the use of \Providence by the Rhode Island Board of Elections in a t
 \label{sec:conc}
 \input{sections/conc}
 
-\section{Availability}
-\label{sec:avail}
-\Providence is implemented in the open source R2B2 software library for \R and \B audits \cite{r2b2_anon} 
-% The software library includes implementations of SO and EoR \BRAVO also. 
-We provide software to test stopping conditions, find round sizes to achieve a given probability of stopping, and find round sizes that have acceptable probabilities of a \emph{misleading sample}. The software also includes the simulator for all these audits and the functionality to perform the workload and real time analysis we present in this paper.
-
 \begin{table}[h!]
 \center
 \begin{tabular}{ |l|l|r|c|c|c| }
@@ -234,9 +232,18 @@ $M$ & margin & $n$ & Prov & SO & EoR \\
 \label{tab:misleading}
 \end{table}
 
+
+
+\section{Availability}
+\label{sec:avail}
+\Providence is implemented in the open source R2B2 software library for \R and \B audits \cite{r2b2_anon} 
+% The software library includes implementations of SO and EoR \BRAVO also. 
+We provide software to test stopping conditions, find round sizes to achieve a given probability of stopping, and find round sizes that have acceptable probabilities of a \emph{misleading sample}. The software also includes the simulator for all these audits and the functionality to perform the workload and real time analysis we present in this paper.
+
 \section{Acknowledgements}
 \label{sec:ack}
-The authors are grateful to the Rhode Island Board of Elections for conducting a pilot \Providence RLA. 
+The authors are grateful to the Rhode Island Board of Elections for conducting a pilot \Providence RLA. The authors thank Georgina Cannan, Liz Howard, Mark Lindeman, and John Marion for their support. The authors are grateful to Audrey Malagon for helpful conversation.
+
 % The authors thank Georgina Cannan for insightful comments.
 
 
