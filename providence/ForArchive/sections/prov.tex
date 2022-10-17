@@ -1,0 +1,128 @@
+In this section we introduce the stopping condition of \Providence and prove some properties.
+
+Recall that the proof that the \Minerva audit is risk-limiting assumes that the round schedule of \Minerva is predetermined and that, in particular, an adversarial auditor cannot determine the next round size after drawing a sample. This presents difficulties because a non-adversarial election official might want to draw a small next round if the current sample comes close to satisfying the risk limit. Because the \Minerva round size is predetermined, however, the election official would be required to draw a larger round size than necessary for the sample. Conversely, if the current sample is not at all close to satisfying the risk limit, it would be advantageous to draw a larger round than the predetermined round size. 
+
+The \Providence audit is risk-limiting even if an adversarial auditor determines round sizes after drawing the sample, and next round size computations may use knowledge of the current sample. 
+
+\subsection{Definition}
+\label{sec:prov_def}
+\begin{definition}[$(\alpha,p_a, p_0,k_{j-1},n_{j-1},n_j)$-\Providence]
+    \label{def:minervatwo}
+    For cumulative round size $n_j$ for round $j$ and a cumulative $k_j$ ballots for the reported winner found in round $j$, the \R \Providence stopping rule for the $j^{th}$ round is:
+$$
+\mathcal{A}(X_{j})=  \left\{ \begin{array}{ll} \text{Correct} ~~~~ \omega_{j}(k_{j}, k_{j-1}, p_a, p_0, n_j, n_{j-1}) \geq \frac{1}{\alpha}\\
+        % & \\
+        % incorrect& ~~~ \sigma_n < \frac{\beta}{1-\alpha} \\
+        % & \\
+        Undetermined ~~else \\
+    \end{array}
+    \right .
+$$
+where $\omega _{1}\triangleq \tau_{1}$ and for $j\ge 2$, we define $\omega _{j}$ as follows:
+\begin{equation}
+    \begin{aligned}
+    \omega_{j}(k_{j}, k_{j-1}, p_a, p_0, n_{j}, n_{j-1})
+    \triangleq\\
+    \sigma(k_{j-1},p_a,p_0,n_{j-1})\cdot \tau_1(k_{j}-k_{j-1},p_a,p_0,n_j-n_{j-1})
+    \end{aligned}
+\end{equation}
+\end{definition}
+
+Notice that \Providence requires the computation of $\tau_j$ for $j=1$ and no other values of $j$. The value of $\tau_1$ is simply the ratio of the the tails of the binomial distributions for the two hypotheses and can be fairly efficiently computed. The computation of $\tau_j$ for $j \geq 2$, as required in \Minerva, relies on the convolution of two probability distribution functions and is hence computationally considerably more expensive. 
+
+Notice also that \Providence and \Minerva are identical for $j=1$. 
+
+\subsection{Risk-Limiting Property: Proof}
+\label{sec:proof}
+We now prove that \Providence is risk-limiting using lemmas from basic algebra in Appendix~\ref{sec:proofs}.
+
+\begin{theorem}
+\label{thm:minerva2_is_rla_new}
+An $(\alpha,p_a, p_0,k_{j-1},n_{j-1},n_j)$-\Providence audit is an
+$\alpha$-RLA.
+\end{theorem}
+\begin{proof}
+Let $\mathcal{A}=(\alpha,p_a, p_0,k_{j-1},n_{j-1},n_j)$-\Providence.
+Let $\bm{n_j}$ be the cumulative round sizes used in this
+audit, with corresponding cumulative tallies of
+ballots for the reported winner $\bm{k_j}$.
+For round $j=1$, by Definitions \ref{def:minervatwo}
+and \ref{def:minerva_ratio}, we see that
+the $\mathcal{A}=\text{Correct}$ (the audit stops) only when
+$$
+\tau_1(k_{1},p_a,p_0,n_1)\\
+=\frac{Pr[K_{1} \geq k_{1} \mid H_a, n_1]}{Pr[K_{1} \geq k_{1} \mid H_0, n_1]}
+\ge \frac{1}{\alpha}.
+$$
+By Lemma \ref{lemma:minerva2_kmin_exists}, we see that this
+is equivalent to the following:
+$$
+\frac{Pr[K_{1} \geq k_{min,1} \mid H_a, n_1]}{Pr[K_{1} \geq k_{min, 1} \mid H_0, n_1]}
+\ge \frac{1}{\alpha}.
+$$
+where $k_{min,1} = k^{p_a, p_0, \alpha, 0}_{min, 1, 0, n_1}$ (see Lemma \ref{lemma:minerva2_kmin_exists} and Definition \ref{def:kmin}). 
+
+For any round $j\ge 2$, by Definition \ref{def:minervatwo}
+and Lemma \ref{lemma:minerva2_kmin_exists},
+$\mathcal{A}=\text{Correct}$ (the audit stops) if and only if
+\begin{equation*}
+\begin{aligned}
+\omega_{j}(k_{j}, k_{j-1}, p_a, p_0, n_{j}, n_{j-1}, \alpha )\triangleq\\
+\sigma(k_{j-1},p_a,p_0,n_{j-1})\cdot \tau_1(k_{j}-k_{j-1},p_a,p_0,n_j-n_{j-1})
+\ge \frac{1}{\alpha}.
+\end{aligned}
+\end{equation*}
+%Let $d_j=k_j-k_{j-1}$ be shorthand for the new draw.
+%could do this for simpler notation^
+By Lemma \ref{lemma:any_ratio_is_sigma_simple}
+and Definition \ref{def:minerva_ratio}, this is equivalent to
+$$
+\frac{\Pr[K_{j-1} = {k_{j-1}} \mid H_a, n_{j-1}] Pr[K_{j} \ge k_{j} \mid {k_{j-1}}, H_a, n_{j-1}, n_{j}]}{\Pr[K_{j-1} = {k_{j-1}} \mid H_0, n_{j-1}] Pr[K_{j} \ge k_{j} \mid {k_{j-1}}, H_0, n_{j-1}, n_{j}]}
+$$$$\ge \frac{1}{\alpha}.
+$$
+By Lemma~\ref{lemma:minerva2_kmin_exists} and Definition~\ref{def:minervatwo},
+we see that there exists a $k_{min, j} = k^{p_a, p_0, \alpha, k_{j-1}}_{min, j, n_{j-1}, n_j}  \leq k_j$ 
+%$k_{min, j}\le k_j$ 
+for which
+$$
+\frac{\Pr[K_{j-1} = {k_{j-1}} \mid H_a, n_{j-1}] Pr[K_{j} \ge k_{j} \mid {k_{j-1}}, H_a, n_{j-1}, n_{j}]}{\Pr[K_{j-1} = {k_{j-1}} \mid H_0, n_{j-1}] Pr[K_{j} \ge k_{j} \mid {k_{j-1}}, H_0, n_{j-1}, n_{j}]}\ge
+$$
+$$
+\frac{\Pr[K_{j-1} = {k_{j-1}} \mid H_a, n_{j-1}] Pr[K_{j} \ge k_{min, j} \mid {k_{j-1}}, H_a, n_{j-1}, n_{j}]}{\Pr[K_{j-1} = {k_{j-1}} \mid H_0, n_{j-1}] Pr[K_{j} \ge k_{min, j} \mid {k_{j-1}}, H_0, n_{j-1}, n_{j}]} 
+$$$$
+\ge 
+\frac{1}{\alpha}
+$$
+%Equivalently,
+%$$
+%\frac{Pr[K_{j} \ge k_{min, j}\wedge K_{j-1} = k_{j-1} \mid n_{j}^*, k_{j-2}^*, H_a]}{Pr[K_{j}\ge k_{min, j} \wedge K_{j-1} = k_{j-1} \mid n_{j}^*, k_{j-2}^*, H_0]}\ge \frac{1}{\alpha}.
+%$$
+%Taking the sum over all possible rounds and corresponding preceding values
+%of $k$, we get
+% Taking the sum over all possible audit histories, we get
+The above may be rewritten as
+\begin{equation*}
+\begin{aligned}
+\sum_{{k} = k_{min, j}}^{n_j} Pr[(K_{j} , K_{j-1}) = (k, k_{j-1}) \mid H_0, n_{j-1}, n_{j}] \leq \\
+\alpha \sum_{{k} = k_{min, j}}^{n_j} Pr[(K_{j} , K_{j-1}) = (k, k_{j-1}) \mid H_a, n_{j-1}, n_{j}]
+\end{aligned}
+\end{equation*}
+The left hand side above is the probability of stopping in the $j^{th}$ round and $K_{j-1} = k_{j-1}$, given the null hypothesis, which is smaller than $alpha$ times the same probability given the alternate hypothesis. Summing both sides over all values of $K_{j-1} < k_{min, j-1}$ gives us a similar relationship between the probabilities of stopping in round $j$ (given the null and alternate hypotheses respectively). Note here that the relationship holds even if the values of $n_{j}$ depend on $k_{j-1}$. When both sides of the inequality are further summed over all rounds, we get:  
+
+$$
+Pr[\mathcal{A}=\text{Correct} \mid H_0]
+\le
+\alpha Pr[\mathcal{A}=\text{Correct} \mid H_a]
+$$
+Finally, because the total probability of stopping the audit under
+the alternative hypothesis is not greater than 1, we get
+$$
+Pr[\mathcal{A}=\text{Correct} \mid H_0] \le
+\alpha.
+$$
+\end{proof}
+
+\subsection{Resistance to an adversary choosing round sizes}
+\label{sec:adversary}
+% Filip TBD
+\input{sections/adversary}

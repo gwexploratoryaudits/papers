@@ -1,0 +1,137 @@
+\begin{thebibliography}{10}
+
+\bibitem{bernhard-diss}
+Matthew Bernhard.
+\newblock {\em Election Security Is Harder Than You Think}.
+\newblock PhD thesis, University of Michigan, 2020.
+
+\bibitem{bernhard-sok}
+Matthew Bernhard.
+\newblock Risk-limiting {A}udits: A practical systematization of knowledge.
+\newblock In {\em In Proceedings, Seventh International Joint Conference on
+  Electronic Voting (E-Vote-ID'21), October 2021}, 2021.
+
+\bibitem{blom_IRV}
+Michelle~L. Blom, Peter~J. Stuckey, and Vanessa~J. Teague.
+\newblock Ballot-polling risk limiting audits for {IRV} elections.
+\newblock In Robert Krimmer, Melanie Volkamer, V{\'{e}}ronique Cortier, Rajeev
+  Gor{\'{e}}, Manik Hapsara, Uwe Serd{\"{u}}lt, and David Duenas{-}Cid,
+  editors, {\em Electronic Voting - Third International Joint Conference,
+  E-Vote-ID 2018, Bregenz, Austria, October 2-5, 2018, Proceedings}, volume
+  11143 of {\em Lecture Notes in Computer Science}, pages 17--34. Springer,
+  2018.
+
+\bibitem{simulations}
+Oliver Broadrick, Sarah Morin, Grant McClearn, Neal McBurnett, Poorvi~L. Vora,
+  and Filip Zag\'{o}rski.
+\newblock Simulations of ballot polling risk-limiting audits.
+\newblock In {\em Seventh Workshop on Advances in Secure Electronic Voting, in
+  Association with Financial Crypto}, 2022.
+
+\bibitem{RI-report}
+Common Cause, VerifiedVoting, and Brennan Center.
+\newblock Pilot implementation study of risk-limiting audit methods in the
+  state of rhode island.
+\newblock
+  \url{https://www.brennancenter.org/sites/default/files/2019-09/Report-RI-Design-FINAL-WEB4.pdf}.
+
+\bibitem{DBLP:conf/evoteid/HuangRSTV20}
+Zhuoqun Huang, Ronald~L. Rivest, Philip~B. Stark, Vanessa~J. Teague, and Damjan
+  Vukcevic.
+\newblock A unified evaluation of two-candidate ballot-polling election
+  auditing methods.
+\newblock In Robert Krimmer, Melanie Volkamer, Bernhard Beckert, Ralf
+  K{\"{u}}sters, Oksana Kulyk, David Duenas{-}Cid, and Mikhel Solvak, editors,
+  {\em Electronic Voting - 5th International Joint Conference, E-Vote-ID 2020,
+  Bregenz, Austria, October 6-9, 2020, Proceedings}, volume 12455 of {\em
+  Lecture Notes in Computer Science}, pages 112--128. Springer, 2020.
+
+\bibitem{RLA}
+Mark Lindeman and Philip~B Stark.
+\newblock A gentle introduction to risk-limiting audits.
+\newblock {\em IEEE Security \& Privacy}, 10(5):42--49, 2012.
+
+\bibitem{bravo}
+Mark Lindeman, Philip~B Stark, and Vincent~S Yates.
+\newblock {BRAVO}: Ballot-polling risk-limiting audits to verify outcomes.
+\newblock In {\em EVT/WOTE}, 2012.
+
+\bibitem{simulations_house}
+Katherine McLaughlin and Philip~B. Stark.
+\newblock Simulations of risk-limiting audit techniques and the effects of
+  reducing batch size on the 2008 {California House of Representatives}
+  elections.
+\newblock NSF report, 2010.
+
+\bibitem{mclaughlin_thesis}
+Katherine McLaughlin and Philip~B. Stark.
+\newblock Workload estimates for risk-limiting audits of large contests.
+\newblock Honors Thesis, University of California, Berkeley, 2011.
+
+\bibitem{r2b2}
+Sarah Morin and Grant McClearn.
+\newblock The {R2B2} ({R}ound-by-{R}ound, {B}allot-by-{B}allot) library,
+  https://github.com/gwexploratoryaudits/r2b2.
+
+\bibitem{bernoulli-ballot-polling}
+Kellie Ottoboni, Matthew Bernhard, J.~Alex Halderman, Ronald~L Rivest, and
+  Philip~B. Stark.
+\newblock Bernoulli ballot polling: A manifest improvement for risk-limiting
+  audits.
+\newblock {\em International Conference on Financial Cryptography and Data
+  Security}, pages 226--241, 2019.
+
+\bibitem{rivest2008notion}
+Ronald~L Rivest.
+\newblock On the notion of "software independence" in voting systems.
+\newblock {\em Philosophical Transactions of the Royal Society A: Mathematical,
+  Physical and Engineering Sciences}, 366(1881):3759--3767, 2008.
+
+\bibitem{SI-Wack}
+Ronald~L. Rivest and John~P. Wack.
+\newblock On the notion of ``software independence'' in voting systems.
+\newblock Prepared for the TGDC, and posted by NIST at the given url.
+
+\bibitem{dice}
+Philip~B. Stark.
+\newblock Simulating a ballot-polling audit with cards and dice.
+\newblock In {\em Multidisciplinary Conference on Election Auditing, MIT},
+  december 2018.
+
+\bibitem{evidence-based}
+Philip~B. Stark and David~A. Wagner.
+\newblock Evidence-based elections.
+\newblock {\em {IEEE} Secur. Priv.}, 10(5):33--41, 2012.
+
+\bibitem{Bayesian-RLA}
+Poorvi~L. Vora.
+\newblock Risk-limiting {B}ayesian polling audits for two candidate elections.
+\newblock {\em CoRR}, abs/1902.00999, 2019.
+
+\bibitem{vv_audits}
+Verified Voting.
+\newblock Audit law database, https://verifiedvoting.org/auditlaws/.
+
+\bibitem{arlo}
+VotingWorks.
+\newblock Arlo, https://voting.works/risk-limiting-audits/.
+
+\bibitem{wald}
+Abraham Wald.
+\newblock Sequential tests of statistical hypotheses.
+\newblock {\em The Annals of Mathematical Statistics}, 16(2):117--186, 1945.
+
+\bibitem{arxiv_athena}
+Filip Zag{\'{o}}rski, Grant McClearn, Sarah Morin, Neal McBurnett, and
+  Poorvi~L. Vora.
+\newblock The {Athena} class of risk-limiting ballot polling audits.
+\newblock {\em CoRR}, abs/2008.02315, 2020.
+
+\bibitem{usenix_minerva}
+Filip Zag{\'o}rski, Grant McClearn, Sarah Morin, Neal McBurnett, and Poorvi~L.
+  Vora.
+\newblock Minerva{\textendash} an efficient risk-limiting ballot polling audit.
+\newblock In {\em 30th {USENIX} Security Symposium ({USENIX} Security 21)},
+  pages 3059--3076. {USENIX} Association, August 2021.
+
+\end{thebibliography}
