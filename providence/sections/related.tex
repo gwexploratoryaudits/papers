@@ -38,8 +38,7 @@ $$\sigma(k,p_a,\frac{1}{2},n)\ge \frac{1}{\alpha}.$$
 
 %If testing the \BRAVO stopping condition after each individual ballot
 % is drawn (a \B \BRAVO audit), 
-It is easy to see that the ratio $\sigma$ is the 
-likelihood ratio:
+If $K$ is the random variable indicating the number of ballots in the sample that contain a vote for the reported winner, it is easy to see that the ratio $\sigma$ is the likelihood ratio:
 $$
 \frac{Pr[K=k|H_a,n]}{Pr[K=k|H_0,n]}= \frac{\binom{n}{k}p_a^{k} (1-p_a)^{n-k}}{\binom{n}{k}(\frac{1}{2})^n} =\sigma(k, p_a, \frac{1}{2}, n)
 $$
@@ -61,7 +60,8 @@ $$
 Where \BRAVO uses the ratio of the values of the probability distribution functions, \Minerva uses the ratio of their \emph{tails}. Now it becomes useful to have shorthand for a sequence of cumulative round sizes and the corresponding sequence
 of cumulative winner ballot tallies.
 We use:
-$$\bm{k_j}\triangleq(k_1,k_2,\ldots,k_j) \quad\text{and}\quad \bm{n_j}\triangleq(n_1,n_2,\ldots,n_j)$$
+$$\bm{n_j}\triangleq(n_1,n_2,\ldots,n_j) \quad\text{and}\quad \bm{k_j}\triangleq(k_1,k_2,\ldots,k_j)$$
+Also, let $K_j$ be the random variable indicating the cumulative number of ballots in the sample after the $j$th round is drawn.
 
 \begin{definition}[\Minerva Ratio] \label{def:minerva_ratio} The \R \Minerva audit uses the ratio $\tau_j$. We use cumulative round sizes $\bm{n_j}$, with corresponding $\bm{k_j}$ ballots for the reported winner in each round. The proportion of ballots for the reported winner under the alternative hypothesis and null hypothesis are $p_a$ and $p_0$ respectively.
          \begin{equation}

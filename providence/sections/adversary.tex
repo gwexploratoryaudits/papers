@@ -23,7 +23,7 @@ This property follows from Theorem~\ref{thm:minerva2_is_rla_new} and Lemma~\ref{
 \end{proof}
 
 To illustrate the practical implication of this property, we consider a toy example: an RLA of a two-candidate contest with margin $0.01$ and risk limit $0.1$. 
-Suppose we wish to achieve a conditional stopping probability $0.9$ in each round of the audit. For \Providence, we can compute a new round size for each round based on the previous samples. For \Minerva, however, we would have a predetermined round schedule. We use the default \Minerva round schedule of audit software Arlo \cite{arlo} (used by many states performing an RLA), which is is $[x, 2.5x, 6.25x, ...]$; that is, the next marginal round size is $1.5$ times the current one. This multiplier of $1.5$ is known to give, over a wide range of margins, a probability of stopping roughly $0.9$ in the second round if the first round size has probability of stopping $0.9$. 
+Suppose we wish to achieve a conditional stopping probability $0.9$ in each round of the audit. For \Providence, we can compute a new round size for each round based on the previous samples. For \Minerva, however, we would have a predetermined round schedule. We use the default \Minerva round schedule of audit software Arlo \cite{arlo} (used by many states performing an RLA), which is $[x, 2.5x, 6.25x, ...]$; that is, the next marginal round size is $1.5$ times the current one. This multiplier of $1.5$ is known to give, over a wide range of margins, a probability of stopping roughly $0.9$ in the second round if the first round size has probability of stopping $0.9$. 
 
 Both the audits of our toy example therefore begin with a first round size of $17,272$ with a $0.9$ probability of stopping, and both will stop in the first round if the sample contains at least $8,725$ ballots for the winner. We now consider two cases for which the audit proceeds to a second round. 
 \begin{description}
@@ -197,7 +197,7 @@ Both the audits of our toy example therefore begin with a first round size of $1
 % For any round schedule %$[n_1, \ldots, n_r]$
 For any risk-limit $\alpha \in (0, 1)$, for any margin
 and for any round schedule $[n_1, \ldots, n_j]$, 
-the \Providence RLA is more efficient than EoR \BRAVO.
+the \Providence RLA stops before or at the same time as EoR \BRAVO.
 \end{lemma}
 \begin{proof} Appendix~\ref{sec:proofs}\end{proof}
 
