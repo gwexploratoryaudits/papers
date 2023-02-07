@@ -35,7 +35,7 @@ A major limitation of our understanding of the ballot polling problem as a commu
 Thus the workload of an audit is not simply a linear (or affine) function of the number of ballots drawn. Relatedly, an optimal round schedule is not completely determined by the expected number of ballots drawn. It depends on other variables as well. The consideration of all these variables is necessary while planning an audit. 
 
 \subsection{Our Contributions}
-We present \Providence, and provide the following:
+Our primary contribution is a new stopping condition, \Providence, which gives the efficiency of \Minerva and is also resistant against an adversary choosing round sizes. We provide the following:
 \begin{enumerate}
 \item Proof that \Providence is an RLA and resistant to an adversary who can choose subsequent round sizes with knowledge of previous samples.
 \item Simulations of \Providence, \Minerva, SO \BRAVO, and EoR \BRAVO which show that \Providence uses number of ballots similar to those of \Minerva, both fewer than either version of \BRAVO.
