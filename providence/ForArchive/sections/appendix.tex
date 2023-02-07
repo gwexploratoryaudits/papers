@@ -1,0 +1,176 @@
+\textbf{Lemma \ref{lem:efficiency}.}
+For any risk-limit $\alpha \in (0, 1)$, for any margin
+and for any round schedule $[n_1, \ldots, n_j]$, 
+the \Providence RLA is more efficient than EoR \BRAVO.
+
+\begin{proof}
+Let $[n_1, \ldots, n_j]$ be a round schedule, and assume that an EoR \BRAVO audit stops in round $j$, after observing $k_1, \ldots, k_j$ ballots for the announced winner in each round respectively.
+That is, the EoR \BRAVO stopping condition is true:
+$$\sigma(k_j,p_a,p_0,n_j) \ge \frac{1}{\alpha}.$$
+To see the \Providence stopping condition is fulfilled, we rewrite as 
+%$$\frac{1}{\alpha} \le \sigma(k_j,p_a,p_0,n_j)=\sigma(k_j,p_a,p_0,n_j)$$
+
+
+%% From Lemma~\ref{lemma:tau1_increasing} 
+% \[
+% \tau_1(k, p_a, p_0, n_j) = 
+%  \frac{P[K_r \geq {k} | H_a, n_j]}{P[K_r \geq {k} | H_0, n_j]}
+% \]
+%is a strictly increasing function of $k$ (for $0 < p_0, p_a < 1$ and $n_r > 0$). % for $k \geq k_r$. % (in fact this isk^{p_a, p_0, \alpha}_{min, \BRAVO, n_r} = k^{*}_{n_r}$
+% \textit{i.e.,}
+% \begin{equation}\label{eq_incr}
+% % \frac{1}{\alpha} \leq
+%   \frac{P[K_r = {k_r} | H_a, n_r]}{P[\mathbf{k_r} | H_0, n_r]} \leq   \frac{P[\mathbf{k_r} + 1 | H_a, n_r]}{P[K_r = {k_r} + 1 | H_0, n_r]} \leq \ldots  \leq \frac{P[\mathbf{n_r} | H_a, n_r]}{P[\mathbf{n_r} | H_0, n_r]}. 
+% \end{equation}
+
+%If the \BRAVO test is satisfied for $k_j$ then:
+
+% From the properties of binomial distribution we obtain:
+% \[
+%    \frac{P[\mathbf{k_r} | H_a, n_r]}{P[\mathbf{k_r} | H_0, n_r]} = 
+%    \frac{P[\mathbf{k_{r-1}} | H_a, n_{r-1}]}{P[\mathbf{k_{r-1}} | H_0, n_{r-1}]}
+%    \frac{P[\mathbf{k_r - k_{r-1}} | H_a, n_r - n_{r-1}]}{P[\mathbf{k_r - k_{r-1}} | H_0, n_r - n_{r-1}]} = 
+% \]
+\[
+ \frac{1}{\alpha} \leq \sigma(k_{j}, p_a, p_0, n_{j}) 
+\]
+\[
+ = \sigma(k_{j-1}, p_a, p_0, n_{j-1}) \cdot \sigma(k_j - k_{j-1}, p_a, p_0, n_j - n_{j-1})  
+\]
+\[
+ \leq^{(*)} \sigma(k_{j-1}, p_a, p_0, n_{j-1}) \cdot \tau_1(k_j - k_{j-1}, p_a, p_0, n_j - n_{j-1}) 
+\]
+\[
+ = \omega_r(k_j, k_{j-1}, p_a, p_0, n_j, n_{j-1}).
+\]
+
+Where inequality $(*)$ follows from \cite[Theorem 6]{arxiv_athena}. Note that we apply this result on $\tau_j$ for just $j=1$.
+%Where inequality $(*)$ follows from Lemma~\ref{lemma:frac_sums_increasing}.
+%the well-known property that if $a_i/b_i$ (for $a_i, b_i > 0$) is monotonicly increasing then
+%(\sum_{i} a_i)/(\sum_{i} b_i)$ is also monotonicly increasing.
+
+
+% 
+% Now, if we consider $k^* = k^{p_a, p_0, \alpha}_{min, \BRAVO, n_r}$ then it is easy to see that:
+% 
+% 
+\end{proof}
+\begin{lemma}
+    \label{lemma:sigma_increasing}
+For $0<p_0< p_a< 1$ and $n>0$, the ratio $\sigma(k,p_a,p_0,n)$ is strictly increasing as a function of $k$ for $0\le k\le n$.
+\end{lemma}
+\begin{proof}
+See \cite[Lemma 4]{usenix_minerva}. 
+\end{proof}
+
+\begin{lemma}
+    \label{lemma:frac_sums_increasing}
+    Given a monotone increasing sequence: $\frac{a_1}{b_1}, \frac{a_2}{b_2}, \ldots, \frac{a_n}{b_n}$, for $a_i, b_i > 0$, the sequence:
+    $$z_i = \frac{\sum_{j=i}^n a_j}{\sum_{j=i}^n b_j}$$
+    is also monotone increasing.
+\end{lemma}
+
+\begin{proof}
+See \cite[Lemma 2]{usenix_minerva}. 
+\end{proof}
+
+\begin{lemma}
+    \label{lemma:tau1_increasing}
+For $0<p_0< p_a< 1$ and $n>0$, the ratio $\tau_1(k,p_a,p_0,n)$ is strictly increasing as a function of $k$ for $0\le k\le n$.
+\end{lemma}
+\begin{proof}
+    Apply Lemmas \ref{lemma:sigma_increasing}-\ref{lemma:frac_sums_increasing}.
+\end{proof}
+\begin{lemma}
+    \label{lemma:imin-exists}
+    Given a strictly monotone increasing sequence: $x_1, x_2, \ldots x_n $ and some constant $A$,
+    %there exists an $i_{min}$ such that
+    $$A \le x_i \Leftrightarrow \exists i_{min} \le i ~\text{s.t.}~   x_{i_{min} -1} < A \le x_{i_{min}} \le x_{i},$$
+    unless $A\le x_1$, in which case $i_{min} =1 $.
+\end{lemma}
+\begin{proof}
+    Evident.
+\end{proof}
+
+\begin{lemma}
+    \label{lemma:minerva2_kmin_exists}
+    For $\mathcal{A}=(\alpha,p_a, p_0,k_{j-1},n_{j-1},n_j)$-\Providence, there exists\\ a 
+    $k^{p_a, p_0, \alpha, k_{j-1}}_{min, j, n_{j-1}, n_j}  = 
+    k_{min,j}(\Providence, p_a, p_0, k_{j-1}, n_{j-1}, n_j)$ such that $$\mathcal{A}(X_j)=\text{Correct}\iff k_j\ge k_{min,j}(\Providence,  \bm{n_j}, p_a, p_0).$$
+\end{lemma}
+\begin{proof}
+    From Definition~\ref{def:minervatwo}, $$\mathcal{A}(X_j)=\text{Correct}\iff \omega_j(k_{j}, k_{j-1}, p_a, p_0, n_j, n_{j-1}) \ge \frac{1}{\alpha}.$$
+    Now to apply Lemma~\ref{lemma:imin-exists}, it suffices to show that
+    $\omega_j$ is monotone increasing with respect to $k_j$.
+    For $j=1$, we have $\omega_1=\tau_1$, so $\omega_1$ is strictly increasing by Lemma \ref{lemma:tau1_increasing}. For $j\ge 2$,
+    $$\omega_j(k_j,k_{j-1},p_a,p_0,n_j,n_{j-1},\alpha)=$$$$\sigma(k_{j-1},p_a,p_0,n_{j-1})\cdot \tau_1(k_{j}-k_{j-1},p_a,p_0,n_j-n_{j-1}).$$
+    As a function of $k_j$, $\sigma$ is constant, and thus $\omega$ is strictly increasing by Lemma \ref{lemma:tau1_increasing}. Therefore by Lemma \ref{lemma:imin-exists}, we have the desired property.
+\end{proof}
+
+\begin{lemma}
+\label{lemma:any_ratio_is_sigma_simple}
+For $j\ge 1$,
+$$\frac{Pr[\bm{K_j}=\bm{k_j} \mid \bm{n_j}, H_a]}{Pr[\bm{K_j}=\bm{k_j} \mid \bm{n_j}, H_0]} = \sigma(k_j, p_a, p_0, n_j).$$
+\end{lemma}
+\begin{proof}
+We induct on the number of rounds.
+For $j=1$, we have
+$$\frac{Pr[\bm{K_1}=\bm{k_1} \mid \bm{n_1},H_a]}{Pr[\bm{K_1}=\bm{k_1} \mid  \bm{n_1},H_0]} =\frac{Pr[K_1 = k_{1} \mid n_1,H_a]}{Pr[K_1 = k_1 \mid n_1,H_0]} $$$$= \frac{\text{Bin}(k_1,n_1,p_a)}{\text{Bin}(k_1,n_1,p_0)}=\sigma(k_1, p_a, p_0, n_1).$$
+Suppose the lemma is true for round $j=m$ with history $\bm{k_m}$.
+Observe that
+ $$\frac{Pr[\bm{K_{m+1}}=\bm{k_{m+1}} \mid \bm{n_{m+1}},H_a]}{Pr[\bm{K_{m+1}}=\bm{k_{m+1}} \mid \bm{n_{m+1}}, H_0]} $$$$= \frac{ Pr[\bm{K_{m}}=\bm{k_{m}}\mid \bm{n_{m+1}},H_a] \cdot Pr[K_{m+1}'=k_{m+1}'|\bm{k_m},\bm{n_{m+1}},H_a]}{ Pr[\bm{K_{m}}= \bm{k_{m}} \mid  \bm{n_{m+1}},H_0]  \cdot  Pr[K_{m+1}'=k_{m+1}'|\bm{k_m},\bm{n_{m+1}},H_0]  }$$
+ $$=\sigma(k_m, p_a, p_0, n_m) \cdot \frac{Pr[K_{m+1}'=k_{m+1}'|\bm{k_m}, \bm{n_{m+1}}, H_a]}{Pr[K_{m+1}'=k_{m+1}'|\bm{k_m},\bm{n_{m+1}},H_0]}$$
+ by the induction hypothesis.
+Then this is simply equal to
+ $$\sigma(k_m, p_a, p_0, n_m)\cdot\frac{\text{Bin}(k_{m+1}',n_{m+1}',p_a)}{\text{Bin}(k_{m+1}',n_{m+1}',p_0)}
+ $$$$
+ =\frac{p_a^{k_m} (1-p_a)^{n_m-k_m}}{p_0^{k_m} (1-p_0)^{n_m-k_m}} \cdot
+ \frac{p_a^{k_{m+1}'} (1-p_a)^{n_{m+1}'-k_{m+1}'}}{p_0^{k_{m+1}'} (1-p_0)^{n_{m+1}'-k_{m+1}'}}
+ $$
+ $$
+ =\sigma(k_{m+1}, p_a, p_0, n_{m+1})
+ $$
+\end{proof}
+
+
+\begin{definition} 
+\label{def:kmin}
+Let $[n_1, \ldots, n_j]$ be the round schedule of an audit that has not stopped by the round $j-1$. Let us define 
+\begin{small}
+\begin{equation}\label{eq:kMin}
+k^{p_a, p_0, \alpha, k_{j-1}}_{min, j, n_{j-1}, n_j}  =
+  \min\left\{k : \omega_j(k, k_{j-1},p_a,p_0,n_j, n_{j-1}) \geq \frac{1}{\alpha}  \right\}.
+%  \min\left\{k : \sigma(k_{r-1},p_a,p_0,n_{r-1})\cdot \tau_1(k-k_{r-1},p_a,p_0,n_r-n_{r-1}) \geq \frac{1}{\alpha}  \right\}$
+\end{equation}
+\end{small}
+\end{definition}
+As we have seen in Lemma \ref{lemma:minerva2_kmin_exists}, such a value of $k^{p_a, p_0, \alpha, k_{j-1}}_{min, j, n_{j-1}, n_j}$ exists and $k_j \geq k^{p_a, p_0, \alpha, k_{j-1}}_{min, j, n_{j-1}, n_j} $ if and only if the result of the audit is Correct, (\textit{i.e.,} the stopping condition in Definition~\ref{def:minervatwo} holds).
+
+The following lemma shows a Markov-like property of \Providence audit (\textit{i.e.,}
+for an audit that has not stopped in the first $j-1$ rounds, only cumulative results of the round $j-1$ matter: cumulative sample size $n_{j-1}$ and the number of ballots for the winner $k_{j-1}$).
+
+\begin{lemma}\label{lemma:markov}
+Let $[n_1, \ldots, n_{j-1}, n_j]$ be a round schedule for an execution of  \Providence audit that has not stopped
+in any of its first $j-1$ rounds (\textit{i.e.,} for every $i = 1, \ldots, j-1$:
+$k_i < k^{p_a, p_0, \alpha, k_{j-1}}_{min, j, n_{j-1}, n_j} $), then: 
+
+\[ 
+k^{p_a, p_0, \alpha, k_{j-1}}_{min, j, n_{j-1}, n_j} = k^{p_a, p_0, \alpha, k_{j-1}}_{min, 2, n_{j-1}, n_j} .
+\]
+\end{lemma}
+% \fpo{this can be used to prove that \Providence is more efficient than \Minerva and \BRAVO}
+\begin{proof}
+Let $k_{j-1}$ denote the number of ballots drawn for the declared winner up to the round $j-1$ (out of $n_{j-1}$ sampled ballots). The stopping decision for the round $j$ is made as follows:
+
+\[
+ k^{p_a, p_0, \alpha, k_{j-1}}_{min, j, n_{j-1}, n_j}  = \min\left\{k : \omega_{j}(k, k_{r-1}, p_a, p_0, n_r, n_{r-1}) \geq \frac{1}{\alpha}  \right\} = 
+\]
+\[
+  =  k^{p_a, p_0, \alpha, k_{j-1}}_{min, 2, n_{j-1}, n_j}  
+\]
+
+\end{proof}
+
+That is, the stopping condition is equivalent to that of a two round audit with the same cumulative votes for the winner and cumulative round sizes: the first round is of size $n_{j-1}$ and has $k_{j-1}$ votes for the winner, and the second (cumulative) round size is $n_j$ with $k_j$ (cumulative) votes for the winner. Compare this to the similar property for the $\Bravo$ stopping condition. 
+
+
