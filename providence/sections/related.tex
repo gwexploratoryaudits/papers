@@ -57,6 +57,8 @@ $$
 \end{definition}
 \end{comment}
 
+Note that \BRAVO is an instance of Wald's Sequential Probability Ratio Test (SPRT). In the more general SPRT, the test can also reject the alternative hypothesis, and there is an additional parameter $\beta$, the probability of incorrectly rejecting the alternative hypothesis. In an RLA, this corresponds to the audit having a third output: \emph{proceed to a full manual count of the ballots}. In the existing literature, ballot polling audits do not include this possibility (i.e. they set $\beta=0$) in order to give maximum flexibility to election officials in choosing when to proceed to a full manual count.
+
 Where \BRAVO uses the ratio of the values of the probability distribution functions, \Minerva uses the ratio of their \emph{tails}. Now it becomes useful to have shorthand for a sequence of cumulative round sizes and the corresponding sequence
 of cumulative winner ballot tallies.
 We use:
@@ -91,3 +93,5 @@ Also, let $K_j$ be the random variable indicating the cumulative number of ballo
  \end{equation}
 \end{definition}
 \end{comment}
+
+In this work, we consider ballot polling RLAs only and thus compare \Providence with \BRAVO and \Minerva.
