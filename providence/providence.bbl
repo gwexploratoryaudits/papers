@@ -26,6 +26,14 @@ Michelle~L. Blom, Peter~J. Stuckey, and Vanessa~J. Teague.
   11143 of {\em Lecture Notes in Computer Science}, pages 17--34. Springer,
   2018.
 
+\bibitem{why-and-how}
+Jennie Bretschneider, Sean Flaherty, Susannah Goodman, Mark Halvorson, Roger
+  Johnston, Mark Lindeman, Ronald~L. Rivest, Pam Smith, and Philip~B. Stark.
+\newblock Risk-limiting post-election audits: Risk-limiting post-election
+  audits: Why and how.
+\newblock https://www.stat.berkeley.edu/~stark/Preprints/RLAwhitepaper12.pdf,
+  October 2012.
+
 \bibitem{simulations}
 Oliver Broadrick, Sarah Morin, Grant McClearn, Neal McBurnett, Poorvi~L. Vora,
   and Filip Zag\'{o}rski.
@@ -39,6 +47,15 @@ Common Cause, VerifiedVoting, and Brennan Center.
   state of rhode island.
 \newblock
   \url{https://www.brennancenter.org/sites/default/files/2019-09/Report-RI-Design-FINAL-WEB4.pdf}.
+
+\bibitem{best-practices}
+Lynn Garland, Mark Lindeman, Neal McBurnett, Jennifer Morrell, Marian
+  Schneider, and Stephanie Singer.
+\newblock Principles and best practices for principles and best practices for
+  post-election tabulation audits.
+\newblock
+  https://verifiedvoting.org/wp-content/uploads/2020/05/Principles-and-Best-Practices-For-Post-Election-Tabulation-Audits.pdf,
+  December 2018.
 
 \bibitem{DBLP:conf/evoteid/HuangRSTV20}
 Zhuoqun Huang, Ronald~L. Rivest, Philip~B. Stark, Vanessa~J. Teague, and Damjan
