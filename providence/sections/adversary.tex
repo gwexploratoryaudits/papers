@@ -2,26 +2,23 @@
 % \subsection{Motivation for considering adaptive adversary}
 % \fpo{(old notes)}
 
-\Minerva was proven to be a risk-limiting audit for a predetermined round schedule.
-As explained earlier, it is not clear that \Minerva is risk-limiting if an adversary can 
-adaptively select the round schedule as the audit proceeds. In this section we prove that \Providence does not have this problem, and is risk-limiting even when the adversary can choose next round sizes based on knowledge of the current sample. 
+%\Minerva was proven to be a risk-limiting audit for a predetermined round schedule.As explained earlier, it is not clear that \Minerva is risk-limiting if an adversary can adaptively select the round schedule as the audit proceeds. In this section we prove that \Providence does not have this problem, and is risk-limiting even when the adversary can choose next round sizes based on knowledge of the current sample. 
 
-\begin{definition}[Strategy-Proof RLA]
- An audit $\mathcal{A}$ is a Strategy-Proof Risk Limiting Audit with risk limit $\alpha$ iff for
- all strategies of selecting round schedule and for sample $X$ 
- \[
-  \Pr\left[\mathcal{A}(X) = \text{Correct} | H_0\right] \leq \alpha.
- \]
+%\begin{definition}[Strategy-Proof RLA]
+% An audit $\mathcal{A}$ is a Strategy-Proof Risk Limiting Audit with risk limit $\alpha$ iff for
+% all strategies of selecting round schedule and for sample $X$ 
+% \[
+%  \Pr\left[\mathcal{A}(X) = \text{Correct} | H_0\right] \leq \alpha.
+% \]
+%\end{definition}
 
-\end{definition}
-
-\begin{lemma}
-\Providence is a Strategy-Proof RLA. 
-\end{lemma}
-\begin{proof}
-This property follows from Theorem~\ref{thm:minerva2_is_rla_new} and Lemma~\ref{lemma:markov}. Note that, as described in section \ref{sec:proof}, the proof of the risk-limiting nature of the audit does not rely on round sizes $n_j$ being identical for all values of $k_{j-1}$. 
-\end{proof}
-
+%\begin{lemma}
+%\Providence is a Strategy-Proof RLA. 
+%\end{lemma}
+%\begin{proof}
+%This property follows from Theorem~\ref{thm:minerva2_is_rla_new} and Lemma~\ref{lemma:markov}. Note that, as described in section \ref{sec:proof}, the proof of the risk-limiting nature of the audit does not rely on round sizes $n_j$ being identical for all values of $k_{j-1}$. 
+%\end{proof}
+%
 To illustrate the practical implication of this property, we consider a toy example: an RLA of a two-candidate contest with margin $0.01$ and risk limit $0.1$. 
 Suppose we wish to achieve a conditional stopping probability $0.9$ in each round of the audit. For \Providence, we can compute a new round size for each round based on the previous samples. For \Minerva, however, we would have a predetermined round schedule. We use the default \Minerva round schedule of audit software Arlo \cite{arlo} (used by many states performing an RLA), which is $[x, 2.5x, 6.25x, ...]$; that is, the next marginal round size is $1.5$ times the current one. This multiplier of $1.5$ is known to give, over a wide range of margins, a probability of stopping roughly $0.9$ in the second round if the first round size has probability of stopping $0.9$. 
 

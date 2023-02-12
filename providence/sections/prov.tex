@@ -128,7 +128,11 @@ The above may be rewritten as
 \alpha \sum_{{k} = k_{min, j}}^{n_j} Pr[(K_{j} , K_{j-1}) = (k, k_{j-1}) \mid H_a, n_{j-1}, n_{j}]
 \end{aligned}
 \end{equation*}
-The left hand side above is the probability of stopping in the $j^{th}$ round and $K_{j-1} = k_{j-1}$, given the null hypothesis, which is smaller than $\alpha$ times the same probability given the alternate hypothesis. Summing both sides over all values of $K_{j-1} < k_{min, j-1}$ gives us a similar relationship between the probabilities of stopping in round $j$ (given the null and alternate hypotheses respectively). Note here that the relationship holds even if the values of $n_{j}$ depend on $k_{j-1}$. When both sides of the inequality are further summed over all rounds, we get:  
+The left hand side above is the probability of stopping in the $j^{th}$ round and $K_{j-1} = k_{j-1}$, given the null hypothesis, which is smaller than $\alpha$ times the same probability given the alternate hypothesis. Summing both sides over all values of $K_{j-1} < k_{min, j-1}$ gives us a similar relationship between the probabilities of stopping in round $j$ (given the null and alternate hypotheses respectively).
+
+Note here that the relationship holds even if the values of $n_{j}$ depend on $k_{j-1}$, if $n_j$ is a function $n_j(\alpha, p_0, p_1, \bm{k_{j-1}}, \bm{n_{j-1}})$.
+
+When both sides of the inequality are further summed over all rounds, we get:  
 
 $$
 Pr[\mathcal{A}=\text{Correct} \mid H_0]
@@ -143,7 +147,6 @@ Pr[\mathcal{A}=\text{Correct} \mid H_0] \le
 $$
 \end{proof}
 
-\subsection{Resistance to an adversary choosing round sizes}
+\subsection{Consequences of resistance to an adversary choosing round size}
 \label{sec:adversary}
-% Filip TBD
 \input{sections/adversary}
