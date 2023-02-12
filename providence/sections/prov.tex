@@ -130,7 +130,7 @@ The above may be rewritten as
 \end{equation*}
 The left hand side above is the probability of stopping in the $j^{th}$ round and $K_{j-1} = k_{j-1}$, given the null hypothesis, which is smaller than $\alpha$ times the same probability given the alternate hypothesis. 
 For different possible values of $k_{j-1}$, different round sizes $n_j$ can be used, and this same relationship will hold. 
-That is, the relationship holds even if the values of $n_{j}$ depend on $k_{j-1}$, if $n_j$ is a function $n_j(\alpha, p_0, p_1, \bm{k_{j-1}}, \bm{n_{j-1}})$.\footnote{\Minerva enforces a similar relationship between risk and stopping probability but does so at the level of the round rather for each individual value of $K_{j-1}$. By enforcing this relationship for each value of $K_{j-1}$, \Providence is resistant to a strong adversary.}
+That is, the relationship holds even if the values of $n_{j}$ depend on $k_{j-1}$, if $n_j$ is a function $n_j(\alpha, p_0, p_1, \bm{k_{j-1}}, \bm{n_{j-1}})$.\footnote{\Minerva enforces a similar relationship between risk and stopping probability but does so at the level of the round rather than for each individual value of $K_{j-1}$. By enforcing this relationship for each value of $K_{j-1}$, \Providence is resistant to a strong adversary.}
 
 Summing both sides over all values of $k_{j-1} < k_{min, j-1}$ gives us a similar relationship between the probabilities of stopping in round $j$ (given the null and alternate hypotheses respectively).
 When both sides of the inequality are further summed over all rounds, we get:  
