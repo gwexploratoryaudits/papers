@@ -11,9 +11,6 @@ We consider a simple round schedule, in which each round is selected to give the
 
 Note that simulations of audits of tied elections are not necessary, as all the audits we are considering are risk-limiting and hence we already know the performance to expect when auditing a tied election, even one not reported as such. 
 
-Importantly, note that \Minerva does not appear in the analysis in this section. 
-Questions about the efficiency of \Minerva for its necessarily fixed round schedules are addressed in Section~\ref{sec:sims}, but in this section round sizes are chosen to have specified probabilities of stopping given previous samples. \Minerva is not known to be risk-limiting in this setting, and thus cannot be used for RLAs that proceed in this way.
-
 \subsection{Person-hours}
 
 \subsubsection{Average total ballots.} 
@@ -57,7 +54,7 @@ As shown in Figure~\ref{fig:with_round_workload}, average workloads first reduce
 
 \begin{figure}[h!]
 \includegraphics[width=.5\textwidth]{with_round_workload.png}
-\caption{For workload parameters $w_b=1$ and $w_r=1000$, this plot shows the expected workload for various values of $p$. Expected workload is found using Equation~\ref{eq:round_workload} and the average number of ballots and rounds in our simulations as the expected number of ballots and rounds.}
+\caption{For workload parameters $w_b=1$ and $w_r=1000$, this plot shows the expected workload for various round schedule parameters $p$. Expected workload is found using Equation~\ref{eq:round_workload} and the average number of ballots and rounds in our simulations as the expected number of ballots and rounds.}
 \label{fig:with_round_workload}
 \end{figure}
 
@@ -77,7 +74,7 @@ Figure~\ref{fig:optimal_ps} shows the corresponding round schedule parameters $p
 \label{fig:optimal_ps}
 \end{figure}
 
-\subsubsection{Precinct overhead.} For a more complete model, we can also introduce container-level workload. If a round requires multiple ballots from a single container, the container need only be unsealed once. Based on a Rhode Island pilot RLA report\cite{RI-report}, this may mean that a ballot from a new container requires roughly twice the time as a ballot from an already-opened container. Typically available election results give per-precinct granularity of vote tallies, rather than individual container information. In Virginia, however, most precincts have a single ballot scanner whose one box has sufficient capacity for all the ballots cast in that precinct anyways, and so we model the per-container workload as a per-precinct workload, $w_p$. In this model, the workload estimate incurs an additional workload of $w_p$ every time a precinct is sampled from for the first time in a round. That is, let $E_{pi}$ be the expected number of distinct precincts sampled from in round $i$, and let $E_p=\sum_i E_{pi}$. Then the new model is
+\subsubsection{Precinct overhead.} For a more complete model, we can also introduce container-level workload. If. around requires multiple ballots from a single container, the container need only be unsealed once. Based on a Rhode Island pilot RLA report\cite{RI-report}, this may mean that a ballot from a new container requires roughly twice the time as a ballot from an already-opened container. Typically available election results give per-precinct granularity of vote tallies, rather than individual container information. In Virginia, however, most precincts have a single ballot scanner whose one box has sufficient capacity for all the ballots cast in that precinct anyways, and so we model the per-container workload as a per-precinct workload, $w_p$. In this model, the workload estimate incurs an additional workload of $w_p$ every time a precinct is sampled from for the first time in a round. That is, let $E_{pi}$ be the expected number of distinct precincts sampled from in round $i$, and let $E_p=\sum_i E_{pi}$. Then the new model is
 \begin{equation}
 W(E_b, E_r, E_p) = E_b w_b + E_r w_r + E_p w_p + C
 \label{eq:round_and_precinct_workload}
@@ -97,8 +94,7 @@ Given tight certification deadlines\footnote{Virginia recently passed legislatio
 Because each county can sample ballots for the same round concurrently, the total real time for a round depends only on the slowest county. 
 In Virginia, Fairfax County typically has the most votes cast by a significant difference; in the contest we consider, Fairfax County had ~551 thousand votes cast, more than double the ~203 thousand of second-highest Virginia Beach City.
 Consequently, we model the expected total real time $T$ of an audit using just the largest county, and we define analagous variables for the expected values in just the largest county.
-Note that some other county may be slower, having fewer votes but also less auditing resources; but still, a slowest county exists. In this example, we take it to be Fairfax, the largest.
-For the slowest county, let the expected total ballots sampled be $\bar E_b$, the expected number of rounds $\bar E_r$, and the expected number of distinct precinct samples summed over all rounds be $\bar E_p$.
+For the largest county, let the expected total ballots sampled be $\bar E_b$, the expected number of rounds $\bar E_r$, and the expected number of distinct precinct samples summed over all rounds be $\bar E_c$.
 Similarly, we use real time per-ballot, per-round, and per-precinct workload variables, $t_b$, $t_r$, and $t_p$. So the real time of the audit is estimated by
 \begin{equation}
 T(\bar E_b, \bar E_r, \bar E_p ) = \bar E_b t_b + \bar E_r t_r + \bar E_p t_p + C

@@ -2,25 +2,6 @@ In this section we introduce the stopping condition of \Providence and prove som
 
 Recall that the proof that the \Minerva audit is risk-limiting assumes that the round schedule of \Minerva is predetermined and that, in particular, an adversarial auditor cannot determine the next round size after drawing a sample. This presents difficulties because a non-adversarial election official might want to draw a small next round if the current sample comes close to satisfying the risk limit. Because the \Minerva round size is predetermined, however, the election official would be required to draw a larger round size than necessary for the sample. Conversely, if the current sample is not at all close to satisfying the risk limit, it would be advantageous to draw a larger round than the predetermined round size. 
 
-We now formalize these notions of weak and strong adversaries.
-
-\begin{definition}[Weak Adversary]
-A {\emph weak adversary} may choose the first round size as a function of audit parameters. That is, the first round size is a function $$n_1(\alpha, p_a, p_0).$$
-\end{definition}
-
-\begin{definition}[Strong Adversary]
-A {\emph strong adversary} may choose any round size as a function of audit parameters and all precreding samples. That is, the first round size is a function 
-$$n_1(\alpha, p_a, p_0),$$
-and for all rounds $j\ge 2$, the round size is a function
-$$n_{j+1}(\alpha, p_a, p_0, \bm{k_{j-1}}, \bm{n_{j-1}}).$$
-\end{definition}
-
-Before defining \Providence, we give some intuition for how it is designed to avoid the problem of \Minerva.
-In round $j$, for every possible value of $K_j$ for which the audit stops, a risk is incurred. To obtain the total risk for the round, one adds the risks corresponding to each value of $K_j$ for which the audit can stop, weighted by the probability of drawing that value of $K_j$. The stopping condition provides relationships among various quantities.
-
-In \Minerva, the stopping condition relates the weighted average of the risks to the weighted average of the stopping probabilities over all values of $K_j$, for a given round size. Separate relationships between risk and stopping probability are not available for individual values of $K_j$. If the next round size depends on $K_j$, we do not have expressions relating the risks, and so \Minerva may be vulnerable to an adversary choosing round sizes \cite{usenix_minerva, arxiv_athena}. 
-
-In \Providence, we choose a stopping condition that applies separately to the risk and stopping probabilities for each value of $K_j$, avoiding the problem of \Minerva, and allowing for optimal round size choices, which depend on the drawn sample. 
 The \Providence audit is risk-limiting even if an adversarial auditor determines round sizes after drawing the sample, and next round size computations may use knowledge of the current sample. 
 
 \subsection{Definition}
@@ -47,13 +28,13 @@ where $\omega _{1}\triangleq \tau_{1}$ and for $j\ge 2$, we define $\omega _{j}$
 \end{equation}
 \end{definition}
 
-Notice that \Providence requires the computation of $\tau_j$ for $j=1$ and no other values of $j$. The value of $\tau_1$ is simply the ratio of the the tails of the binomial distributions for the two hypotheses and can be fairly efficiently computed. The computation of $\tau_j$ for $j \geq 2$, as required in \Minerva, relies on the convolution of two probability distribution functions and is hence computationally considerably more expensive. Lesser computational complexity makes audit planning and analysis using simulations as in Section~\ref{sec:workload} more feasible.
+Notice that \Providence requires the computation of $\tau_j$ for $j=1$ and no other values of $j$. The value of $\tau_1$ is simply the ratio of the the tails of the binomial distributions for the two hypotheses and can be fairly efficiently computed. The computation of $\tau_j$ for $j \geq 2$, as required in \Minerva, relies on the convolution of two probability distribution functions and is hence computationally considerably more expensive. 
 
 Notice also that \Providence and \Minerva are identical for $j=1$. 
 
 \subsection{Risk-Limiting Property: Proof}
 \label{sec:proof}
-We now prove that \Providence is risk-limiting against a strong adversary using lemmas from basic algebra which are given in Appendix~\ref{sec:proofs}.
+We now prove that \Providence is risk-limiting using lemmas from basic algebra in Appendix~\ref{sec:proofs}.
 
 \begin{theorem}
 \label{thm:minerva2_is_rla_new}
@@ -73,15 +54,13 @@ $$
 =\frac{Pr[K_{1} \geq k_{1} \mid H_a, n_1]}{Pr[K_{1} \geq k_{1} \mid H_0, n_1]}
 \ge \frac{1}{\alpha}.
 $$
-By Lemma \ref{lemma:minerva2_kmin_exists} and Definition \ref{def:kmin}, there is 
-a value $k_{min,1} = k^{p_a, p_0, \alpha, 0}_{min, 1, 0, n_1}$ such that 
+By Lemma \ref{lemma:minerva2_kmin_exists}, we see that this
+is equivalent to the following:
 $$
-\frac{Pr[K_{1} \geq k_{1} \mid H_a, n_1]}{Pr[K_{1} \geq k_{1} \mid H_0, n_1]}
-\ge
 \frac{Pr[K_{1} \geq k_{min,1} \mid H_a, n_1]}{Pr[K_{1} \geq k_{min, 1} \mid H_0, n_1]}
-\ge 
-\frac{1}{\alpha}.
+\ge \frac{1}{\alpha}.
 $$
+where $k_{min,1} = k^{p_a, p_0, \alpha, 0}_{min, 1, 0, n_1}$ (see Lemma \ref{lemma:minerva2_kmin_exists} and Definition \ref{def:kmin}). 
 
 For any round $j\ge 2$, by Definition \ref{def:minervatwo}
 and Lemma \ref{lemma:minerva2_kmin_exists},
@@ -128,7 +107,7 @@ The above may be rewritten as
 \alpha \sum_{{k} = k_{min, j}}^{n_j} Pr[(K_{j} , K_{j-1}) = (k, k_{j-1}) \mid H_a, n_{j-1}, n_{j}]
 \end{aligned}
 \end{equation*}
-The left hand side above is the probability of stopping in the $j^{th}$ round and $K_{j-1} = k_{j-1}$, given the null hypothesis, which is smaller than $\alpha$ times the same probability given the alternate hypothesis. Summing both sides over all values of $K_{j-1} < k_{min, j-1}$ gives us a similar relationship between the probabilities of stopping in round $j$ (given the null and alternate hypotheses respectively). Note here that the relationship holds even if the values of $n_{j}$ depend on $k_{j-1}$. When both sides of the inequality are further summed over all rounds, we get:  
+The left hand side above is the probability of stopping in the $j^{th}$ round and $K_{j-1} = k_{j-1}$, given the null hypothesis, which is smaller than $alpha$ times the same probability given the alternate hypothesis. Summing both sides over all values of $K_{j-1} < k_{min, j-1}$ gives us a similar relationship between the probabilities of stopping in round $j$ (given the null and alternate hypotheses respectively). Note here that the relationship holds even if the values of $n_{j}$ depend on $k_{j-1}$. When both sides of the inequality are further summed over all rounds, we get:  
 
 $$
 Pr[\mathcal{A}=\text{Correct} \mid H_0]

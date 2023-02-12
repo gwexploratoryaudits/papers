@@ -1,0 +1,78 @@
+%Related Work
+The \BRAVO audit \cite{bravo} is a well-known ballot polling audit which has been used in numerous pilot and real audits. When used to audit a two-candidate election, it is an instance of Wald's sequential probability ratio test (SPRT) \cite{wald}, and inherits the SPRT property of being the most efficient test (requiring the smallest expected number of ballots) if the election is as announced. The model for \BRAVO and the SPRT is, however, that of a sequential audit: a sample of size one is drawn, and a decision of whether to stop the audit or not is taken. Real election audits invest in drawing large numbers of ballot, called rounds, before making stopping decisions because sequentially sampling individual ballots has significant overhead (unsealing storage boxes and searching for individual ballots). It is possible to apply \BRAVO to the sequence of ballots in a round if the sequential order is retained. This is not, however, the most efficient possible use of the drawn sample because information in consequent ballots is ignored when applying \BRAVO to ballots that were drawn earlier in the sample. 
+
+We do know a great deal about the properties of \BRAVO. The risk limiting property of \BRAVO follows from the similar property of the SPRT. Stopping probabilities for \BRAVO may be estimated as implemented in \cite{arlo}; this method is due to Mark Lindeman and uses quadratic approximations. A later method for stopping probability estimates presented by Zag{\'o}rski {\em et al.}\cite{usenix_minerva,arxiv_athena} uses a similar technique for narrow margins and a separate algorithm for wider margins, the results of which match simulation results reported by Lindeman {\em et al.} \cite[Table 1]{bravo}.  
+
+The \Minerva audit \cite{usenix_minerva,arxiv_athena} was developed for large first round sizes which enable election officials to be done in one round with large probability. It uses information from the entire sample, and has been proven to be risk limiting when the round schedule for the audit is determined before the audit begins. That is, information about the actual ballots drawn in the first round cannot inform future round sizes. First-round sizes for a $0.9$ stopping probability when the election is as announced have been computed for a wide range of margins and are smaller than those for EoR and SO \BRAVO. First round simulations of \Minerva \cite{arxiv_athena} demonstrate that its first-round properties---regarding the probabilities of stopping when the underlying election is tied and when it is as announced---are as predicted for first round sizes with stopping probability $0.9$. 
+
+Ballot polling audit simulations have been used to familiarize election officials and the public with the approach \cite{dice}. McLaughlin and Stark \cite{mclaughlin_thesis,simulations_house} compare the workload for the Canvass Audits by Sampling and Testing (CAST) and Kaplan-Markov (KM) audits using simulations. Blom {\em et al.} demonstrate the efficiency of their ballot polling approach to audit instant runoff voting (IRV) using simulations \cite{blom_IRV}. Huang {\em et al.} present a framework generalizing a number of ballot polling audits and compare their performance (round sizes and stopping probabilities) using simulations \cite{DBLP:conf/evoteid/HuangRSTV20}. This work was prior to the development of \Minerva, and focuses on the comparison between Bayesian audits \cite{bayesian-audits} and \BRAVO, essentially studying the impact of the prior of the Bayesian RLA. Some workload measurements have been made\cite{RI-report}. While total ballots sampled can give naive workload estimates\cite{bernoulli-ballot-polling}, Bernhard presents a more complex workload estimation model\cite{bernhard-diss}. 
+
+\subsection{Model}
+
+\begin{definition}[Risk Limiting Audit ($\alpha$-RLA)]
+An audit $\mathcal{A}$ is a Risk Limiting Audit with 
+risk limit $\alpha$ iff for sample $X$
+$$
+Pr[\mathcal{A}(X) 
+= \text{Correct} \,|\, H_0]\le \alpha
+$$
+\end{definition}
+
+\begin{definition}[\BRAVO Ratio] \label{def:bravo-ratio} The \BRAVO audit uses the ratio $\sigma$. Consider a sample size of $n$ ballots with $k$ for the reported winner. The proportion of ballots for the reported winner under the alternative hypothesis and null hypothesis are $p_a$ and $p_0$ respectively.
+\begin{equation}
+    \sigma(k, p_a, p_0, n) \triangleq \frac{p_a^{k} (1-p_a)^{n-k}}{p_0^{k} (1-p_0)^{n-k}} 
+    \label{eqn:bravoratio}
+\end{equation}
+\end{definition}
+
+In \BRAVO, $p_0=\frac{1}{2}$. If testing the \BRAVO stopping condition after each individual ballot
+is drawn (a \B \BRAVO audit), $\sigma$ is equivalent to the 
+likelihood ratio:
+$$
+\frac{Pr[K=k|H_a,n]}{Pr[K=k|H_0,n]}= \frac{\binom{n}{k}p_a^{k} (1-p_a)^{n-k}}{\binom{n}{k}(\frac{1}{2})^n} =\sigma(k, p_a, \frac{1}{2}, n)
+$$
+
+\begin{comment}
+\begin{definition}[$(\alpha,p)$-\BRAVO ]\label{def:bravo}  An audit $\mathcal{A}$ is the \B~$(\alpha, p)$-\BRAVO audit iff the following stopping condition is tested at each ballot draw. If the sample $X$ is of size $n$ and has $k$ ballots for the winner,  
+\begin{equation}
+    \mathcal{A}(X) =  \left\{ \begin{array}{ll} \text{Correct} & ~\sigma(k, p, \frac{1}{2}, n) 
+         %\triangleq \frac{p^{k} (1-p)^{n-k}}{(\frac{1}{2})^n} 
+        \geq \frac{1}{\alpha}\\
+        Undetermined & ~else 
+    \end{array}
+    \right .
+    \label{eqn:bravo}
+\end{equation}
+\end{definition}
+\end{comment}
+
+It becomes useful to have shorthand for a sequence of round sizes and a sequence
+of winner ballot tallies.
+We use:
+$$\bm{k_j}\triangleq(k_1,k_2,\ldots,k_j)$$
+$$\bm{n_j}\triangleq(n_1,n_2,\ldots,n_j)$$
+
+\begin{definition}[\Minerva Ratio] \label{def:minerva_ratio} The \R \Minerva audit uses the ratio $\tau_j$. We use cumulative round sizes $\bm{n_j}$, with corresponding $\bm{k_j}$ ballots for the reported winner in reach round. The proportion of ballots for the reported winner under the alternative hypothesis and null hypothesis are $p_a$ and $p_0$ respectively.
+         \begin{equation}
+             \label{eqn:tau}
+                 \tau_{j}(k_{j}, p_a,p_0, \bm{n_j}, \alpha )  \triangleq
+                 \frac{Pr[K_{j} \geq k_{j} \wedge \forall_{i < j} ({\mathcal{A}}(X_i) ~\neq \text{Correct}) \mid H_a, \bm{n_j}]}{Pr[K_{j} \geq k_{j} \wedge \forall_{i < j} ({\mathcal{A}}(X_i) ~\neq \text{Correct}) \mid H_0, \bm{n_j}]}
+         \end{equation}
+\end{definition}
+
+\begin{comment}
+\begin{definition}[$ (\alpha, p, \bm{n_j} ) $-\Minerva]
+     \label{def:minerva}
+     Given \B $(\alpha, p)$-\BRAVO and cumulative round sizes\\ $\bm{n_j}$, the corresponding \R \Minerva stopping rule for the $j^{th}$ round is:
+ \begin{equation}
+     \mathcal{A}(X_{j})=  \left\{ \begin{array}{ll} \text{Correct} ~~~~ \tau_{j}(k_{j}, p_a, \frac{1}{2}, \bm{n_j}, \alpha ) \geq \frac{1}{\alpha}\\
+             % & \\
+             % incorrect& ~~~ \sigma_n < \frac{\beta}{1-\alpha} \\
+             % & \\
+             Undetermined ~~else \\
+         \end{array}
+         \right .
+         \label{eqn:minerva-test}
+ \end{equation}
+\end{definition}
+\end{comment}

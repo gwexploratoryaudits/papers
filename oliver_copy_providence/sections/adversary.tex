@@ -1,0 +1,204 @@
+
+% \subsection{Motivation for considering adaptive adversary}
+% \fpo{(old notes)}
+
+\Minerva was proven to be a risk-limiting audit for a predetermined round schedule.
+As explained earlier, it is not clear that \Minerva is risk-limiting if an adversary can 
+adaptively select the round schedule as the audit proceeds. In this section we prove that \Providence does not have this problem, and is risk-limiting even when the adversary can choose next round sizes based on knowledge of the current sample. 
+
+\begin{definition}[Strategy-Proof RLA]
+ An audit $\mathcal{A}$ is a Strategy-Proof Risk Limiting Audit with risk limit $\alpha$ iff for
+ all strategies of selecting round schedule and for sample $X$ 
+ \[
+  \Pr\left[\mathcal{A}(X) = \text{Correct} | H_0\right] \leq \alpha.
+ \]
+
+\end{definition}
+
+\begin{lemma}
+\Providence is a Strategy-Proof RLA. 
+\end{lemma}
+\begin{proof}
+This property follows from Theorem~\ref{thm:minerva2_is_rla_new} and Lemma~\ref{lemma:markov}. Note that, as described in section \ref{sec:proof}, the proof of the risk-limiting nature of the audit does not rely on round sizes $n_j$ being identical for all values of $k_{j-1}$. 
+\end{proof}
+
+To illustrate the practical implication of this property, we consider a toy example: an RLA of a two-candidate contest with margin $0.01$ and risk limit $0.1$. 
+Suppose we wish to achieve a conditional stopping probability $0.9$ in each round of the audit. For \Providence, we can compute a new round size for each round based on the previous samples. For \Minerva, however, we would have a predetermined round schedule. We use the default \Minerva round schedule of audit software Arlo \cite{arlo} (used by many states performing an RLA), which is $[x, 2.5x, 6.25x, ...]$; that is, the next marginal round size is $1.5$ times the current one. This multiplier of $1.5$ is known to give, over a wide range of margins, a probability of stopping roughly $0.9$ in the second round if the first round size has probability of stopping $0.9$. 
+
+Both the audits of our toy example therefore begin with a first round size of $17,272$ with a $0.9$ probability of stopping, and both will stop in the first round if the sample contains at least $8,725$ ballots for the winner. We now consider two cases for which the audit proceeds to a second round. 
+\begin{description}
+\item In one case there are $8,724$ votes for the winner in the sample, just one fewer than the minimum needed to meet the risk limit. In the \Minerva audit, we are already committed to a second round size of $43,180$ which, given the nearly-passing sample of the first round is higher than necessary, achieving a stopping probability in the second round of $.954$. The \Providence audit samples more than $9,000$ fewer ballots with a round size of $34,078$, achieving the desired $0.9$ probability of stopping.
+\item In a less lucky sample, the winner recieves $8,637$ ballots, few more than the loser recieves. In the \Minerva audit, we again have to use a second round size of $43,180$, but now this round size only achieves a $0.727$ probability of stopping, significantly less than the desired $0.9$. Again, the \Providence audit can scale up the second round size according to the first sample and achieve the desired $0.9$ probability of stopping with $58,007$ ballots.
+\end{description}
+
+
+
+% \newpage
+
+% \subsection{Round extensions}
+
+% The end of a round of size $n_1$, with $k^{p_a, p_0, \alpha}_{min, 1}$ and observed ballots for
+% the winner $k$.
+
+
+% The size of the next round is selected to be $n_{r+1}$.
+% The \Providence k-mins are computed as follows. 
+% 
+% (1) The probability distribution at the end of $(r+1)^{st}$ round is computed:
+% % \[
+% %  s_{i, d, [n_1, \ldots, n_{r+1}]} = \sum_{j = \max\{0, i - (n_{r+1} - n_r)\}}^{\min\{i, k^{p_a, p_0, \alpha}_{min, r}-1\}} Bin(n_{r+1} - n_r, p_d, i - j) \cdot s_{j, d, [n_1, \ldots, n_r]},
+% % \]
+% \[
+%  s_{i, d, [n_1, \ldots, n_{r+1}]} = \sum_{j = \max\{0, i - (n_{r+1} - n_r)\}}^{\min\{i, k^{p_a, p_0, \alpha}_{min, r}-1\}} Bin(n_{r+1} - n_r, p_d, i - j) \cdot s_{j, d, [n_1, \ldots, n_r]},
+% \]
+% where $p_d = p_0 = \frac{1}{2}$ or $p_d = p_A$.
+% 
+% (2) The $k^{p_a, p_0, \alpha}_{min, r}$ is found as:
+% \[
+%  k^{p_a, p_0, \alpha}_{min, r} =  k^{p_a, p_0, \alpha}_{min, r, [n_1, \ldots, n_r]} = \min\left\{ k: \sum_{i = k}^{n_r} s_{i, 0, [n_1, \ldots, n_r]} \le \alpha \sum_{i = k}^{n_r} s_{i, A, [n_1, \ldots, n_r]} \right\}.
+% \]
+
+% 
+% \begin{definition} 
+% Let $[n_1, \ldots, n_r]$ be the round schedule of an audit that has not stopped by the round $r-1$. Let us define 
+% \begin{small}
+% \begin{equation}\label{eq:kMin}
+% k^{p_a, p_0, \alpha, k_{r-1}}_{min, r, [n_1, \ldots, n_r]} =
+%   \min\left\{k : \omega_r(k, k_{r-1},p_a,p_0,n_r, n_{r-1}) \geq \frac{1}{\alpha}  \right\}.
+% %  \min\left\{k : \sigma(k_{r-1},p_a,p_0,n_{r-1})\cdot \tau_1(k-k_{r-1},p_a,p_0,n_r-n_{r-1}) \geq \frac{1}{\alpha}  \right\}$
+% \end{equation}
+% \end{small}
+% Then if $k_r \geq k^{p_a, p_0, \alpha, k_{r-1}}_{min, r, [n_1, \ldots, n_r]}$ then the result of the audit is Correct (\textit{i.e.,} stopping condition in Definition~\ref{def:minervatwo} holds).
+% \end{definition}
+% 
+% 
+% 
+% \begin{lemma}
+% Let $[n_1, \ldots, n_{r-1}, n_r]$ be a round schedule for an execution of  \Providence audit that has not stopped
+% in any of its first $r-1$ rounds (\textit{i.e.,} for every $j = 1, \ldots, r-1$:
+% $k_j < k^{p_a, p_0, \alpha}_{min, r, [n_1, \ldots, n_j]}$), then: 
+% 
+% \[ 
+% k^{p_a, p_0, \alpha, k_{r-1}}_{min, [n_1, \ldots, n_{r-1}, n_r]} = k^{p_a, p_0, \alpha, k_{r-1}}_{min, [n_{r-1}, n_r]}.
+% \]
+% \end{lemma}
+% \fpo{this can be used to prove that \Providence is more efficient than \Minerva and \BRAVO}
+% \begin{proof}
+% Let $k_{r-1}$ denote the number of ballots drawn for the declared winner up to the round $r-1$ (out of $n_{r-1}$ sampled ballots). The stopping decision for the round $r$ is made as follows:
+% 
+% \[
+%  k^{p_a, p_0, \alpha, k_{r-1}}_{min, r, [n_1, \ldots, n_r]} = \min\left\{k : \omega_{j}(k, k_{r-1}, p_a, p_0, n_r, n_{r-1}) \geq \frac{1}{\alpha}  \right\} = 
+% \]
+% \[
+%   =  k^{p_a, p_0, \alpha, k_{r-1}}_{min, 2, [n_{r-1}, n_r]}
+% \]
+% 
+% \end{proof}
+% Then, from (\ref{eq:prov}) one can write it as:
+% 
+% % \[
+% %     \begin{aligned}
+% %     \omega_{j}(k, k_{r-1}, p_a, p_0, n_{r}, n_{r-1})
+% %     \triangleq\\
+% %     \sigma(k_{r-1},p_a,p_0,n_{r-1})\cdot \tau_1(k-k_{r-1},p_a,p_0,n_r-n_{r-1})
+% %     \end{aligned}
+% % \]
+% \begin{small}
+% \[
+% \begin{aligned}
+%  k^{p_a, p_0, \alpha}_{min, r, [n_1, \ldots, n_r]} =\\ 
+%  \min\left\{k : \sigma(k_{r-1},p_a,p_0,n_{r-1})\cdot \tau_1(k-k_{r-1},p_a,p_0,n_r-n_{r-1}) \geq \frac{1}{\alpha}  \right\} =\\
+%  \min\left\{k :
+% \frac{s_{k_{r-1}, a, n_{r-1}}}{s_{k_{r-1}, 0, n_{r-1}}} \frac{
+% \sum_{i = k}^{n_r} s_{i - k_{r-1}, a, [n_r - n_{r-1}]}
+% }{
+% \sum_{i = k}^{n_r} s_{i - k_{r-1}, 0, [n_r - n_{r-1}]}
+% }\geq \frac{1}{\alpha}  \right\}
+%  \end{aligned}
+%  \]
+% \end{small}
+% 
+% \fpo{should be added: for $k > k_{r-1}$ but it seems to be obvious (from monotonicity of k-min)}
+% % \[
+% % \sigma(k_{r-1},p_a,p_0,n_{r-1}) = \frac{s_{k_{r-1}, a, n_{r-1}}}{s_{k_{r-1}, 0, n_{r-1}}}
+% % \]
+% 
+% % \begin{small}
+% % \begin{equation}\label{eq:kMinLong}
+% % k^{p_a, p_0, \alpha}_{min, r, [n_1, \ldots, n_r]} =\\ 
+% %  \min\left\{k :
+% % \frac{s_{k_{r-1}, a, n_{r-1}}}{s_{k_{r-1}, 0, n_{r-1}}} \frac{
+% % \sum_{i = k}^{n_r} s_{i - k_{r-1}, a, [n_r - n_{r-1}]}
+% % }{
+% % \sum_{i = k}^{n_r} s_{i - k_{r-1}, 0, [n_r - n_{r-1}]}
+% % }\geq \frac{1}{\alpha}  \right\}
+% % \end{equation}
+% % \end{small}
+% %  = \min\left\{ k: \sum_{i = k}^{n_r} s_{i, 0, [n_1, \ldots, n_r]} \le \alpha \sum_{i = k}^{n_r} s_{i, A, [n_1, \ldots, n_r]} \right\}.
+% % \]
+% 
+% Now, one can rewrite the enumerator and the denominator as  follows ($d \in \{a, 0\}$):
+% 
+% \begin{small}
+% \[
+% \begin{aligned}
+%  s_{k_{r-1}, d, n_{r-1}} \sum_{i = k}^{n_r} s_{i - k_{r-1}, d, [n_r - n_{r-1}]} =\\
+%  \mathsf{Bin}(n_{r-1}, p_d, k_{r-1}) \sum_{i = k}^{n_r} 
+%  \mathsf{Bin}({n_r - n_{r-1}, d, i - k_{r-1}}) =\\
+%  {n_{r-1} \choose k_{r-1}} p_d^{k_{r-1}} p_d^{n_{r-1} - k_{r-1}}
+%  \sum_{i = k}^{n_r} 
+%  {n_r - n_{r-1} \choose i - k_{r-1}} p_d^{i - k_{r-1}} p_d^{n_r - n_{r-1} - (i - k_{r-1})} =\\
+%   \sum_{i = k}^{n_r} {n_{r-1} \choose k_{r-1}}
+%  {n_r - n_{r-1} \choose i - k_{r-1}} p_d^{i} p_d^{n_r - i} =
+%  \sum_{i = k}^{n_r} {n_{r} \choose i}
+%  p_d^{i} p_d^{n_r - i} = \sum_{i = k}^{n_r} s_{i, d, [n_r]}.
+%  \end{aligned}
+% \]
+% \end{small}
+% 
+% \begin{small}
+% \[
+% k^{p_a, p_0, \alpha}_{min, r, [n_1, \ldots, n_r]} =\\ 
+%  \min\left\{k :
+% \frac{
+% \sum_{i = k}^{n_r} s_{i, a, [n_r]}
+% }{
+% \sum_{i = k}^{n_r} s_{i, 0, [n_r]}
+% }\geq \frac{1}{\alpha}  \right\}
+% = k^{p_a, p_0, \alpha}_{min, 1, [n_r]}
+% \]
+% \end{small}
+% \fpo{There is no need to put $r$ in $k_{min}$ definition $[n_1, \ldots, n_r]$ is enough}
+% 
+% \end{proof}
+
+% \fpo{Corollary 1: For RO-Bravo you need to pay attention.}
+% 
+% \fpo{Corollary 2: For \Providence you can (1) be late for an audit (round schedule does not
+% matter much); (2) you can be distracted: only the end-of-round matters}
+
+% \begin{lemma}
+%  I
+% \end{lemma}
+
+
+
+
+% \begin{theorem}
+%  \Providence is risk limiting for adversarial choices of round schedules.
+% \end{theorem}
+% \begin{proof}
+% 
+% \end{proof}
+
+\subsection{Efficiency}
+\begin{lemma}
+\label{lem:efficiency}
+% For any round schedule %$[n_1, \ldots, n_r]$
+For any risk-limit $\alpha \in (0, 1)$, for any margin
+and for any round schedule $[n_1, \ldots, n_j]$, 
+the \Providence RLA stops before or in the same round as EoR \BRAVO.
+\end{lemma}
+\begin{proof} Appendix~\ref{sec:proofs}\end{proof}
+
+
