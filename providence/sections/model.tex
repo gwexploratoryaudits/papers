@@ -1,0 +1,18 @@
+% Model
+
+We now summarize the model drawing largely from the notation and terminology of \cite{usenix_minerva,arxiv_athena,simulations,bravo}. The model is related work and not claimed to be original to this work. 
+
+An audit $\mathcal{A}$ is a function that takes as input the sample of ballots and outputs either (1) \emph{Correct: stop the audit} or (2) \emph{Undetermined: sample more ballots}.
+\BRAVO and \Minerva are modeled as binary hypothesis tests where the null hypothesis $H_0$ corresponds to a tied election and the alternative hypothesis $H_a$ to an election tally as announced. 
+(When the number of ballots is odd, $H_0$ corresponds to the announced loser winning by one ballot.)
+Thus the null hypothesis is the outcome distinct from the announced one which is most difficult to detect; the probability of failing to detect it, given that the null hypothesis is true, is the worst case such probability and should be below the risk limit \cite{Bayesian-RLA}.
+
+\begin{definition}[Risk Limiting Audit ($\alpha$-RLA)]
+An audit $\mathcal{A}$ is a Risk Limiting Audit with 
+risk limit $\alpha$ iff for sample $X$
+$$
+Pr[\mathcal{A}(X) 
+= \text{Correct} \,|\, H_0]\le \alpha
+$$
+\end{definition}
+
