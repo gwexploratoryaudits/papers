@@ -1,27 +1,28 @@
 In this section we introduce the stopping condition of \Providence and prove some properties.
 
-Recall that the proof that the \Minerva audit is risk-limiting assumes that the round schedule of \Minerva is predetermined and that, in particular, an adversarial auditor cannot determine the next round size after drawing a sample. This presents difficulties because a non-adversarial election official might want to draw a small next round if the current sample comes close to satisfying the risk limit. Because the \Minerva round size is predetermined, however, the election official would be required to draw a larger round size than necessary for the sample. Conversely, if the current sample is not at all close to satisfying the risk limit, it would be advantageous to draw a larger round than the predetermined round size. 
+Recall that the proof that the \Minerva audit is risk-limiting assumes that the round schedule of \Minerva is predetermined and that, in particular, an adversarial auditor cannot determine the next round size after drawing a sample (we termed such an adversary a weak adversary in section \ref{sec:adv}). This presents difficulties because a non-adversarial election official might want to draw a small next round if the current sample comes close to satisfying the risk limit. Because the \Minerva round size is predetermined, however, the election official would be required to draw a larger round size than necessary for the sample. Conversely, if the current sample is not at all close to satisfying the risk limit, it would be advantageous to draw a larger round than the predetermined round size. Thus it would be advantageous to have an RLA with \Minerva's efficiency advantages in the face of an adversarial auditor who could choose next round sizes after drawing the sample (we termed such an adversary a strong adversary). This would enable honest participants to better plan audits. 
 
-We now formalize these notions of weak and strong adversaries.
+Before proceeding to define the audit \Providence which is an RLA in the presence of the stronger adversary, we formalize the notions of weak and strong adversaries introduced in section \ref{sec:adv}.
 
 \begin{definition}[Weak Adversary]
-A {\emph weak adversary} may choose the first round size as a function of audit parameters. That is, the first round size is a function $$n_1(\alpha, p_a, p_0).$$
+A {\emph weak adversary} may choose the first and consequent round sizes as a pre-determined function of audit parameters. That is, the $j^{th}$ round size is a function $$n_j(\alpha, p_a, p_0)$$ determined before the audit begins. 
 \end{definition}
 
 \begin{definition}[Strong Adversary]
-A {\emph strong adversary} may choose any round size as a function of audit parameters and all precreding samples. That is, the first round size is a function 
+A {\emph strong adversary} may choose any round size as any function of audit parameters and all preceding samples. That is, the first round size is a function 
 $$n_1(\alpha, p_a, p_0),$$
 and for all rounds $j\ge 2$, the round size is a function
-$$n_{j+1}(\alpha, p_a, p_0, \bm{k_{j-1}}, \bm{n_{j-1}}).$$
+$$n_{j}(\alpha, p_a, p_0, \bm{k_{j-1}}, \bm{n_{j-1}})$$ The functions $n_j$, $j \geq 1$ may be chosen at any time before the $j^{th}$ round begins. 
 \end{definition}
 
 Before defining \Providence, we give some intuition for how it is designed to avoid the problem of \Minerva.
-In round $j$, for every possible value of $K_j$ for which the audit stops, a risk is incurred. To obtain the total risk for the round, one adds the risks corresponding to each value of $K_j$ for which the audit can stop, weighted by the probability of drawing that value of $K_j$. The stopping condition provides relationships among various quantities.
 
-In \Minerva, the stopping condition relates the weighted average of the risks to the weighted average of the stopping probabilities over all values of $K_j$, for a given round size. Separate relationships between risk and stopping probability are not available for individual values of $K_j$. If the next round size depends on $K_j$, we do not have expressions relating the risks, and so \Minerva may be vulnerable to an adversary choosing round sizes \cite{usenix_minerva, arxiv_athena}. 
+For any ballot polling audit, in round $j$, designed to stop for some value of $K_j$, however large $K_j$ is, there is, in general, a probability, however small, that the value of $K_j$ has resulted from an underlying incorrect election outcome. Thus, corresponding to each such value of $K_j$, a risk---probability that the audit will stop given that the outcome is incorrect---is incurred. To obtain the total risk for the round, one adds the risks corresponding to each value of $K_j$ for which the audit can stop, weighted by the probability of drawing that value of $K_j$. The stopping condition may provide relationships among the various quantities.
+
+In \Minerva, the stopping condition relates the weighted average of the risks to the weighted average of the stopping probabilities over all values of $K_j$, for a given round size. Separate relationships between risk and stopping probability are not available for individual values of $K_j$. If the next round size depends on $K_j$, expressions relating the risks are not available, and so we are not able to say if \Minerva is an RLA in this case, or if it is vulnerable to an adversary choosing round sizes \cite{usenix_minerva, arxiv_athena}. 
 
 In \Providence, we choose a stopping condition that applies separately to the risk and stopping probabilities for each value of $K_j$, avoiding the problem of \Minerva, and allowing for optimal round size choices, which depend on the drawn sample. 
-The \Providence audit is risk-limiting even if an adversarial auditor determines round sizes after drawing the sample, and next round size computations may use knowledge of the current sample. 
+The \Providence audit is risk-limiting even if a strong adversarial auditor determines round sizes after drawing the sample, and next round size computations may use knowledge of the current sample. 
 
 \subsection{Definition}
 \label{sec:prov_def}
@@ -57,7 +58,7 @@ We now prove that \Providence is risk-limiting against a strong adversary using 
 
 \begin{theorem}
 \label{thm:minerva2_is_rla_new}
-An $(\alpha,p_a, p_0,k_{j-1},n_{j-1},n_j)$-\Providence audit is an
+$(\alpha,p_a, p_0,k_{j-1},n_{j-1},n_j)$-\Providence is an
 $\alpha$-RLA.
 \end{theorem}
 \begin{proof}
@@ -132,7 +133,7 @@ The left hand side above is the probability of stopping in the $j^{th}$ round an
 For different possible values of $k_{j-1}$, different round sizes $n_j$ can be used, and this same relationship will hold. 
 That is, the relationship holds even if the values of $n_{j}$ depend on $k_{j-1}$, if $n_j$ is a function $n_j(\alpha, p_0, p_1, \bm{k_{j-1}}, \bm{n_{j-1}})$.\footnote{\Minerva enforces a similar relationship between risk and stopping probability but does so at the level of the round rather than for each individual value of $K_{j-1}$. By enforcing this relationship for each value of $K_{j-1}$, \Providence is resistant to a strong adversary.}
 
-Summing both sides over all values of $k_{j-1} < k_{min, j-1}$ gives us a similar relationship between the probabilities of stopping in round $j$ (given the null and alternate hypotheses respectively).
+Summing both sides over all values of $k_{j-1} < k_{min, j-1}$ gives us a similar relationship between the probabilities of stopping in round $j$ (given the null and alternate hypotheses respectively)\footnote{In fact, this is the relationship \Minerva enforces for its stopping condition, additionally requiring that $n_j$ be fixed for all values of $k_{j-1}$.}. 
 When both sides of the inequality are further summed over all rounds, we get:  
 
 $$
