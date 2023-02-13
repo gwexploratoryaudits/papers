@@ -2,7 +2,7 @@
 
 We now summarize the model drawing largely from the notation and terminology of \cite{usenix_minerva,arxiv_athena,simulations,bravo}. The model is related work and not claimed to be original to this work. 
 
-An audit $\mathcal{A}$ is a function that takes as input the sample of ballots and outputs either (1) \emph{Correct: stop the audit} or (2) \emph{Undetermined: sample more ballots}. As described in the introduction, we ignore a third option of moving to a hand count, leaving that decision to election officials. This is standard in the literature, see, for example, \cite{bravo}. We provide more detail on the use of this option in Section \ref{sec:related}, on related work. 
+An audit $\mathcal{A}$ is a function that takes as input the sample of ballots and outputs either (1) \emph{Correct: stop the audit} or (2) \emph{Undetermined: sample more ballots}. As described in the introduction, we ignore a third option of moving to a hand count, leaving that decision to election officials. This is standard in the literature, see, for example, \cite{bravo}. We provide more detail on the use of this option in section \ref{sec:related}, on related work. 
 
 \BRAVO and \Minerva are modeled as binary hypothesis tests where the null hypothesis $H_0$ corresponds to a tied election and the alternative hypothesis $H_a$ to an election tally as announced. 
 (When the number of ballots is odd, $H_0$ corresponds to the announced loser winning by one ballot.)

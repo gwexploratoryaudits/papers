@@ -115,6 +115,11 @@ Ronald~L. Rivest and John~P. Wack.
 \newblock On the notion of ``software independence'' in voting systems.
 \newblock Prepared for the TGDC, and posted by NIST at the given url.
 
+\bibitem{alpha}
+PB~Stark.
+\newblock Alpha: Audit that learns from previously hand-audited ballots.
+\newblock {\em The Annals of Applied Statistics}, 2022.
+
 \bibitem{dice}
 Philip~B. Stark.
 \newblock Simulating a ballot-polling audit with cards and dice.
