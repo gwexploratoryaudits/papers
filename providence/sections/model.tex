@@ -2,7 +2,7 @@
 
 We now summarize the model drawing largely from the notation and terminology of \cite{usenix_minerva,arxiv_athena,simulations,bravo}. The model is related work and not claimed to be original to this work. 
 
-An audit $\mathcal{A}$ is a function that takes as input the sample of ballots and outputs either (1) \emph{Correct: stop the audit} or (2) \emph{Undetermined: sample more ballots}. As described in the introduction, we ignore a third option of moving to a hand count, leaving that decision to election officials. We provide more context on this in section \ref{sec:related}, on related work. 
+An audit $\mathcal{A}$ is a function that takes as input the sample of ballots and outputs either (1) \emph{Correct: stop the audit} or (2) \emph{Undetermined: sample more ballots}. As described in the introduction, we ignore a third option of moving to a hand count, leaving that decision to election officials. This is standard in the literature, see, for example, \cite{bravo}. We provide more detail on the use of this option in section \ref{sec:related}, on related work. 
 
 \BRAVO and \Minerva are modeled as binary hypothesis tests where the null hypothesis $H_0$ corresponds to a tied election and the alternative hypothesis $H_a$ to an election tally as announced. 
 (When the number of ballots is odd, $H_0$ corresponds to the announced loser winning by one ballot.)
@@ -66,7 +66,9 @@ Also, let $K_j$ be the random variable indicating the cumulative number of ballo
          \end{equation}
 \end{definition}
 
+Notice that the ratios for \BRAVO and \Minerva are for two candidates. They may both be extended to multi-candidate plurality elections through the computation of $\ell -1$ audits for $\ell$ candidates by pairing the announced winner with all other candidates. 
 
+The {\em margin}, given a contest and two candidates, is the difference between the votes received by each as a fraction of the total number of votes. 
 
 \begin{comment}
 \begin{definition}[$ (\alpha, p, \bm{n_j} ) $-\Minerva]

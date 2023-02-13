@@ -1,4 +1,4 @@
-This is BibTeX, Version 0.99d (TeX Live 2022)
+This is BibTeX, Version 0.99d (TeX Live 2021)
 Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: providence.aux
 The style file: plain.bst
@@ -6,7 +6,7 @@ Database file #1: audits.bib
 Warning--I didn't find a database entry for "va-2022"
 You've used 24 entries,
             2118 wiz_defined-function locations,
-            631 strings with 8899 characters,
+            631 strings with 8835 characters,
 and the built_in function-call counts, 7969 in all, are:
 = -- 732
 > -- 454
