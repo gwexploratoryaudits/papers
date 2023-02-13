@@ -67,9 +67,13 @@ Finally, in the current environment of misinformation, election officials fear a
 Thus the workload of an audit is not simply a linear (or affine) function of the number of ballots drawn. Relatedly, an optimal round schedule is not completely determined by the expected number of ballots drawn. It depends on other variables as well. The consideration of all these variables is necessary while planning an audit. 
 
 \subsection{Our Contributions}
-Our primary contribution is a new RLA, \Providence, which gives the efficiency of \Minerva and is also resistant to a strong adversary. Additionally, \Providence does not assume that the null hypothesis is a tied election and hence is more broadly useful than \Minerva. \BRAVO is a very flexible audit enabling audit planning; with the introduction of \Providence, similar planning is possible with greater efficiency. In a contest with a narrow margin (in the 2020 US Presidential election, eight states had margins smaller than 0:03) the difference in number of ballots sampled using \Providence over \BRAVO could correspond to many days of work which would need to be completed before a certification deadline.
+Our primary contribution is a new RLA, \Providence, which gives the efficiency of \Minerva and is also resistant to a strong adversary. 
+%Additionally, \Providence does not assume that the null hypothesis is a tied election and hence is more broadly useful than \Minerva. 
+\BRAVO is a very flexible audit enabling audit planning; with the introduction of \Providence, similar planning is possible with greater efficiency. In a contest with a narrow margin (in the 2020 US Presidential election, eight states had margins smaller than 0:03) the difference in number of ballots sampled using \Providence over \BRAVO could correspond to many days of work which would need to be completed before a certification deadline.
 
-The stopping condition for \Minerva does not take into account the sample obtained in previous rounds, and, in \cite{usenix_minerva}, its risk limit is estimated through weighted averages across multiple rounds, assuming that round sizes do not depend on the previous sample. Further, it assumes that the null hypothesis is a tie. A far simpler proof is possible for the risk-limiting property of \Providence. In particular, the proof does not require an assumption about round sizes and does not assume any particular fractional vote distribution for the null. 
+The stopping condition for \Minerva does not take into account the sample obtained in previous rounds, and, in \cite{usenix_minerva}, its risk limit is estimated through weighted averages across multiple rounds, assuming that round sizes do not depend on the previous sample. 
+%Further, it assumes that the null hypothesis is a tie. A far simpler proof is possible for the risk-limiting property of \Providence. 
+In particular, the proof does not require an assumption about round sizes. 
 
 We provide the following:
 \begin{enumerate}
@@ -82,7 +86,7 @@ We provide the following:
 %including the novel metric Probability of Misleading(name?)
 \end{enumerate}
 
-\Providence may be used in any audit, stratified or otherwise, where audited contests may be expressed as pairwise plurality contests: for example, it can be used in plurality and majoritarian elections. 
+\Providence may be used in any audit where audited contests may be expressed as pairwise plurality contests: for example, it can be used in plurality and majoritarian elections. 
 
 %Our results demonstrate the superiority of \Providence over the other audits. Our work may be used by election officials to plan ballot polling audits, including in Georgia and Pennsylvania in 2022. 
 
