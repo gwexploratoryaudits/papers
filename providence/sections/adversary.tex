@@ -188,7 +188,11 @@ Both the audits of our toy example therefore begin with a first round size of $1
 % 
 % \end{proof}
 
-\subsection{Efficiency}
+\subsection{Theoretical Properties}
+Here we briefly give two interesting theoretical properties of \Providence.
+
+\subsubsection{Efficiency}
+In terms of expected ballots sampled, it is easy to see that \Providence dominates EoR \BRAVO in the sense that for any sample for which the EoR \BRAVO stopping condition is met, the \Providence stopping condition is met also.
 \begin{lemma}
 \label{lem:efficiency}
 % For any round schedule %$[n_1, \ldots, n_r]$
@@ -198,4 +202,19 @@ the \Providence RLA stops before or in the same round as EoR \BRAVO.
 \end{lemma}
 \begin{proof} Appendix~\ref{sec:proofs}\end{proof}
 
+\subsubsection{Markov-like Stopping Condition}
+After $j-1$ rounds, having drawn $n_{j-1}$ cumulative ballots with $k_{j-1}$ cumulative winner ballots, the \Providence stopping condition in round $j$ with size $n_j$ is equivalent to the \Providence stopping condition for a second round where the first round size is $n_1=n_{j-1}$ with $k_1=k_{j-1}$ winner ballots and a second round size $n_2=n_j$. The particular sequence of round sizes and winner ballots found does not affect the \Providence stopping condition; only the previous cumulative round size and number of winner ballots matters. \Minerva does not have this property, but \BRAVO also does.
+
+\begin{lemma}\label{lemma:markov}
+Let $[n_1, \ldots, n_{j-1}, n_j]$ be a round schedule for an execution of \Providence audit that has not stopped
+in any of its first $j-1$ rounds (\textit{i.e.,} for every $i = 1, \ldots, j-1$:
+$k_i < k^{p_a, p_0, \alpha, k_{j-1}}_{min, j, n_{j-1}, n_j} $), then: 
+
+\[ 
+k^{p_a, p_0, \alpha, k_{j-1}}_{min, j, n_{j-1}, n_j} = k^{p_a, p_0, \alpha, k_{j-1}}_{min, 2, n_{j-1}, n_j} .
+\]
+\end{lemma}
+\begin{proof}
+Appendix~\ref{sec:proofs}
+\end{proof}
 
