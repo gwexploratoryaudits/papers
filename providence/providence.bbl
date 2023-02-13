@@ -48,10 +48,6 @@ Common Cause, VerifiedVoting, and Brennan Center.
 \newblock
   \url{https://www.brennancenter.org/sites/default/files/2019-09/Report-RI-Design-FINAL-WEB4.pdf}.
 
-\bibitem{adaptive-comparison}
-Benjamin Fuller, Abigail Harrison, and Alexander Russell.
-\newblock Adaptive risk-limiting ballot comparison audits, 2022.
-
 \bibitem{best-practices}
 Lynn Garland, Mark Lindeman, Neal McBurnett, Jennifer Morrell, Marian
   Schneider, and Stephanie Singer.
@@ -97,7 +93,7 @@ Katherine McLaughlin and Philip~B. Stark.
 Virginia State~Board of~Elections.
 \newblock 2022 risk-limiting audit report.
 \newblock
-  https://www.elections.virginia.gov/media/formswarehouse/risk-limiting-audit/2022-RLA-Final-Report.pdf,
+  \url{https://www.elections.virginia.gov/media/formswarehouse/risk-limiting-audit/2022-RLA-Final-Report.pdf},
   March 2022.
 
 \bibitem{bernoulli-ballot-polling}
