@@ -28,7 +28,7 @@ The \Providence audit is risk-limiting even if a strong adversarial auditor dete
 \label{sec:prov_def}
 \begin{definition}[$(\alpha,p_a, p_0,k_{j-1},n_{j-1},n_j)$-\Providence]
     \label{def:minervatwo}
-    For cumulative round size $n_j$ for round $j$ and a cumulative $k_j$ ballots for the reported winner found in round $j$, the \R \Providence stopping rule for the $j^{th}$ round is:
+    For cumulative round size $n_j$ for round $j$ and a cumulative $k_j$ ballots for the reported winner found in round $j$, where samples are drawn with replacement, the \R \Providence stopping rule for the $j^{th}$ round is:
 $$
 \mathcal{A}(X_{j})=  \left\{ \begin{array}{ll} \text{Correct} ~~~~ \omega_{j}(k_{j}, k_{j-1}, p_a, p_0, n_j, n_{j-1}) \geq \frac{1}{\alpha}\\
         % & \\
@@ -48,7 +48,7 @@ where $\omega _{1}\triangleq \tau_{1}$ and for $j\ge 2$, we define $\omega _{j}$
 \end{equation}
 \end{definition}
 
-Notice that \Providence requires the computation of $\tau_j$ for $j=1$ and no other values of $j$. The value of $\tau_1$ is simply the ratio of the the tails of the binomial distributions for the two hypotheses and can be fairly efficiently computed. The computation of $\tau_j$ for $j \geq 2$, as required in \Minerva, relies on the convolution of two probability distribution functions and is hence computationally considerably more expensive. Lesser computational complexity makes audit planning and analysis using simulations as in Section~\ref{sec:workload} more feasible.
+Notice that \Providence requires the computation of $\tau_j$ for $j=1$ and no other values of $j$. The value of $\tau_1$ is simply the ratio of the the tails of the binomial distributions (the distributions are binomial because the auditing is with replacement) for the two hypotheses and can be fairly efficiently computed. The computation of $\tau_j$ for $j \geq 2$, as required in \Minerva, relies on the convolution of two probability distribution functions and is hence computationally considerably more expensive. Lesser computational complexity makes audit planning and analysis using simulations as in Section~\ref{sec:workload} more feasible.
 
 Notice also that \Providence and \Minerva are identical for $j=1$. 
 
