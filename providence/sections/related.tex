@@ -5,81 +5,27 @@ The \BRAVO audit \cite{bravo} is the most popular ballot polling audit. When bal
 
 The \Minerva audit \cite{usenix_minerva,arxiv_athena} was developed for use with large first round sizes, and has been proven to be risk limiting when the round schedule for the audit is fixed before any ballots are drawn. First-round sizes for a stopping probability of $0.9$ when the announced tally is correct have been shown to be smaller than those for EoR and SO \BRAVO for a wide range of margins; simulations \cite{arxiv_athena} support these observations. Additional simulations \cite{simulations} have shown that \Minerva requires fewer ballots than EoR and SO \BRAVO over multiple rounds and for smaller stopping probability. As expected, the advantage of \Minerva decreases for smaller stopping probability (smaller round sizes) as such round schedules approach the B2 round schedule (1,1,1,\ldots) for which \BRAVO is known to be most efficient.
 
+\BRAVO is an instance of Wald's Sequential Probability Ratio Test (SPRT) \cite{wald}. Applying the general SPRT to RLAs, there would be a third output, {\em Full Manual Hand Count}, in addition to {\em Correct} and {\em Undetermined}. The test requires an additional error parameter $\beta$ (of audit error when the outcome is correct): the probability of requiring a (unnecessary) hand count when the outcome is correct. The test is:
+\begin{equation}
+    \mathcal{A}(X) =  \left\{ \begin{array}{ll} \emph{Correct} & ~\sigma(k, p_a, p_0, n) 
+        \geq \frac{1-\beta}{\alpha}\\ \\ \\
+       \emph{Hand~Count} & ~\sigma(k, p_a, p_0, n) 
+        < \frac{\beta}{1-\alpha}\\ \\ \\
+        \emph{Undetermined} & ~else 
+    \end{array}
+    \right .
+    \label{eqn:wald}
+\end{equation}
+
+In the existing literature, ballot polling audits do not include this possibility (i.e. they set $\beta=0$) in order to give maximum flexibility to election officials in choosing when to proceed to a full manual count.
+
 Ballot polling audit simulations provide a means of educating the public and election officials \cite{dice} and to understand audit properties \cite{mclaughlin_thesis,simulations_house, blom_IRV, DBLP:conf/evoteid/HuangRSTV20}. There is work measuring the amount of time taken to examine a single ballot \cite{RI-report}. 
 Simple workload estimates may be obtained by using the number of ballots drawn \cite{bernoulli-ballot-polling}, a more thorough workload estimation model includes the time taken to access individual ballots\cite{bernhard-diss}. 
 
-In a ballot comparison RLA \cite{RLA}, the manual interpretation of each sampled ballot is compared to the corresponding Cast Vote Record (CVR), which is the machine interpretation of the ballot. Ballot comparison RLAs require the fewest ballots of all known RLA approaches, but also require a means of identifying the CVR corresponding to a particular ballot. A typical approach is to use a ballot serial number on both paper ballot and CVR. When voters vote in precincts, however, serial numbers on ballots can enable the correlation of ballots with voters, and ballots are typically not numbered. Additionally, some voting systems do not record a CVR. One may perform a transitive audit by rescanning unnumbered voted ballots with special scanners which produce CVRs and also print numbers on the ballots as they are scanned. This requires an investment in a sufficiently large number of such printers and in the human effort of rescanning ballots, and is not always feasible. 
-
-A batch comparison RLA \cite{RI-report} samples batches of ballots (typically, a batch is a storage box of ballots) and compares the manual tally of each sampled batch with the announced tally of that batch. Thus, while this type of audit does not need CVRs, it does need both a ballot manifest and a public declaration of the tally of each batch. This approach typically requires the sampling of a very large number of ballots. However, the process is most similar to that which election officials already use when they perform fixed-percentage post-election audits, where, for example, 2\% of the batches are manually tallied. (Note that, for an RLA, the number of batches tallied is not fixed; the risk limit is. A smaller number of batches might be sufficient, or a larger number necessary, for an audit with the required risk limit.)
-
-The stopping conditions of \BRAVO and \Minerva rely on the following ratios.
-
-\begin{definition}[\BRAVO Ratio] \label{def:bravo-ratio} The \BRAVO audit uses the ratio $\sigma$. Consider a sample size of $n$ ballots with $k$ for the reported winner. The proportion of ballots for the reported winner under the alternative hypothesis and null hypothesis are $p_a$ and $p_0$ respectively.
-\begin{equation}
-    \sigma(k, p_a, p_0, n) \triangleq \frac{p_a^{k} (1-p_a)^{n-k}}{p_0^{k} (1-p_0)^{n-k}} 
-    \label{eqn:bravoratio}
-\end{equation}
-\end{definition}
-
-In \BRAVO, $p_0=\frac{1}{2}$. A \BRAVO audit outputs correct if and only if
-$$\sigma(k,p_a,\frac{1}{2},n)\ge \frac{1}{\alpha}.$$
-
-%If testing the \BRAVO stopping condition after each individual ballot
-% is drawn (a \B \BRAVO audit), 
-If $K$ is the random variable indicating the number of ballots in the sample that contain a vote for the reported winner, it is easy to see that the ratio $\sigma$ is the likelihood ratio:
-$$
-\frac{Pr[K=k|H_a,n]}{Pr[K=k|H_0,n]}= \frac{\binom{n}{k}p_a^{k} (1-p_a)^{n-k}}{\binom{n}{k}(\frac{1}{2})^n} =\sigma(k, p_a, \frac{1}{2}, n)
-$$
-
-\begin{comment}
-\begin{definition}[$(\alpha,p)$-\BRAVO ]\label{def:bravo}  An audit $\mathcal{A}$ is the \B~$(\alpha, p)$-\BRAVO audit iff the following stopping condition is tested at each ballot draw. If the sample $X$ is of size $n$ and has $k$ ballots for the winner,  
-\begin{equation}
-    \mathcal{A}(X) =  \left\{ \begin{array}{ll} \text{Correct} & ~\sigma(k, p, \frac{1}{2}, n) 
-         %\triangleq \frac{p^{k} (1-p)^{n-k}}{(\frac{1}{2})^n} 
-        \geq \frac{1}{\alpha}\\
-        Undetermined & ~else 
-    \end{array}
-    \right .
-    \label{eqn:bravo}
-\end{equation}
-\end{definition}
-\end{comment}
-
-\BRAVO is an instance of Wald's Sequential Probability Ratio Test (SPRT) \cite{wald}. In the more general SPRT, the test can also reject the alternative hypothesis, and there is an additional parameter $\beta$, the probability of incorrectly rejecting the alternative hypothesis. In an RLA, this corresponds to the audit having a third output: \emph{proceed to a full manual count of the ballots}. In the existing literature, ballot polling audits do not include this possibility (i.e. they set $\beta=0$) in order to give maximum flexibility to election officials in choosing when to proceed to a full manual count.
-
-Where \BRAVO uses the ratio of the values of the probability distribution functions, \Minerva uses the ratio of their \emph{tails}. Now it becomes useful to have shorthand for a sequence of cumulative round sizes and the corresponding sequence
-of cumulative winner ballot tallies.
-We use:
-$$\bm{n_j}\triangleq(n_1,n_2,\ldots,n_j) \quad\text{and}\quad \bm{k_j}\triangleq(k_1,k_2,\ldots,k_j)$$
-Also, let $K_j$ be the random variable indicating the cumulative number of ballots in the sample after the $j$th round is drawn.
-
-\begin{definition}[\Minerva Ratio] \label{def:minerva_ratio} The \R \Minerva audit uses the ratio $\tau_j$. We use cumulative round sizes $\bm{n_j}$, with corresponding $\bm{k_j}$ ballots for the reported winner in each round. The proportion of ballots for the reported winner under the alternative hypothesis and null hypothesis are $p_a$ and $p_0$ respectively.
-         \begin{equation}
-         \begin{aligned}
-             \label{eqn:tau}
-                 \tau_{j}(k_{j}, p_a,p_0, \bm{n_j}, \alpha )  \triangleq\\
-                 \frac{Pr[K_{j} \geq k_{j} \wedge \forall_{i < j} ({\mathcal{A}}(X_i) ~\neq \text{Correct}) \mid H_a, \bm{n_j}]}{Pr[K_{j} \geq k_{j} \wedge \forall_{i < j} ({\mathcal{A}}(X_i) ~\neq \text{Correct}) \mid H_0, \bm{n_j}]}
-         \end{aligned}
-         \end{equation}
-\end{definition}
-
-
-
-\begin{comment}
-\begin{definition}[$ (\alpha, p, \bm{n_j} ) $-\Minerva]
-     \label{def:minerva}
-     Given \B $(\alpha, p)$-\BRAVO and cumulative round sizes\\ $\bm{n_j}$, the corresponding \R \Minerva stopping rule for the $j^{th}$ round is:
- \begin{equation}
-     \mathcal{A}(X_{j})=  \left\{ \begin{array}{ll} \text{Correct} ~~~~ \tau_{j}(k_{j}, p_a, \frac{1}{2}, \bm{n_j}, \alpha ) \geq \frac{1}{\alpha}\\
-             % & \\
-             % incorrect& ~~~ \sigma_n < \frac{\beta}{1-\alpha} \\
-             % & \\
-             Undetermined ~~else \\
-         \end{array}
-         \right .
-         \label{eqn:minerva-test}
- \end{equation}
-\end{definition}
-\end{comment}
+For completeness, we describe here other types of RLAs. 
+\begin{description}
+\item In a ballot comparison RLA \cite{RLA}, the manual interpretation of each sampled ballot is compared to the corresponding Cast Vote Record (CVR), which is the machine interpretation of the ballot. Ballot comparison RLAs require the fewest ballots of all known RLA approaches, but also require a means of identifying the CVR corresponding to a particular ballot. A typical approach is to use a ballot serial number on both paper ballot and CVR. When voters vote in precincts, however, serial numbers on ballots can enable the correlation of ballots with voters, and ballots are typically not numbered. Additionally, some voting systems do not record a CVR. One may perform a transitive audit by rescanning unnumbered voted ballots with special scanners which produce CVRs and also print numbers on the ballots as they are scanned. This requires an investment in a sufficiently large number of such printers and in the human effort of rescanning ballots, and is not always feasible. 
+\item A batch comparison RLA \cite{RI-report} samples batches of ballots (typically, a batch is a storage box of ballots) and compares the manual tally of each sampled batch with the announced tally of that batch. Thus, while this type of audit does not need CVRs, it does need both a ballot manifest and a public declaration of the tally of each batch. This approach typically requires the sampling of a very large number of ballots. However, the process is most similar to that which election officials already use when they perform fixed-percentage post-election audits, where, for example, 2\% of the batches are manually tallied. (Note that, for an RLA, the number of batches tallied is not fixed; the risk limit is. A smaller number of batches might be sufficient, or a larger number necessary, for an audit with the required risk limit.)
+\end{description}
 
 In this work, we consider ballot polling RLAs only and thus compare \Providence with \BRAVO and \Minerva.
