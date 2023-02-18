@@ -1,21 +1,21 @@
 % Model
 
-We now summarize the model drawing largely from the notation and terminology of \cite{usenix_minerva,arxiv_athena,simulations,bravo}. The model is related work and not claimed to be original to this work. 
+%We now summarize the model drawing largely from the notation and terminology of \cite{usenix_minerva,arxiv_athena,simulations,bravo}. The model is related work and not claimed to be original to this work. 
 
-An audit $\mathcal{A}$ is a function that takes as input the sample of ballots and outputs either (1) \emph{Correct: stop the audit} or (2) \emph{Undetermined: sample more ballots}. As described in the introduction, we ignore a third option of moving to a hand count, leaving that decision to election officials. This is standard in the literature, see, for example, \cite{bravo}. We provide more detail on the use of this option in section \ref{sec:related}, on related work. 
+%An audit $\mathcal{A}$ is a function that takes as input the sample of ballots and outputs either (1) \emph{Correct: stop the audit} or (2) \emph{Undetermined: sample more ballots}. As described in the introduction, we ignore a third option of moving to a hand count, leaving that decision to election officials. This is standard in the literature, see, for example, \cite{bravo}. We provide more detail on the use of this option in section \ref{sec:related}, on related work. 
 
 \BRAVO and \Minerva are modeled as binary hypothesis tests where the null hypothesis $H_0$ corresponds to a tied election and the alternative hypothesis $H_a$ to an election tally as announced. 
 (When the number of ballots is odd, $H_0$ corresponds to the announced loser winning by one ballot.)
-Thus the null hypothesis is the outcome distinct from the announced one which is most difficult to detect; the probability of failing to detect it, given that the null hypothesis is true, is the worst case such probability and should be below the risk limit \cite{Bayesian-RLA}.
+%Thus the null hypothesis is the outcome distinct from the announced one which is most difficult to detect; the probability of failing to detect it, given that the null hypothesis is true, is the worst case such probability and should be below the risk limit \cite{Bayesian-RLA}.
 
-\begin{definition}[Risk Limiting Audit ($\alpha$-RLA)]
-An audit $\mathcal{A}$ is a Risk Limiting Audit with 
-risk limit $\alpha$ iff for sample $X$
-$$
-Pr[\mathcal{A}(X) 
-= \text{Correct} \,|\, H_0]\le \alpha
-$$
-\end{definition}
+%\begin{definition}[Risk Limiting Audit ($\alpha$-RLA)]
+%An audit $\mathcal{A}$ is a Risk Limiting Audit with 
+%risk limit $\alpha$ iff for sample $X$
+%$$
+%Pr[\mathcal{A}(X) 
+%= \text{Correct} \,|\, H_0]\le \alpha
+%$$
+%\end{definition}
 
 The stopping conditions of \BRAVO and \Minerva rely on the following ratios.
 
@@ -50,6 +50,24 @@ $$
 \end{definition}
 \end{comment}
 
+\BRAVO is an instance of Wald's Sequential Probability Ratio Test (SPRT) \cite{wald}. Applying the general SPRT to RLAs, there would be a third output, {\em Full Manual Hand Count}, in addition to {\em Correct} and {\em Undetermined}. The test requires an additional error parameter $\beta$ (of audit error when the outcome is correct): the probability of requiring a (unnecessary) hand count when the outcome is correct. The test is:
+\begin{equation}
+    \mathcal{A}(X) =  \left\{ \begin{array}{ll} \emph{Correct} & ~\sigma(k, p_a, p_0, n) 
+        \geq \frac{1-\beta}{\alpha}\\ \\ \\
+       \emph{Hand~Count} & ~\sigma(k, p_a, p_0, n) 
+        < \frac{\beta}{1-\alpha}\\ \\ \\
+        \emph{Undetermined} & ~else 
+    \end{array}
+    \right .
+    \label{eqn:wald}
+\end{equation}
+
+An example of the above use is \cite{RLA}. In the more recent literature, for example \cite{bravo}, ballot polling audits do not include this possibility (i.e. they set $\beta=0$) in order to give maximum flexibility to election officials in choosing when to proceed to a full manual count. 
+%In principle, the stopping condition could indicate a third option too: (c) the audit proceeds to a full manual hand count. This option is generally not incorporated \cite{bravo}. 
+% Election officials would typically decide to perform a full manual hand count if the audit does not stop in spite of drawing a large number of ballots, typically over multiple rounds. 
+
+A manual hand count presents significant logistical challenges. Left to election officials, the decision would be influenced by the certification deadline, the estimated number of human hours required for another round, the logistical costs of a full hand count, and the impact of any decision on citizen confidence. The only disadvantage of leaving the decision to election officials would be when the outcome were incorrect, and election officials would continue drawing rounds hoping that they would not need to escalate to a full hand count. Audits going towards statutory or legal requirements would need to be completed by the certification deadline; this provides an incentive to go to a hand count. Pilot audits, performed after certification, usually end after a single round or fixed number of rounds, providing a measured risk (the statistical p-value) at the end of the round, and no decision regarding a full hand count needs to be made. A better workload model would enable a better determination of when election officials are better off stopping than drawing more ballots 
+
 Where \BRAVO uses the ratio of the values of the probability distribution functions, \Minerva uses the ratio of their \emph{tails}. Now it becomes useful to have shorthand for a sequence of cumulative round sizes and the corresponding sequence
 of cumulative winner ballot tallies.
 We use:
@@ -66,9 +84,9 @@ Also, let $K_j$ be the random variable indicating the cumulative number of ballo
          \end{equation}
 \end{definition}
 
-Here, if we were to condition the ratio on $\bm{k_{j-1}}$, we would get the binomial distributions and be running a new first round each time. 
+Note that $\tau$ depends only on the most recent cumulative votes for the winner, $k_j$ and not on older values. Here, if we were to condition the ratio on the vector of cumulative winner votes $\bm{k_{j-1}}$, or, equivalently, on the most recent cumulative winner votes ${k_{j-1}}$, we would get the binomial distributions and be running a new first round each time. 
 
-Notice that the ratios for \BRAVO and \Minerva are for two candidates. They may both be extended to multi-candidate plurality elections through the computation of $\ell -1$ audits for $\ell$ candidates by pairing the announced winner with all other candidates. 
+Notice that the ratios for \BRAVO and \Minerva are for two candidates. Audits of multiple-candidate contests are treated as multiple audits of the pairwise contest between the announced winner and all other candidates. 
 
 The {\em margin}, given a contest and two candidates, is the difference between the votes received by each as a fraction of the total number of votes. 
 
@@ -88,6 +106,5 @@ The {\em margin}, given a contest and two candidates, is the difference between 
  \end{equation}
 \end{definition}
 \end{comment}
-
 
 
