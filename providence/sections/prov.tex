@@ -23,7 +23,7 @@ and for all rounds $j\ge 2$, the round size is a function
 $$n_{j}(\alpha, p_a, p_0, ballot\_manifest, \bm{k_{j-1}}, \bm{n_{j-1}})$$ The functions $n_j$, $j \geq 1$ may be chosen at any time before the $j^{th}$ round begins. 
 \end{definition}
 
-\subsection{The Intuition Behind the Properties of \Providence}
+\subsection{Intuition Behind the Properties of \Providence}
 Before defining \Providence, we give some intuition for how it is designed to avoid the problem of \Minerva.
 
 Consider any ballot polling audit in round $j$, designed to stop for some value of $K_j=k_j$ smaller than the round size. In general, if $k_j$ is large, the probability of this value of $K_j$ given a correct outcome, $Pr[K_j = k_j \mid H_1]$, is larger than the corresponding risk---$Pr[K_j = k_j \mid H_0]$, the probability of this value of $K_j$ given a tie. The risk is generally not zero, however. Thus, corresponding to each such value of $K_j$, a risk is incurred. To obtain the total risk for the round, one adds the risks corresponding to each value of $K_j$ for which the audit can stop, weighted by the probability of drawing that value of $K_j$. The stopping condition may provide relationships among the various quantities. To obtain the risk of the entire audit, one sums the risks of each round. 

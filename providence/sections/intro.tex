@@ -34,11 +34,11 @@ Ballot polling audits proceed as follows.
 \item \emph{Correct: stop the audit} or 
 \item \emph{Undetermined: sample more ballots}. 
 \end{enumerate}
-Election officials may choose to abort this procedure and go to a full hand count at any time and should have a plan for how to decide whether to do so; we discuss this in more detail below and in section \ref{sec:related}.     
+Election officials may choose to abort this procedure and go to a full hand count at any time and should have a plan for how to decide whether to do so; we discuss this in more detail below and in section \ref{sec:model}.     
 \item If more ballots are to be drawn, the next round size is chosen, and we go back to step 2. 
 \end{enumerate} 
 
-Round sizes, including the first one, may be computed based on a desired probability of audit completion at the end of the round, and may take into consideration loose estimates of the resources required. For RLAs required by statute or legislation the successful completion of the RLA (or a full hand count confirming the outcome) is usually necessary before certification\footnote{If an RLA were performed after certification and determined that the outcome was incorrect, there might be no legal means of changing the outcome and this would significantly impact citizen confidence. For example, till recently, the state of Virginia required RLAs but they were to be performed after certification and could not be used to change an outcome. This was corrected through new legislation passed in April 2022.} and certification deadlines would play a large role in round size deternination. 
+Round sizes, including the first one, may be computed based on a desired probability of audit completion at the end of the round, and may take into consideration loose estimates of the resources required. For RLAs required by statute or legislation the successful completion of the RLA (or a full hand count confirming the outcome) is usually necessary before certification\footnote{If an RLA were performed after certification and determined that the outcome was incorrect, there might be no legal means of changing the outcome and this would significantly impact citizen confidence. For example, till recently, the state of Virginia required RLAs but they were to be performed after certification and could not be used to change an outcome. This was corrected through new legislation passed in April 2022.} and certification deadlines would play a large role in round size and hand count decisions. 
 
 %In principle, the stopping condition could indicate a third option too: (c) the audit proceeds to a full manual hand count. This option is generally not incorporated \cite{bravo}. A manual hand count presents significant logistical challenges, and there is always a chance that it will have been unnecessary. 
 % They would be influenced by the certification deadline, the estimated number of human hours required for another round, the logistical costs of a full hand count, and the impact of any decision on citizen confidence. 
@@ -50,9 +50,10 @@ Round sizes, including the first one, may be computed based on a desired probabi
 %Using notation and terminology from , an audit $\mathcal{A}$ is a function that takes as input the current sample of ballots and outputs either (1) \emph{Correct: stop the audit} or (2) \emph{Undetermined: sample more ballots}. As mentioned earlier, we ignore a third option of a full hand count, leaving that decision to election officials, see section \ref{sec:related} for more detail. 
 
 \subsubsection{The Audit Model}
-An audit is typically defined as a binary hypothesis test. If the null, $H_0$, is defined as the incorrect outcome hardest to detect (generally a tie, see \cite{Bayesian-RLA}), we have the following definition of an RLA. 
+An audit is typically defined as a binary hypothesis test. If the null, $H_0$, is defined as the incorrect outcome hardest to detect (generally a tie, see \cite{Bayesian-RLA}, we have the following definition of an RLA. 
 
 \begin{definition}[Risk Limiting Audit ($\alpha$-RLA)]
+\label{def:RLA}
 An audit $\mathcal{A}$ is a Risk Limiting Audit with 
 risk limit $\alpha$ iff for sample $X$
 $$
@@ -61,17 +62,24 @@ Pr[\mathcal{A}(X)
 $$
 \end{definition}
 
-The definition above is valid at the end of the RLA, and not at the end of each round. 
+Definition \ref{def:RLA} is valid at the end of the RLA, and not at the end of each round. Thus it is not the case that an incorrect election will pass the audit if a sufficient number of rounds is drawn. In fact, the larger a sample the more accurate the estimate of election correctness can be, though, of course, it is possible to declare an incorrect outcome correct even after drawing a large sample. 
+
+We will refer to $Pr[\mathcal{A}(X) = \text{Correct} \,|\, H_0]$ as the {\em risk} of the audit (though, technically, it is the maximum risk, corresponding to the election outcome hardest to detect). Every time an audit stops, it incurs a contribution to its risk. Audit design determines how the risk contributions are distributed across rounds, so long as the overall risk is limited by $\alpha$.  
 
 %When $X$ is used to represent a sample while the RLA is ongoing, it is understood to be the cumulative sample, representing all the information obtained thus far about the underlying vote collection.  
 
-The goal of the adversary is to increase the true risk beyond the declared risk limit---that is, make the audit declare an incorrect outcome as correct more often than implied by the risk limit. An audit is an RLA only if there is a proof of its risk-limiting property. Thus, the adversary would need to, at the very least, invalidate an assumption of the proof to obtain:  
+{\bf Full Hand Count:} It is worth noting here that if election officials do not have a plan for when they will move to a full hand count, at least a $1-\alpha$ fraction of the audits of an incorrect outcome will {\em never} stop, and election officials will keep drawing new rounds of ballots. See Figure \ref{fig:prov-risk} in section \ref{sec:sims} for the results of 10,000 simulations of \Providence on tied elections (risk limit of 0.1, across election margins). Observe that, for each margin studied, more than 90\% of the audits do not stop after 5 rounds. 
+
+EXAMPLE 
+
+To avoid a scenario where election officials fruitlessly draw round after round hoping the audit will stop when the election outcome is incorrect, it might be worthwhile for election officials to determine, before the audit begins, the latest date by which either the audit stops or a hand count must begin to be completed before certification. 
+
+{\bf The Adversary in an RLA:} The goal of the adversary is to increase the true risk beyond the declared risk limit---that is, make the audit declare an incorrect outcome as correct more often than implied by the risk limit. An audit is an RLA only if there is a proof of its risk-limiting property. Thus, the adversary would need to, at the very least, invalidate an assumption of the proof to obtain:  
 $$
 Pr[\mathcal{A}(X) 
 = \text{Correct} \,|\, H_0] > \alpha
 $$
 
-It is worth noting here that if election officials do not have a plan for when they will move to a full hand count, at least a $1-\alpha$ fraction of the audits of an incorrect outcome will never stop, and election officials will keep drawing new rounds of ballots. See Figure \ref{fig:prov-risk} in section \ref{sec:sims} for the results of 10,000 simulations of \Providence on tied elections (risk limit of 0.1, across election margins). Observe that, for each margin studied, more than 90\% of the audits do not stop after 5 rounds. 
 \subsection{Related Work}
 \label{sec:related}
 \input{sections/related}
