@@ -20,7 +20,8 @@ Questions about the efficiency of \Minerva for its necessarily fixed round sched
 The simplest workload models are a function of just the total number of a ballots sampled.\footnote{Sometimes total \emph{distinct} ballots sampled is used, but for the margins we use in our examples in this section, the difference between total distinct ballots and total ballots is insignificant\cite{arxiv_athena}. It is straightforward to modify the model we discuss here to account for total distinct ballots.} Figure~\ref{fig:avg_bals} shows the average total number of ballots sampled as a function of $p$.
 \begin{figure}[h!]
 %\includegraphics[width=.5\textwidth]{avg_bals.png}
-\includegraphics[width=.5\textwidth]{avg_bals_error_bars_every_three.png}
+%\includegraphics[width=.5\textwidth]{avg_bals_error_bars_every_three.png}
+\includegraphics[width=.5\textwidth]{avg_bals_errorbars.png}
 \caption{The total number of ballots sampled on average, as a function of $p$, the conditional stopping probability used to select each round size, for ballot polling audits of the 2020 US Presidential election in the state of Virginia.}
 \label{fig:avg_bals}
 \end{figure}
@@ -29,6 +30,7 @@ Figure~\ref{fig:avg_bals_ratio} provides the same number as a fraction of the \P
 It is straightforward to show that \Providence and both forms of \BRAVO collapse to the same test when each round corresponds to a single ballot. Figures~\ref{fig:avg_bals} and \ref{fig:avg_bals_ratio} show that for larger stopping probabilities $p$ (i.e. larger rounds), \Providence requires fewer ballots on average. In particular, the savings of \Providence become larger as $p$ increases; for $p=0.95$, EoR \BRAVO and SO \BRAVO require more than $2$ and $1.4$ times as many ballots as \Providence respectively. 
 \begin{figure}[h!]
 %\includegraphics[width=.5\textwidth]{avg_bals_ratio.png}
+%\includegraphics[width=.5\textwidth]{avg_bals_ratio_errorbars.png}
 \includegraphics[width=.5\textwidth]{avg_bals_ratio_errorbars.png}
 \caption{The total number of ballots sampled on average, as a fraction of those sampled by \Providence, as a function of $p$, the conditional stopping probability used to select each round size, for ballot polling audits of the 2020 US Presidential election in the state of Virginia.}
 \label{fig:avg_bals_ratio}
@@ -59,7 +61,8 @@ As shown in Figure~\ref{fig:with_round_workload}, average workloads first reduce
 
 \begin{figure}[h!]
 %\includegraphics[width=.5\textwidth]{with_round_workload.png}
-\includegraphics[width=.5\textwidth]{with_round_workload_errorbars.png}
+%\includegraphics[width=.5\textwidth]{with_round_workload_errorbars.png}
+\includegraphics[width=.5\textwidth]{round_workload_errorbars.png}
 \caption{For workload parameters $w_b=1$ and $w_r=1000$, this plot shows the expected workload for various values of $p$. Expected workload is found using Equation~\ref{eq:round_workload} and the average number of ballots and rounds in our simulations as the expected number of ballots and rounds.}
 \label{fig:with_round_workload}
 \end{figure}
