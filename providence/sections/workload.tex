@@ -21,8 +21,9 @@ The simplest workload models are a function of just the total number of a ballot
 \begin{figure}[h!]
 %\includegraphics[width=.5\textwidth]{avg_bals.png}
 %\includegraphics[width=.5\textwidth]{avg_bals_error_bars_every_three.png}
-\includegraphics[width=.5\textwidth]{avg_bals_errorbars.png}
-\caption{The total number of ballots sampled on average, as a function of $p$, the conditional stopping probability used to select each round size, for ballot polling audits of the 2020 US Presidential election in the state of Virginia.}
+%\includegraphics[width=.5\textwidth]{avg_bals_errorbars.png}
+\includegraphics[width=.5\textwidth]{avg_bals_quantiles.png}
+\caption{The average and $0.25$ and $0.75$ quantiles for total number of ballots sampled, as a function of $p$, the conditional stopping probability used to select each round size, for ballot polling audits of the 2016 US Presidential election in the US State of Virginia. For sufficiently large $p$ ($p\ge 0.75$), the $0.25$ and $0.75$ quantiles are both equal to the first round size, and this shown by the downward arrows.}
 \label{fig:avg_bals}
 \end{figure}
 
@@ -31,7 +32,8 @@ It is straightforward to show that \Providence and both forms of \BRAVO collapse
 \begin{figure}[h!]
 %\includegraphics[width=.5\textwidth]{avg_bals_ratio.png}
 %\includegraphics[width=.5\textwidth]{avg_bals_ratio_errorbars.png}
-\includegraphics[width=.5\textwidth]{avg_bals_ratio_errorbars.png}
+%\includegraphics[width=.5\textwidth]{avg_bals_ratio_errorbars.png}
+\includegraphics[width=.5\textwidth]{avg_bals_ratio_quantiles.png}
 \caption{The total number of ballots sampled on average, as a fraction of those sampled by \Providence, as a function of $p$, the conditional stopping probability used to select each round size, for ballot polling audits of the 2020 US Presidential election in the state of Virginia.}
 \label{fig:avg_bals_ratio}
 \end{figure}
@@ -62,7 +64,8 @@ As shown in Figure~\ref{fig:with_round_workload}, average workloads first reduce
 \begin{figure}[h!]
 %\includegraphics[width=.5\textwidth]{with_round_workload.png}
 %\includegraphics[width=.5\textwidth]{with_round_workload_errorbars.png}
-\includegraphics[width=.5\textwidth]{round_workload_errorbars.png}
+%\includegraphics[width=.5\textwidth]{round_workload_errorbars.png}
+\includegraphics[width=.5\textwidth]{round_workload_quantiles.png}
 \caption{For workload parameters $w_b=1$ and $w_r=1000$, this plot shows the expected workload for various values of $p$. Expected workload is found using Equation~\ref{eq:round_workload} and the average number of ballots and rounds in our simulations as the expected number of ballots and rounds.}
 \label{fig:with_round_workload}
 \end{figure}
