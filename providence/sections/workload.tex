@@ -144,18 +144,19 @@ It is not unreasonable to think that election officials might choose a \emph{mis
 Consequently, the desired \emph{misleading limit} may be a deciding constraint in the choice of round schedule. 
 
 \begin{figure}
-\includegraphics[width=.5\textwidth]{misleading_limits.png}
-\caption{The proportion of simulated \Providence audits for the Virginia contest parameters that had a \emph{misleading sample} in any round.}
+%\includegraphics[width=.5\textwidth]{misleading_limits.png}
+\includegraphics[width=.5\textwidth]{combined_misleading.png}
+\caption{The proportion of simulated \Providence audits for the Virginia and pilot contest parameters that had a \emph{misleading sample} in any round.}
 \label{fig:misleading}
 \end{figure}
 
-We observe a similar behavior in our simulations of audits on the contest from the pilot audit. Figure~\ref{fig:pilot_misleading} shows the proportion of the pilot simulations which contained a \emph{misleading sample} in any round. Despite the large difference in margin ($\sim 0.05$ in Virginia and $\sim 0.25$ in the pilot) we still observe that a \emph{misleading limit} of $0.01$ is first achieved at roughly $p=0.8$ and $0.001$ at $p=0.95$.
+We observe a similar behavior in our simulations of audits on the contest from the pilot audit. Figure~\ref{fig:misleading} also shows the proportion of the pilot simulations which contained a \emph{misleading sample} in any round. Despite the large difference in margin ($\sim 0.05$ in Virginia and $\sim 0.25$ in the pilot) we still observe that a \emph{misleading limit} of $0.01$ is first achieved at roughly $p=0.8$ and $0.001$ at $p=0.95$.
 
-\begin{figure}
-\includegraphics[width=.5\textwidth]{pilot_misleading_prop.png}
-\caption{The proportion of simulated \Providence audits for the pilot audit parameters that had a \emph{misleading sample} in any round.}
-\label{fig:pilot_misleading}
-\end{figure}
+%\begin{figure}
+%\includegraphics[width=.5\textwidth]{pilot_misleading_prop.png}
+%\caption{The proportion of simulated \Providence audits for the pilot audit parameters that had a \emph{misleading sample} in any round.}
+%\label{fig:pilot_misleading}
+%\end{figure}
 
 If election officials wish to enforce a \emph{misleading limit} for all the rounds, our simulation analysis could help. On the other hand, for a given round, it is straightforward to compute analytically the probability that a loser has more votes than the winner in the sample. Table~\ref{tab:misleading} shows for various margins the minimum first round size $n$ that guarantees a probability of a \emph{misleading sample} at most $M\in\{0.1,0.01,0.001\}$. For all values of $M$ and all margins, \Providence achieves a higher probability of stopping than either EoR \BRAVO or SO \BRAVO. 
     As seen in the Table~\ref{tab:misleading}, to enforce $M=0.01$ requires minimum round sizes with at least roughly a $0.8$ probability of stopping in the first round. Even if the most efficient audit schedule (by either workload or real time measures) would use a lower stopping probability $p$ to choose the first round size, the election officials may opt to use this constraint on the probability of a \emph{misleading sample} as the deciding factor in planning their audits.
