@@ -119,7 +119,8 @@ As before, we can use our simulations to estimate $\bar E_b$, $\bar E_r$, and $\
 Available data to estimate values for $t_b$, $t_r$, and $t_p$ is limited, and so we take as an example the values $t_b=75$ seconds, $t_r=3$ hours, and $t_p=75$ seconds.\footnote{The value $t_b=75$ seconds corresponds to a serial retrieval and interpretation of the ballots based on the \cite{RI-report} timing, $t_p=75$ seconds corresponds to the approximate doubling in time for new-box ballots as reported in \cite{RI-report} in the ballot-level comparison timing data, and $t_r=3$ hours is just a guess at an approximate order for this variable.} In practice, election officials could use our software and their own estimates of these values to explore choices for round schedules. Figure~\ref{fig:real_time} shows how the estimated real time for these values differs as a function of $p$. It should be noted that real values of $t_b$, $t_r$, and $t_p$ will vary greatly based on the number of parallel teams retrieving and checking ballots, the distribution of ballots and containers both in number and physical space, and other factors. We provide Figure~\ref{fig:real_time} only as an example of the general shape and behavior of this function. Use of this optimal scheduling tool would depend on parameter estimates tailored to each case.
 
 \begin{figure}
-\includegraphics[width=.5\textwidth]{real_time.png}
+%\includegraphics[width=.5\textwidth]{real_time.png}
+\includegraphics[width=.5\textwidth]{real_time_errorbars.png}
 \caption{The real time as estimated by Equation~\ref{eq:real_time} for varying $p$ with expected values as estimated by our simulations.}
 \label{fig:real_time}
 \end{figure}
