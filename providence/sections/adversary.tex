@@ -20,13 +20,13 @@
 %\end{proof}
 %
 To illustrate the practical implication of this property, we consider a toy example: an RLA of a two-candidate contest with margin $0.01$ and risk limit $0.1$. 
-Suppose we wish to achieve a conditional stopping probability $0.9$ in each round of the audit. For \Providence, we can compute a new round size for each round based on the previous samples. For \Minerva, however, we would have a predetermined round schedule. We use the default \Minerva round schedule of audit software Arlo \cite{arlo} (used by many states performing an RLA), which is $[x, 2.5x, 6.25x, ...]$; that is, the next marginal round size is $1.5$ times the current one. This multiplier of $1.5$ is known to give, over a wide range of margins, a probability of stopping roughly $0.9$ in the second round if the first round size has probability of stopping $0.9$. 
+For a conditional stopping probability of $0.9$ in each round of a \Providence audit, we can compute next round sizes based on the current sample. \Minerva, however, would have a predetermined round schedule. We use the default \Minerva round schedule of audit software Arlo: $[x, 2.5x, 6.25x, ...]$; that is, the next marginal round size is $1.5$ times the current one---equivalently, the next total round size is $2.5$ times the current one. This approach is known to give, over a wide range of margins, a conditional probability of stopping roughly $0.9$ in the second round if the first round size was determined for a probability of stopping $0.9$. 
 
-Both the audits of our toy example therefore begin with a first round size of $17,272$ with a $0.9$ probability of stopping, and both will stop in the first round if the sample contains at least $8,725$ ballots for the winner. The audits are identical in the first round, and both numbers of ballots may be computed as described in \cite{usenix_minerva} and integrated into Arlo. We now consider two cases for which the audit proceeds to a second round. 
+Both the audits of our toy example therefore begin with a first round size of $17,272$ with a $0.9$ probability of stopping, and both will stop in the first round if the sample contains at least $8,725$ ballots for the winner. The audits are identical in the first round, and both numbers of ballots may be computed as described in \cite{usenix_minerva} and used by Arlo. We now consider two cases for which the audit proceeds to a second round. 
 
 In one case there are $8,724$ votes for the winner in the sample, just one fewer than the minimum needed to meet the risk limit. In the \Minerva audit, we are already committed to a second round size of $43,180$ which, given the nearly-passing sample of the first round is higher than necessary, achieving a stopping probability in the second round of $.954$. The \Providence audit samples more than $9,000$ fewer ballots with a round size of $34,078$, achieving the desired $0.9$ probability of stopping.
 
-In a less lucky sample, the winner recieves $8,637$ ballots, few more than the loser recieves. In the \Minerva audit, we again have to use a second round size of $43,180$, but now this round size only achieves a $0.727$ probability of stopping, significantly less than the desired $0.9$. Again, the \Providence audit can scale up the second round size according to the first sample and achieve the desired $0.9$ probability of stopping with $58,007$ ballots. 
+In a less lucky first round sample, the winner recieves $8,637$ ballots, few more than the loser recieves. In the \Minerva audit, we again have to use a second round size of $43,180$, but now this round size only achieves a $0.727$ probability of stopping, significantly less than the desired $0.9$. Again, the \Providence audit can scale up the second round size according to the first sample and achieve the desired $0.9$ probability of stopping with $58,007$ ballots. 
 
 
 % \newpage
@@ -188,10 +188,10 @@ In a less lucky sample, the winner recieves $8,637$ ballots, few more than the l
 % \end{proof}
 
 \subsection{Theoretical Properties}
-Here we briefly give two interesting theoretical properties of \Providence.
+Here we present two interesting theoretical properties of \Providence.
 
 \subsubsection{Efficiency}
-In terms of expected ballots sampled, it is easy to see that \Providence dominates EoR \BRAVO in the sense that for any sample for which the EoR \BRAVO stopping condition is met, the \Providence stopping condition is met also.
+It is easy to see that, for any sample for which the EoR \BRAVO stopping condition is met, the \Providence stopping condition is also met. This implies that \Providence will never draw more ballots than EoR \BRAVO. 
 \begin{lemma}
 \label{lem:efficiency}
 % For any round schedule %$[n_1, \ldots, n_r]$
@@ -202,7 +202,7 @@ the \Providence RLA stops before or in the same round as EoR \BRAVO.
 \begin{proof} Appendix~\ref{sec:proofs}\end{proof}
 
 \subsubsection{Markov-like Stopping Condition}
-After $j-1$ rounds, having drawn $n_{j-1}$ cumulative ballots with $k_{j-1}$ cumulative winner ballots, the \Providence stopping condition in round $j$ with size $n_j$ is equivalent to the \Providence stopping condition for a second round where the first round size is $n_1=n_{j-1}$ with $k_1=k_{j-1}$ winner ballots and a second round size $n_2=n_j$. The particular sequence of round sizes and winner ballots found does not affect the \Providence stopping condition; only the previous cumulative round size and number of winner ballots matters. \Minerva does not have this property, but \BRAVO also does.
+After $j-1$ rounds, having drawn $n_{j-1}$ cumulative ballots with $k_{j-1}$ cumulative winner ballots, the \Providence stopping condition in round $j$ with size $n_j$ is equivalent to the \Providence stopping condition for a second round where the first round size is $n_1=n_{j-1}$ with $k_1=k_{j-1}$ winner ballots and a second round size $n_2=n_j$. The particular sequence of round sizes and winner ballots does not affect the \Providence stopping condition; only the previous cumulative round size and number of winner ballots matters. \Minerva does not have this property, but \BRAVO also does.
 
 \begin{lemma}\label{lemma:markov}
 Let $[n_1, \ldots, n_{j-1}, n_j]$ be a round schedule for an execution of \Providence audit that has not stopped
