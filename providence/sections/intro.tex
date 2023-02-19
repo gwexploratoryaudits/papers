@@ -1,5 +1,5 @@
 %Intro
-It is well-known that electronic voting systems are vulnerable to software errors and manipulation which may be undetected. Errors and/or manipulation may not always change an election outcome, but we would want to know when they do. {\em Software independent} voting systems \cite{SI-Wack,rivest2008notion} are ones where an undetected change in the software cannot lead to an undetectable change in the election outcome. The {\em evidence-based elections} \cite{evidence-based} approach requires that election outcomes be supported by strong affirmative evidence. The evidence is generated during the election and publicly examined at the end, so that citizens may determine whether it provides strong support of the election outcome or is not sufficiently convincing. 
+It is well-known that electronic voting systems are vulnerable to software errors and manipulation which may be undetected. Errors and/or manipulation may not always change an election outcome, but we would want to know when they do. {\em Software independent} voting systems \cite{SI-Wack,rivest2008notion} are ones where an undetected change in the software cannot lead to an undetectable change in the election outcome. The {\em evidence-based elections} \cite{evidence-based} approach requires that election outcomes be supported by strong affirmative evidence. The evidence is generated during the election and publicly examined at the end, enabling citizens to determine whether it provides strong support of the election outcome or is not sufficiently convincing. 
 %by requiring not merely the use software independent systems to produce trustworthy evidence of outcome correctness; but also the examination of the evidence so that incorrect outcomes may be detected with high probability. 
 One approach to evidence-based elections is to use voter-verified paper ballots, store them securely, and perform public audits---a compliance audit to determine whether the ballots were stored securely and procedures were followed; and a rigorous tabulation audit, known as a risk-limiting audit (RLA) \cite{RLA}, to determine whether the outcome is correctly computed from the stored ballots.  
 %Many US states have had pilot RLA programs. Additionally, some states allow RLAs to be used towards audit requirements, and some states require RLAs before elections can be certified. 
@@ -38,7 +38,7 @@ Election officials may choose to abort this procedure and go to a full hand coun
 \item If more ballots are to be drawn, the next round size is chosen, and we go back to step 2. 
 \end{enumerate} 
 
-Round sizes, including the first one, may be computed based on a desired probability of audit completion at the end of the round, and may take into consideration loose estimates of the resources required. For RLAs required by statute or legislation the successful completion of the RLA (or a full hand count confirming the outcome) is usually necessary before certification\footnote{If an RLA were performed after certification and determined that the outcome was incorrect, there may not be a legal means of changing the outcome and this could significantly impact citizen confidence. For example, till recently, the state of Virginia required RLAs but they were to be performed after certification and could not be used to change an outcome. This was corrected through new legislation passed in April 2022.} and certification deadlines would play a large role in round size and hand count decisions. 
+Round sizes, including the first one, may be computed based on a desired probability of audit completion at the end of the round, and may take into consideration loose estimates of the resources required. For RLAs required by statute or legislation, the successful completion of the RLA (or a full hand count confirming the outcome) is usually necessary before certification\footnote{If an RLA were performed after certification and determined that the outcome was incorrect, there may not be a legal means of changing the outcome and this could significantly impact citizen confidence. For example, till recently, the state of Virginia required RLAs but they were to be performed after certification and could not be used to change an outcome. This was corrected through new legislation passed in April 2022.} and certification deadlines would play a large role in round size and hand count decisions. 
 
 %In principle, the stopping condition could indicate a third option too: (c) the audit proceeds to a full manual hand count. This option is generally not incorporated \cite{bravo}. A manual hand count presents significant logistical challenges, and there is always a chance that it will have been unnecessary. 
 % They would be influenced by the certification deadline, the estimated number of human hours required for another round, the logistical costs of a full hand count, and the impact of any decision on citizen confidence. 
@@ -66,17 +66,35 @@ Definition \ref{def:RLA} is valid at the end of the RLA, and not at the end of e
 
 %When $X$ is used to represent a sample while the RLA is ongoing, it is understood to be the cumulative sample, representing all the information obtained thus far about the underlying vote collection.  
 
-\npara{\bf Full Hand Count:} It is worth noting here that if election officials do not have a plan for when they will move to a full hand count, and the election outcome is incorrect, at least a fraction $(1-\alpha)$ of the audits will {\em never} stop, and new rounds will continue to be drawn. See Figure \ref{fig:prov-risk} in section \ref{sec:sims} for the results of 10,000 simulations of \Providence on tied elections (risk limit of 0.1, across election margins). Observe that, for each margin studied, more than 90\% of the audits do not stop after 5 rounds. 
+\npara{\bf Full Hand Count:} It is worth noting here that if election officials do not have a plan for when they will move to a full hand count, and the election outcome is incorrect, at least a fraction $(1-\alpha)$ of the audits will {\em never} stop, and new rounds will continue to be drawn. See Figure \ref{fig:prov-risk} in section \ref{sec:sims} for the results of 10,000 simulations of \Providence on tied elections (risk limit of 0.1, across election margins). Observe that, for each margin studied, more than 90\% of the audits do not stop after 5 rounds. We present two example simulations from among the ones reported to illustrate this idea. 
 
-We present an example to illustrate the above idea. Consider the 2020 US President contest in the state of Texas \cite{MIT-Data-Lab}; candidate Trump won with a total of 5,890,347 votes, and the second highest vote count was that of candidate Biden, who received 5,259,126 votes, for a margin of 0.056614 in the pairwise contest (that is, ignoring the votes received by other candidates). The total number of votes cast in this contest, including invalid votes and votes for other candidates (all termed {\em irrelevant} votes for this pairwise contest), was 11, 315,056. A first round size of 2,217 corresponds to a stopping probability of 0.9 and a risk limit of $\alpha=0.1$ for \Providence (see \cite{usenix_minerva} for a description of how first round size may be computed, \Minerva and \Providence are identical in the first round). The audit stops when its p-value is smaller than $\alpha$. We ran two simulations using these parameters. 
+Consider the 2020 US President contest in the state of Texas \cite{MIT-Data-Lab}; candidate Trump won with a total of 5,890,347 votes, and the second highest vote count was that of candidate Biden, who received 5,259,126 votes, for a margin of 0.056614 in the pairwise contest (that is, ignoring the votes received by other candidates). The total number of votes cast in this contest, including invalid votes and votes for other candidates (all termed {\em irrelevant} votes for this pairwise contest), was 11, 315,056. A first round size of 2,217 corresponds to a stopping probability of 0.9 and a risk limit of $\alpha=0.1$ for \Providence (see \cite{usenix_minerva} for a description of how first round size may be computed, \Minerva and \Providence are identical in the first round). The audit stops when the inverse of the \Providence ratio (see section \ref{sec:prov}) is smaller than $\alpha$. We describe two audit simulations using these parameters. 
 
-The first simulation assumed the tally is correct and resulted in 1,138 votes for Trump, 1,054 for Biden (the rest were irrelevant votes). The p-value was $0.047 < \alpha$ and the audit stops. 
+The first simulation assumed that the tally is correct and resulted in 1,138 votes for Trump and 1,054 for Biden (the rest were irrelevant votes). The inverse of the \Providence ratio was $0.047 < \alpha$ and the audit stopped. 
 
-The second simulation assumed a tied election and did not stop over five rounds. 
+The second simulation assumed a tied election and did not stop at the end of five rounds. 
 %The design of the \Providence audit (see section \ref{sec:prov}) ensures that the risk of the first round is no more than 0.9 times the risk limit, and the risk expended in the first round is roughly 0.09. 
-Table \ref{tab:toy} lists the round sizes, votes for both candidates and the \Providence ratio after each draw. 
-
-Our simulation draws 1,111 and 1,079 votes for Trump and Biden respectively, to obtain a \Providence ratio of 0.256 which is not small enough. The simulation then proceeds to draw another round of cumulative size 5,970 for a conditional stopping probability of 0.9, which corresponds to an approximate probability of 0.09 that the audit stops in the second round (that it does not stop in the first round and stops in the second). Similarly, this round corresponds to a risk expenditure of approximately 0.009. Trump gets 2,940 votes; Biden 2,953; and the ratio is 4.251. The process continues, with cumulative round sizes of 16,685; 35,096; and 76,979; Trump votes of 8,281; 17,320; and 37,943; Biden votes of 8,171; 17,264; and 37,868; and \Providence ratios of 3,150.268; 380,220,376; and $2.5e^{+22}$. 
+Table \ref{tab:toy} lists the round sizes, votes for both candidates and the inverse \Providence ratio after each draw. Each round size was chosen for a conditional stopping probability of 0.9, given that the audit did not stop so far. For example, this corresponds to an approximate probability of 0.09 that the audit stops in the second round (that it does not stop in the first round and stops in the second), and so on. 
+\begin{table}[h]
+\centering
+%\scriptsize
+\begin{tabular}{|crrrc|}
+\hline
+\hline
+Round& Cumulative& Trump & Biden & Inverse  \\
+ No. & Round Size &  & & Ratio \\
+\hline
+\hline
+1 & 2,217 & 1,111 & 1,079 & 0.256\\
+2 & 5,970 & 2,940 & 2,953 & 4.251\\
+3 & 16,685 & 8,281 & 8,171 & 3,150 \\
+4 & 35,096 & 17,320 & 17,264 & 380,220,376 \\
+5 & 76,979 & 37,943 & 37,868 & $2.5e^{+22}$ \\
+\hline
+\end{tabular}
+\caption{A simulation of a \Providence audit of a tied contest when the announced election has a margin of 0.056614, each round size is computed for a conditional stopping probability of $0.9$, and $\alpha=0.1$.}
+\label{tab:toy}
+\end{table}
 
 To avoid a scenario where election officials fruitlessly draw round after round hoping the audit will stop when the election outcome is incorrect, it might be worthwhile for election officials to determine, before the audit begins, the latest date by which either: the audit stops, or a hand count begins, so as to be completed before certification. 
 
