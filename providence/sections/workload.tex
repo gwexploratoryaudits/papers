@@ -17,7 +17,7 @@ Questions about the efficiency of \Minerva for its necessarily fixed round sched
 \subsection{Person-hours}
 
 \subsubsection{Average total ballots.} 
-The simplest workload models are a function of just the total number of a ballots sampled.\footnote{Sometimes total \emph{distinct} ballots sampled is used, but for the margins we use in our examples in this section, the difference between total distinct ballots and total ballots is insignificant\cite{arxiv_athena}. It is straightforward to modify the model we discuss here to account for total distinct ballots.} Figure~\ref{fig:avg_bals} shows the average total number of ballots sampled as a function of $p$.
+The simplest workload models are a function of just the total number of a ballots sampled\footnote{Sometimes total \emph{distinct} ballots sampled is used, but for the margins we use in our examples in this section, the difference between total distinct ballots and total ballots is very small\cite{arxiv_athena}. It is straightforward to modify the model we discuss here to account for total distinct ballots.}. Figure~\ref{fig:avg_bals} shows the average total number of ballots sampled as a function of $p$.
 \begin{figure}[h!]
 %\includegraphics[width=.5\textwidth]{avg_bals.png}
 %\includegraphics[width=.5\textwidth]{avg_bals_error_bars_every_three.png}
@@ -57,9 +57,9 @@ W(E_b,E_r) = E_b w_b + E_r w_r + C
 
 Note there is also some constant overhead of workload for the whole audit, namely $C$ in Equation~\ref{eq:round_workload}, which we take to be zero in our examples but could be used by election officials to represent, for example, the effort of constructing a ballot manifest.
 For simplicity, (and without loss of generality), we measure in multiples of the per ballot workload; that is, we assume it is one unit, $w_b=1$. A per round workload of $w_r=x$ corresponds to a per round workload which is $x$ times the per ballot workload. We use $w_r=1000$ as a conservative example. 
-That is, we set the overhead of a round equal to the workload of sampling $1000$ ballots. Based on available data\cite{RI-report}, the time retrieving and analyzing each individual ballot is on the order of $75$ seconds which means that $w_r=1000$ is equivalent to roughly $20$ person-hours of workload. This corresponds to about $15$ minutes being spent, on average, per round in each of the $133$ counties of Virginia, a clearly conservative workload estimate. 
+That is, we set the overhead of a round equal to the workload of sampling $1000$ ballots. Based on available data\cite{RI-report}, the time retrieving and analyzing each individual ballot is on the order of $75$ seconds which means that $w_r=1000$ is equivalent to roughly $20$ person-hours of workload. This corresponds to about $15$ minutes being spent, on average, per round in each of the $133$ counties of Virginia, a clearly conservative workload estimate. We do not consider $w_r < 1$ because it is not possible for the round overhead to be smaller than the workload corresponding to a single ballot. 
 
-As shown in Figure~\ref{fig:with_round_workload}, average workloads first reduce as stopping probability increases; this is likely due to a decrease in the number of rounds. After hitting a sweet spot, average workloads again increase with stopping probability; this time, likely because the average number of rounds does not increase much and the cost changes because of number of ballots drawn, which increases with round size. \Providence achieves the lowest minimum average workload at roughly $p=0.7$ for our example choice of $w_r=1000$.
+As shown in Figure~\ref{fig:with_round_workload}, average workloads first reduce as stopping probability increases; this is likely due to a decrease in the number of rounds. After hitting a sweet spot, average workloads again increase with stopping probability; this time, likely because the average number of rounds does not decrease much and the cost changes because of number of ballots drawn, which increases with round size. \Providence achieves the lowest minimum average workload at roughly $p=0.7$ for our example choice of $w_r=1000$.
 
 \begin{figure}[h!]
 %\includegraphics[width=.5\textwidth]{with_round_workload.png}
@@ -103,7 +103,9 @@ We can again explore the minimum achievable workloads under this model, as shown
 
 
 \subsection{Real time}
-Given tight certification deadlines\footnote{Virginia recently passed legislation requiring pre-certification RLAs.}, the total real time to conduct the RLA is also an important factor to consider when planning audits.
+Given tight certification deadlines,
+%\footnote{Virginia recently passed legislation requiring pre-certification RLAs.}, 
+the total real time to conduct the RLA is also an important factor to consider when planning audits.
 Because each county can sample ballots for the same round concurrently, the total real time for a round depends only on the slowest county. 
 In Virginia, Fairfax County typically has the most votes cast by a significant difference; in the contest we consider, Fairfax County had ~551 thousand votes cast, more than double the ~203 thousand of second-highest Virginia Beach City.
 Consequently, we model the expected total real time $T$ of an audit using just the largest county, and we define analagous variables for the expected values in just the largest county.
@@ -121,7 +123,7 @@ Available data to estimate values for $t_b$, $t_r$, and $t_p$ is limited, and so
 \begin{figure}
 %\includegraphics[width=.5\textwidth]{real_time.png}
 \includegraphics[width=.5\textwidth]{real_time_errorbars.png}
-\caption{The real time as estimated by Equation~\ref{eq:real_time} for varying $p$ with expected values as estimated by our simulations. Error bars show the $0.25$ and $0.75$ quantiles. Unlike Figures \ref{fig:avg_bals}, \ref{fig:avg_bals_ratio}, and \ref{fig:with_round_workload}, the quantiles stil differ for large $p$ because the first round size is no longer a constant; the number of ballots drawn in the first round in Fairfax County is variable.}
+\caption{The real time as estimated by Equation~\ref{eq:real_time} for varying $p$ with expected values as estimated by our simulations. Error bars show the $0.25$ and $0.75$ quantiles. Unlike Figures \ref{fig:avg_bals}, \ref{fig:avg_bals_ratio}, and \ref{fig:with_round_workload}, the quantiles still differ for large $p$ because the first round size is no longer a constant; the number of ballots drawn in the first round in Fairfax County is variable.}
 \label{fig:real_time}
 \end{figure}
 
