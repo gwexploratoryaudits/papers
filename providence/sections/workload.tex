@@ -51,48 +51,48 @@ This of course is inefficient and is why audits are actually performed in rounds
 In a US state-wide RLA, the state organizes the audit by determining the random sample and communicating with the counties, but election officials at the county level physically sample and inspect the ballots after drawing them from secure storage boxes stored in county locations. 
 Therefore each audit round requires some number of person-hours for set up and communication between state and county. This overhead for a round includes choosing the round size, generating the random sample, and communicating that random sample to the counties, as well as the communication of the results back to the state afterwards. 
 
-Consequently, we now consider a model with a constant per-ballot workload $w_b$ and a constant per-round workload $w_r$.
+Consequently, we now consider a model with a constant per-ballot workload $w_b$ and a constant per-round workload $c_r$.
 So for an audit with expected number of ballots $E_{b}$ and expected number of rounds $E_{r}$, we estimate that the workload $W$ of the audit is
 \begin{equation}
-W(E_b,E_r) = E_b w_b + E_r w_r + C
+W(E_b,E_r) = E_b w_b + E_r c_r + C
 \label{eq:round_workload}
 \end{equation}
 
 Note there is also some constant overhead of workload for the whole audit, namely $C$ in Equation~\ref{eq:round_workload}, which we take to be zero in our examples but could be used by election officials to represent, for example, the effort of constructing a ballot manifest.
-For simplicity, (and without loss of generality), we measure in multiples of the per ballot workload; that is, we assume it is one unit, $w_b=1$. A per round workload of $w_r=x$ corresponds to a per round workload which is $x$ times the per ballot workload. We use $w_r=1000$ as a conservative example. 
-That is, we set the overhead of a round equal to the workload of sampling $1000$ ballots. Based on available data\cite{RI-report}, the time retrieving and analyzing each individual ballot is on the order of $75$ seconds which means that $w_r=1000$ is equivalent to roughly $20$ person-hours of workload. This corresponds to about $15$ minutes being spent, on average, per round in each of the $133$ counties of Virginia, a clearly conservative workload estimate. We do not consider $w_r < 1$ because it is not possible for the round overhead to be smaller than the workload corresponding to a single ballot. 
+For simplicity, (and without loss of generality), we measure in multiples of the per ballot workload; that is, we assume it is one unit, $w_b=1$. A per round workload of $c_r=x$ corresponds to a per round workload which is $x$ times the per ballot workload. We use $c_r=1000$ as a conservative example. 
+That is, we set the overhead of a round equal to the workload of sampling $1000$ ballots. Based on available data\cite{RI-report}, the time retrieving and analyzing each individual ballot is on the order of $75$ seconds which means that $c_r=1000$ is equivalent to roughly $20$ person-hours of workload. This corresponds to about $15$ minutes being spent, on average, per round in each of the $133$ counties of Virginia, a clearly conservative workload estimate. We do not consider $c_r < 1$ because it is not possible for the round overhead to be smaller than the workload corresponding to a single ballot. 
 
-As shown in Figure~\ref{fig:with_round_workload}, average workloads first reduce as stopping probability increases; this is likely due to a decrease in the number of rounds. After hitting a sweet spot, average workloads again increase with stopping probability; this time, likely because the average number of rounds does not decrease much and the cost changes because of number of ballots drawn, which increases with round size. \Providence achieves the lowest minimum average workload at roughly $p=0.7$ for our example choice of $w_r=1000$.
+As shown in Figure~\ref{fig:with_round_workload}, average workloads first reduce as stopping probability increases; this is likely due to a decrease in the number of rounds. After hitting a sweet spot, average workloads again increase with stopping probability; this time, likely because the average number of rounds does not decrease much and the cost changes because of number of ballots drawn, which increases with round size. \Providence achieves the lowest minimum average workload at roughly $p=0.7$ for our example choice of $c_r=1000$.
 
 \begin{figure}[h!]
 %\includegraphics[width=.5\textwidth]{with_round_workload.png}
 %\includegraphics[width=.5\textwidth]{with_round_workload_errorbars.png}
 %\includegraphics[width=.5\textwidth]{round_workload_errorbars.png}
 \includegraphics[width=.5\textwidth]{round_workload_quantiles.png}
-\caption{For workload parameters $w_b=1$ and $w_r=1000$, this plot shows the expected workload for various values of $p$. Expected workload is found using Equation~\ref{eq:round_workload} and the average number of ballots and rounds in our simulations as the expected number of ballots and rounds. The $0.25$ and $0.75$ quantiles are shown as in Figure~\ref{fig:avg_bals}.}
+\caption{For workload parameters $w_b=1$ and $c_r=1000$, this plot shows the expected workload for various values of $p$. Expected workload is found using Equation~\ref{eq:round_workload} and the average number of ballots and rounds in our simulations as the expected number of ballots and rounds. The $0.25$ and $0.75$ quantiles are shown as in Figure~\ref{fig:avg_bals}.}
 \label{fig:with_round_workload}
 \end{figure}
 
-Importantly, this gives us a way to estimate the minimum expected workload, as well as which round schedule value $p$ achieves it, for arbitrary round workload. For each round workload $w_r$, we produce a dataset analagous to that of Figure~\ref{fig:with_round_workload} and then find the minimum average workload achieved for each of the audits and its corresponding stopping probability $p$. 
+Importantly, this gives us a way to estimate the minimum expected workload, as well as which round schedule value $p$ achieves it, for arbitrary round workload. For each round workload $c_r$, we produce a dataset analagous to that of Figure~\ref{fig:with_round_workload} and then find the minimum average workload achieved for each of the audits and its corresponding stopping probability $p$. 
 
-Figure~\ref{fig:optimal_workloads} shows the optimal achievable workload for a wide range of per round workloads. For very low round workloads, the workload function approaches just the total number of ballots, and so workload is minimized by minimizing the number of ballots drawn, which corresponds to small round sizes, and we would expect all three audits to behave similarly, as ballot-by-ballot audits, with the smallest workload. On the other hand, for extremely large values of round workload, the average number of ballots has little impact on the workload function, and so the three audits again have similar values, all corresponding to large round sizes in order to minimize the number of rounds.  We know that there is variation in the number of ballots used by each type of audit for large round sizes (a factor of two for $p=0.9$), but these values would be small in comparison to $w_r$. We observe this behaviour in Figure~\ref{fig:optimal_workloads} for extremely small and large workload values. For more reasonable values of the round workload $w_r$, SO \BRAVO and EoR \BRAVO achieve minimum workload roughly $1.1$ and $1.3$ times greater than that of \Providence.
+Figure~\ref{fig:optimal_workloads} shows the optimal achievable workload for a wide range of per round workloads. For very low round workloads, the workload function approaches just the total number of ballots, and so workload is minimized by minimizing the number of ballots drawn, which corresponds to small round sizes, and we would expect all three audits to behave similarly, as ballot-by-ballot audits, with the smallest workload. On the other hand, for extremely large values of round workload, the average number of ballots has little impact on the workload function, and so the three audits again have similar values, all corresponding to large round sizes in order to minimize the number of rounds.  We know that there is variation in the number of ballots used by each type of audit for large round sizes (a factor of two for $p=0.9$), but these values would be small in comparison to $c_r$. We observe this behaviour in Figure~\ref{fig:optimal_workloads} for extremely small and large workload values. For more reasonable values of the round workload $c_r$, SO \BRAVO and EoR \BRAVO achieve minimum workload roughly $1.1$ and $1.3$ times greater than that of \Providence.
 \begin{figure}[h!]
 %\includegraphics[width=.5\textwidth]{optimal_workloads.png}
 \includegraphics[width=.5\textwidth]{optimal_workloads.png}
-\caption{For varying round workload $w_r$, the optimal average workload achievable by each audit, as a fraction of the \Providence values.}
+\caption{For varying round workload $c_r$, the optimal average workload achievable by each audit, as a fraction of the \Providence values.}
 \label{fig:optimal_workloads}
 \end{figure}
 
-Figure~\ref{fig:optimal_ps} shows the corresponding round schedule parameters $p$ that achieve these minimal workloads. As expected, an overhead for each round means that larger round sizes are needed to achieve an optimal audit, and so for all three audits $p$ increases as a function of $w_r$. Notice that \Providence is generally above and to the left of SO \BRAVO, and SO \BRAVO is generally above and to the left of EoR \BRAVO. This relationship reflects the fact that for the same round workload, \Providence can get away with a larger stopping probability because it requires fewer ballots.
+Figure~\ref{fig:optimal_ps} shows the corresponding round schedule parameters $p$ that achieve these minimal workloads. As expected, an overhead for each round means that larger round sizes are needed to achieve an optimal audit, and so for all three audits $p$ increases as a function of $c_r$. Notice that \Providence is generally above and to the left of SO \BRAVO, and SO \BRAVO is generally above and to the left of EoR \BRAVO. This relationship reflects the fact that for the same round workload, \Providence can get away with a larger stopping probability because it requires fewer ballots.
 \begin{figure}[h!]
 \includegraphics[width=.5\textwidth]{optimal_ps.png}
-\caption{The optimal (workload-minimizing) stopping probability $p$ for varying workload model parameters $w_r$. (Note that the steps in this function are a consequence of our subsampling the workload function. That is, the workload-minimizing value of $p$ for each $w_r$ is only allowed to take on values at increments of $0.05$.)}
+\caption{The optimal (workload-minimizing) stopping probability $p$ for varying workload model parameters $c_r$. (Note that the steps in this function are a consequence of our subsampling the workload function. That is, the workload-minimizing value of $p$ for each $c_r$ is only allowed to take on values at increments of $0.05$.)}
 \label{fig:optimal_ps}
 \end{figure}
 
-\subsubsection{Precinct overhead.} For a more complete model, we can also introduce container-level workload. If a round requires multiple ballots from a single container, the container need only be unsealed once. Based on a Rhode Island pilot RLA report\cite{RI-report}, this may mean that a ballot from a new container requires roughly twice the time as a ballot from an already-opened container. Typically available election results give per-precinct granularity of vote tallies, rather than individual container information. In Virginia, however, most precincts have a single ballot scanner whose one box has sufficient capacity for all the ballots cast in that precinct anyways, and so we model the per-container workload as a per-precinct workload, $w_p$. In this model, the workload estimate incurs an additional workload of $w_p$ every time a precinct is sampled from for the first time in a round. That is, let $E_{pi}$ be the expected number of distinct precincts sampled from in round $i$, and let $E_p=\sum_i E_{pi}$. Then the new model is
+\subsubsection{Precinct overhead.} For a more complete model, we can also introduce container-level workload. If a round requires multiple ballots from a single container, the container need only be unsealed once. Based on a Rhode Island pilot RLA report\cite{RI-report}, this may mean that a ballot from a new container requires roughly twice the time as a ballot from an already-opened container. Typically available election results give per-precinct granularity of vote tallies, rather than individual container information. In Virginia, however, most precincts have a single ballot scanner whose one box has sufficient capacity for all the ballots cast in that precinct anyways, and so we model the per-container workload as a per-precinct workload, $c_p$. In this model, the workload estimate incurs an additional workload of $c_p$ every time a precinct is sampled from for the first time in a round. That is, let $E_{pi}$ be the expected number of distinct precincts sampled from in round $i$, and let $E_p=\sum_i E_{pi}$. Then the new model is
 \begin{equation}
-W(E_b, E_r, E_p) = E_b w_b + E_r w_r + E_p w_p + C
+W(E_b, E_r, E_p) = E_b w_b + E_r c_r + E_p c_p + C
 \label{eq:round_and_precinct_workload}
 \end{equation}
 
@@ -100,7 +100,7 @@ We can again explore the minimum achievable workloads under this model, as shown
 
 \begin{figure}
 \includegraphics[width=.5\textwidth]{optimal_workload_precinct_workload_ratio.png}
-\caption{Optimal average workload using the workload Equation~\ref{eq:round_and_precinct_workload} for varying $w_p$, given as a fraction of the value for \Providence. Similar to Figure~\ref{fig:optimal_workloads}, we show a generous range of values for the workload variable, $c_p$ in this case. If the time for a single ballot is $75$ seconds, then $c_p=50$ corresponds to over an hour of extra time to sample a ballot from a new container.}
+\caption{Optimal average workload using the workload Equation~\ref{eq:round_and_precinct_workload} for varying $c_p$, given as a fraction of the value for \Providence. Similar to Figure~\ref{fig:optimal_workloads}, we show a generous range of values for the workload variable, $c_p$ in this case. If the time for a single ballot is $75$ seconds, then $c_p=50$ corresponds to over an hour of extra time to sample a ballot from a new container.}
 \label{fig:optimal_workload_precinct_workload_ratio}
 \end{figure}
 
@@ -126,7 +126,7 @@ Available data to estimate values for $t_b$, $t_r$, and $t_p$ is limited, and so
 \begin{figure}
 %\includegraphics[width=.5\textwidth]{real_time.png}
 \includegraphics[width=.5\textwidth]{real_time_errorbars.png}
-\caption{The real time as estimated by Equation~\ref{eq:real_time} for varying $p$ with expected values as estimated by our simulations. Error bars show the $0.25$ and $0.75$ quantiles. Unlike Figures \ref{fig:avg_bals} and \ref{fig:with_round_workload}, the quantiles still differ for large $p$ because the first round size is no longer a constant; the number of ballots drawn in the first round in Fairfax County is variable.}
+\caption{The real time as estimated by Equation~\ref{eq:real_time} for varying $p$ with expected values as estimated by our simulations. Error bars show the $0.25$ and $0.75$ quantiles. Unlike Figures \ref{fig:avg_bals} and \ref{fig:with_round_workload}, the quantiles still differ for large $p$ because while the the number of ballots drawn in the first round in Virginia is constant, the number drawn in Fairfax County is variable.}
 \label{fig:real_time}
 \end{figure}
 
