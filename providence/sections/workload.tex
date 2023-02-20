@@ -27,16 +27,19 @@ The simplest workload models are a function of just the total number of a ballot
 \label{fig:avg_bals}
 \end{figure}
 
-Figure~\ref{fig:avg_bals_ratio} provides the same number as a fraction of the \Providence values.
-It is straightforward to show that \Providence and both forms of \BRAVO collapse to the same test when each round corresponds to a single ballot. Figures~\ref{fig:avg_bals} and \ref{fig:avg_bals_ratio} show that for larger stopping probabilities $p$ (i.e. larger rounds), \Providence requires fewer ballots on average. In particular, the savings of \Providence become larger as $p$ increases; for $p=0.95$, EoR \BRAVO and SO \BRAVO require more than $2$ and $1.4$ times as many ballots as \Providence respectively. 
-\begin{figure}[h!]
+%Figure~\ref{fig:avg_bals_ratio} provides the same number as a fraction of the \Providence values.
+It is straightforward to show that \Providence and both forms of \BRAVO collapse to the same test when each round corresponds to a single ballot. Figures~\ref{fig:avg_bals} 
+%and \ref{fig:avg_bals_ratio} 
+shows that for larger stopping probabilities $p$ (i.e. larger rounds), \Providence requires fewer ballots on average. In particular, the savings of \Providence become larger as $p$ increases; for $p=0.95$, EoR \BRAVO and SO \BRAVO require more than $2$ and $1.4$ times as many ballots as \Providence respectively. 
+
+%\begin{figure}[h!]
 %\includegraphics[width=.5\textwidth]{avg_bals_ratio.png}
 %\includegraphics[width=.5\textwidth]{avg_bals_ratio_errorbars.png}
 %\includegraphics[width=.5\textwidth]{avg_bals_ratio_errorbars.png}
-\includegraphics[width=.5\textwidth]{avg_bals_ratio_quantiles.png}
-\caption{The total number of ballots sampled on average, as a fraction of those sampled by \Providence, as a function of $p$, the conditional stopping probability used to select each round size, for ballot polling audits of the 2016 US Presidential election in the state of Virginia. The $0.25$ and $0.75$ quantiles are shown as in Figure~\ref{fig:avg_bals}.}
-\label{fig:avg_bals_ratio}
-\end{figure}
+%\includegraphics[width=.5\textwidth]{avg_bals_ratio_quantiles.png}
+%\caption{The total number of ballots sampled on average, as a fraction of those sampled by \Providence, as a function of $p$, the conditional stopping probability used to select each round size, for ballot polling audits of the 2016 US Presidential election in the state of Virginia. The $0.25$ and $0.75$ quantiles are shown as in Figure~\ref{fig:avg_bals}.}
+%\label{fig:avg_bals_ratio}
+%\end{figure}
 
 
 \subsubsection{Round overhead.} 
@@ -118,7 +121,7 @@ T(\bar E_b, \bar E_r, \bar E_p ) = \bar E_b t_b + \bar E_r t_r + \bar E_p t_p + 
 \end{equation}
 
 As before, we can use our simulations to estimate $\bar E_b$, $\bar E_r$, and $\bar E_p$ using the corresponding averages over the trials. 
-Available data to estimate values for $t_b$, $t_r$, and $t_p$ is limited, and so we take as an example the values $t_b=75$ seconds, $t_r=3$ hours, and $t_p=75$ seconds.\footnote{The value $t_b=75$ seconds corresponds to a serial retrieval and interpretation of the ballots based on the \cite{RI-report} timing, $t_p=75$ seconds corresponds to the approximate doubling in time for new-box ballots as reported in \cite{RI-report} in the ballot-level comparison timing data, and $t_r=3$ hours is just a guess at an approximate order for this variable.} In practice, election officials could use our software and their own estimates of these values to explore choices for round schedules. Figure~\ref{fig:real_time} shows how the estimated real time for these values differs as a function of $p$. It should be noted that real values of $t_b$, $t_r$, and $t_p$ will vary greatly based on the number of parallel teams retrieving and checking ballots, the distribution of ballots and containers both in number and physical space, and other factors. We provide Figure~\ref{fig:real_time} only as an example of the general shape and behavior of this function. Use of this optimal scheduling tool would depend on parameter estimates tailored to each case.
+Available data to estimate values for $t_b$, $t_r$, and $t_p$ is limited, and so we take as an example the values $t_b=75$ seconds, $t_r=3$ hours, and $t_p=75$ seconds\footnote{The value $t_b=75$ seconds corresponds to a serial retrieval and interpretation of the ballots based on the \cite{RI-report} timing, $t_p=75$ seconds corresponds to the approximate doubling in time for new-box ballots as reported in \cite{RI-report} in the ballot-level comparison timing data, and $t_r=3$ hours is just a guess at an approximate order of magnitude for this variable.}. In practice, election officials could use our software and their own estimates of these values to explore choices for round schedules. Figure~\ref{fig:real_time} shows how the estimated real time for these values differs as a function of $p$. It should be noted that real values of $t_b$, $t_r$, and $t_p$ will vary greatly based on the number of parallel teams retrieving and checking ballots, the distribution of ballots and containers both in number and physical space, and other factors. We provide Figure~\ref{fig:real_time} only as an example of the general shape and behavior of this function. Use of this optimal scheduling tool would depend on parameter estimates tailored to each case.
 
 \begin{figure}
 %\includegraphics[width=.5\textwidth]{real_time.png}
@@ -133,11 +136,13 @@ Available data to estimate values for $t_b$, $t_r$, and $t_p$ is limited, and so
 
 Unfortunately, efficiency alone is not sufficient for planning audits. In the US today, election officials have a legitimate need to include personal safety as a consideration.
 In a random sample, a true loser may receive more votes than the true winner. This happens more often when the sample sizes are small, like for a hypothetical first round size of $11$ in the pilot audit, as seen in Figure~\ref{fig:pilot_sequence}.
-In the abstract, a misleading sample in an early round is dealt with by drawing more ballots (moving on to another round), but in practice the implications of this approach may be dangerous.
+In the abstract, a misleading sample in an early round is dealt with by drawing more ballots (moving on to another round), but in practice it serves to create expectations or suspicions that then need to be managed by election officials. Hence there is reason to structure round sizes so that they are unlikely to misrepresent the true outcome.
 
-Imagine that Alice beats Bob in an election contest both truly and in the reported results, but Bob's supporters are insistent he really won. When election officials carry out the RLA, they choose a small first round size in the hopes of achieving an efficient audit by getting to stop sooner (and drawing fewer ballots on average). 
-After the first round, by chance, there are more votes for Bob than for Alice in the sample. Bob's supporters celebrate their victory that the audit has in fact revealed that Bob really won, but the election officials have to explain that they are moving on to a second round. 
-So there is a reason to structure round sizes so that they are unlikely to appear to support a true loser.
+%, angry supporters of the losing candidate may be suspicious of election officials moving onto a next round, or, if the audit is declared correct after the second round, feel sufficiently disappointed to pose a threat. 
+%but in practice the implications of this approach may be dangerous.
+
+%Imagine that Alice beats Bob in an election contest both truly and in the reported results, but Bob's supporters are insistent he really won. When election officials carry out the RLA, they choose a small first round size in the hopes of achieving an efficient audit by getting to stop sooner (and drawing fewer ballots on average). 
+% After the first round, by chance, there are more votes for Bob than for Alice in the sample. Bob's supporters celebrate their victory that the audit has in fact revealed that Bob really won, but the election officials have to explain that they are moving on to a second round. 
 
 %After the second round, there are more votes in the sample for Alice and sufficiently many that the risk limit is met and the audit now ends confirming the announced result that Alice won. This is an undesirable situation, as it can appear to Bob's supporters that election officials are simply drawing ballots till a chosen outcome is obtained. 
 
@@ -160,7 +165,7 @@ Consequently, the desired \emph{misleading limit} may be a deciding constraint i
 \label{fig:misleading}
 \end{figure}
 
-We observe a similar behavior in our simulations of audits on the contest from the pilot audit. Figure~\ref{fig:misleading} also shows the proportion of the pilot simulations which contained a \emph{misleading sample} in any round. Despite the large difference in margin ($\sim 0.05$ in Virginia and $\sim 0.25$ in the pilot) we still observe that a \emph{misleading limit} of $0.01$ is first achieved at roughly $p=0.8$ and $0.001$ at $p=0.95$.
+%We observe a similar behavior in our simulations of audits on the contest from the pilot audit. Figure~\ref{fig:misleading} also shows the proportion of the pilot simulations which contained a \emph{misleading sample} in any round. Despite the large difference in margin ($\sim 0.05$ in Virginia and $\sim 0.25$ in the pilot) we still observe that a \emph{misleading limit} of $0.01$ is first achieved at roughly $p=0.8$ and $0.001$ at $p=0.95$.
 
 %\begin{figure}
 %\includegraphics[width=.5\textwidth]{pilot_misleading_prop.png}
@@ -170,22 +175,3 @@ We observe a similar behavior in our simulations of audits on the contest from t
 
 If election officials wish to enforce a \emph{misleading limit} for all the rounds, our simulation analysis could help. On the other hand, for a given round, it is straightforward to compute analytically the probability that a loser has more votes than the winner in the sample. Table~\ref{tab:misleading} shows for various margins the minimum first round size $n$ that guarantees a probability of a \emph{misleading sample} at most $M\in\{0.1,0.01,0.001\}$. For all values of $M$ and all margins, \Providence achieves a higher probability of stopping than either EoR \BRAVO or SO \BRAVO. 
     As seen in the Table~\ref{tab:misleading}, to enforce $M=0.01$ requires minimum round sizes with at least roughly a $0.8$ probability of stopping in the first round. Even if the most efficient audit schedule (by either workload or real time measures) would use a lower stopping probability $p$ to choose the first round size, the election officials may opt to use this constraint on the probability of a \emph{misleading sample} as the deciding factor in planning their audits.
-
-\subsubsection{Misleading SO \BRAVO sequences.} As we consider the idea of misleading samples, it is noteworthy that SO \BRAVO suffers from a different and unique type of misleading result. 
-
-After drawing a cumulative $n>1$ ballots in a round, some number $k$ of them are votes for the announced winner. There are $\binom{n}{k}$ possible sequences of ballots which can lead to such a sample. Given a value of $k$, however, the particular sequence of the sample that led to that value of $k$ contains no additional information about whether the sample is more likely under the alternative or null hypotheses. That is to say, $\Pr[K=k|H_a]$ and $\Pr[K=k|H_0]$ have the same value regardless of the sequence.
-Despite this, the SO \BRAVO RLA stopping condition is not just a function of $n$ and $k$ but also a function of the sequence, the selection order. In particular, if the sequence of ballots is such that the standard \BRAVO stopping condition was met for some $n'<n$ and corresponding $k'<n$, the audit will stop, even if by the end of the sequence the values $k$ and $n$ no longer meet the \BRAVO condition. We refer to such sequences which stop under SO \BRAVO, but not under EoR \BRAVO, as \emph{misleading sequences}. To be clear, this is not a mathematical issue; stopping in such cases is still a correct application of Wald's SPRT result\cite{wald}. The misleading nature of such stoppages is the note we are making. This is another case where election officials might have difficulty explaining the misleading situation to the public.
-
-Recall from section~\ref{sec:pilot} that the pilot \Providence RLA performed in Providence, Rhode Island had an SO \BRAVO \emph{misleading sequence}. In particular, the audit passed with an SO \BRAVO risk measure of $0.0541$ but the final cumulative tally of the sample gives a \BRAVO risk measure of $0.366$.
-
-It is easy to use our simulations to see how often SO \BRAVO \emph{misleading sequences} occur by checking whether the final cumulative sample of each SO \BRAVO trial meets the EoR \BRAVO stopping condition and counting those which do not. Figure~\ref{so_misleading} shows the proportion of simulated SO \BRAVO audits that stopped with a \emph{misleading sequence}. Unlike the more general \emph{misleading sample} discussed so far, these \emph{misleading sequences} are unique to SO \BRAVO audits, and Figure~\ref{so_misleading} only shows the proportion of audits that stopped with a \emph{misleading sequence}; additional SO \BRAVO audits also contained \emph{misleading samples}.
-
-\begin{figure}
-\includegraphics[width=.5\textwidth]{so_misleading.png}
-\caption{The proportion of sequences that are misleading sequences in the SO \BRAVO audit as a function of $p$.}
-\label{so_misleading}
-\end{figure}
-
-
-
-
