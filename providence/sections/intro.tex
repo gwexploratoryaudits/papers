@@ -119,7 +119,7 @@ $$
 %We define a {\em weak adversary} as one who can choose the first and subsequent round sizes before the audit begins and a {\em strong adversary} as one who can choose any round size at any time (before, of course, that particular round begins). In particular, a strong adversary may use information about the sample drawn thus far to decide the next round size, but a weak adversary may not. 
 
 \subsection{Gaps in Prior Work and Our Contributions}
-We describe relevant gaps in our knowledge of audits and then describe our contributions. 
+We describe relevant gaps in current knowledge of audits and then describe our contributions. 
 \subsubsection{Limitations of \Minerva}
 Zag\'{o}rski {\em et al.}  prove that \Minerva \cite{usenix_minerva} is risk-limiting when the number of relevant ballots drawn in each round is pre-determined before any ballots are examined. They do not address the case of a stronger adversary (such as an audit insider) who can determine the size of the next round after knowing what votes are on the ballots sampled thus far. An open question about \Minerva is whether its RLA proof holds in this case. Can the audit insider increase the audit's error probability beyond its declared risk limit? Or is there no probabilistic adversarial advantage to being able to compute next round sizes after knowing the drawn sample? We do not answer this question, and to our knowledge, it remains open. 
 
