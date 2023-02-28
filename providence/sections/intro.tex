@@ -27,18 +27,18 @@ Ballot polling audits proceed as follows.
 \begin{enumerate}
 \item The ballot manifest is published. 
 \item A first round size \cite{usenix_minerva} is chosen. %\fpo{the sentence is hard to understand}. pv: fixed
-\item Ballots on the ballot manifest are sampled uniformly at random, with replacement, using a pseudorandom number generator, which is typically seeded by a natural source of randomness like rolling dice.
-\item The physical ballots are found and manually interpreted, recording the manual interpretations. 
+\item Ballots on the ballot manifest are sampled uniformly at random, with replacement, using a pseudorandom number generator---typically seeded by a natural source of randomness like rolling dice.
+\item The physical ballots are found and manually interpreted; the interpretations are recorded. 
 \item The stopping condition $\mathcal{A}$, a function of the manual interpretations of the current cumulative sample of ballots $X$, is computed. It outputs: 
 \begin{enumerate}
 \item \emph{Correct: stop the audit} or 
 \item \emph{Undetermined: sample more ballots}. 
 \end{enumerate}
 Election officials may choose to abort this procedure and go to a full hand count at any time and should have a plan for how to decide whether to do so; we discuss this in more detail below and in section \ref{sec:model}.     
-\item If more ballots are to be drawn, the next round size is chosen, and we go back to step 2. 
+\item If more ballots are to be drawn, the next round size is chosen, and the audit goes back to step 2. 
 \end{enumerate} 
 
-Round sizes, including the first one, may be computed based on a desired probability of audit completion at the end of the round, and may take into consideration loose estimates of the resources required. For RLAs required by statute or legislation, the successful completion of the RLA (or a full hand count confirming the outcome) is usually necessary before certification\footnote{If an RLA were performed after certification and determined that the outcome was incorrect, there may not be a legal means of changing the outcome and this could significantly impact citizen confidence. For example, till recently, the state of Virginia required RLAs but they were to be performed after certification and could not be used to change an outcome. This was corrected through new legislation passed in April 2022.} and certification deadlines would play a large role in round size and hand count decisions. 
+Round sizes, including the first one, may be computed based on a desired probability of audit completion at the end of the round, and may take into consideration loose estimates of the resources required. For RLAs required by statute or legislation, the successful completion of the RLA (or a full hand count confirming the certified outcome) is usually necessary before certification\footnote{If an RLA were performed after certification and determined that the outcome was incorrect, there may not be a legal means of changing the outcome and this could significantly impact citizen confidence. For example, till recently, the state of Virginia required RLAs but they were to be performed after certification and could not be used to change an outcome. This was corrected through new legislation passed in April 2022.} and certification deadlines would play a large role in round size and hand count decisions. 
 
 %In principle, the stopping condition could indicate a third option too: (c) the audit proceeds to a full manual hand count. This option is generally not incorporated \cite{bravo}. A manual hand count presents significant logistical challenges, and there is always a chance that it will have been unnecessary. 
 % They would be influenced by the certification deadline, the estimated number of human hours required for another round, the logistical costs of a full hand count, and the impact of any decision on citizen confidence. 
@@ -67,13 +67,13 @@ Definition \ref{def:RLA} is valid at the end of the RLA, and not at the end of e
 
 %When $X$ is used to represent a sample while the RLA is ongoing, it is understood to be the cumulative sample, representing all the information obtained thus far about the underlying vote collection.  
 
-\npara{\bf Full Hand Count:} It is worth noting here that if election officials do not have a plan for when they will move to a full hand count, and the election outcome is incorrect, at least a fraction $(1-\alpha)$ of the audits will {\em never} stop, and new rounds will continue to be drawn. See Figure \ref{fig:prov-risk} in section \ref{sec:sims} for the results of 10,000 simulations of \Providence on tied elections (risk limit of 0.1, across election margins of 0.05 and larger in the statewide contests for US President in 2020), each simulation stopping after five rounds. Observe that, for each margin studied, more than 90\% of the audits do not stop after five rounds. We present two example simulations from among the ones reported for the state of Texas to illustrate this idea. 
+\npara{\bf Full Hand Count:} It is worth noting here that if election officials do not have a plan for when they will move to a full hand count, and the election outcome is incorrect, at least a fraction $(1-\alpha)$ of the audits will {\em never} stop, and new rounds will continue to be drawn. See Figure \ref{fig:prov-risk} in section \ref{sec:sims} for the results of 10,000 simulations of \Providence on tied elections (risk limit of 0.1, across election margins of 0.05 and larger in the statewide contests for US President in 2020). Observe that, for each margin studied, more than 90\% of the audits do not stop after five rounds. To illustrate this idea, we present two example simulations from among those used to compute the statistics reported in Figure \ref{fig:prov-risk}. 
 
 A total of 11,315,056 votes were cast in the 2020 US President contest in the state of Texas \cite{MIT-Data-Lab}; candidate Trump won with 5,890,347 votes, and the second highest vote count was that of candidate Biden, who received 5,259,126 votes, for a margin of 0.0566 in the pairwise contest. A pairwise contest between two candidates treats invalid votes and those received by other candidates as irrelevant to determining which of the two won the pairwise contest. Its {\em margin} is the difference between their vote counts as a fraction of the sum of their votes. Ballot polling audits used to audit government elections (such as \BRAVO, \Minerva and \Providence) audit a multi-candidate contest by conducting multiple audits of the pairwise contests between the winner and every other candidate. 
 
-A first round size of 2,217 corresponds to a stopping probability of 0.9 and a risk limit of $\alpha=0.1$ for \Providence (see \cite{usenix_minerva} for a description of how first round size may be computed, \Minerva and \Providence are identical in the first round). The audit stops when the inverse of the \Providence ratio (see section \ref{sec:prov}) is smaller than $\alpha$. We describe two audit simulations using these parameters. 
+A first round size of 2,217 corresponds to a stopping probability of 0.9 and a risk limit of $\alpha=0.1$ for \Providence (see \cite{usenix_minerva} for a description of how first round size may be computed, \Minerva and \Providence are identical in the first round). If the \Providence ratio is denoted $\omega$, the audit stops when $\omega^{-1} \leq \alpha$, or equivalently (see Definition \ref{def:minervatwo}) if $\omega \geq \alpha^{-1}$. We describe two audit simulations using these parameters. 
 
-The first simulation assumed that the tally is correct and resulted in 1,138 votes for Trump and 1,054 for Biden (the rest were irrelevant votes). The inverse of the \Providence ratio was $0.047 < \alpha$ and the audit stopped. 
+The first simulation assumed that the tally is correct and resulted in 1,138 votes for Trump and 1,054 for Biden (the rest were irrelevant votes) and the audit stopped because: \[ \omega ^{-1} = 0.047 < \alpha \]
 
 The second simulation assumed a tied election and did not stop at the end of five rounds. 
 %The design of the \Providence audit (see section \ref{sec:prov}) ensures that the risk of the first round is no more than 0.9 times the risk limit, and the risk expended in the first round is roughly 0.09. 
@@ -84,8 +84,8 @@ Table \ref{tab:toy} lists the cumulative round sizes, cumulative votes for both 
 \begin{tabular}{|crrrc|}
 \hline
 \hline
-Round& Cumulative& Trump & Biden & Inverse  \\
- No. & Round Size &  & & Ratio \\
+Round& Cumulative& Trump & Biden & $\omega^{-1}$  \\
+ No. & Round Size &  & &  \\
 \hline
 \hline
 1 & 2,217 & 1,111 & 1,079 & 0.256\\
@@ -95,13 +95,13 @@ Round& Cumulative& Trump & Biden & Inverse  \\
 5 & 76,979 & 37,943 & 37,868 & $2.5e^{+22}$ \\
 \hline
 \end{tabular}
-\caption{A simulation of a \Providence audit of a tied contest with an announced margin of 0.0566, and $\alpha=0.1$. Each round size is computed for a conditional stopping probability of $0.9$. The stopping condition is Inverse Ratio $\le \alpha$.}
+\caption{A simulation of a \Providence audit of a tied contest with an announced margin of 0.0566, and $\alpha=0.1$. Each round size is computed for a conditional stopping probability of $0.9$. The stopping condition is $\omega^{-1} \le \alpha$.}
 \label{tab:toy}
 \end{table}
 
 To avoid a scenario where election officials fruitlessly draw round after round hoping the audit will stop when the election outcome is incorrect, it might be worthwhile for election officials to determine, before the audit begins, the latest date by which either: the audit stops, or a hand count begins, so as to be completed before certification. 
 
-\npara{\bf The Adversary in an RLA:} The goal of the adversary is to increase the true risk beyond the declared risk limit---that is, make the audit declare an incorrect outcome as correct with a chance larger than the risk limit. An audit is an RLA only if there is a proof of its risk-limiting property. Hence, at the very least, the adversary would need to invalidate an assumption of the proof to obtain:  
+\npara{\bf The Adversary in an RLA:} The goal of the adversary is to increase the true risk beyond the declared risk limit---that is, given an incorrect outcome, make the audit declare it as correct with a chance larger than the risk limit. An audit is an RLA only if there is a proof of its risk-limiting property. Hence, at the very least, the adversary would need to invalidate an assumption of the proof to obtain:  
 $$
 Pr[\mathcal{A}(X) 
 = \text{Correct} \,|\, H_0] > \alpha
@@ -143,7 +143,7 @@ Our primary contribution is a new RLA, \Providence, which gives the efficiency o
 %Additionally, \Providence does not assume that the null hypothesis is a tied election and hence is more broadly useful than \Minerva. 
 \BRAVO is a very flexible audit enabling audit planning; with the introduction of \Providence, similar planning is possible with greater efficiency. In a contest with a narrow margin (in the 2020 US Presidential election, eight states had margins smaller than 0.03) the difference in number of ballots sampled using \Providence over \BRAVO could correspond to many days of work which would need to be completed before a certification deadline.
 
-The stopping condition for \Minerva does not take into account the sample obtained in previous rounds, and, in \cite{usenix_minerva}, its risk limit is estimated through weighted averages across multiple rounds, assuming that round sizes do not depend on the previous sample. 
+The stopping condition for \Minerva does not take into account the sample obtained in previous rounds. The risk limit is estimated through weighted averages across multiple rounds, assuming that round sizes do not depend on the previous sample. 
 %Further, it assumes that the null hypothesis is a tie. 
 Attempting to simplify the proof of \Minerva's risk-limiting property, we were able to define a different audit \Providence. The RLA proof for \Providence does not make an assumption about round sizes.  
 
@@ -163,5 +163,5 @@ We provide the following:
 %Our results demonstrate the superiority of \Providence over the other audits. Our work may be used by election officials to plan ballot polling audits, including in Georgia and Pennsylvania in 2022. 
 
 \subsubsection{Organization} 
-Sections \ref{sec:model} provides preliminaries on the \BRAVO and \Minerva audits. Section \ref{sec:prov} describes the \Providence audit, section \ref{sec:sims} the simulations comparing the number of ballots drawn using various ballot polling audits and section \ref{sec:pilot} the use of \Providence in an audit carried out by the Board of Elections of Rhode Island. Section \ref{sec:workload} presents our workload model and describes its use for a ballot polling audit using details of the 2016 US Presidential election in the state of Virginia. Our conclusions, the availability of an audit implementation and acknowledgements may be found in sections \ref{sec:conc}, \ref{sec:avail} and \ref{sec:ack} respectively. 
+Section \ref{sec:model} provides preliminaries on the \BRAVO and \Minerva audits. Section \ref{sec:prov} describes the \Providence audit, section \ref{sec:sims} the simulations comparing the number of ballots drawn using various ballot polling audits and section \ref{sec:pilot} the use of \Providence in an audit carried out by the Board of Elections of Rhode Island. Section \ref{sec:workload} presents our workload model and describes its use for a ballot polling audit using details of the 2016 US Presidential election in the state of Virginia, while section \ref{sec:misleading} introduces the notion of a misleading sample, illustrating it on the Virginia details as an example. Our conclusions, the availability of an audit implementation and acknowledgements may be found in sections \ref{sec:conc}, \ref{sec:avail} and \ref{sec:ack} respectively. 
 

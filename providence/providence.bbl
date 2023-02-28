@@ -13,7 +13,7 @@ Matthew Bernhard.
 \bibitem{bernhard-sok}
 Matthew Bernhard.
 \newblock Risk-limiting {A}udits: A practical systematization of knowledge.
-\newblock In {\em In Proceedings, Seventh International Joint Conference on
+\newblock In {\em Proceedings, Seventh International Joint Conference on
   Electronic Voting (E-Vote-ID'21), October 2021}, 2021.
 
 \bibitem{blom_IRV}
@@ -44,7 +44,7 @@ Oliver Broadrick, Sarah Morin, Grant McClearn, Neal McBurnett, Poorvi~L. Vora,
 \bibitem{RI-report}
 Common Cause, VerifiedVoting, and Brennan Center.
 \newblock Pilot implementation study of risk-limiting audit methods in the
-  state of rhode island.
+  state of {R}hode {I}sland.
 \newblock
   \url{https://www.brennancenter.org/sites/default/files/2019-09/Report-RI-Design-FINAL-WEB4.pdf}.
 
@@ -117,11 +117,11 @@ Ronald~L Rivest.
 \bibitem{SI-Wack}
 Ronald~L. Rivest and John~P. Wack.
 \newblock On the notion of ``software independence'' in voting systems.
-\newblock Prepared for the TGDC, and posted by NIST at the given url.
+\newblock Prepared for the TGDC.
 
 \bibitem{alpha}
 PB~Stark.
-\newblock Alpha: Audit that learns from previously hand-audited ballots.
+\newblock {ALPHA}: Audit that learns from previously hand-audited ballots.
 \newblock {\em The Annals of Applied Statistics}, 2022.
 
 \bibitem{dice}
