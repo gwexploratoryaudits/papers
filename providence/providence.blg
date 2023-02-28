@@ -7,34 +7,34 @@ Warning--entry type for "MIT-Data-Lab" isn't style-file defined
 --line 9 of file audits.bib
 You've used 27 entries,
             2118 wiz_defined-function locations,
-            644 strings with 9185 characters,
-and the built_in function-call counts, 8616 in all, are:
-= -- 792
-> -- 481
+            644 strings with 9220 characters,
+and the built_in function-call counts, 8652 in all, are:
+= -- 795
+> -- 487
 < -- 6
-+ -- 191
-- -- 160
-* -- 551
-:= -- 1444
++ -- 193
+- -- 162
+* -- 555
+:= -- 1450
 add.period$ -- 80
 call.type$ -- 27
-change.case$ -- 153
+change.case$ -- 154
 chr.to.int$ -- 0
 cite$ -- 27
 duplicate$ -- 307
 empty$ -- 685
-format.name$ -- 160
-if$ -- 1805
+format.name$ -- 162
+if$ -- 1812
 int.to.chr$ -- 0
 int.to.str$ -- 27
 missing$ -- 15
 newline$ -- 134
 num.names$ -- 58
-pop$ -- 206
+pop$ -- 207
 preamble$ -- 1
-purify$ -- 127
+purify$ -- 128
 quote$ -- 0
-skip$ -- 255
+skip$ -- 256
 stack$ -- 0
 substring$ -- 357
 swap$ -- 74
